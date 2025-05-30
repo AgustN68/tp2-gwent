@@ -30,4 +30,4 @@ Aquellos que deseen colaborar con el proyecto pueden consultar la [guía de desa
 Este repositorio se encuentra bajo la Licencia MIT.
 
 ## Enunciado
-https://programacion3fiuba.slack.com/files/U06P10NBMPG/F08TEK1L4V9/_tp2___2025_1c__-_gwent.pdf
+[[TP2] [2025 1C] - Gwent.pdf](https://github.com/user-attachments/files/20525358/TP2.2025.1C.-.Gwent.pdf)
