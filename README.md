@@ -30,4 +30,4 @@ Aquellos que deseen colaborar con el proyecto pueden consultar la [guía de desa
 Este repositorio se encuentra bajo la Licencia MIT.
 
 ## Enunciado
-file:///C:/Users/Crowley%20Pc%20Store/Downloads/[TP2]%20[2025%201C]%20-%20Gwent.pdf
+https://programacion3fiuba.slack.com/files/U06P10NBMPG/F08TEK1L4V9/_tp2___2025_1c__-_gwent.pdf
