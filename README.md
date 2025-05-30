@@ -11,7 +11,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 3** - [integrante3](https://github.com/integrante3)
 * **Integrante 4** - [integrante4](https://github.com/integrante4)
 
-Corrector: **{Corrector}**
+Corrector: **{Pablo Suárez}**
 
 ## Aplicación
 
@@ -28,3 +28,6 @@ Aquellos que deseen colaborar con el proyecto pueden consultar la [guía de desa
 ## Licencia
 
 Este repositorio se encuentra bajo la Licencia MIT.
+
+## Enunciado
+file:///C:/Users/Crowley%20Pc%20Store/Downloads/[TP2]%20[2025%201C]%20-%20Gwent.pdf
