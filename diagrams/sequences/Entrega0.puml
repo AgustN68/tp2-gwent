@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor Usuario
+
+Usuario -> Gwent: calcularPuntaje(Jugador)
+Gwent -> Jugador: calcularPuntaje()
+Jugador -> Tablero: calcularPuntaje()
+
+Tablero -> CuerpoACuerpo: puntaje()
+CuerpoACuerpo -> Unidad: puntajeCarta()
+Unidad -> Puntaje: calcularPuntaje():
+Puntaje --> Unidad: puntaje
+Unidad --> CuerpoACuerpo: puntaje
+CuerpoACuerpo --> Tablero: puntaje
+
+Tablero -> Distancia: puntaje()
+Distancia -> Unidad: puntajeCarta()
+Unidad -> Puntaje: calcularPuntaje():
+Puntaje --> Unidad: puntaje
+Unidad --> Distancia: puntaje
+Distancia --> Tablero: puntaje
+
+Tablero -> Asedio: puntaje()
+Asedio -> Unidad: puntajeCarta()
+Unidad -> Puntaje: calcularPuntaje()
+Puntaje --> Unidad: puntaje
+Unidad --> Asedio: puntaje
+Asedio --> Tablero: puntaje
+
+Tablero --> Jugador: puntaje
+Jugador --> Gwent: puntaje
+Gwent --> Usuario: puntaje
+
+
+@enduml

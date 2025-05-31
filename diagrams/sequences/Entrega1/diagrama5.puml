@@ -1,0 +1,11 @@
+@startuml
+
+Actor TestCase
+TestCase -> Jugador: ubicarCarta(posicion)
+Jugador -> Mano: seleccionarCarta(posicion)
+Mano --> Jugador: Carta
+Jugador -> Carta: ubicarCarta(Tablero)
+
+Jugador -> PilaDeDescarte: agregarCarta(Carta)
+
+@enduml

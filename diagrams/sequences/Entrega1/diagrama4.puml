@@ -1,0 +1,26 @@
+@startuml
+Actor TestCase
+TestCase -> Jugador: ubicarCarta(posicion)
+
+Jugador -> Mano: seleccionarCarta(posicion)
+Mano --> Jugador: Carta
+Jugador -> Carta: ubicar(Tablero)
+Carta -> Tablero: ubicar(Carta, Seccion)
+Tablero -> Seccion: ubicar(Carta)
+
+
+TestCase -> Jugador: obtenerPuntaje()
+Jugador -> Tablero: obtenerPuntaje()
+loop para cada seccion
+Tablero -> Seccion: puntaje()
+loop para cada carta
+Seccion -> Carta: puntaje()
+Carta --> Seccion: puntajeCarta
+end
+Seccion --> Tablero: putajeSeccion
+end
+Tablero --> Jugador: puntajeTotal
+Jugador --> TestCase: puntajeTotal
+
+
+@enduml

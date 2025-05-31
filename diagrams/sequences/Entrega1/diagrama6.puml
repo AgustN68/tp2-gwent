@@ -1,0 +1,49 @@
+
+@startuml
+actor TestCase
+TestCase -> Jugador: ubicarCarta(posicion)
+Jugador -> Mano: seleccionarCarta(posicion)
+Mano --> Jugador: carta1
+Jugador -> "carta1:Carta": ubicarCarta(Tablero)
+TestCase -> Jugador: calcularPuntaje()
+Jugador -> Tablero: calcularPuntaje()
+Tablero -> Seccion: calcularPuntaje()
+loop para cada Carta
+Seccion -> Carta: puntaje()
+Carta -> Modificador: aplicarModificador(Puntaje)
+Modificador -> Puntaje: modificarPuntaje()
+Carta --> Seccion: Puntaje
+end
+Seccion --> Tablero: puntaje
+Tablero --> Jugador: puntaje
+Jugador --> TestCase: puntaje
+TestCase -> Jugador: ubicarCarta(posicion)
+Jugador -> Mano: seleccionarCarta(posicion)
+Mano --> Jugador: carta2
+Jugador -> "carta2:Carta": ubicarCarta(Tablero)
+
+TestCase -> Jugador: calcularPuntaje()
+Jugador -> Tablero: calcularPuntaje()
+Tablero -> Seccion: calcularPuntaje()
+loop para cada Carta
+Seccion -> Carta: puntaje()
+Carta -> Modificador: aplicarModificador(Puntaje)
+Modificador -> Puntaje: modificarPuntaje()
+Carta --> Seccion: Puntaje
+end
+Seccion --> Tablero: puntaje
+Tablero --> Jugador: puntaje
+Jugador --> TestCase: puntaje
+
+@enduml
+
+@startuml
+
+actor TestCase
+
+TestCase -> Carta: puntaje()
+Carta -> Modificador: aplicarModificador(Puntaje)
+Modificador -> Puntaje: modificarPuntaje()
+Carta --> TestCase: Puntaje
+
+@enduml

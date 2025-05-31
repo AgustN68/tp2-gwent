@@ -1,0 +1,27 @@
+@startuml
+Actor FaseInicial
+
+FaseInicial -> Jugador: tieneCartasSuficientesMazo(15,6)
+Jugador -> Mazo: tieneCartasSuficientes(15,6)
+Mazo -> Mazo: hayCartasUnidadSuficientes(15)
+Mazo --> Mazo: true
+Mazo -> Mazo: hayCartasEspecialSuficientes(6)
+Mazo --> Mazo: true
+Mazo --> Jugador: true
+Jugador --> FaseInicial
+
+FaseInicial -> Jugador: tieneCartasSuficientesMazo(15,6)
+Jugador -> Mazo: tieneCartasSuficientes(15,6)
+
+loop para cada Carta
+Mazo -> Carta: esUnidad()
+Carta --> Mazo: true/false
+Mazo --> Carta: esEspecial()
+Carta --> Mazo: true/false
+end
+
+Mazo --> Jugador: true
+Jugador --> FaseInicial
+
+
+@enduml

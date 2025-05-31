@@ -1,0 +1,11 @@
+@startuml
+Actor FaseDePreparacion
+
+FaseDePreparacion -> Jugador: tieneCartasSuficientesMano(10)
+Jugador -> Mano: tieneCartasSuficientes(10)
+Mano -> Mano: contarCartas()
+Mano --> Mano: 10
+Mano --> Jugador: true
+Jugador --> FaseDePreparacion: true
+
+@enduml

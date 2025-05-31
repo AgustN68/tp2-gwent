@@ -1,0 +1,111 @@
+@startuml
+
+Ronda o- "2"Jugador
+Gwent o- "2" Jugador
+Gwent -> "3" Ronda
+Gwent -> Tablero
+Gwent -> Fase
+Fase <|-- Inicial
+Fase <|-- Preparacion
+Fase <|-- Juego
+Fase <|-- Final
+Juego --> Ronda
+Inicial --> Jugador
+Preparacion -> Mazo
+Preparacion -> Moneda
+Ronda --> Turno
+Jugador -> Mazo
+Jugador -> Turno
+Jugador -> Tablero
+Jugador -> Mano
+Mano ..> Mazo
+
+Mazo o- Carta
+
+Carta <|-- Unidad
+Carta <|-- Especial
+Carta -> Seccion
+
+Tablero -> "3" Seccion
+Seccion <|-- CuerpoACuerpo
+Seccion <|-- Rango
+Seccion <|-- Asedio
+Seccion -> "*" Unidad
+Unidad --> Puntaje
+Unidad --> Modificador
+Unidad o-- Seccion
+Especial <|-- TierraArrasada
+Especial <|-- MoraleBoost
+Especial <|-- Clima
+
+Clima -> "2"Seccion
+
+Jugador -> PilaDeDescarte
+
+abstract class Fase
+class Inicial
+class Preparacion
+class Juego
+
+class Ronda {
++calcularGanador() : Jugador
+}
+abstract class Carta {
++usar()
+}
+class Jugador {
++calcularPuntaje() : Puntaje
+}
+class Tablero {
++calcularPuntaje() : Puntaje
+}
+class Mazo
+class Gwent {
++calcularPuntaje(jugador : Jugador): Puntaje
+}
+
+abstract class Especial {
+
+}
+class Unidad {
+-puntajeBase : int
++puntajeCarta() : Puntaje
++usar()
+}
+abstract class Seccion {
++puntaje() : Puntaje
+}
+class CuerpoACuerpo {
++puntaje() : Puntaje
+}
+class Rango {
++puntaje() : Puntaje
+}
+class Asedio {
++puntaje() : Puntaje
+}
+class Modificador {
++modificarPuntaje(puntajeBase)
+}
+class TierraArrasada {
++usar()
+}
+class MoraleBoost {
++usar()
+}
+abstract class Clima {
+}
+
+
+class Puntaje {
+-valor : int
+
+}
+class Moneda
+class Turno
+class PilaDeDescarte
+
+
+
+@enduml
+
