@@ -15,22 +15,19 @@ public class Mazo {
         this.cartasEspeciales = cartasEspeciales;
     }
 
-    public Boolean tieneCartasSuficientes(int cantUnidadMin, int cantEspecialMin){
-        return hayCartasUnidadSuficientes(cantUnidadMin) && hayCartasEspecialSuficientes(cantEspecialMin);
+    public void validarCartasSuficientes(int cantUnidadMin, int cantEspecialMin){
+        validarCartasUnidadSuficientes(cantUnidadMin);
+        validarCartasEspecialSuficientes(cantEspecialMin);
     }
 
-    private Boolean hayCartasUnidadSuficientes(int cant){
-        if (cartasUnidades.size() >= cant) {
-            return true;
-        } else {
+    private void validarCartasUnidadSuficientes(int cant){
+        if (cartasUnidades.size() < cant) {
             throw new NoHayCartasUnidadSuficientesException("El mazo no tiene unidades suficientes");
         }
     }
 
-    private Boolean hayCartasEspecialSuficientes(int cant){
-        if (cartasEspeciales.size() >= cant) {
-            return true;
-        } else {
+    private void validarCartasEspecialSuficientes(int cant){
+        if (cartasEspeciales.size() < cant) {
             throw new NoHayCartasEspecialesSuficientesException("El mazo no tiene cartas especiales suficientes");
         }
     }

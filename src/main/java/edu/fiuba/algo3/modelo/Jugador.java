@@ -16,7 +16,7 @@ public class Jugador {
     }
 
     public void validarCartasSuficientesMazo(int cantidadUnidades, int cantidadEspeciales) {
-        mazo.tieneCartasSuficientes(cantidadUnidades, cantidadEspeciales);
+        mazo.validarCartasSuficientes(cantidadUnidades, cantidadEspeciales);
     }
 
     public void validarCartasSuficientesMano(int cantidadCartas) {

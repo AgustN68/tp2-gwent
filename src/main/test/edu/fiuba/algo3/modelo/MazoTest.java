@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MazoTest {
     @Test
-    public void test1UnMazoTieneCartasSuficientesParaEmpezarLaPartida(){
+    public void test1UnMazoValidarCartasSuficientesParaEmpezarLaPartida(){
 
         // Arrange
         List<Unidad> cartasUnidades = new ArrayList();
@@ -26,7 +26,7 @@ public class MazoTest {
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
         //Act y Assert
-        assert(mazo.tieneCartasSuficientes(15,6));
+        mazo.validarCartasSuficientes(15,6);
     }
     @Test
     public void test2UnMazoTieneCartasDeSobraParaEmpezarLaPartida(){
@@ -44,7 +44,7 @@ public class MazoTest {
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
         //Act y Assert
-        assert(mazo.tieneCartasSuficientes(15,6));
+        mazo.validarCartasSuficientes(15,6);
     }
 
     @Test
@@ -63,10 +63,10 @@ public class MazoTest {
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
         //Act y Assert
-        assertThrows(NoHayCartasUnidadSuficientesException.class,
-                ()->{
-            mazo.tieneCartasSuficientes(15,6);
-                });
+        assertThrows(
+                NoHayCartasUnidadSuficientesException.class,
+                ()-> mazo.validarCartasSuficientes(15,6)
+        );
     }
 
     @Test
@@ -85,9 +85,9 @@ public class MazoTest {
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
         //Act y Assert
-        assertThrows(NoHayCartasEspecialesSuficientesException.class,
-                ()->{
-                    mazo.tieneCartasSuficientes(15,6);
-                });
+        assertThrows(
+                NoHayCartasEspecialesSuficientesException.class,
+                ()-> mazo.validarCartasSuficientes(15,6)
+        );
     }
 }
