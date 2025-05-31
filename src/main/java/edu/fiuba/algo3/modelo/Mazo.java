@@ -35,4 +35,8 @@ public class Mazo {
         }
     }
 
+    // TODO: obtener carta aleatoria y quitarla
+    public Carta obtenerCarta() {
+        return cartasUnidades.get(0);
+    }
 }
