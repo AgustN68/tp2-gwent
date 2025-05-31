@@ -4,7 +4,7 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo {9}
 
 * **Integrante 1** - [Agustin Ivan Abitabile](https://github.com/AgustN68)
 * **Integrante 2** - [integrante2](https://github.com/integrante2)
