@@ -17,7 +17,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList();
         List<Especial> cartasEspeciales = new ArrayList();
         for (int i = 0; i < 15; i++) {
-            cartasUnidades.add(new Unidad(new Seccion(),2));
+            cartasUnidades.add(new Unidad(new Seccion(),2, new Modificador()));
         }
         for (int i = 0; i < 6; i++) {
             cartasEspeciales.add(new Especial());
@@ -35,7 +35,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList();
         List<Especial> cartasEspeciales = new ArrayList();
         for (int i = 0; i < 20; i++) {
-            cartasUnidades.add(new Unidad(new Seccion(),2));
+            cartasUnidades.add(new Unidad(new Seccion(),2, new Modificador()));
         }
         for (int i = 0; i < 9; i++) {
             cartasEspeciales.add(new Especial());
@@ -54,7 +54,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList();
         List<Especial> cartasEspeciales = new ArrayList();
         for (int i = 0; i < 14; i++) {
-            cartasUnidades.add(new Unidad(new Seccion(),2));
+            cartasUnidades.add(new Unidad(new Seccion(),2, new Modificador()));
         }
         for (int i = 0; i < 6; i++) {
             cartasEspeciales.add(new Especial());
@@ -76,7 +76,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList();
         List<Especial> cartasEspeciales = new ArrayList();
         for (int i = 0; i < 17; i++) {
-            cartasUnidades.add(new Unidad(new Seccion(),2));
+            cartasUnidades.add(new Unidad(new Seccion(),2, new Modificador()));
         }
         for (int i = 0; i < 3; i++) {
             cartasEspeciales.add(new Especial());
