@@ -13,6 +13,7 @@ public class Jugador {
         this.tablero = tablero;
         this.mazo = mazo;
         this.mano = new Mano(new ArrayList<>());
+        this.pilaDeDescarte = new PilaDeDescarte();
     }
 
     public void validarCartasSuficientesMazo(int cantidadUnidades, int cantidadEspeciales) {
@@ -27,5 +28,14 @@ public class Jugador {
         for (int i = 0; i < cantidadCartas; i++) {
             mano.tomarCarta(mazo);
         }
+    }
+
+    public void seleccionarCarta(int posicion){
+        Carta cartaSeleccionada =  mano.agarrarCarta(posicion);
+        // mando al tablero.
+    }
+    public void descartar(int posicion){
+        Carta carta = mano.agarrarCarta(posicion);
+        this.pilaDeDescarte.descartarUna(carta);
     }
 }
