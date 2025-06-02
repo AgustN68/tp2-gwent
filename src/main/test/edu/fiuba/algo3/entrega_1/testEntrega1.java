@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasEspecialesSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasUnidadSuficientesException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -198,5 +199,35 @@ public class testEntrega1 {
 
         //Puntaje puntaje = jugador.obtenerPuntaje();
 
+    }
+
+
+    // Correspondiente al punto 6 - Falta el "que solo se aplique el valor a la ronda"
+
+    @Test
+    public void test08ModificoUnaCartaConUnaCartaaUnidaYSeCambianLosPuntos() {
+
+        /*
+        Primera idea de implementación. La otra forma seria que cada carta tenga su propio
+        modificador, pero tiene que haber un metodo que le pregunte a sección la cantidad
+        de cartas del mismo tipo que hay para así multiplicar
+        */
+
+        Seccion seccionCuerpoACuerpo = new Seccion();
+        Seccion seccionRango = new Seccion();
+        Seccion seccionAsedio = new Seccion();
+        Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
+
+        Unida modificador = new Unida(1);
+        Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
+        Unidad catapulta2 = new Unidad(seccionAsedio, 8, modificador);
+
+        catapulta1.usar(tablero);
+        catapulta2.usar(tablero);
+        modificador.sumarCantidadEnSeccion();
+
+        Puntaje puntajeTotal = seccionAsedio.puntajeTotal();
+
+        Assertions.assertTrue(puntajeTotal.equals(32));
     }
 }
