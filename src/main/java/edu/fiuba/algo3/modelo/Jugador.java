@@ -32,16 +32,17 @@ public class Jugador {
         }
     }
 
-    public Carta seleccionarCarta(int posicion){
+    public Carta seleccionarCarta(int posicion) {
         return mano.agarrarCarta(posicion);
-
     }
-    public void descartar(int posicion){
+
+    public void usarCarta(int posicion) {
         Carta carta = mano.agarrarCarta(posicion);
         this.pilaDeDescarte.descartarUna(carta);
+        carta.usar(tablero);
     }
 
-    /*public Puntaje obtenerPuntaje() {
-        return tablero.obtenerPuntaje();
-    }*/
+    public Puntaje obtenerPuntaje() {
+        return tablero.calcularPuntaje();
+    }
 }

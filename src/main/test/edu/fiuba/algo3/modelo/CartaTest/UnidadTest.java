@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Modificador;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,18 +17,17 @@ public class UnidadTest {
     public void test01SeColocaCorrectamenteUnaUnidadEnElTablero(){
         // Arrange
         Seccion cuerpoACuerpo = new Seccion();
-        Unidad unidad = new Unidad(cuerpoACuerpo, 5, new Modificador());
+        Unidad unidad = new Unidad(new ColocadorCuerpoACuerpo(), 5, new Modificador());
 
         // Act y Assert
-        unidad.ubicar(new Tablero(cuerpoACuerpo, new Seccion(), new Seccion()));
+        unidad.usar(new Tablero(cuerpoACuerpo, new Seccion(), new Seccion()));
 
     }
 
     @Test
     public void test02SeCalculaElPuntajeDeUnaUnidad(){
         // Arrange
-        Seccion asedio = new Seccion();
-        Unidad unidad = new Unidad(asedio, 5, new Modificador());
+        Unidad unidad = new Unidad(new ColocadorAsedio(), 5, new Modificador());
 
         // Act
         Puntaje puntajeObtenido = unidad.calcularPuntaje();
@@ -38,8 +39,7 @@ public class UnidadTest {
     @Test
     public void test03SeCalculaElPuntajeDeOtraUnidad(){
         // Arrange
-        Seccion cuerpoACuerpo = new Seccion();
-        Unidad unidad = new Unidad(cuerpoACuerpo, 8, new Modificador());
+        Unidad unidad = new Unidad(new ColocadorCuerpoACuerpo(), 8, new Modificador());
 
         // Act
         Puntaje puntajeObtenido = unidad.calcularPuntaje();

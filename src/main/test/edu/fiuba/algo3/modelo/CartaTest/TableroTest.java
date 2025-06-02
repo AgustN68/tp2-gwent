@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.CartaTest;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
 import org.junit.jupiter.api.Test;
 
 
@@ -17,8 +18,8 @@ public class TableroTest {
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         //"Act"
-        new Unidad(seccionCuerpoACuerpo, 4, new Modificador()).usar(tablero);
-        new Unidad(seccionCuerpoACuerpo, 2, new Modificador()).usar(tablero);
+        new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()).usar(tablero);
+        new Unidad(new ColocadorCuerpoACuerpo(), 2, new Modificador()).usar(tablero);
 
         //"Assert"
         assertEquals(6, tablero.calcularPuntaje().obtenerValor());

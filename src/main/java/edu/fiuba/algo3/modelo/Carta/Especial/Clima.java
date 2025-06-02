@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo.Carta.Especial;
 
 import edu.fiuba.algo3.modelo.Seccion;
+import edu.fiuba.algo3.modelo.Tablero;
 
-public abstract class Clima {
+public class Clima extends Especial {
 
     protected static final int VALOR = 1;
 
@@ -14,7 +15,7 @@ public abstract class Clima {
         seccionAfectada2 = seccion2;
     }
 
-    protected void usar(){
+    public void usar(Tablero tablero) {
         seccionAfectada1.reducirPuntaje(VALOR);
         seccionAfectada2.reducirPuntaje(VALOR);
     }

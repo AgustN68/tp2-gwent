@@ -13,8 +13,16 @@ public class Tablero {
         this.seccionAsedio = seccionAsedio;
     }
 
-    public void ubicar(Unidad unidad, Seccion seccion) {
-        seccion.ubicar(unidad);
+    public void ubicarCuerpoACuerpo(Unidad unidad) {
+        seccionCuerpoACuerpo.ubicar(unidad);
+    }
+
+    public void ubicarRango(Unidad unidad) {
+        seccionRango.ubicar(unidad);
+    }
+
+    public void ubicarAsedio(Unidad unidad) {
+        seccionAsedio.ubicar(unidad);
     }
 
     public Puntaje calcularPuntaje() {
