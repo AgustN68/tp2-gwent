@@ -22,6 +22,9 @@ public class PilaDeDescarte {
        // this.cartas.mostrar(); No esta implementado en cartas.
     }
 
+    public int cantidadCartas(){
+        return this.cartas.size();
+    }
     public Carta usarCartaMedico(int posicion){
         return this.cartas.remove(posicion);
     }
