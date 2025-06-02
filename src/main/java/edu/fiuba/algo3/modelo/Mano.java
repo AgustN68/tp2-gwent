@@ -21,4 +21,8 @@ public class Mano {
     public void tomarCarta(Mazo mazo) {
         cartas.add(mazo.obtenerCarta());
     }
+
+    public Carta agarrarCarta(int unaPosicion){
+        return cartas.remove(unaPosicion);
+    }
 }
