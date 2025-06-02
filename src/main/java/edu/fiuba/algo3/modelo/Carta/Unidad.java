@@ -1,29 +1,25 @@
 package edu.fiuba.algo3.modelo.Carta;
 
+import edu.fiuba.algo3.modelo.colocadores.Colocador;
 import edu.fiuba.algo3.modelo.Modificador;
 import edu.fiuba.algo3.modelo.Puntaje;
-import edu.fiuba.algo3.modelo.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
 
 public class Unidad extends Carta {
 
     private Puntaje puntaje;
-    private Seccion seccion;
     private Modificador modificador;
+    private Colocador colocador;
 
-    public Unidad(Seccion seccion, int puntosIniciales, Modificador modificador) {
-        this.seccion = seccion;
+    public Unidad(Colocador colocador, int puntosIniciales, Modificador modificador) {
+        this.colocador = colocador;
         puntaje = new Puntaje(puntosIniciales);
         this.modificador = modificador;
     }
 
     @Override
     public void usar(Tablero tablero){
-        this.ubicar(tablero);
-
-    }
-    public void ubicar(Tablero tablero){
-        tablero.ubicar(this, seccion);
+        colocador.colocar(this, tablero);
     }
 
     public Puntaje calcularPuntaje(){

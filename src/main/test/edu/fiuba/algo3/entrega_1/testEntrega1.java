@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasEspecialesSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasUnidadSuficientesException;
@@ -28,7 +29,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Especial());
@@ -52,7 +53,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 14; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Especial());
@@ -79,7 +80,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
         for (int i = 0; i < 5; i++) {
             especiales.add(new Especial());
@@ -106,7 +107,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
         for (int i = 0; i < 5; i++) {
             especiales.add(new Especial());
@@ -131,7 +132,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
         for (int i = 0; i < 5; i++) {
             especiales.add(new Especial());
@@ -159,7 +160,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Especial());
@@ -184,7 +185,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Especial());

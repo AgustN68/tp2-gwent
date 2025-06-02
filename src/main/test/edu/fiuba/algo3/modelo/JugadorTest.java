@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class JugadorTest {
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
-        unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+        unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
 
         Mazo mazo = new Mazo(unidades, especiales);
         Jugador jugador = new Jugador(tablero, mazo);
