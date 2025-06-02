@@ -1,6 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Carta.Especial;
 
-public class Nieve extends Clima{
+import edu.fiuba.algo3.modelo.Seccion;
+
+public class Nieve extends Clima {
 
     public Nieve(Seccion seccion1, Seccion seccion2) {
         super(seccion1, seccion2);

@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Carta;
+
 import java.util.ArrayList;
 
 public class Jugador {
@@ -30,12 +32,16 @@ public class Jugador {
         }
     }
 
-    public void seleccionarCarta(int posicion){
-        Carta cartaSeleccionada =  mano.agarrarCarta(posicion);
-        // mando al tablero.
+    public Carta seleccionarCarta(int posicion){
+        return mano.agarrarCarta(posicion);
+
     }
     public void descartar(int posicion){
         Carta carta = mano.agarrarCarta(posicion);
         this.pilaDeDescarte.descartarUna(carta);
     }
+
+    /*public Puntaje obtenerPuntaje() {
+        return tablero.obtenerPuntaje();
+    }*/
 }

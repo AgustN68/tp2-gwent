@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.CartaTest;
 import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.Unidad;
+import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Modificador;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
+import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasEspecialesSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasUnidadSuficientesException;
 

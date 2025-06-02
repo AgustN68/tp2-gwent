@@ -1,6 +1,11 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Carta;
 
-public class Unidad extends Carta{
+import edu.fiuba.algo3.modelo.Modificador;
+import edu.fiuba.algo3.modelo.Puntaje;
+import edu.fiuba.algo3.modelo.Seccion;
+import edu.fiuba.algo3.modelo.Tablero;
+
+public class Unidad extends Carta {
 
     private Puntaje puntaje;
     private Seccion seccion;
@@ -12,6 +17,11 @@ public class Unidad extends Carta{
         this.modificador = modificador;
     }
 
+    @Override
+    public void usar(Tablero tablero){
+        this.ubicar(tablero);
+
+    }
     public void ubicar(Tablero tablero){
         tablero.ubicar(this, seccion);
     }

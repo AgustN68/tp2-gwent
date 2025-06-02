@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modelo.CartaTest;
 
 import edu.fiuba.algo3.modelo.*;
-import org.junit.jupiter.api.Assertions;
+import edu.fiuba.algo3.modelo.Carta.Especial.Nieve;
+import edu.fiuba.algo3.modelo.Carta.Unidad;
 import org.junit.jupiter.api.Test;
 
 public class EspecialTest {

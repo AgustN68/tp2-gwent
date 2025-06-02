@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Unidad;
+
 public class Tablero {
     private final Seccion seccionCuerpoACuerpo;
     private final Seccion seccionRango;
@@ -12,5 +14,6 @@ public class Tablero {
     }
 
     public void ubicar(Unidad unidad, Seccion seccion) {
+
     }
 }

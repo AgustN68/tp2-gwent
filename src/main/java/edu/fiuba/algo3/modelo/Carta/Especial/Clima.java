@@ -1,4 +1,6 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Carta.Especial;
+
+import edu.fiuba.algo3.modelo.Seccion;
 
 public abstract class Clima {
 

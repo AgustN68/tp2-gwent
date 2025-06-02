@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 public class JugadorTest {
     @Test
     public void test01UnJugadorPuedeSeleccionarUnaCartaYPonerEnElTablero(){
-        "Arrange"
+        //"Arrange"
 
-        "Act"
+        //"Act"
 
-        "Assert"
+        //"Assert"
     }
 }
