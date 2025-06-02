@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Unidad;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Seccion {
     public Puntaje puntajeTotal() {
         Puntaje total = new Puntaje(0);
         for (Unidad unidad : cartasUnidades) {
-            total = total.sumaPuntaje(unidad.puntaje());
+            total = total.sumarPuntaje(unidad.calcularPuntaje());
         }
         return total;
     }
