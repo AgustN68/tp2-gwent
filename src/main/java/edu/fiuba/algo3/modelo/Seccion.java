@@ -20,7 +20,7 @@ public class Seccion {
     public Puntaje puntajeTotal() {
         Puntaje total = new Puntaje(0);
         for (Unidad unidad : cartasUnidades) {
-            total = total.sumar(unidad);
+            total = total.sumaPuntaje(unidad.puntaje());
         }
         return total;
     }
