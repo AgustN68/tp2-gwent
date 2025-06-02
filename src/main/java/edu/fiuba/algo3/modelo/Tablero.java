@@ -14,6 +14,14 @@ public class Tablero {
     }
 
     public void ubicar(Unidad unidad, Seccion seccion) {
+        seccion.ubicar(unidad);
+    }
 
+    public Puntaje calcularPuntaje() {
+        Puntaje puntajeTotal = new Puntaje(0);
+        puntajeTotal = puntajeTotal.sumarPuntaje(seccionCuerpoACuerpo.puntajeTotal());
+        puntajeTotal = puntajeTotal.sumarPuntaje(seccionRango.puntajeTotal());
+        puntajeTotal = puntajeTotal.sumarPuntaje(seccionAsedio.puntajeTotal());
+        return puntajeTotal;
     }
 }
