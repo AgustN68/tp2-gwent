@@ -15,7 +15,7 @@ public class Clima extends Especial {
         seccionAfectada2 = seccion2;
     }
 
-    public void usar(Tablero tablero) {
+    public void usar() {
         seccionAfectada1.reducirPuntaje(VALOR);
         seccionAfectada2.reducirPuntaje(VALOR);
     }

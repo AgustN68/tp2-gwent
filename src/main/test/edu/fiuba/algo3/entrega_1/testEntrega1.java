@@ -2,8 +2,10 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
 import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasEspecialesSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
@@ -198,15 +200,33 @@ public class testEntrega1 {
         Carta cartaSeleccionada = jugador.seleccionarCarta(2);
         cartaSeleccionada.usar(tablero);
 
-        //Puntaje puntaje = jugador.obtenerPuntaje();
+        Puntaje puntaje = jugador.obtenerPuntaje();
+
+        Assertions.assertTrue(puntaje.equals(4));
 
     }
+    // Punto 5
+    @Test
+    public void test08PuedoDescartarUnaCarta() {
+        //Arrange
+        PilaDeDescarte descartes = new PilaDeDescarte();
+        Modificador modificador = new Modificador();
+        ColocadorAsedio colocador = new ColocadorAsedio();
 
+        Carta carta = new Unidad(colocador, 4, modificador);
 
+        int tamanio = 1;
+
+        //Act
+        descartes.descartarUna(carta);
+
+        //Assert
+        Assertions.assertTrue(tamanio == descartes.cantidadCartas());
+    }
     // Correspondiente al punto 6 - Falta el "que solo se aplique el valor a la ronda"
 
     @Test
-    public void test08ModificoUnaCartaConUnaCartaaUnidaYSeCambianLosPuntos() {
+    public void test09ModificoUnaCartaConUnaCartaaUnidaYSeCambianLosPuntos() {
 
         /*
         Primera idea de implementación. La otra forma seria que cada carta tenga su propio
@@ -218,10 +238,10 @@ public class testEntrega1 {
         Seccion seccionRango = new Seccion();
         Seccion seccionAsedio = new Seccion();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
-
+        ColocadorAsedio colocadorAsedio = new ColocadorAsedio();
         Unida modificador = new Unida(1);
-        Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
-        Unidad catapulta2 = new Unidad(seccionAsedio, 8, modificador);
+        Unidad catapulta1 = new Unidad(colocadorAsedio, 8, modificador);
+        Unidad catapulta2 = new Unidad(colocadorAsedio, 8, modificador);
 
         catapulta1.usar(tablero);
         catapulta2.usar(tablero);
@@ -230,5 +250,24 @@ public class testEntrega1 {
         Puntaje puntajeTotal = seccionAsedio.puntajeTotal();
 
         Assertions.assertTrue(puntajeTotal.equals(32));
+    }
+
+    // Punto 7
+    @Test
+    public void test10SeAplicaElEfectoDelClimaYSeReduceElValorDeLasCartasDeLaSeccionCorrespondiente(){
+        Seccion cuerpoACuerpo1 = new Seccion();
+        Seccion cuerpoACuerpo2 = new Seccion();
+        Unidad unidad1 = new Unidad(new ColocadorCuerpoACuerpo(),5,new Modificador());
+        Unidad unidad2 = new Unidad(new ColocadorCuerpoACuerpo(),6,new Modificador());
+        Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
+
+        cuerpoACuerpo1.ubicar(unidad1);
+        cuerpoACuerpo2.ubicar(unidad2);
+
+        nieve.usar();
+        Puntaje puntajeSeccion1 = cuerpoACuerpo1.puntajeTotal();
+        Puntaje puntajeSeccion2 = cuerpoACuerpo2.puntajeTotal();
+
+        Assertions.assertTrue(puntajeSeccion1.equals(1) && puntajeSeccion2.equals(1));
     }
 }

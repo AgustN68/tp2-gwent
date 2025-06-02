@@ -2,6 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
+import edu.fiuba.algo3.modelo.colocadores.ColocadorRango;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +29,9 @@ public class PilaDeDescarteTest {
         PilaDeDescarte descartes = new PilaDeDescarte();
         Seccion seccion = new Seccion();
         Modificador modificador = new Modificador();
+        ColocadorAsedio colocador = new ColocadorAsedio();
 
-        Carta carta = new Unidad(seccion, 4, modificador);
+        Carta carta = new Unidad(colocador, 4, modificador);
 
         int tamanio = 1;
 
@@ -42,8 +46,9 @@ public class PilaDeDescarteTest {
     public void test03PuedoDescartasVariasCartas(){
         //Arrange
         PilaDeDescarte descartes = new PilaDeDescarte();
-        Carta carta1 = new Unidad(new Seccion(), 2, new Modificador());
-        Carta carta2 = new Unidad(new Seccion(),4, new Modificador());
+
+        Carta carta1 = new Unidad(new ColocadorRango(), 2, new Modificador());
+        Carta carta2 = new Unidad(new ColocadorRango(),4, new Modificador());
         int tamanioDescartes = 2;
         List<Carta> cartas = new ArrayList<>();
         cartas.add(carta1);
@@ -60,8 +65,8 @@ public class PilaDeDescarteTest {
     public void test04PuedoSacarDeLaPilaDeDescarteUnaCartaUsandoCartaMedico(){
         //Arrange
         PilaDeDescarte descartes = new PilaDeDescarte();
-        Carta carta1 = new Unidad(new Seccion(), 2, new Modificador());
-        Carta carta2 = new Unidad(new Seccion(),4, new Modificador());
+        Carta carta1 = new Unidad(new ColocadorRango(), 2, new Modificador());
+        Carta carta2 = new Unidad(new ColocadorCuerpoACuerpo(),4, new Modificador());
         int tamanioDescartes = 1;
         List<Carta> cartas = new ArrayList<>();
         cartas.add(carta1);

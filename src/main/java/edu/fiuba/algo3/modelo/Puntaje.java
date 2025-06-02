@@ -24,4 +24,8 @@ public class Puntaje {
     public Boolean equals(int valor) {
         return valor == this.valor;
     }
+
+    public void reducirPuntajeA(int valor) {
+        this.valor = valor;
+    }
 }

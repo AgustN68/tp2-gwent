@@ -1,6 +1,5 @@
-package edu.fiuba.algo3.modelo.CartaTest;
+package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
 import org.junit.jupiter.api.Test;

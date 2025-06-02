@@ -25,4 +25,8 @@ public class Unidad extends Carta {
     public Puntaje calcularPuntaje(){
         return this.modificador.aplicarModificador(puntaje);
     }
+
+    public void reducirPuntaje(int valor){
+        this.puntaje.reducirPuntajeA(valor);
+    }
 }

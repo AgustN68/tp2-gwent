@@ -13,7 +13,11 @@ public class Seccion {
         cartasUnidades = new ArrayList<>();
     }
     
-    public void reducirPuntaje(int valor){}
+    public void reducirPuntaje(int valor){
+        for (Unidad unidad : cartasUnidades){
+            unidad.reducirPuntaje(valor);
+        }
+    }
     
     public void ubicar(Unidad unidad){
         cartasUnidades.add(unidad);

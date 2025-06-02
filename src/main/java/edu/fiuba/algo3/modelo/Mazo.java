@@ -6,16 +6,20 @@ import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasEspecialesSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasUnidadSuficientesException;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Mazo {
 
     private List<Unidad> cartasUnidades;
     private List<Especial> cartasEspeciales;
+    private ArrayList<Carta> cartas;
 
     public Mazo(List<Unidad> cartasUnidad, List<Especial> cartasEspeciales) {
         this.cartasUnidades = cartasUnidad;
         this.cartasEspeciales = cartasEspeciales;
+        this.cartas = mezclarCartas();
     }
 
     public void validarCartasSuficientes(int cantUnidadMin, int cantEspecialMin){
@@ -35,8 +39,16 @@ public class Mazo {
         }
     }
 
+    private ArrayList<Carta> mezclarCartas(){
+        ArrayList<Carta> cartas = new ArrayList<>();
+        cartas.addAll(cartasUnidades);
+        cartas.addAll(cartasEspeciales);
+        Collections.shuffle(cartas);
+        return cartas;
+    }
+
     // TODO: obtener carta aleatoria y quitarla
     public Carta obtenerCarta() {
-        return cartasUnidades.get(0);
+        return cartas.remove((cartas.size() - 1));
     }
 }
