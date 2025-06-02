@@ -19,28 +19,34 @@ Jugador -> Turno
 Jugador -> Tablero
 Jugador -> Mano
 Mano ..> Mazo
+Mano --> "*" Carta
 
 Mazo o- Carta
+'Mazo o-> "*" Unidad
+'Mazo o-> "*" Especial
 
 Carta <|-- Unidad
 Carta <|-- Especial
-Carta -> Seccion
 
 Tablero -> "3" Seccion
-Seccion <|-- CuerpoACuerpo
-Seccion <|-- Rango
-Seccion <|-- Asedio
 Seccion -> "*" Unidad
 Unidad --> Puntaje
 Unidad --> Modificador
-Unidad o-- Seccion
 Especial <|-- TierraArrasada
 Especial <|-- MoraleBoost
 Especial <|-- Clima
 
+Colocador <|-- ColocadorCuerpoACuerpo
+Colocador <|-- ColocadorRango
+Colocador <|-- ColocadorAsedio
+
+Unidad --> Colocador
+
 Clima -> "2"Seccion
+'Clima -> ModificadorClima
 
 Jugador -> PilaDeDescarte
+PilaDeDescarte --> "*" Carta
 
 abstract class Fase
 class Inicial
@@ -51,15 +57,31 @@ class Ronda {
 +calcularGanador() : Jugador
 }
 abstract class Carta {
-+usar()
++usar(tablero: Tablero)
 }
 class Jugador {
-+calcularPuntaje() : Puntaje
++Jugador(tablero : Tablero, mazo : Mazo)
++validarCartasSuficientesMazo(cantidadUnidades : int, cantidadEspeciales : int)
++validarCartasSuficientesMano(cantidadCartas : int)
++tomarCartasMazo(cantidadCartas : int)
++seleccionarCarta(posicion : int) : Carta
++usarCarta(posicion : int)
++obtenerPuntaje() : Puntaje
 }
 class Tablero {
++Tablero(seccionCuerpoACuerpo : Seccion, seccionRango : Seccion, seccionAsedio : Seccion)
++ubicarCuerpoACuerpo(unidad : Unidad)
++ubicarRango(unidad : Unidad)
++ubicarAsedio(unidad : Unidad)
 +calcularPuntaje() : Puntaje
 }
-class Mazo
+class Mazo {
++Mazo(cartasUnidad : List<Unidad>, cartasEspeciales : List<Especial>)
++validarCartasSuficientes(cantUnidadMin : int, cantEspecialMin : int)
+-validarCartasUnidadSuficientes(cant : int)
+-validarCartasEspecialSuficientes(cant : int)
++obtenerCarta() : Carta
+}
 class Gwent {
 +calcularPuntaje(jugador : Jugador): Puntaje
 }
@@ -68,44 +90,56 @@ abstract class Especial {
 
 }
 class Unidad {
--puntajeBase : int
-+puntajeCarta() : Puntaje
-+usar()
++Unidad(colocador : Colocador, puntosIniciales : int, modificador : Modificador)
++calcularPuntaje() : Puntaje
++usar(tablero : Tablero)
 }
-abstract class Seccion {
-+puntaje() : Puntaje
-}
-class CuerpoACuerpo {
-+puntaje() : Puntaje
-}
-class Rango {
-+puntaje() : Puntaje
-}
-class Asedio {
-+puntaje() : Puntaje
+class Seccion {
++reducirPuntaje(valor : int)
++ubicar(unidad : Unidad)
++puntajeTotal() : Puntaje
 }
 class Modificador {
-+modificarPuntaje(puntajeBase)
++aplicarModificador(puntaje : Puntaje) : Puntaje
 }
 class TierraArrasada {
-+usar()
++usar(tablero : Tablero)
 }
 class MoraleBoost {
-+usar()
++usar(tablero : Tablero)
 }
-abstract class Clima {
+class Clima {
++Clima(Seccion seccion1, Seccion seccion2)
++usar(tablero : Tablero)
 }
-
 
 class Puntaje {
 -valor : int
-
++Puntaje(puntosIniciales : int)
++sumarPuntaje(unPuntaje : Puntaje) : Puntaje
++restarPuntaje(unPuntaje : Puntaje) : Puntaje
++obtenerValor() : int
++equals(valor : int) : Boolean
 }
+
+class Mano {
++Mano(cartas : List<Carta>)
++tieneCartasSuficientes(cantidadCartas : int)
++tomarCarta(mazo : Mazo)
++agarrarCarta(unaPosicion : int) : Carta
+}
+
 class Moneda
 class Turno
-class PilaDeDescarte
+class PilaDeDescarte {
++descartarUna(carta : Carta)
++descartarCartas(descartes : List<Carta>)
++usarCartaMedico(posicion : int) : Carta
+}
 
-
+interface Colocador {
++colocar(Unidad unidad, Tablero tablero)
+}
 
 @enduml
 
