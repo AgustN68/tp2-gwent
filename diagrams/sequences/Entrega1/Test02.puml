@@ -1,0 +1,17 @@
+@startuml
+skinparam SequenceMessageAlign center
+'https://plantuml.com/sequence-diagram
+actor Test02
+create "mazo:Mazo" as mazo
+Test02 -> mazo: new (unidades,especiales)
+create "tablero: Tablero" as tablero
+Test02 -> tablero : new(cuerpoAcuerpo,rango,asedio)
+create ":Jugador" as jugador
+Test02 -> jugador : new(tablero, mazo)
+create "mano:Mano" as mano
+jugador -> mano: new(cartas)
+Test02 -> jugador : validarCartasSuficientesMano(10)
+jugador -> mano : tieneCartasSuficientes(10)
+create "Error:NoHayCartasSuficientes" as error
+mano -> error : throw()
+@enduml

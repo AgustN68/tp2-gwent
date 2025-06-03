@@ -116,7 +116,7 @@ public class testEntrega1 {
 
         jugador.validarCartasSuficientesMano(10);
     }
-
+//test 02 caso negativo
     @Test
     public void test05UnJugadorNoPoseeCartasSuficientesEnSuManoParaEmpezarElJuego() {
         //Inicial faseActual = new Preparacion();

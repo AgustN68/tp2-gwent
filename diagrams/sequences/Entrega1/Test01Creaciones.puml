@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam SequenceMessageAlign center
+
+actor Test
+
+Test -> Seccion: new()
+Test -> Seccion: new()
+Test -> Seccion: new()
+
+create "tablero:Tablero" as Tablero
+Test -> Tablero : new(cuerpoACuerpo, rango, asedio)
+
+loop para cada carta unidad
+       create ColocadorCuerpoACuerpo
+    Test -> ColocadorCuerpoACuerpo : new()
+    create ":Modificador" as Modificador
+    Test -> Modificador : new()
+    create ":Unidad" as Unidad
+    Test -> Unidad : new(ColocadorCuerpoACuerpo, 4, Modificador)
+end
+
+loop para cada carta especial
+    create ":Especial" as Especial
+    Test -> Especial : new()
+end
+
+ create "mazo:Mazo" as mazo
+Test -> mazo : new(unidades, especiales)
+create ":Jugador" as jugador
+Test -> jugador : new(tablero, mazo)
+@enduml

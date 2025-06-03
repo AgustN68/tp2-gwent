@@ -1,0 +1,28 @@
+@startuml
+skinparam SequenceMessageAlign center
+'https://plantuml.com/sequence-diagram
+actor Test02
+create "mazo:Mazo" as mazo
+Test02 -> mazo: new (unidades,especiales)
+create "tablero: Tablero" as tablero
+Test02 -> tablero : new(cuerpoAcuerpo,rango,asedio)
+create ":Jugador" as jugador
+Test02 -> jugador : new(tablero, mazo)
+create "mano:Mano" as mano
+jugador -> mano: new(cartas)
+Test02 -> jugador : seleccionarCarta(2)
+jugador -> mano : agarrarCarta(2)
+mano --> jugador: Carta
+jugador --> jugador: usar
+Test02 -> jugador: obtenerPuntaje()
+jugador -> tablero: calcularPuntaje()
+create ":Puntaje" as puntaje
+tablero -> puntaje : new()
+loop para cada seccion
+puntaje -> Seccion : puntaje()
+Seccion --> puntaje : puntaje
+end
+puntaje --> tablero: puntaje
+tablero --> jugador : puntaje
+jugador --> Test02 : puntaje
+@enduml
