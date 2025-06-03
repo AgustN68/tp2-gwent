@@ -217,27 +217,23 @@ public class testEntrega1 {
         //Assert
         Assertions.assertTrue(tamanio == descartes.cantidadCartas());
     }
-    // Correspondiente al punto 6 - Falta el "que solo se aplique el valor a la ronda"
+    // Punto 6 - Falta el "que solo se aplique el valor a la ronda"
 
     @Test
     public void test09ModificoUnaCartaConUnaCartaaUnidaYSeCambianLosPuntos() {
-
-        /*
-        Primera idea de implementación. La otra forma seria que cada carta tenga su propio
-        modificador, pero tiene que haber un metodo que le pregunte a sección la cantidad
-        de cartas del mismo tipo que hay para así multiplicar
-        */
 
         Seccion seccionCuerpoACuerpo = new Seccion();
         Seccion seccionRango = new Seccion();
         Seccion seccionAsedio = new Seccion();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
         ColocadorAsedio colocadorAsedio = new ColocadorAsedio();
-        Unida modificador = new Unida(1);
+        Unida modificador = new Unida(0);
         Unidad catapulta1 = new Unidad(colocadorAsedio, 8, modificador);
         Unidad catapulta2 = new Unidad(colocadorAsedio, 8, modificador);
 
         catapulta1.usar(tablero);
+        modificador.sumarCantidadEnSeccion();
+
         catapulta2.usar(tablero);
         modificador.sumarCantidadEnSeccion();
 
