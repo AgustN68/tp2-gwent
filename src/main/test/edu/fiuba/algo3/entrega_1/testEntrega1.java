@@ -41,7 +41,7 @@ public class testEntrega1 {
         Mazo mazo = new Mazo(unidades, especiales);
         Jugador jugador = new Jugador(tablero, mazo);
 
-        jugador.validarCartasSuficientesMazo(15, 6);
+        //jugador.validarCartasSuficientesMazo(15, 6);
     }
 
     @Test
@@ -62,18 +62,14 @@ public class testEntrega1 {
             especiales.add(new Especial());
         }
 
-        Mazo mazo = new Mazo(unidades, especiales);
-        Jugador jugador = new Jugador(tablero, mazo);
-
         assertThrows(
                 NoHayCartasUnidadSuficientesException.class,
-                ()-> jugador.validarCartasSuficientesMazo(15, 6)
+                ()-> new Mazo(unidades, especiales)
         );
     }
 
     @Test
     public void test03UnJugadorNoPoseeEspecialesSuficientesEnSuMazoParaEmpezarElJuego() {
-        //Inicial faseActual = new Inicial();
         Seccion seccionCuerpoACuerpo = new Seccion();
         Seccion secconRango = new Seccion();
         Seccion seccionAsedio = new Seccion();
@@ -89,12 +85,10 @@ public class testEntrega1 {
             especiales.add(new Especial());
         }
 
-        Mazo mazo = new Mazo(unidades, especiales);
-        Jugador jugador = new Jugador(tablero, mazo);
 
         assertThrows(
                 NoHayCartasEspecialesSuficientesException.class,
-                ()-> jugador.validarCartasSuficientesMazo(15, 6)
+                ()-> new Mazo(unidades, especiales)
         );
     }
 // Punto 2
@@ -112,7 +106,7 @@ public class testEntrega1 {
         for (int i = 0; i < 15; i++) {
             unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             especiales.add(new Especial());
         }
 
@@ -137,7 +131,7 @@ public class testEntrega1 {
         for (int i = 0; i < 15; i++) {
             unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             especiales.add(new Especial());
         }
 

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
 import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
@@ -28,7 +29,16 @@ public class ManoTest {
     public void test02TomarCartaAgregaUnaCartaALaMano() {
         Mano mano = new Mano(new ArrayList<>());
         Modificador modificador = new Modificador();
-        Mazo mazo = new Mazo(List.of(new Unidad(new ColocadorCuerpoACuerpo(), 7, modificador)),new ArrayList<>());
+        List<Unidad> cartasUnidades = new ArrayList();
+        List<Especial> cartasEspeciales = new ArrayList();
+        for (int i = 0; i < 15; i++) {
+            cartasUnidades.add(new Unidad(new ColocadorCuerpoACuerpo(),2, new Modificador()));
+        }
+        for (int i = 0; i < 6; i++) {
+            cartasEspeciales.add(new Especial());
+        }
+
+        Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
         mano.tomarCarta(mazo);
 

@@ -18,10 +18,6 @@ public class Jugador {
         this.pilaDeDescarte = new PilaDeDescarte();
     }
 
-    public void validarCartasSuficientesMazo(int cantidadUnidades, int cantidadEspeciales) {
-        mazo.validarCartasSuficientes(cantidadUnidades, cantidadEspeciales);
-    }
-
     public void validarCartasSuficientesMano(int cantidadCartas) {
         mano.tieneCartasSuficientes(cantidadCartas);
     }

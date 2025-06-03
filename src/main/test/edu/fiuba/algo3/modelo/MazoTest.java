@@ -26,10 +26,9 @@ public class MazoTest {
             cartasEspeciales.add(new Especial());
         }
 
+        //Act y Assert
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
-        //Act y Assert
-        mazo.validarCartasSuficientes(15,6);
     }
     @Test
     public void test2UnMazoTieneCartasDeSobraParaEmpezarLaPartida(){
@@ -44,10 +43,9 @@ public class MazoTest {
             cartasEspeciales.add(new Especial());
         }
 
+        //Act y Assert
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
-        //Act y Assert
-        mazo.validarCartasSuficientes(15,6);
     }
 
     @Test
@@ -63,12 +61,11 @@ public class MazoTest {
             cartasEspeciales.add(new Especial());
         }
 
-        Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
         //Act y Assert
         assertThrows(
                 NoHayCartasUnidadSuficientesException.class,
-                ()-> mazo.validarCartasSuficientes(15,6)
+                ()-> new Mazo(cartasUnidades, cartasEspeciales)
         );
     }
 
@@ -85,12 +82,11 @@ public class MazoTest {
             cartasEspeciales.add(new Especial());
         }
 
-        Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 
         //Act y Assert
         assertThrows(
                 NoHayCartasEspecialesSuficientesException.class,
-                ()-> mazo.validarCartasSuficientes(15,6)
+                ()-> new Mazo(cartasUnidades, cartasEspeciales)
         );
     }
 }

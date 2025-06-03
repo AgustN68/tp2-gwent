@@ -12,37 +12,32 @@ import java.util.List;
 
 public class Mazo {
 
-    private List<Unidad> cartasUnidades;
-    private List<Especial> cartasEspeciales;
     private ArrayList<Carta> cartas;
+    private static final int CANT_MIN_UNIDADES = 15;
+    private static final int CANT_MIN_ESPECIALES = 6;
 
-    public Mazo(List<Unidad> cartasUnidad, List<Especial> cartasEspeciales) {
-        this.cartasUnidades = cartasUnidad;
-        this.cartasEspeciales = cartasEspeciales;
-        this.cartas = mezclarCartas();
+    public Mazo(List<Unidad> unidades, List<Especial> especiales) {
+        validarUnidades(unidades, CANT_MIN_UNIDADES);
+        validarEspeciales(especiales, CANT_MIN_ESPECIALES);
+        this.cartas = mezclarCartas(unidades, especiales);
     }
 
-    public void validarCartasSuficientes(int cantUnidadMin, int cantEspecialMin){
-        validarCartasUnidadSuficientes(cantUnidadMin);
-        validarCartasEspecialSuficientes(cantEspecialMin);
-    }
-
-    private void validarCartasUnidadSuficientes(int cant){
-        if (cartasUnidades.size() < cant) {
+    private void validarUnidades(List<Unidad> unidades, int cant){
+        if (unidades.size() < cant) {
             throw new NoHayCartasUnidadSuficientesException("El mazo no tiene unidades suficientes");
         }
     }
 
-    private void validarCartasEspecialSuficientes(int cant){
-        if (cartasEspeciales.size() < cant) {
+    private void validarEspeciales(List<Especial> especiales, int cant){
+        if (especiales.size() < cant) {
             throw new NoHayCartasEspecialesSuficientesException("El mazo no tiene cartas especiales suficientes");
         }
     }
 
-    private ArrayList<Carta> mezclarCartas(){
+    private ArrayList<Carta> mezclarCartas(List<Unidad> unidades ,List<Especial> especiales){
         ArrayList<Carta> cartas = new ArrayList<>();
-        cartas.addAll(cartasUnidades);
-        cartas.addAll(cartasEspeciales);
+        cartas.addAll(unidades);
+        cartas.addAll(especiales);
         Collections.shuffle(cartas);
         return cartas;
     }
