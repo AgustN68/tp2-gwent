@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Puntaje{
+    - valor : Int
+    +Puntaje(puntosInicales: Int)
+    +sumarPuntaje(puntaje: Puntaje): Puntaje
+    +obtenerValor(): Int
+   +reducirPuntajeA(valor): void
+   + equals(valor: Int): Boolean
+}
+
+@enduml

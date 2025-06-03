@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Jugador {
+    -tablero: Tablero
+    -mazo: Mazo
+    +Jugador(Tablero tablero, Mazo mazo)
+    +validadCartasSuficientesMano(cantidadCartas:Int): void
+    +tomarCartasMazo(mazo: Mazo): void
+    +seleccionarCarta(posicion: Int): Carta
+    +obtenerPuntaje(): Puntaje
+
+}
+
+class Mano{
+    -cartas: List<Carta>
+    +Mano(cartas: Carta)
+    +tomarCartaMazo(mazo: Mazo):void
+    +agarrarCarta(posicion: Int): Carta
+}
+
+class PilaDeDescarte{
+-cartas : List <Carta>
++PilaDeDescarte()
++descartarUna(carta: Carta): void
++descartarCartas(cartas: List <Carta>): void
++cantidadCartas(): Int
++usarCartaMedico(posicion: Int): Carta
+}
+
+Jugador ---> Mano
+Jugador --->PilaDeDescarte
+Mano .> PilaDeDescarte: usa
+@enduml

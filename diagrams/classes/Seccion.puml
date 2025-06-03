@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Seccion{
+-cartasUnidades: List<Carta>
++puntajeTotal(): Puntaje
++ubicar(): void
++reducirPuntaje(valor: Int): void
+}
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+class Tablero{
+-cuerpoACuerpo: Seccion
+-rango: Seccion
+- asedio: Seccion
++ubicarRango(unidad: Unidad): void
++ubicarCuerpoACuerpo(unidad: Unidad): void
++ubicarAsedio(unidad: Unidad): void
++ calcularPuntaje(): Puntaje
+}
+
+
+@enduml

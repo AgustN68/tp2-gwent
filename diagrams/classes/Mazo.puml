@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Mazo{
++Mazo(unidades: List<Unidad>, especiales: List<Especial>):
++ validarUnidades(unidades, cant: Int): void
++validarEspeciales(especiales, cant: Int): void
+- mezclarCartas(unidades, especiales): List<Carta>
++ obtenerCarta(): Carta
+}
+abstract Carta{
+    + usar(tablero: Tablero):
+}
+
+class Unidad {
+-puntaje: Puntaje
+-modificador: Modificador
+-colocador: Colocador
++ Unidad(modificador, colocador, puntosInicales)
++usar(tablero: Tablero): void
++ calcularPuntaje(): Puntaje
++reducirPuntaje(valor: Int): void
+}
+
+class Especial{
+    +Especial()
+    +usar(tablero: Tablero): void
+}
+
+Carta "*" -o Mazo
+Carta <|-- Unidad
+Carta <|-- Especial
+@enduml
