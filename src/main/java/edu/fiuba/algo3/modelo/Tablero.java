@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 public class Tablero {
     private final Seccion seccionCuerpoACuerpo;
@@ -31,5 +32,12 @@ public class Tablero {
         puntajeTotal = puntajeTotal.sumarPuntaje(seccionRango.puntajeTotal());
         puntajeTotal = puntajeTotal.sumarPuntaje(seccionAsedio.puntajeTotal());
         return puntajeTotal;
+    }
+
+    public void limpiarClima() {
+
+    }
+
+    public void removerCartaMasFuerte() {
     }
 }

@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorRango;
+import edu.fiuba.algo3.modelo.Modificador.Modificador;
+import edu.fiuba.algo3.modelo.Seccion.Asedio;
+import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Seccion.Rango;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ public class ManoTest {
     @Test
     public void test01TieneCartasSuficientesLanzaExcepcionCuandoNoAlcanza() {
         Modificador modificador = new Modificador();
-        List<Carta> cartas = List.of(new Unidad(new ColocadorRango(), 7, modificador));
+        List<Carta> cartas = List.of(new Unidad(new Rango(), 7, modificador));
         Mano mano = new Mano(new ArrayList<>(cartas));
 
         assertThrows(NoHayCartasSuficientesException.class, () -> mano.tieneCartasSuficientes(2));
@@ -32,10 +34,10 @@ public class ManoTest {
         List<Unidad> cartasUnidades = new ArrayList();
         List<Especial> cartasEspeciales = new ArrayList();
         for (int i = 0; i < 15; i++) {
-            cartasUnidades.add(new Unidad(new ColocadorCuerpoACuerpo(),2, new Modificador()));
+            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new Modificador()));
         }
         for (int i = 0; i < 6; i++) {
-            cartasEspeciales.add(new Especial());
+            cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
         }
 
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
@@ -48,7 +50,7 @@ public class ManoTest {
     @Test
     public void test03AgarrarCartaDevuelveYRemueveLaCartaEnEsaPosicion() {
         Modificador modificador = new Modificador();
-        ColocadorAsedio asedio = new ColocadorAsedio();
+        Asedio asedio = new Asedio();
 
         List<Carta> cartas = new ArrayList<>();
         cartas.add(new Unidad(asedio, 7, modificador));

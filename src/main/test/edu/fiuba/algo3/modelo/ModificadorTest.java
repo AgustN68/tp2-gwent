@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
-import edu.fiuba.algo3.modelo.colocadores.Colocador;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Modificador.Modificador;
+import edu.fiuba.algo3.modelo.Modificador.Unida;
+import edu.fiuba.algo3.modelo.Seccion.Asedio;
+import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Seccion.Rango;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,14 +17,14 @@ public class ModificadorTest {
 
 
         // Arrange
-        Seccion cuerpoACuerpo = new Seccion();
-        Tablero tablero = new Tablero(cuerpoACuerpo, new Seccion(), new Seccion());
-        Colocador colocadorCuerpo = new ColocadorCuerpoACuerpo();
+        Seccion cuerpoACuerpo = new CuerpoACuerpo();
+        Tablero tablero = new Tablero(cuerpoACuerpo, new Asedio(), new Rango());
+        CuerpoACuerpo seccionCuerpo = new CuerpoACuerpo();
         Modificador normal = new Modificador();
-        Unidad unidad = new Unidad(colocadorCuerpo, 5,normal);
+        Unidad unidad = new Unidad(seccionCuerpo, 5,normal);
 
         // Act
-        unidad.usar(tablero);
+        unidad.usar();
         Puntaje puntajeObtenido = unidad.calcularPuntaje();
 
         // Assert
@@ -34,19 +37,17 @@ public class ModificadorTest {
     public void test02unModificadorUnidaCalculaElPuntajeCorrectoConUnaCartaPuesta() {
 
         //Arrange
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion seccionRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion seccionRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
 
-        ColocadorAsedio colocadorAsedio = new ColocadorAsedio();
-
         Unida modificador = new Unida(0);
-        Unidad catapulta1 = new Unidad(colocadorAsedio, 8, modificador);
+        Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
 
 
         //Act
-        catapulta1.usar(tablero);
+        catapulta1.usar();
         modificador.sumarCantidadEnSeccion();
 
         Puntaje puntajeTotal = seccionAsedio.puntajeTotal();
@@ -60,27 +61,25 @@ public class ModificadorTest {
     public void test03unModificadorUnidaCalculaElPuntajeCorrectoConTresCartasPuestas() {
 
         // Arrange
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion seccionRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion seccionRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
 
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
 
-        ColocadorAsedio colocadorAsedio = new ColocadorAsedio();
-
         Unida modificador = new Unida(0);
-        Unidad catapulta1 = new Unidad(colocadorAsedio, 8, modificador);
-        Unidad catapulta2 = new Unidad(colocadorAsedio, 8, modificador);
-        Unidad catapulta3 = new Unidad(colocadorAsedio, 8, modificador);
+        Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
+        Unidad catapulta2 = new Unidad(seccionAsedio, 8, modificador);
+        Unidad catapulta3 = new Unidad(seccionAsedio, 8, modificador);
 
         // Act
-        catapulta1.usar(tablero);
+        catapulta1.usar();
         modificador.sumarCantidadEnSeccion();
 
-        catapulta2.usar(tablero);
+        catapulta2.usar();
         modificador.sumarCantidadEnSeccion();
 
-        catapulta3.usar(tablero);
+        catapulta3.usar();
         modificador.sumarCantidadEnSeccion();
 
 

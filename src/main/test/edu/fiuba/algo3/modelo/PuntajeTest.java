@@ -60,7 +60,7 @@ public class PuntajeTest {
         Puntaje puntaje1 = new Puntaje(100);
 
         // Act
-        puntaje1.reducirPuntajeA(50);
+        puntaje1.modificarValor(50);
 
         // Assert
         Assertions.assertTrue(puntaje1.equals(50));
