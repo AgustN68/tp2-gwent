@@ -36,8 +36,8 @@ public class testEntrega2 {
         Tablero tablero2 = new Tablero(cuerpoACuerpo2, new Rango(), new Asedio());
         int puntosCarta1 = 5;
         int puntosCarta2 = 6;
-        Unidad unidad1 = new Unidad(cuerpoACuerpo1,puntosCarta1,new Modificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo2,puntosCarta2,new Modificador());
+        Unidad unidad1 = new Unidad(cuerpoACuerpo1,puntosCarta1,new SinModificador());
+        Unidad unidad2 = new Unidad(cuerpoACuerpo2,puntosCarta2,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
         Limpiar limpiarClima = new Limpiar(tablero1, tablero2);
 
@@ -67,9 +67,9 @@ public class testEntrega2 {
         Tablero tablero1 = new Tablero(cuerpoACuerpo1, rango1, asedio1);
         Tablero tablero2 = new Tablero(cuerpoACuerpo2, rango2, asedio2);
 
-        Unidad unidad1 = new Unidad(cuerpoACuerpo1, 8, new Modificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo2, 9, new Modificador());
-        Unidad unidad3 = new Unidad(rango2, 10, new Modificador());
+        Unidad unidad1 = new Unidad(cuerpoACuerpo1, 8, new SinModificador());
+        Unidad unidad2 = new Unidad(cuerpoACuerpo2, 9, new SinModificador());
+        Unidad unidad3 = new Unidad(rango2, 10, new SinModificador());
 
         unidad1.ubicar(cuerpoACuerpo1);
         unidad2.ubicar(cuerpoACuerpo2);

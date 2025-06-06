@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Modificador.Modificador;
+import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Modificador.Unida;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
@@ -20,7 +22,7 @@ public class ModificadorTest {
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
         Tablero tablero = new Tablero(cuerpoACuerpo, new Asedio(), new Rango());
         CuerpoACuerpo seccionCuerpo = new CuerpoACuerpo();
-        Modificador normal = new Modificador();
+        Modificador normal = new SinModificador();
         Unidad unidad = new Unidad(seccionCuerpo, 5,normal);
 
         // Act

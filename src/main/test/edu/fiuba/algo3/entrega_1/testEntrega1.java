@@ -37,7 +37,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(seccionAsedio, seccionAsedio));
@@ -61,7 +61,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 14; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(seccionAsedio, seccionAsedio));
@@ -84,7 +84,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 5; i++) {
             especiales.add(new Clima(seccionAsedio, seccionAsedio));
@@ -109,7 +109,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(seccionAsedio, seccionAsedio));
@@ -134,7 +134,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(seccionAsedio, seccionAsedio));
@@ -162,7 +162,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(seccionAsedio, seccionAsedio));
@@ -187,7 +187,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(seccionAsedio, seccionAsedio));

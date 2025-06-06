@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Modificador.Modificador;
+import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
@@ -20,7 +21,7 @@ public class ManoTest {
 
     @Test
     public void test01TieneCartasSuficientesLanzaExcepcionCuandoNoAlcanza() {
-        Modificador modificador = new Modificador();
+        Modificador modificador = new SinModificador();
         List<Carta> cartas = List.of(new Unidad(new Rango(), 7, modificador));
         Mano mano = new Mano(new ArrayList<>(cartas));
 
@@ -30,11 +31,11 @@ public class ManoTest {
     @Test
     public void test02TomarCartaAgregaUnaCartaALaMano() {
         Mano mano = new Mano(new ArrayList<>());
-        Modificador modificador = new Modificador();
+        Modificador modificador = new SinModificador();
         List<Unidad> cartasUnidades = new ArrayList();
         List<Especial> cartasEspeciales = new ArrayList();
         for (int i = 0; i < 15; i++) {
-            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new Modificador()));
+            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
@@ -49,7 +50,7 @@ public class ManoTest {
 
     @Test
     public void test03AgarrarCartaDevuelveYRemueveLaCartaEnEsaPosicion() {
-        Modificador modificador = new Modificador();
+        Modificador modificador = new SinModificador();
         Asedio asedio = new Asedio();
 
         List<Carta> cartas = new ArrayList<>();
