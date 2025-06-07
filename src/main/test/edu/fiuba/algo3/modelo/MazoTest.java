@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
@@ -93,5 +94,23 @@ public class MazoTest {
                 NoHayCartasEspecialesSuficientesException.class,
                 ()-> new Mazo(cartasUnidades, cartasEspeciales)
         );
+    }
+
+    @Test
+    public void test05SePideUnaCartaAUnMazoYSeEnviaCorrectamente(){
+        // Arrange
+        List<Unidad> cartasUnidades = new ArrayList();
+        List<Especial> cartasEspeciales = new ArrayList();
+        for (int i = 0; i < 17; i++) {
+            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
+        }
+        for (int i = 0; i < 8; i++) {
+            cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
+        }
+        Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
+
+        Carta carta = mazo.obtenerCarta();
+
+        carta.usar();
     }
 }

@@ -17,6 +17,7 @@ import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasUnidadSuficientesException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,21 +158,14 @@ public class testEntrega1 {
         Seccion secconRango = new Rango();
         Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
+        Unidad unidad = new Unidad(seccionCuerpoACuerpo, 4, new SinModificador());
+        Mazo mockedMazo = mock(Mazo.class);
 
-        List<Unidad> unidades = new ArrayList<Unidad>();
-        List<Especial> especiales = new ArrayList<Especial>();
+        when(mockedMazo.obtenerCarta()).thenReturn(unidad);
 
-        for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
-        }
-        for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(seccionAsedio, seccionAsedio));
-        }
-
-        Mazo mazo = new Mazo(unidades, especiales);
-        Jugador jugador = new Jugador(tablero, mazo);
-        jugador.tomarCartasMazo(10);
-        Carta cartaSeleccionada = jugador.seleccionarCarta(2);
+        Jugador jugador = new Jugador(tablero, mockedMazo);
+        jugador.tomarCartasMazo(1);
+        Carta cartaSeleccionada = jugador.seleccionarCarta(0);
         cartaSeleccionada.usar();
 
     }
@@ -183,20 +177,15 @@ public class testEntrega1 {
         Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
-        List<Unidad> unidades = new ArrayList<Unidad>();
-        List<Especial> especiales = new ArrayList<Especial>();
+        Mazo mockedMazo = mock(Mazo.class);
 
-        for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
-        }
-        for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(seccionAsedio, seccionAsedio));
-        }
+        Unidad unidad = new Unidad(seccionCuerpoACuerpo, 4, new SinModificador());
 
-        Mazo mazo = new Mazo(unidades, especiales);
-        Jugador jugador = new Jugador(tablero, mazo);
-        jugador.tomarCartasMazo(10);
-        Carta cartaSeleccionada = jugador.seleccionarCarta(2);
+        when(mockedMazo.obtenerCarta()).thenReturn(unidad);
+
+        Jugador jugador = new Jugador(tablero, mockedMazo);
+        jugador.tomarCartasMazo(1);
+        Carta cartaSeleccionada = jugador.seleccionarCarta(0);
         cartaSeleccionada.usar();
 
         Puntaje puntaje = jugador.obtenerPuntaje();
