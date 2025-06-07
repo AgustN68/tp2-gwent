@@ -2,11 +2,16 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Carta.Carta;
-import edu.fiuba.algo3.modelo.Carta.Especial.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Modificador.Modificador;
+import edu.fiuba.algo3.modelo.Modificador.SinModificador;
+import edu.fiuba.algo3.modelo.Modificador.Unida;
+import edu.fiuba.algo3.modelo.Seccion.Asedio;
+import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Seccion.Rango;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasEspecialesSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasUnidadSuficientesException;
@@ -23,19 +28,19 @@ public class testEntrega1 {
     @Test
     public void test01UnJugadorPoseeCartasSuficientesEnSuMazoParaEmpezarElJuego() {
         //Inicial faseActual = new Inicial();
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion secconRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion secconRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Especial());
+            especiales.add(new Clima(seccionAsedio, seccionAsedio));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
@@ -47,19 +52,19 @@ public class testEntrega1 {
     @Test
     public void test02UnJugadorNoPoseeUnidadesSuficientesEnSuMazoParaEmpezarElJuego() {
         //Inicial faseActual = new Inicial();
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion secconRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion secconRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 14; i++) {
-            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Especial());
+            especiales.add(new Clima(seccionAsedio, seccionAsedio));
         }
 
         assertThrows(
@@ -70,19 +75,19 @@ public class testEntrega1 {
 
     @Test
     public void test03UnJugadorNoPoseeEspecialesSuficientesEnSuMazoParaEmpezarElJuego() {
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion secconRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion secconRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 5; i++) {
-            especiales.add(new Especial());
+            especiales.add(new Clima(seccionAsedio, seccionAsedio));
         }
 
 
@@ -95,19 +100,19 @@ public class testEntrega1 {
     @Test
     public void test04UnJugadorPoseeCartasSuficientesEnSuManoParaEmpezarElJuego() {
         //Inicial faseActual = new Preparacion();
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion secconRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion secconRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Especial());
+            especiales.add(new Clima(seccionAsedio, seccionAsedio));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
@@ -120,19 +125,19 @@ public class testEntrega1 {
     @Test
     public void test05UnJugadorNoPoseeCartasSuficientesEnSuManoParaEmpezarElJuego() {
         //Inicial faseActual = new Preparacion();
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion secconRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion secconRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Especial());
+            especiales.add(new Clima(seccionAsedio, seccionAsedio));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
@@ -148,51 +153,51 @@ public class testEntrega1 {
 
     @Test
     public void test06UnJugadorColocaCorrectamenteUnaUnidadEnElTablero() {
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion secconRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion secconRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Especial());
+            especiales.add(new Clima(seccionAsedio, seccionAsedio));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
         Jugador jugador = new Jugador(tablero, mazo);
         jugador.tomarCartasMazo(10);
         Carta cartaSeleccionada = jugador.seleccionarCarta(2);
-        cartaSeleccionada.usar(tablero);
+        cartaSeleccionada.usar();
 
     }
     // Punto 4
     @Test
     public void test07UnJugadorColocaCorrectamenteUnaUnidadEnElTableroYSeCalculaElPuntaje() {
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion secconRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion secconRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
 
         List<Unidad> unidades = new ArrayList<Unidad>();
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(new ColocadorCuerpoACuerpo(), 4, new Modificador()));
+            unidades.add(new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Especial());
+            especiales.add(new Clima(seccionAsedio, seccionAsedio));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
         Jugador jugador = new Jugador(tablero, mazo);
         jugador.tomarCartasMazo(10);
         Carta cartaSeleccionada = jugador.seleccionarCarta(2);
-        cartaSeleccionada.usar(tablero);
+        cartaSeleccionada.usar();
 
         Puntaje puntaje = jugador.obtenerPuntaje();
 
@@ -204,10 +209,10 @@ public class testEntrega1 {
     public void test08PuedoDescartarUnaCarta() {
         //Arrange
         PilaDeDescarte descartes = new PilaDeDescarte();
-        Modificador modificador = new Modificador();
-        ColocadorAsedio colocador = new ColocadorAsedio();
+        Modificador modificador = new SinModificador();
+        Rango seccion = new Rango();
 
-        Carta carta = new Unidad(colocador, 4, modificador);
+        Carta carta = new Unidad(seccion, 4, modificador);
 
         int tamanio = 1;
 
@@ -222,19 +227,18 @@ public class testEntrega1 {
     @Test
     public void test09ModificoUnaCartaConUnaCartaaUnidaYSeCambianLosPuntos() {
 
-        Seccion seccionCuerpoACuerpo = new Seccion();
-        Seccion seccionRango = new Seccion();
-        Seccion seccionAsedio = new Seccion();
+        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
+        Seccion seccionRango = new Rango();
+        Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
-        ColocadorAsedio colocadorAsedio = new ColocadorAsedio();
         Unida modificador = new Unida(0);
-        Unidad catapulta1 = new Unidad(colocadorAsedio, 8, modificador);
-        Unidad catapulta2 = new Unidad(colocadorAsedio, 8, modificador);
+        Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
+        Unidad catapulta2 = new Unidad(seccionAsedio, 8, modificador);
 
-        catapulta1.usar(tablero);
+        catapulta1.usar();
         modificador.sumarCantidadEnSeccion();
 
-        catapulta2.usar(tablero);
+        catapulta2.usar();
         modificador.sumarCantidadEnSeccion();
 
         Puntaje puntajeTotal = seccionAsedio.puntajeTotal();
@@ -245,10 +249,10 @@ public class testEntrega1 {
     // Punto 7
     @Test
     public void test10SeAplicaElEfectoDelClimaYSeReduceElValorDeLasCartasDeLaSeccionCorrespondiente(){
-        Seccion cuerpoACuerpo1 = new Seccion();
-        Seccion cuerpoACuerpo2 = new Seccion();
-        Unidad unidad1 = new Unidad(new ColocadorCuerpoACuerpo(),5,new Modificador());
-        Unidad unidad2 = new Unidad(new ColocadorCuerpoACuerpo(),6,new Modificador());
+        Seccion cuerpoACuerpo1 = new CuerpoACuerpo();
+        Seccion cuerpoACuerpo2 = new CuerpoACuerpo();
+        Unidad unidad1 = new Unidad(cuerpoACuerpo1,5,new SinModificador());
+        Unidad unidad2 = new Unidad(cuerpoACuerpo2,6,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
 
         cuerpoACuerpo1.ubicar(unidad1);

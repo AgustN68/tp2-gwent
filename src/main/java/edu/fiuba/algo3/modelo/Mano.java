@@ -26,4 +26,8 @@ public class Mano {
     public Carta agarrarCarta(int unaPosicion){
         return cartas.remove(unaPosicion);
     }
+
+    public List<Carta> obtenerCartas() {
+        return cartas;
+    }
 }

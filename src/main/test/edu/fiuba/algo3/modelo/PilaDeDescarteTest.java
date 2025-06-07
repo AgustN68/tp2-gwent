@@ -2,9 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorAsedio;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorCuerpoACuerpo;
-import edu.fiuba.algo3.modelo.colocadores.ColocadorRango;
+import edu.fiuba.algo3.modelo.Modificador.Modificador;
+import edu.fiuba.algo3.modelo.Modificador.SinModificador;
+import edu.fiuba.algo3.modelo.Seccion.Asedio;
+import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Seccion.Rango;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,11 +30,10 @@ public class PilaDeDescarteTest {
     public void test02PuedoDescartarUnaCarta(){
         //Arrange
         PilaDeDescarte descartes = new PilaDeDescarte();
-        Seccion seccion = new Seccion();
-        Modificador modificador = new Modificador();
-        ColocadorAsedio colocador = new ColocadorAsedio();
+        Seccion seccion = new Asedio();
+        Modificador modificador = new SinModificador();
 
-        Carta carta = new Unidad(colocador, 4, modificador);
+        Carta carta = new Unidad(seccion, 4, modificador);
 
         int tamanio = 1;
 
@@ -47,8 +49,9 @@ public class PilaDeDescarteTest {
         //Arrange
         PilaDeDescarte descartes = new PilaDeDescarte();
 
-        Carta carta1 = new Unidad(new ColocadorRango(), 2, new Modificador());
-        Carta carta2 = new Unidad(new ColocadorRango(),4, new Modificador());
+        Rango rango = new Rango();
+        Carta carta1 = new Unidad(rango, 2, new SinModificador());
+        Carta carta2 = new Unidad(rango,4, new SinModificador());
         int tamanioDescartes = 2;
         List<Carta> cartas = new ArrayList<>();
         cartas.add(carta1);
@@ -65,8 +68,8 @@ public class PilaDeDescarteTest {
     public void test04PuedoSacarDeLaPilaDeDescarteUnaCartaUsandoCartaMedico(){
         //Arrange
         PilaDeDescarte descartes = new PilaDeDescarte();
-        Carta carta1 = new Unidad(new ColocadorRango(), 2, new Modificador());
-        Carta carta2 = new Unidad(new ColocadorCuerpoACuerpo(),4, new Modificador());
+        Carta carta1 = new Unidad(new Rango(), 2, new SinModificador());
+        Carta carta2 = new Unidad(new CuerpoACuerpo(),4, new SinModificador());
         int tamanioDescartes = 1;
         List<Carta> cartas = new ArrayList<>();
         cartas.add(carta1);

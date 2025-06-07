@@ -1,25 +1,38 @@
 package edu.fiuba.algo3.modelo.Carta;
 
-import edu.fiuba.algo3.modelo.colocadores.Colocador;
-import edu.fiuba.algo3.modelo.Modificador;
+import edu.fiuba.algo3.modelo.Modificador.Modificador;
 import edu.fiuba.algo3.modelo.Puntaje;
-import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
+import edu.fiuba.algo3.modelo.exceptions.UnidadNoSePuedeUbicarEnEstaSeccionException;
 
-public class Unidad extends Carta {
+public class Unidad implements Carta {
 
     private Puntaje puntaje;
     private Modificador modificador;
-    private Colocador colocador;
+    private Seccion seccion;
 
-    public Unidad(Colocador colocador, int puntosIniciales, Modificador modificador) {
-        this.colocador = colocador;
+    public Unidad(Seccion seccion, int puntosIniciales, Modificador modificador) {
+        this.seccion = seccion;
         puntaje = new Puntaje(puntosIniciales);
         this.modificador = modificador;
     }
 
     @Override
-    public void usar(Tablero tablero){
-        colocador.colocar(this, tablero);
+    public void usar(){
+        this.ubicar(this.seccion);
+    }
+
+    public void ubicar(Seccion seccionAUbicar) {
+        if (seccionPuedeUbicar(seccionAUbicar)){
+            seccionAUbicar.ubicar(this);
+        } else {
+            throw new UnidadNoSePuedeUbicarEnEstaSeccionException("No se puede ubicar en esta seccion");
+        }
+
+    }
+
+    public Boolean seccionPuedeUbicar(Seccion seccion) {
+        return seccion.equals(this.seccion);
     }
 
     public Puntaje calcularPuntaje(){
@@ -27,6 +40,6 @@ public class Unidad extends Carta {
     }
 
     public void reducirPuntaje(int valor){
-        this.puntaje.reducirPuntajeA(valor);
+        this.puntaje.modificarValor(valor);
     }
 }

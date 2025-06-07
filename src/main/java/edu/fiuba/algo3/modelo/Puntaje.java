@@ -3,9 +3,11 @@ package edu.fiuba.algo3.modelo;
 public class Puntaje {
 
     private int valor;
+    private int valorOriginal;
 
     public Puntaje(int puntosIniciales) {
         this.valor = puntosIniciales;
+        this.valorOriginal = puntosIniciales;
     }
 
     public Puntaje sumarPuntaje(Puntaje unPuntaje) {
@@ -20,12 +22,15 @@ public class Puntaje {
         return valor;
     }
 
-
     public Boolean equals(int valor) {
         return valor == this.valor;
     }
 
-    public void reducirPuntajeA(int valor) {
+    public void modificarValor(int valor) {
         this.valor = valor;
+    }
+
+    public void reiniciarValor() {
+        valor = valorOriginal;
     }
 }

@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.modelo.Carta;
 
-import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
-public abstract class Carta {
-
-    public abstract void usar(Tablero tablero);
-
+public interface Carta {
+    void usar();
 }

@@ -1,11 +1,12 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Seccion;
 
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.Puntaje;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Seccion {
+public abstract class Seccion {
 
     private List<Unidad> cartasUnidades;
 
@@ -30,5 +31,6 @@ public class Seccion {
         }
         return total;
     }
+
 
 }
