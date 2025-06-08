@@ -5,8 +5,8 @@ import edu.fiuba.algo3.modelo.Puntaje;
 public class Unida extends Modificador {
     private int cantidadEnSeccion;
 
-    public Unida(int cantidadEnSeccion) {
-        this.cantidadEnSeccion = cantidadEnSeccion;
+    public Unida() {
+        this.cantidadEnSeccion = 0;
     } // provisorio - Si ya habia una carta en alguna sección, tengo que saber la cantidad inicial
       // previo a aplicar el puntaje
 

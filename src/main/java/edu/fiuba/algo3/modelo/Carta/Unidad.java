@@ -20,6 +20,7 @@ public class Unidad implements Carta {
     @Override
     public void usar(){
         this.ubicar(this.seccion);
+        this.modificador.aplicarModificador();
     }
 
     public void ubicar(Seccion seccionAUbicar) {

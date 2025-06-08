@@ -220,7 +220,7 @@ public class testEntrega1 {
         Seccion seccionRango = new Rango();
         Seccion seccionAsedio = new Asedio();
         Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
-        Unida modificador = new Unida(0);
+        Unida modificador = new Unida();
         Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
         Unidad catapulta2 = new Unidad(seccionAsedio, 8, modificador);
 
