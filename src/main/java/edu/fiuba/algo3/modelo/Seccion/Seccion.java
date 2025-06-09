@@ -9,14 +9,16 @@ import java.util.List;
 public abstract class Seccion {
 
     private List<Unidad> cartasUnidades;
+    private Puntaje puntaje;
 
     public Seccion() {
         cartasUnidades = new ArrayList<>();
+        puntaje = new Puntaje(0);
     }
     
     public void reducirPuntaje(int valor){
         for (Unidad unidad : cartasUnidades){
-            unidad.reducirPuntaje(valor);
+            unidad.actualizarPuntaje(valor);
         }
     }
     
@@ -25,12 +27,22 @@ public abstract class Seccion {
     }
 
     public Puntaje puntajeTotal() {
-        Puntaje total = new Puntaje(0);
         for (Unidad unidad : cartasUnidades) {
-            total = total.sumarPuntaje(unidad.calcularPuntaje());
+            puntaje = puntaje.sumarPuntaje(unidad.calcularPuntaje());
         }
-        return total;
+        return puntaje;
     }
 
 
+    public void multiplicarPuntaje(int producto) {
+        for (Unidad unidad : cartasUnidades) {
+            unidad.multiplicarPuntaje(producto);
+        }
+    }
+
+    public void restaurarPuntaje() {
+        for (Unidad unidad : cartasUnidades) {
+            unidad.restaurarPuntaje();
+        }
+    }
 }

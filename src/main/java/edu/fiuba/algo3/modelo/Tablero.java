@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
@@ -7,6 +8,7 @@ public class Tablero {
     private final Seccion seccionCuerpoACuerpo;
     private final Seccion seccionRango;
     private final Seccion seccionAsedio;
+    private Clima climaActual;
 
     public Tablero(Seccion seccionCuerpoACuerpo, Seccion seccionRango, Seccion seccionAsedio) {
         this.seccionCuerpoACuerpo = seccionCuerpoACuerpo;
@@ -35,7 +37,9 @@ public class Tablero {
     }
 
     public void limpiarClima() {
-
+        seccionCuerpoACuerpo.restaurarPuntaje();
+        seccionRango.restaurarPuntaje();
+        seccionAsedio.restaurarPuntaje();
     }
 
     public void removerCartaMasFuerte() {
