@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Carta.Especial.TierraArrasada;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mazo;
+import edu.fiuba.algo3.modelo.Modificador.Agil;
 import edu.fiuba.algo3.modelo.Modificador.Espia;
 import edu.fiuba.algo3.modelo.Modificador.Modificador;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
@@ -93,41 +94,71 @@ public class testEntrega2 {
         CuerpoACuerpo cuerpoACuerpo1 = new CuerpoACuerpo();
         Rango rango1 = new Rango();
         Asedio asedio1 = new Asedio();
+
         CuerpoACuerpo cuerpoACuerpo2 = new CuerpoACuerpo();
         Rango rango2 = new Rango();
         Asedio asedio2 = new Asedio();
 
+
         Tablero tablero1 = new Tablero(cuerpoACuerpo1, rango1, asedio1);
         Tablero tablero2 = new Tablero(cuerpoACuerpo2, rango2, asedio2);
 
-        List<Unidad> unidades = new ArrayList();
-        List<Especial> especiales = new ArrayList();
+
+        List<Unidad> unidades = new ArrayList<>();
+        List<Especial> especiales = new ArrayList<>();
+
         for (int i = 0; i < 16; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo1,2, new SinModificador()));
+            unidades.add(new Unidad(cuerpoACuerpo1, 2, new SinModificador()));
         }
+
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(cuerpoACuerpo1,cuerpoACuerpo2));
+            especiales.add(new Clima(cuerpoACuerpo1, cuerpoACuerpo2));
         }
+
 
         Mazo mazo = new Mazo(unidades, especiales);
 
-
         Jugador jugador1 = new Jugador(tablero1, mazo);
 
-        int cantCartasMano = 12;
-        Espia espia = new Espia(jugador1);
-        Unidad unidad1 = new Unidad(cuerpoACuerpo2, 8, espia);
+        int cartasEsperadas = 12;
 
-        unidad1.usar();
+        Modificador espia = new Espia(jugador1);
+        Unidad unidadEspia = new Unidad(cuerpoACuerpo2, 8, espia);
 
-        jugador1.verMano().size();
+        jugador1.tomarCartasMazo(10);
 
-        Assertions.assertEquals(jugador1.verMano().size(), cantCartasMano);
+        // Act
+        unidadEspia.usar();
+        Puntaje puntajeCuerpoACuerpo2 = cuerpoACuerpo2.puntajeTotal();
 
+        // Assert
+        Assertions.assertTrue(cartasEsperadas == jugador1.verMano().size() && puntajeCuerpoACuerpo2.equals(8));
 
+    }
 
+    @Test
+    public void test04unaCartaAgilSePuedeColocarEnLaSeccionCorrespondiente() {
+        // Arrange
+        Seccion cuerpoACuerpo = new CuerpoACuerpo();
+        Seccion rango = new Rango();
+        Seccion asedio = new Asedio();
 
+        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
 
+        List<Seccion> seccionesPermitidas = new ArrayList<>();
+        seccionesPermitidas.add(cuerpoACuerpo);
+        seccionesPermitidas.add(rango);
+
+        Modificador agil = new Agil(seccionesPermitidas);
+
+        Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
+
+        // Act
+        hechicero.ubicar(rango);
+        Puntaje puntajeRango = rango.puntajeTotal();
+
+        // Assert
+        Assertions.assertTrue(puntajeRango.equals(5));
 
     }
 }
