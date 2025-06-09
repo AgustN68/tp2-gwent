@@ -116,7 +116,7 @@ public class testEntrega2 {
 
         int cartasEsperadas = 12;
 
-        Modificador espia = new Espia(jugador1);
+        Espia espia = new Espia(jugador1);
         Unidad unidadEspia = new Unidad(cuerpoACuerpo2, 8, espia);
 
         jugador1.tomarCartasMazo(10);
@@ -143,7 +143,7 @@ public class testEntrega2 {
         seccionesPermitidas.add(cuerpoACuerpo);
         seccionesPermitidas.add(rango);
 
-        Modificador agil = new Agil(seccionesPermitidas);
+        Agil agil = new Agil(seccionesPermitidas);
 
         Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
 
