@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Carta;
 import edu.fiuba.algo3.modelo.Modificador.Modificador;
 import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
+import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.exceptions.UnidadNoSePuedeUbicarEnEstaSeccionException;
 
 public class Unidad implements Carta {
@@ -22,6 +23,11 @@ public class Unidad implements Carta {
         this.ubicar(this.seccion);
     }
 
+    public void usar(Seccion seccion) {
+        ubicar(seccion);
+    }
+
+
     public void ubicar(Seccion seccionAUbicar) {
         if (seccionPuedeUbicar(seccionAUbicar)){
             seccionAUbicar.ubicar(this);
@@ -31,15 +37,23 @@ public class Unidad implements Carta {
 
     }
 
-    public Boolean seccionPuedeUbicar(Seccion seccion) {
+    private Boolean seccionPuedeUbicar(Seccion seccion) {
         return seccion.equals(this.seccion);
     }
 
     public Puntaje calcularPuntaje(){
-        return this.modificador.aplicarModificador(puntaje);
+        return modificador.aplicarModificador(puntaje);
     }
 
-    public void reducirPuntaje(int valor){
-        this.puntaje.modificarValor(valor);
+    public void actualizarPuntaje(int valor){
+        puntaje.modificarValor(valor);
+    }
+
+    public void multiplicarPuntaje(int multiplicador){
+        puntaje.multiplicarValor(multiplicador);
+    }
+
+    public void restaurarPuntaje() {
+        puntaje.reiniciarValor();
     }
 }

@@ -1,14 +1,13 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
-import edu.fiuba.algo3.modelo.Carta.Especial.Limpiar;
+import edu.fiuba.algo3.modelo.Carta.Especial.Despejado;
 import edu.fiuba.algo3.modelo.Carta.Especial.TierraArrasada;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mazo;
 import edu.fiuba.algo3.modelo.Modificador.Espia;
-import edu.fiuba.algo3.modelo.Modificador.Modificador;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
@@ -18,12 +17,9 @@ import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.mockito.Mockito.*;
 
 import static org.mockito.Mockito.mock;
 
@@ -39,14 +35,14 @@ public class testEntrega2 {
         Unidad unidad1 = new Unidad(cuerpoACuerpo1,puntosCarta1,new SinModificador());
         Unidad unidad2 = new Unidad(cuerpoACuerpo2,puntosCarta2,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
-        Limpiar limpiarClima = new Limpiar(tablero1, tablero2);
+        Despejado despejadoClima = new Despejado(tablero1, tablero2);
 
         cuerpoACuerpo1.ubicar(unidad1);
         cuerpoACuerpo2.ubicar(unidad2);
 
         nieve.usar();
 
-        limpiarClima.usar();
+        despejadoClima.usar();
 
         Puntaje puntajeSeccion1 = cuerpoACuerpo1.puntajeTotal();
         Puntaje puntajeSeccion2 = cuerpoACuerpo2.puntajeTotal();
@@ -57,33 +53,31 @@ public class testEntrega2 {
     @Test
     public void test02SeUsaTierraArrasadaYSeEliminanLasCartasCorrectamente() {
         // Arrange
-        CuerpoACuerpo cuerpoACuerpo1 = new CuerpoACuerpo();
-        Rango rango1 = new Rango();
-        Asedio asedio1 = new Asedio();
-        CuerpoACuerpo cuerpoACuerpo2 = new CuerpoACuerpo();
-        Rango rango2 = new Rango();
-        Asedio asedio2 = new Asedio();
+        CuerpoACuerpo cuerpoACuerpo = new CuerpoACuerpo();
+        Rango rango = new Rango();
+        Asedio asedio = new Asedio();
 
-        Tablero tablero1 = new Tablero(cuerpoACuerpo1, rango1, asedio1);
-        Tablero tablero2 = new Tablero(cuerpoACuerpo2, rango2, asedio2);
+        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
 
-        Unidad unidad1 = new Unidad(cuerpoACuerpo1, 8, new SinModificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo2, 9, new SinModificador());
-        Unidad unidad3 = new Unidad(rango2, 10, new SinModificador());
+        Unidad unidad1 = new Unidad(cuerpoACuerpo, 8, new SinModificador());
+        Unidad unidad2 = new Unidad(cuerpoACuerpo, 9, new SinModificador());
+        Unidad unidad3 = new Unidad(rango, 10, new SinModificador());
+        Unidad unidad4 = new Unidad(asedio, 14, new SinModificador());
 
-        unidad1.ubicar(cuerpoACuerpo1);
-        unidad2.ubicar(cuerpoACuerpo2);
-        unidad3.ubicar(rango2);
+        unidad1.ubicar(cuerpoACuerpo);
+        unidad2.ubicar(cuerpoACuerpo);
+        unidad3.ubicar(rango);
+        unidad4.ubicar(asedio);
 
         // Act
-        TierraArrasada tierraArrasada = new TierraArrasada(tablero2);
+        TierraArrasada tierraArrasada = new TierraArrasada();
 
-        tierraArrasada.usar();
+        tierraArrasada.usar(tablero);
 
-        Puntaje puntajeObtenido = tablero2.calcularPuntaje();
+        Puntaje puntajeObtenido = tablero.calcularPuntaje();
 
         // Assert
-        Assertions.assertTrue(puntajeObtenido.equals(9));
+        Assertions.assertTrue(puntajeObtenido.equals(8+9+10));
     }
 
     @Test

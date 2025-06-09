@@ -33,4 +33,8 @@ public class Puntaje {
     public void reiniciarValor() {
         valor = valorOriginal;
     }
+
+    public void multiplicarValor(int multiplicador) {
+        valor = valor * multiplicador;
+    }
 }
