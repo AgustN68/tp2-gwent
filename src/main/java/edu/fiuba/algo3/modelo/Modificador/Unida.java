@@ -7,11 +7,10 @@ public class Unida extends Modificador {
 
     public Unida() {
         this.cantidadEnSeccion = 0;
-    } // provisorio - Si ya habia una carta en alguna sección, tengo que saber la cantidad inicial
-      // previo a aplicar el puntaje
+    }
 
     public void sumarCantidadEnSeccion() {
-        this.cantidadEnSeccion++; // se pone una carta, tengo que actualizar
+        this.cantidadEnSeccion++;
     }
 
 

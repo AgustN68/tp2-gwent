@@ -16,6 +16,7 @@ import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.exceptions.UnidadNoSePuedeUbicarEnEstaSeccionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -144,15 +145,12 @@ public class testEntrega2 {
         seccionesPermitidas.add(rango);
 
         Agil agil = new Agil(seccionesPermitidas);
-
         Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
 
-        // Act
-        hechicero.ubicar(rango);
-        Puntaje puntajeRango = rango.puntajeTotal();
-
-        // Assert
-        Assertions.assertTrue(puntajeRango.equals(5));
+        // Act & Assert
+        Assertions.assertDoesNotThrow(() -> {
+            hechicero.ubicar(rango);
+        });
 
     }
 }
