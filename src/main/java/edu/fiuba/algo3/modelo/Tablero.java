@@ -8,7 +8,6 @@ public class Tablero {
     private final Seccion seccionCuerpoACuerpo;
     private final Seccion seccionRango;
     private final Seccion seccionAsedio;
-    private Clima climaActual;
 
     public Tablero(Seccion seccionCuerpoACuerpo, Seccion seccionRango, Seccion seccionAsedio) {
         this.seccionCuerpoACuerpo = seccionCuerpoACuerpo;
@@ -42,6 +41,23 @@ public class Tablero {
         seccionAsedio.restaurarPuntaje();
     }
 
-    public void removerCartaMasFuerte() {
+    public void removerUnidadMasFuerte() {
+
+        Seccion seccionUnidadMasFuerte = seccionCuerpoACuerpo;
+        Unidad unidadMasFuerte = seccionCuerpoACuerpo.obtenerUnidadMasFuerte();
+
+        Unidad unidadMasFuerteRango = seccionRango.obtenerUnidadMasFuerte();
+        if (unidadMasFuerteRango.esMasFuerte(unidadMasFuerte)) {
+            seccionUnidadMasFuerte = seccionRango;
+            unidadMasFuerte = unidadMasFuerteRango;
+        }
+
+        Unidad unidadMasFuerteAsedio = seccionAsedio.obtenerUnidadMasFuerte();
+        if (unidadMasFuerteAsedio.esMasFuerte(unidadMasFuerte)) {
+            seccionUnidadMasFuerte = seccionAsedio;
+            unidadMasFuerte = unidadMasFuerteAsedio;
+        }
+
+        seccionUnidadMasFuerte.remover(unidadMasFuerte);
     }
 }

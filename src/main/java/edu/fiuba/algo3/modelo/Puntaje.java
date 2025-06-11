@@ -37,4 +37,8 @@ public class Puntaje {
     public void multiplicarValor(int multiplicador) {
         valor = valor * multiplicador;
     }
+
+    public boolean esMayor(Puntaje puntaje) {
+        return valor > puntaje.obtenerValor();
+    }
 }

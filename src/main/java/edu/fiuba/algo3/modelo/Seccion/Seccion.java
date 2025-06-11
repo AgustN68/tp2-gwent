@@ -45,4 +45,16 @@ public abstract class Seccion {
             unidad.restaurarPuntaje();
         }
     }
+
+    public Unidad obtenerUnidadMasFuerte() {
+        Unidad unidadMasFuerte = cartasUnidades.get(0);
+        for (Unidad unidad : cartasUnidades) {
+            unidadMasFuerte = unidad.esMasFuerte(unidadMasFuerte) ? unidad : unidadMasFuerte;
+        }
+        return unidadMasFuerte;
+    }
+
+    public void remover(Unidad unidad) {
+        cartasUnidades.remove(unidad);
+    }
 }

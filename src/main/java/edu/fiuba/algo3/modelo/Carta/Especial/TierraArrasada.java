@@ -8,7 +8,7 @@ public class TierraArrasada extends Especial {
 
 
     public void usar(Tablero tablero) {
-        tablero.removerCartaMasFuerte();
+        tablero.removerUnidadMasFuerte();
     }
 
 }

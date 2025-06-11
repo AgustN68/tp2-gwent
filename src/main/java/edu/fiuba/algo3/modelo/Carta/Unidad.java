@@ -75,4 +75,7 @@ public class Unidad implements Carta {
     }
 
 
+    public boolean esMasFuerte(Unidad unidad) {
+        return puntaje.esMayor(unidad.calcularPuntaje());
+    }
 }
