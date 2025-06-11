@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mazo;
 import edu.fiuba.algo3.modelo.Modificador.Agil;
 import edu.fiuba.algo3.modelo.Modificador.Espia;
+import edu.fiuba.algo3.modelo.Modificador.Medico;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
@@ -140,12 +141,14 @@ public class testEntrega2 {
 
         Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
 
+
         List<Seccion> seccionesPermitidas = new ArrayList<>();
         seccionesPermitidas.add(cuerpoACuerpo);
         seccionesPermitidas.add(rango);
 
         Agil agil = new Agil(seccionesPermitidas);
         Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
+        agil.setCarta(hechicero);
 
         // Act & Assert
         Assertions.assertDoesNotThrow(() -> {
@@ -153,4 +156,30 @@ public class testEntrega2 {
         });
 
     }
+
+
+    @Test
+    public void test05unaCartaAgilNoSePuedeColocarEnUnaSeccionNoPermitida() {
+        // Arrange
+        Seccion cuerpoACuerpo = new CuerpoACuerpo();
+        Seccion rango = new Rango();
+        Seccion asedio = new Asedio();
+
+        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
+
+
+        List<Seccion> seccionesPermitidas = new ArrayList<>();
+        seccionesPermitidas.add(cuerpoACuerpo);
+        seccionesPermitidas.add(rango);
+
+        Agil agil = new Agil(seccionesPermitidas);
+        Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
+        agil.setCarta(hechicero);
+
+        // Act & Assert
+        Assertions.assertThrows(UnidadNoSePuedeUbicarEnEstaSeccionException.class, () -> {
+            hechicero.ubicar(asedio);
+        });
+    }
+
 }
