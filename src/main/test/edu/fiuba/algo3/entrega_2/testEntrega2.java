@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class testEntrega2 {
@@ -80,7 +81,7 @@ public class testEntrega2 {
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 
         // Assert
-        Assertions.assertTrue(puntajeObtenido.equals(8+9+10));
+        assertEquals(8+9+10, puntajeObtenido.obtenerValor());
     }
 
     @Test

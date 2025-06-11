@@ -3,6 +3,9 @@ package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class PuntajeTest {
 
     @Test
@@ -16,7 +19,7 @@ public class PuntajeTest {
         Boolean resultado = puntaje.equals(50);
 
         // Assert
-        Assertions.assertTrue(resultado);
+        assertTrue(resultado);
 
     }
 
@@ -33,7 +36,7 @@ public class PuntajeTest {
         Puntaje nuevoPuntaje = puntaje1.sumarPuntaje(puntaje2);
 
         // Assert
-        Assertions.assertTrue(nuevoPuntaje.equals(200));
+        assertTrue(nuevoPuntaje.equals(200));
 
     }
 
@@ -49,7 +52,7 @@ public class PuntajeTest {
         Puntaje nuevoPuntaje = puntaje2.restarPuntaje(puntaje1);
 
         // Assert
-        Assertions.assertTrue(nuevoPuntaje.equals(1));
+        assertTrue(nuevoPuntaje.equals(1));
 
     }
 
@@ -63,7 +66,37 @@ public class PuntajeTest {
         puntaje1.modificarValor(50);
 
         // Assert
-        Assertions.assertTrue(puntaje1.equals(50));
+        assertTrue(puntaje1.equals(50));
+
+    }
+
+    @Test
+    public void test05UnPuntajePuedeVerificarSiTieneElMismoValorQueOtroPuntaje() {
+
+        // Arrange
+        Puntaje puntaje1 = new Puntaje(100);
+        Puntaje puntaje2 = new Puntaje(100);
+
+        // Act
+        Boolean resultado = puntaje1.equalsPuntaje(puntaje2);
+
+        // Assert
+        assertTrue(resultado);
+
+    }
+
+    @Test
+    public void test06UnPuntajePuedeVerificarSiNoTieneElMismoValorQueOtroPuntaje() {
+
+        // Arrange
+        Puntaje puntaje1 = new Puntaje(50);
+        Puntaje puntaje2 = new Puntaje(60);
+
+        // Act
+        Boolean resultado = puntaje1.equalsPuntaje(puntaje2);
+
+        // Assert
+        assertFalse(resultado);
 
     }
 }

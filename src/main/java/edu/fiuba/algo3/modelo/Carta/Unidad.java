@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.Carta;
 import edu.fiuba.algo3.modelo.Modificador.Modificador;
 import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
-import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.exceptions.UnidadNoSePuedeUbicarEnEstaSeccionException;
 
 import java.util.List;
@@ -77,5 +76,9 @@ public class Unidad implements Carta {
 
     public boolean esMasFuerte(Unidad unidad) {
         return puntaje.esMayor(unidad.calcularPuntaje());
+    }
+
+    public boolean tienePuntaje(Puntaje puntaje) {
+        return this.puntaje.equalsPuntaje(puntaje);
     }
 }

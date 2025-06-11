@@ -26,6 +26,10 @@ public class Puntaje {
         return valor == this.valor;
     }
 
+    public Boolean equalsPuntaje(Puntaje puntaje) {
+        return puntaje.obtenerValor() == this.valor;
+    }
+
     public void modificarValor(int valor) {
         this.valor = valor;
     }

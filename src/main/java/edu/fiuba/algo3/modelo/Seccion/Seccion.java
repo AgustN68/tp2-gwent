@@ -9,11 +9,9 @@ import java.util.List;
 public abstract class Seccion {
 
     private List<Unidad> cartasUnidades;
-    private Puntaje puntaje;
 
     public Seccion() {
         cartasUnidades = new ArrayList<>();
-        puntaje = new Puntaje(0);
     }
     
     public void reducirPuntaje(int valor){
@@ -27,10 +25,11 @@ public abstract class Seccion {
     }
 
     public Puntaje puntajeTotal() {
+        Puntaje puntajeTotal = new Puntaje(0);
         for (Unidad unidad : cartasUnidades) {
-            puntaje = puntaje.sumarPuntaje(unidad.calcularPuntaje());
+            puntajeTotal = puntajeTotal.sumarPuntaje(unidad.calcularPuntaje());
         }
-        return puntaje;
+        return puntajeTotal;
     }
 
 
@@ -46,15 +45,15 @@ public abstract class Seccion {
         }
     }
 
-    public Unidad obtenerUnidadMasFuerte() {
+    public Puntaje obtenerPuntajeMasFuerte() {
         Unidad unidadMasFuerte = cartasUnidades.get(0);
         for (Unidad unidad : cartasUnidades) {
             unidadMasFuerte = unidad.esMasFuerte(unidadMasFuerte) ? unidad : unidadMasFuerte;
         }
-        return unidadMasFuerte;
+        return unidadMasFuerte.calcularPuntaje();
     }
 
-    public void remover(Unidad unidad) {
-        cartasUnidades.remove(unidad);
+    public void removerCartasDePuntaje(Puntaje puntaje) {
+        cartasUnidades.removeIf(unidad -> unidad.tienePuntaje(puntaje));
     }
 }
