@@ -46,4 +46,8 @@ public class Jugador {
     public List<Carta> verMano() {
         return mano.obtenerCartas();
     }
+
+    public Carta agarrarDescarte(){
+        return this.pilaDeDescarte.agarrarCarta();
+    }
 }

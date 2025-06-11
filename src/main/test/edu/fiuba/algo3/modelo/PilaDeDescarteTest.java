@@ -77,7 +77,7 @@ public class PilaDeDescarteTest {
         descartes.descartarCartas(cartas);
 
         //Act
-        descartes.usarCartaMedico(1);
+        descartes.agarrarCarta();
 
         //Assert
         Assertions.assertTrue(tamanioDescartes == descartes.cantidadCartas());
