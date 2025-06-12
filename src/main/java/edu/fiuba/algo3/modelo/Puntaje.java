@@ -26,6 +26,10 @@ public class Puntaje {
         return valor == this.valor;
     }
 
+    public Boolean equalsPuntaje(Puntaje puntaje) {
+        return puntaje.obtenerValor() == this.valor;
+    }
+
     public void modificarValor(int valor) {
         this.valor = valor;
     }
@@ -36,5 +40,9 @@ public class Puntaje {
 
     public void multiplicarValor(int multiplicador) {
         valor = valor * multiplicador;
+    }
+
+    public boolean esMayor(Puntaje puntaje) {
+        return valor > puntaje.obtenerValor();
     }
 }

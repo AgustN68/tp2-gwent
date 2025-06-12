@@ -7,9 +7,13 @@ import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TierraArrasadaTest {
     @Test
@@ -19,7 +23,11 @@ public class TierraArrasadaTest {
         Rango rango = new Rango();
         Asedio asedio = new Asedio();
 
-        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
+        List<Seccion> secciones = new ArrayList<>();
+        secciones.add(cuerpoACuerpo);
+        secciones.add(rango);
+        secciones.add(asedio);
+        Tablero tablero = new Tablero(secciones);
 
         Unidad unidad2 = new Unidad(cuerpoACuerpo, 9, new SinModificador());
         Unidad unidad3 = new Unidad(rango, 10, new SinModificador());
@@ -45,7 +53,11 @@ public class TierraArrasadaTest {
         Rango rango = new Rango();
         Asedio asedio = new Asedio();
 
-        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
+        List<Seccion> secciones = new ArrayList<>();
+        secciones.add(cuerpoACuerpo);
+        secciones.add(rango);
+        secciones.add(asedio);
+        Tablero tablero = new Tablero(secciones);
 
         Unidad unidad1 = new Unidad(cuerpoACuerpo, 8, new SinModificador());
         Unidad unidad2 = new Unidad(cuerpoACuerpo, 9, new SinModificador());

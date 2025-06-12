@@ -9,20 +9,29 @@ import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TableroTest {
     @Test
     public void test01UnTableroPuedeCalcularSuPuntajeTotal(){
         //"Arrange"
-        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
-        Seccion secconRango = new Rango();
-        Seccion seccionAsedio = new Asedio();
-        Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
+        Seccion cuerpoACuerpo = new CuerpoACuerpo();
+        Seccion rango = new Rango();
+        Seccion asedio = new Asedio();
+
+        List<Seccion> secciones = new ArrayList<>();
+        secciones.add(cuerpoACuerpo);
+        secciones.add(rango);
+        secciones.add(asedio);
+
+        Tablero tablero = new Tablero(secciones);
 
         //"Act"
-        new Unidad(seccionCuerpoACuerpo, 4, new SinModificador()).ubicar(seccionCuerpoACuerpo);
-        new Unidad(seccionCuerpoACuerpo, 2, new SinModificador()).ubicar(seccionCuerpoACuerpo);
+        new Unidad(cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad(cuerpoACuerpo, 2, new SinModificador()).ubicar(cuerpoACuerpo);
 
         //"Assert"
         assertEquals(6, tablero.calcularPuntaje().obtenerValor());
