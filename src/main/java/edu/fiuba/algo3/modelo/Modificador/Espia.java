@@ -7,11 +7,10 @@ public class Espia extends Modificador {
 
     public Espia(Jugador jugador) {
         this.jugador = jugador;
-
     }
 
     @Override
     public void aplicarModificador() {
-        jugador.tomarCartasMazo(2);
+        jugador.tomarCartasEspia();
     }
 }

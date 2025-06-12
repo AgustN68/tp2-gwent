@@ -29,17 +29,17 @@ public class AgilTest {
         seccionesPermitidas.add(rango);
 
         Agil agil = new Agil(seccionesPermitidas);
-        Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
+        Unidad unidad = new Unidad(cuerpoACuerpo, 5, agil);
 
         // Act & Assert
-        agil.setCarta(hechicero);
+        agil.setCarta(unidad);
         Assertions.assertDoesNotThrow(() -> {
-            hechicero.ubicar(cuerpoACuerpo);
+            unidad.ubicar(cuerpoACuerpo);
         });
     }
 
     @Test
-    public void test02unaCartaAgilSePuedeColocarEnAlgunaDeTresLasSeccionesDisponibles() {
+    public void test02unaCartaAgilSePuedeColocarEnAlgunaDeLasTresSeccionesDisponibles() {
         // Arrange
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
         Seccion rango = new Rango();
@@ -61,4 +61,30 @@ public class AgilTest {
             unidad.ubicar(asedio);
         });
     }
+
+    @Test
+    public void test03unaCartaAgilSePuedeColocarEnAlgunaDeDosSeccionesDisponibles() {
+        // Arrange
+        Seccion cuerpoACuerpo = new CuerpoACuerpo();
+        Seccion rango = new Rango();
+        Seccion asedio = new Asedio();
+
+        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
+
+        List<Seccion> seccionesPermitidas = new ArrayList<>();
+
+        seccionesPermitidas.add(cuerpoACuerpo);
+        seccionesPermitidas.add(rango);
+
+        Agil agil = new Agil(seccionesPermitidas);
+        Unidad unidad = new Unidad(cuerpoACuerpo, 5, agil);
+
+        // Act & Assert
+        agil.setCarta(unidad);
+        Assertions.assertDoesNotThrow(() -> {
+            unidad.ubicar(rango);
+        });
+    }
+
+
 }

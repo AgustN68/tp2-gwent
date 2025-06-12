@@ -46,4 +46,8 @@ public class Mazo {
     public Carta obtenerCarta() {
         return cartas.remove((cartas.size() - 1));
     }
+
+    public int obtenerCantidadDeCartas() {
+        return cartas.size();
+    }
 }

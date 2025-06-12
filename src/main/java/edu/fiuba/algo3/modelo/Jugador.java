@@ -50,4 +50,10 @@ public class Jugador {
     public Carta agarrarDescarte(){
         return this.pilaDeDescarte.agarrarCarta();
     }
+
+    public void tomarCartasEspia() {
+        int cantidadCartas = (mazo.obtenerCantidadDeCartas() > 1) ? 2 : 1;
+        tomarCartasMazo(cantidadCartas);
+    }
 }
+

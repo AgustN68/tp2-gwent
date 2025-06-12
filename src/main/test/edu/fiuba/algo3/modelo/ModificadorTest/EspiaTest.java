@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mazo;
 import edu.fiuba.algo3.modelo.Modificador.Espia;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
-import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
@@ -63,7 +62,42 @@ public class EspiaTest {
     }
 
     @Test
-    // Caso en que no hayan dos cartas disponibles para agarrar
-    public void test02SeUsaUnEspiaYSoloAgarra1Carta() {
+    public void test02SeUsaUnEspiaYSoloAgarra1CartaYaQueNoHayLasSuficientesEnElMazo() {
+
+        // Arrange
+        CuerpoACuerpo cuerpoACuerpo1 = new CuerpoACuerpo();
+        Rango rango1 = new Rango();
+        Asedio asedio1 = new Asedio();
+
+        CuerpoACuerpo cuerpoACuerpo2 = new CuerpoACuerpo();
+
+        Tablero tablero1 = new Tablero(cuerpoACuerpo1, rango1, asedio1);
+
+        List<Unidad> unidades = new ArrayList<>();
+        List<Especial> especiales = new ArrayList<>();
+
+        for (int i = 0; i < 16; i++) {
+            unidades.add(new Unidad(cuerpoACuerpo1, 2, new SinModificador()));
+        }
+
+        for (int i = 0; i < 6; i++) {
+            especiales.add(new Clima(cuerpoACuerpo1, cuerpoACuerpo2));
+        }
+
+
+        Mazo mazo = new Mazo(unidades, especiales);
+
+        Jugador jugador1 = new Jugador(tablero1, mazo);
+
+        int cartasEsperadas = 22;
+        Espia espia = new Espia(jugador1);
+        Unidad unidadEspia = new Unidad(cuerpoACuerpo2, 8, espia);
+        jugador1.tomarCartasMazo(21);
+
+        // Act
+        unidadEspia.usar();
+
+        // Assert
+        Assertions.assertEquals(cartasEsperadas, jugador1.verMano().size());
     }
 }
