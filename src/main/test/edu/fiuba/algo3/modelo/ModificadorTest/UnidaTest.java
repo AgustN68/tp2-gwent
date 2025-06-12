@@ -21,7 +21,6 @@ public class UnidaTest {
 
         // Arrange
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
-        Tablero tablero = new Tablero(cuerpoACuerpo, new Asedio(), new Rango());
         CuerpoACuerpo seccionCuerpo = new CuerpoACuerpo();
         Modificador normal = new SinModificador();
         Unidad unidad = new Unidad(seccionCuerpo, 5,normal);
@@ -43,7 +42,6 @@ public class UnidaTest {
         Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
         Seccion seccionRango = new Rango();
         Seccion seccionAsedio = new Asedio();
-        Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
 
         Unida modificador = new Unida();
         Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
@@ -67,8 +65,6 @@ public class UnidaTest {
         Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
         Seccion seccionRango = new Rango();
         Seccion seccionAsedio = new Asedio();
-
-        Tablero tablero = new Tablero(seccionCuerpoACuerpo, seccionRango, seccionAsedio);
 
         Unida modificador = new Unida();
         Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);

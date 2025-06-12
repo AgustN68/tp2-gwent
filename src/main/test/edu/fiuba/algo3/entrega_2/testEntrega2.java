@@ -32,8 +32,19 @@ public class testEntrega2 {
     public void test01SePuedeEliminarEfectoClima(){
         Seccion cuerpoACuerpo1 = new CuerpoACuerpo();
         Seccion cuerpoACuerpo2 = new CuerpoACuerpo();
-        Tablero tablero1 = new Tablero(cuerpoACuerpo1,new Rango(), new Asedio());
-        Tablero tablero2 = new Tablero(cuerpoACuerpo2, new Rango(), new Asedio());
+
+        List<Seccion> secciones1 = new ArrayList<>();
+        secciones1.add(cuerpoACuerpo1);
+        secciones1.add(new Rango());
+        secciones1.add(new Asedio());
+
+        List<Seccion> secciones2 = new ArrayList<>();
+        secciones2.add(cuerpoACuerpo2);
+        secciones2.add(new Rango());
+        secciones2.add(new Asedio());
+
+        Tablero tablero1 = new Tablero(secciones1);
+        Tablero tablero2 = new Tablero(secciones2);
         int puntosCarta1 = 5;
         int puntosCarta2 = 6;
         Unidad unidad1 = new Unidad(cuerpoACuerpo1,puntosCarta1,new SinModificador());
@@ -61,7 +72,12 @@ public class testEntrega2 {
         Rango rango = new Rango();
         Asedio asedio = new Asedio();
 
-        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
+        List<Seccion> secciones = new ArrayList<>();
+        secciones.add(cuerpoACuerpo);
+        secciones.add(rango);
+        secciones.add(asedio);
+
+        Tablero tablero = new Tablero(secciones);
 
         Unidad unidad1 = new Unidad(cuerpoACuerpo, 8, new SinModificador());
         Unidad unidad2 = new Unidad(cuerpoACuerpo, 9, new SinModificador());
@@ -92,13 +108,22 @@ public class testEntrega2 {
         Rango rango1 = new Rango();
         Asedio asedio1 = new Asedio();
 
+        List<Seccion> secciones1 = new ArrayList<>();
+        secciones1.add(cuerpoACuerpo1);
+        secciones1.add(rango1);
+        secciones1.add(asedio1);
+
         CuerpoACuerpo cuerpoACuerpo2 = new CuerpoACuerpo();
         Rango rango2 = new Rango();
         Asedio asedio2 = new Asedio();
 
+        List<Seccion> secciones2 = new ArrayList<>();
+        secciones2.add(cuerpoACuerpo2);
+        secciones2.add(rango2);
+        secciones2.add(asedio2);
 
-        Tablero tablero1 = new Tablero(cuerpoACuerpo1, rango1, asedio1);
-        Tablero tablero2 = new Tablero(cuerpoACuerpo2, rango2, asedio2);
+        Tablero tablero1 = new Tablero(secciones1);
+        Tablero tablero2 = new Tablero(secciones2);
 
 
         List<Unidad> unidades = new ArrayList<>();
@@ -140,8 +165,6 @@ public class testEntrega2 {
         Seccion rango = new Rango();
         Seccion asedio = new Asedio();
 
-        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
-
 
         List<Seccion> seccionesPermitidas = new ArrayList<>();
         seccionesPermitidas.add(cuerpoACuerpo);
@@ -165,9 +188,6 @@ public class testEntrega2 {
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
         Seccion rango = new Rango();
         Seccion asedio = new Asedio();
-
-        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
-
 
         List<Seccion> seccionesPermitidas = new ArrayList<>();
         seccionesPermitidas.add(cuerpoACuerpo);

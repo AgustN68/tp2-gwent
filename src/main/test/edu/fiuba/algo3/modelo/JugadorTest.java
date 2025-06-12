@@ -10,6 +10,9 @@ import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -19,10 +22,16 @@ public class JugadorTest {
     @Test
     public void test01UnJugadorPuedeSeleccionarUnaUnidad() {
         //"Arrange"
-        Seccion seccionCuerpoACuerpo = new CuerpoACuerpo();
-        Seccion secconRango = new Rango();
-        Seccion seccionAsedio = new Asedio();
-        Tablero tablero = new Tablero(seccionCuerpoACuerpo, secconRango, seccionAsedio);
+        Seccion cuerpoACuerpo = new CuerpoACuerpo();
+        Seccion rango = new Rango();
+        Seccion asedio = new Asedio();
+
+        List<Seccion> secciones = new ArrayList<>();
+        secciones.add(cuerpoACuerpo);
+        secciones.add(rango);
+        secciones.add(asedio);
+
+        Tablero tablero = new Tablero(secciones);
 
         Mazo mazoUnidades = mock(Mazo.class);
         when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));

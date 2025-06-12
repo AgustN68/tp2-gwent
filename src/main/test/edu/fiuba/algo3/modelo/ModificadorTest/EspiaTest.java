@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,11 @@ public class EspiaTest {
 
         CuerpoACuerpo cuerpoACuerpo2 = new CuerpoACuerpo();
 
-        Tablero tablero1 = new Tablero(cuerpoACuerpo1, rango1, asedio1);
+        List<Seccion> secciones = new ArrayList<>();
+        secciones.add(cuerpoACuerpo1);
+        secciones.add(rango1);
+        secciones.add(asedio1);
+        Tablero tablero1 = new Tablero(secciones);
 
         List<Unidad> unidades = new ArrayList<>();
         List<Especial> especiales = new ArrayList<>();

@@ -13,6 +13,9 @@ import edu.fiuba.algo3.modelo.Tablero;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClimaTest {
 
     @Test
@@ -78,7 +81,14 @@ public class ClimaTest {
         Unidad unidad1 = new Unidad(cuerpoACuerpo1,5,new SinModificador());
         Unidad unidad2 = new Unidad(cuerpoACuerpo2,6,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
-        Despejado despejado = new Despejado(new Tablero(cuerpoACuerpo1, cuerpoACuerpo1, cuerpoACuerpo1), new Tablero(cuerpoACuerpo2, cuerpoACuerpo2, cuerpoACuerpo2));
+
+        List<Seccion> secciones1 = new ArrayList<>();
+        secciones1.add(cuerpoACuerpo1);
+
+        List<Seccion> secciones2 = new ArrayList<>();
+        secciones2.add(cuerpoACuerpo2);
+
+        Despejado despejado = new Despejado(new Tablero(secciones1), new Tablero(secciones2));
 
         cuerpoACuerpo1.ubicar(unidad1);
         cuerpoACuerpo2.ubicar(unidad2);
@@ -101,7 +111,14 @@ public class ClimaTest {
         Unidad unidad1 = new Unidad(rango1,5,new SinModificador());
         Unidad unidad2 = new Unidad(rango2,6,new SinModificador());
         Clima niebla = new Clima(rango1, rango2);
-        Despejado despejado = new Despejado(new Tablero(rango1, rango1, rango1), new Tablero(rango2, rango2, rango2));
+
+        List<Seccion> secciones1 = new ArrayList<>();
+        secciones1.add(rango1);
+
+        List<Seccion> secciones2 = new ArrayList<>();
+        secciones2.add(rango2);
+
+        Despejado despejado = new Despejado(new Tablero(secciones1), new Tablero(secciones2));
 
         rango1.ubicar(unidad1);
         rango2.ubicar(unidad2);
@@ -124,7 +141,14 @@ public class ClimaTest {
         Unidad unidad1 = new Unidad(asedio1,5,new SinModificador());
         Unidad unidad2 = new Unidad(asedio2,6,new SinModificador());
         Clima niebla = new Clima(asedio1, asedio2);
-        Despejado despejado = new Despejado(new Tablero(asedio1, asedio1, asedio1), new Tablero(asedio2, asedio2, asedio2));
+
+        List<Seccion> secciones1 = new ArrayList<>();
+        secciones1.add(asedio1);
+
+        List<Seccion> secciones2 = new ArrayList<>();
+        secciones2.add(asedio2);
+
+        Despejado despejado = new Despejado(new Tablero(secciones1), new Tablero(secciones2));
 
         asedio1.ubicar(unidad1);
         asedio2.ubicar(unidad2);

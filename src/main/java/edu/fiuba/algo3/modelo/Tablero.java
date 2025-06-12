@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Carta.Unidad;
-import edu.fiuba.algo3.modelo.Modificador.Unida;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.ArrayList;
@@ -10,23 +8,8 @@ import java.util.List;
 public class Tablero {
     private final List<Seccion> secciones;
 
-    /*
-    public Tablero(Seccion seccionCuerpoACuerpo, Seccion seccionRango, Seccion seccionAsedio) {
-        this.seccionCuerpoACuerpo = seccionCuerpoACuerpo;
-        this.seccionRango = seccionRango;
-        this.seccionAsedio = seccionAsedio;
-    }
-    */
-
     public Tablero(List<Seccion> secciones) {
         this.secciones = secciones;
-    }
-
-    public Tablero(Seccion seccionCuerpoACuerpo, Seccion seccionRango, Seccion seccionAsedio) {
-        this.secciones = new ArrayList<>();
-        this.secciones.add(seccionCuerpoACuerpo);
-        this.secciones.add(seccionRango);
-        this.secciones.add(seccionAsedio);
     }
 
     public Puntaje calcularPuntaje() {

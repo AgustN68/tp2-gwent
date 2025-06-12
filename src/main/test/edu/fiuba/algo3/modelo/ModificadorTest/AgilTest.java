@@ -22,8 +22,6 @@ public class AgilTest {
         Seccion rango = new Rango();
         Seccion asedio = new Asedio();
 
-        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
-
         List<Seccion> seccionesPermitidas = new ArrayList<>();
         seccionesPermitidas.add(cuerpoACuerpo);
         seccionesPermitidas.add(rango);
@@ -44,8 +42,6 @@ public class AgilTest {
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
         Seccion rango = new Rango();
         Seccion asedio = new Asedio();
-
-        Tablero tablero = new Tablero(cuerpoACuerpo, rango, asedio);
 
         List<Seccion> seccionesPermitidas = new ArrayList<>();
         seccionesPermitidas.add(cuerpoACuerpo);
