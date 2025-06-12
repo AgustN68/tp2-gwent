@@ -21,8 +21,8 @@ public class MazoTest {
 
         // Arrange
         CuerpoACuerpo cuerpoACuerpo = new CuerpoACuerpo();
-        List<Unidad> cartasUnidades = new ArrayList();
-        List<Especial> cartasEspeciales = new ArrayList();
+        List<Unidad> cartasUnidades = new ArrayList<>();
+        List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
             cartasUnidades.add(new Unidad(cuerpoACuerpo,2, new SinModificador()));
         }
@@ -39,8 +39,8 @@ public class MazoTest {
 
         // Arrange
         CuerpoACuerpo cuerpoACuerpo = new CuerpoACuerpo();
-        List<Unidad> cartasUnidades = new ArrayList();
-        List<Especial> cartasEspeciales = new ArrayList();
+        List<Unidad> cartasUnidades = new ArrayList<>();
+        List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             cartasUnidades.add(new Unidad(cuerpoACuerpo,2, new SinModificador()));
         }
@@ -57,8 +57,8 @@ public class MazoTest {
     public void test3UnMazoNoTieneCartasDeUnidadSuficientesParaEmpezarLaPartida(){
 
         // Arrange
-        List<Unidad> cartasUnidades = new ArrayList();
-        List<Especial> cartasEspeciales = new ArrayList();
+        List<Unidad> cartasUnidades = new ArrayList<>();
+        List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
         }
@@ -78,8 +78,8 @@ public class MazoTest {
     public void test4UnMazoNoTieneCartasEspecialesSuficientesParaEmpezarLaPartida(){
 
         // Arrange
-        List<Unidad> cartasUnidades = new ArrayList();
-        List<Especial> cartasEspeciales = new ArrayList();
+        List<Unidad> cartasUnidades = new ArrayList<>();
+        List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 17; i++) {
             cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
         }
@@ -98,8 +98,8 @@ public class MazoTest {
     @Test
     public void test05SePideUnaCartaAUnMazoYSeEnviaCorrectamente(){
         // Arrange
-        List<Unidad> cartasUnidades = new ArrayList();
-        List<Especial> cartasEspeciales = new ArrayList();
+        List<Unidad> cartasUnidades = new ArrayList<>();
+        List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 17; i++) {
             cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
         }
