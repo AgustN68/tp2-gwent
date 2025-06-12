@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mazo;
 import edu.fiuba.algo3.modelo.Modificador.Espia;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
+import edu.fiuba.algo3.modelo.PilaDeDescarte;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
@@ -50,7 +51,7 @@ public class EspiaTest {
 
         Mazo mazo = new Mazo(unidades, especiales);
 
-        Jugador jugador1 = new Jugador(tablero1, mazo);
+        Jugador jugador1 = new Jugador(tablero1, mazo, new PilaDeDescarte());
 
         int cartasEsperadas = 12;
 
@@ -97,7 +98,7 @@ public class EspiaTest {
 
         Mazo mazo = new Mazo(unidades, especiales);
 
-        Jugador jugador1 = new Jugador(tablero1, mazo);
+        Jugador jugador1 = new Jugador(tablero1, mazo, new PilaDeDescarte());
 
         int cartasEsperadas = 22;
         Espia espia = new Espia(jugador1);

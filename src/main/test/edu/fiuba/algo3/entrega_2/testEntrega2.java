@@ -1,22 +1,19 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Especial.Despejado;
 import edu.fiuba.algo3.modelo.Carta.Especial.TierraArrasada;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Mazo;
 import edu.fiuba.algo3.modelo.Modificador.Agil;
 import edu.fiuba.algo3.modelo.Modificador.Espia;
 import edu.fiuba.algo3.modelo.Modificador.Medico;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
-import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
-import edu.fiuba.algo3.modelo.Tablero;
 import edu.fiuba.algo3.modelo.exceptions.UnidadNoSePuedeUbicarEnEstaSeccionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -140,7 +137,7 @@ public class testEntrega2 {
 
         Mazo mazo = new Mazo(unidades, especiales);
 
-        Jugador jugador1 = new Jugador(tablero1, mazo);
+        Jugador jugador1 = new Jugador(tablero1, mazo, new PilaDeDescarte());
 
         int cartasEsperadas = 12;
 

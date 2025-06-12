@@ -12,11 +12,11 @@ public class Jugador {
     private Mano mano;
     private PilaDeDescarte pilaDeDescarte;
 
-    public Jugador(Tablero tablero, Mazo mazo) {
+    public Jugador(Tablero tablero, Mazo mazo, PilaDeDescarte pilaDeDescarte) {
         this.tablero = tablero;
         this.mazo = mazo;
         this.mano = new Mano(new ArrayList<>());
-        this.pilaDeDescarte = new PilaDeDescarte();
+        this.pilaDeDescarte = pilaDeDescarte;
     }
 
     public void validarCartasSuficientesMano(int cantidadCartas) {

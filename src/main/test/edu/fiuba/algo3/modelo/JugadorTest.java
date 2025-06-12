@@ -36,7 +36,7 @@ public class JugadorTest {
         Mazo mazoUnidades = mock(Mazo.class);
         when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
 
-        Jugador jugador = new Jugador(tablero, mazoUnidades);
+        Jugador jugador = new Jugador(tablero, mazoUnidades, new PilaDeDescarte());
         jugador.tomarCartasMazo(1);
 
         //"Act"
