@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TierraArrasadaTest {
     @Test
     public void test01SeUsaTierraArrasadaYSeEliminanLasCartasCorrectamente() {
@@ -43,7 +45,7 @@ public class TierraArrasadaTest {
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 
         // Assert
-        Assertions.assertTrue(puntajeObtenido.equals(9));
+        assertEquals(9, puntajeObtenido.obtenerValor());
     }
 
     @Test
@@ -77,6 +79,6 @@ public class TierraArrasadaTest {
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 
         // Assert
-        Assertions.assertTrue(puntajeObtenido.equals(8+9+10));
+        assertEquals(8+9+10, puntajeObtenido.obtenerValor());
     }
 }

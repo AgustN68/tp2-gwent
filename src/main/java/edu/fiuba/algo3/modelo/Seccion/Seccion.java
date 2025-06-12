@@ -46,6 +46,7 @@ public abstract class Seccion {
     }
 
     public Puntaje obtenerPuntajeMasFuerte() {
+        if (cartasUnidades.size() == 0) return new Puntaje(0);
         Unidad unidadMasFuerte = cartasUnidades.get(0);
         for (Unidad unidad : cartasUnidades) {
             unidadMasFuerte = unidad.esMasFuerte(unidadMasFuerte) ? unidad : unidadMasFuerte;
