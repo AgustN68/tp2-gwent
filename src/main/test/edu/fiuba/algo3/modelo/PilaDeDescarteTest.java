@@ -33,7 +33,7 @@ public class PilaDeDescarteTest {
         Seccion seccion = new Asedio();
         Modificador modificador = new SinModificador();
 
-        Carta carta = new Unidad(seccion, 4, modificador);
+        Carta carta = new Unidad("Nombre", seccion, 4, modificador);
 
         int tamanio = 1;
 
@@ -50,8 +50,8 @@ public class PilaDeDescarteTest {
         PilaDeDescarte descartes = new PilaDeDescarte();
 
         Rango rango = new Rango();
-        Carta carta1 = new Unidad(rango, 2, new SinModificador());
-        Carta carta2 = new Unidad(rango,4, new SinModificador());
+        Carta carta1 = new Unidad("Nombre", rango, 2, new SinModificador());
+        Carta carta2 = new Unidad("Nombre", rango,4, new SinModificador());
         int tamanioDescartes = 2;
         List<Carta> cartas = new ArrayList<>();
         cartas.add(carta1);
@@ -68,8 +68,8 @@ public class PilaDeDescarteTest {
     public void test04PuedoSacarDeLaPilaDeDescarteUnaCartaUsandoCartaMedico(){
         //Arrange
         PilaDeDescarte descartes = new PilaDeDescarte();
-        Carta carta1 = new Unidad(new Rango(), 2, new SinModificador());
-        Carta carta2 = new Unidad(new CuerpoACuerpo(),4, new SinModificador());
+        Carta carta1 = new Unidad("Nombre", new Rango(), 2, new SinModificador());
+        Carta carta2 = new Unidad("Nombre", new CuerpoACuerpo(),4, new SinModificador());
         int tamanioDescartes = 1;
         List<Carta> cartas = new ArrayList<>();
         cartas.add(carta1);

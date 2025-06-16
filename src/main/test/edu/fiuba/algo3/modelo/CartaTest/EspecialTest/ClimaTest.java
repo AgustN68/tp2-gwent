@@ -22,8 +22,8 @@ public class ClimaTest {
     public void test01SeAplicaElEfectoNieveALaPartida(){
         Seccion cuerpoACuerpo1 = new CuerpoACuerpo();
         Seccion cuerpoACuerpo2 = new CuerpoACuerpo();
-        Unidad unidad1 = new Unidad(cuerpoACuerpo1,5,new SinModificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo2,6,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo1,5,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo2,6,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
 
         cuerpoACuerpo1.ubicar(unidad1);
@@ -41,8 +41,8 @@ public class ClimaTest {
     public void test02SeAplicaElClimaNieblaALaPartida(){
         Seccion rango1 = new Rango();
         Seccion rango2 = new Rango();
-        Unidad unidad1 = new Unidad(rango1,5,new SinModificador());
-        Unidad unidad2 = new Unidad(rango2,6,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", rango1,5,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", rango2,6,new SinModificador());
         Clima niebla = new Clima(rango1, rango2);
 
         rango1.ubicar(unidad1);
@@ -59,8 +59,8 @@ public class ClimaTest {
     public void test03SeAplicaElClimaLluviaALaPartida(){
         Seccion asedio1 = new Asedio();
         Seccion asedio2 = new Asedio();
-        Unidad unidad1 = new Unidad(asedio1,5,new SinModificador());
-        Unidad unidad2 = new Unidad(asedio2,6,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", asedio1,5,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", asedio2,6,new SinModificador());
         Clima lluvia = new Clima(asedio1, asedio2);
 
         asedio1.ubicar(unidad1);
@@ -78,8 +78,8 @@ public class ClimaTest {
 
         Seccion cuerpoACuerpo1 = new CuerpoACuerpo();
         Seccion cuerpoACuerpo2 = new CuerpoACuerpo();
-        Unidad unidad1 = new Unidad(cuerpoACuerpo1,5,new SinModificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo2,6,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo1,5,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo2,6,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
 
         List<Seccion> secciones1 = new ArrayList<>();
@@ -108,8 +108,8 @@ public class ClimaTest {
 
         Seccion rango1 = new Rango();
         Seccion rango2 = new Rango();
-        Unidad unidad1 = new Unidad(rango1,5,new SinModificador());
-        Unidad unidad2 = new Unidad(rango2,6,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", rango1,5,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", rango2,6,new SinModificador());
         Clima niebla = new Clima(rango1, rango2);
 
         List<Seccion> secciones1 = new ArrayList<>();
@@ -138,8 +138,8 @@ public class ClimaTest {
 
         Seccion asedio1 = new Asedio();
         Seccion asedio2 = new Asedio();
-        Unidad unidad1 = new Unidad(asedio1,5,new SinModificador());
-        Unidad unidad2 = new Unidad(asedio2,6,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", asedio1,5,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", asedio2,6,new SinModificador());
         Clima niebla = new Clima(asedio1, asedio2);
 
         List<Seccion> secciones1 = new ArrayList<>();

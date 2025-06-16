@@ -30,8 +30,8 @@ public class TableroTest {
 
         Tablero tablero = new Tablero(secciones);
 
-        new Unidad(cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(cuerpoACuerpo, 2, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 2, new SinModificador()).ubicar(cuerpoACuerpo);
         //"Act"
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 
@@ -53,8 +53,8 @@ public class TableroTest {
 
         Tablero tablero = new Tablero(secciones);
 
-        new Unidad(cuerpoACuerpo, 3, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(cuerpoACuerpo, 9, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 3, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 9, new SinModificador()).ubicar(cuerpoACuerpo);
         //"Act"
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 
@@ -77,8 +77,8 @@ public class TableroTest {
 
         Clima clima = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
 
-        new Unidad(cuerpoACuerpo1, 4, new SinModificador()).ubicar(cuerpoACuerpo1);
-        new Unidad(cuerpoACuerpo1, 2, new SinModificador()).ubicar(cuerpoACuerpo1);
+        new Unidad("Nombre", cuerpoACuerpo1, 4, new SinModificador()).ubicar(cuerpoACuerpo1);
+        new Unidad("Nombre", cuerpoACuerpo1, 2, new SinModificador()).ubicar(cuerpoACuerpo1);
 
         clima.usar();
 
@@ -101,9 +101,9 @@ public class TableroTest {
         seccionesTablero.add(asedio);
         Tablero tablero = new Tablero(seccionesTablero);
 
-        new Unidad(cuerpoACuerpo, 8, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(asedio, 4, new SinModificador()).ubicar(asedio);
-        new Unidad(rango, 3, new SinModificador()).ubicar(rango);
+        new Unidad("Nombre", cuerpoACuerpo, 8, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", asedio, 4, new SinModificador()).ubicar(asedio);
+        new Unidad("Nombre", rango, 3, new SinModificador()).ubicar(rango);
 
         //"Act"
         tablero.removerUnidadesMasFuertes();
@@ -124,9 +124,9 @@ public class TableroTest {
         seccionesTablero.add(asedio);
         Tablero tablero = new Tablero(seccionesTablero);
 
-        new Unidad(cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(asedio, 8, new SinModificador()).ubicar(asedio);
-        new Unidad(rango, 3, new SinModificador()).ubicar(rango);
+        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", asedio, 8, new SinModificador()).ubicar(asedio);
+        new Unidad("Nombre", rango, 3, new SinModificador()).ubicar(rango);
 
         //"Act"
         tablero.removerUnidadesMasFuertes();
@@ -147,9 +147,9 @@ public class TableroTest {
         seccionesTablero.add(asedio);
         Tablero tablero = new Tablero(seccionesTablero);
 
-        new Unidad(cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(asedio, 8, new SinModificador()).ubicar(asedio);
-        new Unidad(rango, 9, new SinModificador()).ubicar(rango);
+        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", asedio, 8, new SinModificador()).ubicar(asedio);
+        new Unidad("Nombre", rango, 9, new SinModificador()).ubicar(rango);
 
         //"Act"
         tablero.removerUnidadesMasFuertes();
@@ -170,9 +170,9 @@ public class TableroTest {
         seccionesTablero.add(asedio);
         Tablero tablero = new Tablero(seccionesTablero);
 
-        new Unidad(cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(asedio, 9, new SinModificador()).ubicar(asedio);
-        new Unidad(rango, 9, new SinModificador()).ubicar(rango);
+        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", asedio, 9, new SinModificador()).ubicar(asedio);
+        new Unidad("Nombre", rango, 9, new SinModificador()).ubicar(rango);
 
         //"Act"
         tablero.removerUnidadesMasFuertes();

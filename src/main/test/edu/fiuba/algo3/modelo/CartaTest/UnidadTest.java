@@ -18,7 +18,7 @@ public class UnidadTest {
     public void test01SeColocaCorrectamenteUnaUnidadEnElTablero(){
         // Arrange
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
-        Unidad unidad = new Unidad(cuerpoACuerpo, 5, new SinModificador());
+        Unidad unidad = new Unidad("Nombre", cuerpoACuerpo, 5, new SinModificador());
 
         // Act y Assert
         unidad.ubicar(cuerpoACuerpo);
@@ -28,7 +28,7 @@ public class UnidadTest {
     @Test
     public void test02SeCalculaElPuntajeDeUnaUnidad(){
         // Arrange
-        Unidad unidad = new Unidad(new Asedio(), 5, new SinModificador());
+        Unidad unidad = new Unidad("Nombre", new Asedio(), 5, new SinModificador());
 
         // Act
         Puntaje puntajeObtenido = unidad.calcularPuntaje();
@@ -40,7 +40,7 @@ public class UnidadTest {
     @Test
     public void test03SeCalculaElPuntajeDeOtraUnidad(){
         // Arrange
-        Unidad unidad = new Unidad(new CuerpoACuerpo(), 8, new SinModificador());
+        Unidad unidad = new Unidad("Nombre", new CuerpoACuerpo(), 8, new SinModificador());
 
         // Act
         Puntaje puntajeObtenido = unidad.calcularPuntaje();
@@ -52,7 +52,7 @@ public class UnidadTest {
     @Test
     public void test04UnaUnidadPuedeVerificarSiSuPuntajeEsIgualAOtroPuntaje(){
         // Arrange
-        Unidad unidad = new Unidad(new CuerpoACuerpo(), 8, new SinModificador());
+        Unidad unidad = new Unidad("Nombre", new CuerpoACuerpo(), 8, new SinModificador());
         Puntaje puntaje = new Puntaje(8);
 
         // Act
@@ -65,7 +65,7 @@ public class UnidadTest {
     @Test
     public void test05UnaUnidadPuedeVerificarSiSuPuntajeNoEsIgualAOtroPuntaje(){
         // Arrange
-        Unidad unidad = new Unidad(new CuerpoACuerpo(), 10, new SinModificador());
+        Unidad unidad = new Unidad("Nombre", new CuerpoACuerpo(), 10, new SinModificador());
         Puntaje puntaje = new Puntaje(5);
 
         // Act

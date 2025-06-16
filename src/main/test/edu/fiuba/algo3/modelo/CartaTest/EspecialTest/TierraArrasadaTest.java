@@ -31,8 +31,8 @@ public class TierraArrasadaTest {
         secciones.add(asedio);
         Tablero tablero = new Tablero(secciones);
 
-        Unidad unidad2 = new Unidad(cuerpoACuerpo, 9, new SinModificador());
-        Unidad unidad3 = new Unidad(rango, 10, new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo, 9, new SinModificador());
+        Unidad unidad3 = new Unidad("Nombre", rango, 10, new SinModificador());
 
         unidad2.ubicar(cuerpoACuerpo);
         unidad3.ubicar(rango);
@@ -61,10 +61,10 @@ public class TierraArrasadaTest {
         secciones.add(asedio);
         Tablero tablero = new Tablero(secciones);
 
-        Unidad unidad1 = new Unidad(cuerpoACuerpo, 8, new SinModificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo, 9, new SinModificador());
-        Unidad unidad3 = new Unidad(rango, 10, new SinModificador());
-        Unidad unidad4 = new Unidad(asedio, 14, new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo, 8, new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo, 9, new SinModificador());
+        Unidad unidad3 = new Unidad("Nombre", rango, 10, new SinModificador());
+        Unidad unidad4 = new Unidad("Nombre", asedio, 14, new SinModificador());
 
         unidad1.ubicar(cuerpoACuerpo);
         unidad2.ubicar(cuerpoACuerpo);

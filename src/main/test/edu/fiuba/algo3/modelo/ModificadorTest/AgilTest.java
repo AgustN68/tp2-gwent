@@ -27,7 +27,7 @@ public class AgilTest {
         seccionesPermitidas.add(rango);
 
         Agil agil = new Agil(seccionesPermitidas);
-        Unidad unidad = new Unidad(cuerpoACuerpo, 5, agil);
+        Unidad unidad = new Unidad("Nombre", cuerpoACuerpo, 5, agil);
 
         // Act & Assert
         agil.setCarta(unidad);
@@ -49,7 +49,7 @@ public class AgilTest {
         seccionesPermitidas.add(asedio);
 
         Agil agil = new Agil(seccionesPermitidas);
-        Unidad unidad = new Unidad(cuerpoACuerpo, 5, agil);
+        Unidad unidad = new Unidad("Nombre", cuerpoACuerpo, 5, agil);
 
         // Act & Assert
         agil.setCarta(unidad);
@@ -70,7 +70,7 @@ public class AgilTest {
         seccionesPermitidas.add(rango);
 
         Agil agil = new Agil(seccionesPermitidas);
-        Unidad unidad = new Unidad(cuerpoACuerpo, 5, agil);
+        Unidad unidad = new Unidad("Nombre", cuerpoACuerpo, 5, agil);
 
         // Act & Assert
         agil.setCarta(unidad);

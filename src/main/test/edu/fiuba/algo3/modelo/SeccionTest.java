@@ -23,7 +23,7 @@ public class SeccionTest {
         Seccion seccion = new CuerpoACuerpo();
         Modificador modificador = new SinModificador();
         Asedio seccionAsedio = new Asedio();
-        Unidad unidad = new Unidad(seccionAsedio, 7, modificador);
+        Unidad unidad = new Unidad("Nombre", seccionAsedio, 7, modificador);
 
         seccion.ubicar(unidad);
 
@@ -36,9 +36,9 @@ public class SeccionTest {
         Modificador modificador = new SinModificador();
         Asedio seccionAsedio = new Asedio();
 
-        seccion.ubicar(new Unidad(seccionAsedio, 3, modificador));
-        seccion.ubicar(new Unidad(seccionAsedio, 5, modificador));
-        seccion.ubicar(new Unidad(seccionAsedio, 2, modificador));
+        seccion.ubicar(new Unidad("Nombre", seccionAsedio, 3, modificador));
+        seccion.ubicar(new Unidad("Nombre", seccionAsedio, 5, modificador));
+        seccion.ubicar(new Unidad("Nombre", seccionAsedio, 2, modificador));
 
         assertEquals(10, seccion.puntajeTotal().obtenerValor());
     }

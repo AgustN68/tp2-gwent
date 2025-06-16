@@ -22,7 +22,7 @@ public class ManoTest {
     @Test
     public void test01TieneCartasSuficientesLanzaExcepcionCuandoNoAlcanza() {
         Modificador modificador = new SinModificador();
-        List<Carta> cartas = List.of(new Unidad(new Rango(), 7, modificador));
+        List<Carta> cartas = List.of(new Unidad("Nombre", new Rango(), 7, modificador));
         Mano mano = new Mano(new ArrayList<>(cartas));
 
         assertThrows(NoHayCartasSuficientesException.class, () -> mano.tieneCartasSuficientes(2));
@@ -35,7 +35,7 @@ public class ManoTest {
         List<Unidad> cartasUnidades = new ArrayList();
         List<Especial> cartasEspeciales = new ArrayList();
         for (int i = 0; i < 15; i++) {
-            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
+            cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
@@ -54,8 +54,8 @@ public class ManoTest {
         Asedio asedio = new Asedio();
 
         List<Carta> cartas = new ArrayList<>();
-        cartas.add(new Unidad(asedio, 7, modificador));
-        cartas.add(new Unidad(asedio, 3, modificador));
+        cartas.add(new Unidad("Nombre", asedio, 7, modificador));
+        cartas.add(new Unidad("Nombre", asedio, 3, modificador));
 
         Mano mano = new Mano(cartas);
 

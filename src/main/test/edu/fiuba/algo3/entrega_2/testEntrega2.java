@@ -44,8 +44,8 @@ public class testEntrega2 {
         Tablero tablero2 = new Tablero(secciones2);
         int puntosCarta1 = 5;
         int puntosCarta2 = 6;
-        Unidad unidad1 = new Unidad(cuerpoACuerpo1,puntosCarta1,new SinModificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo2,puntosCarta2,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo1,puntosCarta1,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo2,puntosCarta2,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
         Despejado despejadoClima = new Despejado(tablero1, tablero2);
 
@@ -76,10 +76,10 @@ public class testEntrega2 {
 
         Tablero tablero = new Tablero(secciones);
 
-        Unidad unidad1 = new Unidad(cuerpoACuerpo, 8, new SinModificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo, 9, new SinModificador());
-        Unidad unidad3 = new Unidad(rango, 10, new SinModificador());
-        Unidad unidad4 = new Unidad(asedio, 14, new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo, 8, new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo, 9, new SinModificador());
+        Unidad unidad3 = new Unidad("Nombre", rango, 10, new SinModificador());
+        Unidad unidad4 = new Unidad("Nombre", asedio, 14, new SinModificador());
 
         unidad1.ubicar(cuerpoACuerpo);
         unidad2.ubicar(cuerpoACuerpo);
@@ -127,7 +127,7 @@ public class testEntrega2 {
         List<Especial> especiales = new ArrayList<>();
 
         for (int i = 0; i < 16; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo1, 2, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo1, 2, new SinModificador()));
         }
 
         for (int i = 0; i < 6; i++) {
@@ -142,7 +142,7 @@ public class testEntrega2 {
         int cartasEsperadas = 12;
 
         Espia espia = new Espia(jugador1);
-        Unidad unidadEspia = new Unidad(cuerpoACuerpo2, 8, espia);
+        Unidad unidadEspia = new Unidad("Nombre", cuerpoACuerpo2, 8, espia);
 
         jugador1.tomarCartasMazo(10);
 
@@ -168,7 +168,7 @@ public class testEntrega2 {
         seccionesPermitidas.add(rango);
 
         Agil agil = new Agil(seccionesPermitidas);
-        Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
+        Unidad hechicero = new Unidad("Nombre", cuerpoACuerpo, 5, agil);
         agil.setCarta(hechicero);
 
         // Act & Assert
@@ -191,7 +191,7 @@ public class testEntrega2 {
         seccionesPermitidas.add(rango);
 
         Agil agil = new Agil(seccionesPermitidas);
-        Unidad hechicero = new Unidad(cuerpoACuerpo, 5, agil);
+        Unidad hechicero = new Unidad("Nombre", cuerpoACuerpo, 5, agil);
         agil.setCarta(hechicero);
 
         // Act & Assert
@@ -218,7 +218,7 @@ public class testEntrega2 {
         List<Especial> especiales = new ArrayList<>();
 
         for (int i = 0; i < 16; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo, 2, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo, 2, new SinModificador()));
         }
 
         for (int i = 0; i < 6; i++) {
@@ -226,12 +226,12 @@ public class testEntrega2 {
         }
         Mazo mazo = new Mazo(unidades, especiales);
         PilaDeDescarte pila = new PilaDeDescarte();
-        pila.descartarUna(new Unidad(cuerpoACuerpo, 5, new SinModificador()));
+        pila.descartarUna(new Unidad("Nombre", cuerpoACuerpo, 5, new SinModificador()));
 
         Jugador jugador1 = new Jugador(tablero1, mazo, pila);
 
         Medico medico = new Medico(jugador1);
-        Unidad unidadMedico = new Unidad(cuerpoACuerpo, 8, medico);
+        Unidad unidadMedico = new Unidad("Nombre", cuerpoACuerpo, 8, medico);
 
         // Act
         unidadMedico.usar();

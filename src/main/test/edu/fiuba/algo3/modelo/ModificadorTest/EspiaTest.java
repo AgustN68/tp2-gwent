@@ -41,7 +41,7 @@ public class EspiaTest {
         List<Especial> especiales = new ArrayList<>();
 
         for (int i = 0; i < 16; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo1, 2, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo1, 2, new SinModificador()));
         }
 
         for (int i = 0; i < 6; i++) {
@@ -56,7 +56,7 @@ public class EspiaTest {
         int cartasEsperadas = 12;
 
         Espia espia = new Espia(jugador1);
-        Unidad unidadEspia = new Unidad(cuerpoACuerpo2, 8, espia);
+        Unidad unidadEspia = new Unidad("Nombre", cuerpoACuerpo2, 8, espia);
 
         jugador1.tomarCartasMazo(10);
 
@@ -88,7 +88,7 @@ public class EspiaTest {
         List<Especial> especiales = new ArrayList<>();
 
         for (int i = 0; i < 16; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo1, 2, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo1, 2, new SinModificador()));
         }
 
         for (int i = 0; i < 6; i++) {
@@ -102,7 +102,7 @@ public class EspiaTest {
 
         int cartasEsperadas = 22;
         Espia espia = new Espia(jugador1);
-        Unidad unidadEspia = new Unidad(cuerpoACuerpo2, 8, espia);
+        Unidad unidadEspia = new Unidad("Nombre", cuerpoACuerpo2, 8, espia);
         jugador1.tomarCartasMazo(21);
 
         // Act

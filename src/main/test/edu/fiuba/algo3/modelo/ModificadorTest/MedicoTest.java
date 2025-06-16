@@ -36,7 +36,7 @@ public class MedicoTest {
         List<Especial> especiales = new ArrayList<>();
 
         for (int i = 0; i < 16; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo, 2, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo, 2, new SinModificador()));
         }
 
         for (int i = 0; i < 6; i++) {
@@ -44,12 +44,12 @@ public class MedicoTest {
         }
         Mazo mazo = new Mazo(unidades, especiales);
         PilaDeDescarte pila = new PilaDeDescarte();
-        pila.descartarUna(new Unidad(cuerpoACuerpo, 5, new SinModificador()));
+        pila.descartarUna(new Unidad("Nombre", cuerpoACuerpo, 5, new SinModificador()));
 
         Jugador jugador1 = new Jugador(tablero1, mazo, pila);
 
         Medico medico = new Medico(jugador1);
-        Unidad unidadMedico = new Unidad(cuerpoACuerpo, 8, medico);
+        Unidad unidadMedico = new Unidad("Nombre", cuerpoACuerpo, 8, medico);
 
         // Act
         unidadMedico.usar();

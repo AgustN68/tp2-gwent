@@ -23,7 +23,7 @@ public class UnidaTest {
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
         CuerpoACuerpo seccionCuerpo = new CuerpoACuerpo();
         Modificador normal = new SinModificador();
-        Unidad unidad = new Unidad(seccionCuerpo, 5,normal);
+        Unidad unidad = new Unidad("Nombre", seccionCuerpo, 5,normal);
 
         // Act
         unidad.usar();
@@ -44,7 +44,7 @@ public class UnidaTest {
         Seccion seccionAsedio = new Asedio();
 
         Unida modificador = new Unida();
-        Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
+        Unidad catapulta1 = new Unidad("Nombre", seccionAsedio, 8, modificador);
 
 
         //Act
@@ -67,9 +67,9 @@ public class UnidaTest {
         Seccion seccionAsedio = new Asedio();
 
         Unida modificador = new Unida();
-        Unidad catapulta1 = new Unidad(seccionAsedio, 8, modificador);
-        Unidad catapulta2 = new Unidad(seccionAsedio, 8, modificador);
-        Unidad catapulta3 = new Unidad(seccionAsedio, 8, modificador);
+        Unidad catapulta1 = new Unidad("Nombre", seccionAsedio, 8, modificador);
+        Unidad catapulta2 = new Unidad("Nombre", seccionAsedio, 8, modificador);
+        Unidad catapulta3 = new Unidad("Nombre", seccionAsedio, 8, modificador);
 
         // Act
         catapulta1.usar();

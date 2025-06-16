@@ -24,7 +24,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList<>();
         List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            cartasUnidades.add(new Unidad(cuerpoACuerpo,2, new SinModificador()));
+            cartasUnidades.add(new Unidad("Nombre", cuerpoACuerpo,2, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             cartasEspeciales.add(new Clima(cuerpoACuerpo, cuerpoACuerpo));
@@ -42,7 +42,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList<>();
         List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
-            cartasUnidades.add(new Unidad(cuerpoACuerpo,2, new SinModificador()));
+            cartasUnidades.add(new Unidad("Nombre", cuerpoACuerpo,2, new SinModificador()));
         }
         for (int i = 0; i < 9; i++) {
             cartasEspeciales.add(new Clima(cuerpoACuerpo, cuerpoACuerpo));
@@ -60,7 +60,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList<>();
         List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
-            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
+            cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
@@ -81,7 +81,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList<>();
         List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 17; i++) {
-            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
+            cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 3; i++) {
             cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
@@ -101,7 +101,7 @@ public class MazoTest {
         List<Unidad> cartasUnidades = new ArrayList<>();
         List<Especial> cartasEspeciales = new ArrayList<>();
         for (int i = 0; i < 17; i++) {
-            cartasUnidades.add(new Unidad(new CuerpoACuerpo(),2, new SinModificador()));
+            cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 8; i++) {
             cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));

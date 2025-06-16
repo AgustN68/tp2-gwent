@@ -16,7 +16,7 @@ public class MoraleBoostTest {
 
         CuerpoACuerpo cuerpoACuerpo = new CuerpoACuerpo();
 
-        Unidad soldado = new Unidad(cuerpoACuerpo, 10, new SinModificador());
+        Unidad soldado = new Unidad("Nombre", cuerpoACuerpo, 10, new SinModificador());
 
         soldado.ubicar(cuerpoACuerpo);
 
@@ -33,7 +33,7 @@ public class MoraleBoostTest {
 
         Asedio asedio = new Asedio();
 
-        Unidad catapulta = new Unidad(asedio, 20, new SinModificador());
+        Unidad catapulta = new Unidad("Nombre", asedio, 20, new SinModificador());
 
         catapulta.ubicar(asedio);
 

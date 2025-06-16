@@ -44,7 +44,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo, 4, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(asedio, asedio));
@@ -74,7 +74,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 14; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo, 4, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(asedio, asedio));
@@ -103,7 +103,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo, 4, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 5; i++) {
             especiales.add(new Clima(asedio, asedio));
@@ -134,7 +134,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo, 4, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(asedio, asedio));
@@ -165,7 +165,7 @@ public class testEntrega1 {
         List<Especial> especiales = new ArrayList<Especial>();
 
         for (int i = 0; i < 15; i++) {
-            unidades.add(new Unidad(cuerpoACuerpo, 4, new SinModificador()));
+            unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
             especiales.add(new Clima(asedio, asedio));
@@ -195,7 +195,7 @@ public class testEntrega1 {
 
         Tablero tablero = new Tablero(secciones);
 
-        Unidad unidad = new Unidad(cuerpoACuerpo, 4, new SinModificador());
+        Unidad unidad = new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador());
         Mazo mockedMazo = mock(Mazo.class);
 
         when(mockedMazo.obtenerCarta()).thenReturn(unidad);
@@ -222,7 +222,7 @@ public class testEntrega1 {
 
         Mazo mockedMazo = mock(Mazo.class);
 
-        Unidad unidad = new Unidad(cuerpoACuerpo, 4, new SinModificador());
+        Unidad unidad = new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador());
 
         when(mockedMazo.obtenerCarta()).thenReturn(unidad);
 
@@ -244,7 +244,7 @@ public class testEntrega1 {
         Modificador modificador = new SinModificador();
         Rango seccion = new Rango();
 
-        Carta carta = new Unidad(seccion, 4, modificador);
+        Carta carta = new Unidad("Nombre", seccion, 4, modificador);
 
         int tamanio = 1;
 
@@ -271,8 +271,8 @@ public class testEntrega1 {
         Tablero tablero = new Tablero(secciones);
 
         Unida modificador = new Unida();
-        Unidad catapulta1 = new Unidad(asedio, 8, modificador);
-        Unidad catapulta2 = new Unidad(asedio, 8, modificador);
+        Unidad catapulta1 = new Unidad("Nombre", asedio, 8, modificador);
+        Unidad catapulta2 = new Unidad("Nombre", asedio, 8, modificador);
 
         catapulta1.usar();
         modificador.sumarCantidadEnSeccion();
@@ -290,8 +290,8 @@ public class testEntrega1 {
     public void test10SeAplicaElEfectoDelClimaYSeReduceElValorDeLasCartasDeLaSeccionCorrespondiente(){
         Seccion cuerpoACuerpo1 = new CuerpoACuerpo();
         Seccion cuerpoACuerpo2 = new CuerpoACuerpo();
-        Unidad unidad1 = new Unidad(cuerpoACuerpo1,5,new SinModificador());
-        Unidad unidad2 = new Unidad(cuerpoACuerpo2,6,new SinModificador());
+        Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo1,5,new SinModificador());
+        Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo2,6,new SinModificador());
         Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
 
         cuerpoACuerpo1.ubicar(unidad1);

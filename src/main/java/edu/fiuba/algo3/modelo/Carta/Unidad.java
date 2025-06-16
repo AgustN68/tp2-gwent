@@ -10,20 +10,21 @@ import java.util.ArrayList;
 
 public class Unidad implements Carta {
 
+    private final String nombre;
     private Puntaje puntaje;
     private Modificador modificador;
     private List<Seccion> secciones;
 
-    public Unidad(Seccion seccion, int puntosIniciales, Modificador modificador) {
+    public Unidad(String nombre, Seccion seccion, int puntosIniciales, Modificador modificador) {
+        this.nombre = nombre;
         this.secciones = new ArrayList<>();
         secciones.add(seccion);
-
         puntaje = new Puntaje(puntosIniciales);
         this.modificador = modificador;
     }
 
     @Override
-    public void usar(){
+    public void usar() {
         this.ubicar(this.secciones.get(0));
         this.modificador.aplicarModificador();
     }
@@ -34,12 +35,11 @@ public class Unidad implements Carta {
 
 
     public void ubicar(Seccion seccionAUbicar) {
-        if (seccionPuedeUbicar(seccionAUbicar)){
+        if (seccionPuedeUbicar(seccionAUbicar)) {
             seccionAUbicar.ubicar(this);
         } else {
             throw new UnidadNoSePuedeUbicarEnEstaSeccionException("No se puede ubicar en esta seccion");
         }
-
     }
 
     private Boolean seccionPuedeUbicar(Seccion seccion) {
@@ -57,15 +57,15 @@ public class Unidad implements Carta {
     }
 
 
-    public Puntaje calcularPuntaje(){
+    public Puntaje calcularPuntaje() {
         return modificador.aplicarModificador(puntaje);
     }
 
-    public void actualizarPuntaje(int valor){
+    public void actualizarPuntaje(int valor) {
         puntaje.modificarValor(valor);
     }
 
-    public void multiplicarPuntaje(int multiplicador){
+    public void multiplicarPuntaje(int multiplicador) {
         puntaje.multiplicarValor(multiplicador);
     }
 

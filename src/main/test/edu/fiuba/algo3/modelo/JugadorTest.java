@@ -26,7 +26,7 @@ public class JugadorTest {
     public void test01UnJugadorPuedeTomarUnaCartaDelMazo() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
 
@@ -41,7 +41,7 @@ public class JugadorTest {
     public void test02UnJugadorPuedeTomarDosCartasDelMazo() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
 
@@ -56,7 +56,7 @@ public class JugadorTest {
     public void test03UnJugadorPuedeTomarTresCartasDelMazo() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
 
@@ -71,7 +71,7 @@ public class JugadorTest {
     public void test04UnJugadorPuedeSeleccionarUnaUnidad() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
         jugador.tomarCartasMazo(1);
@@ -87,7 +87,7 @@ public class JugadorTest {
     public void test05UnJugadorPuedeSeleccionarUnaUnidad() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
         jugador.tomarCartasMazo(2);
@@ -113,8 +113,8 @@ public class JugadorTest {
 
         Jugador jugador = new Jugador(new Tablero(secciones), mock(Mazo.class), new PilaDeDescarte());
 
-        new Unidad(cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(cuerpoACuerpo, 2, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 2, new SinModificador()).ubicar(cuerpoACuerpo);
 
         //"Act"
         Puntaje puntajeObtenido = jugador.obtenerPuntaje();
@@ -137,8 +137,8 @@ public class JugadorTest {
 
         Jugador jugador = new Jugador(new Tablero(secciones), mock(Mazo.class), new PilaDeDescarte());
 
-        new Unidad(cuerpoACuerpo, 7, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad(cuerpoACuerpo, 8, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 7, new SinModificador()).ubicar(cuerpoACuerpo);
+        new Unidad("Nombre", cuerpoACuerpo, 8, new SinModificador()).ubicar(cuerpoACuerpo);
 
         //"Act"
         Puntaje puntajeObtenido = jugador.obtenerPuntaje();
@@ -151,7 +151,7 @@ public class JugadorTest {
     public void test08UnJugadorPuedeVerificarSiTieneCartasSuficientesEnSuMano() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
 
@@ -165,7 +165,7 @@ public class JugadorTest {
     public void test09UnJugadorPuedeVerificarSiTieneCartasSuficientesEnSuMano() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
 
@@ -179,7 +179,7 @@ public class JugadorTest {
     public void test10UnJugadorPuedeVerificarSiNoTieneCartasSuficientesEnSuMano() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
 
@@ -196,7 +196,7 @@ public class JugadorTest {
     public void test11UnJugadorPuedeVerificarSiNoTieneCartasSuficientesEnSuMano() {
         //"Arrange"
         Mazo mazoUnidades = mock(Mazo.class);
-        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad(new CuerpoACuerpo(), 7, new SinModificador()));
+        when(mazoUnidades.obtenerCarta()).thenReturn(new Unidad("Nombre", new CuerpoACuerpo(), 7, new SinModificador()));
 
         Jugador jugador = new Jugador(new Tablero(new ArrayList<>()), mazoUnidades, new PilaDeDescarte());
 
