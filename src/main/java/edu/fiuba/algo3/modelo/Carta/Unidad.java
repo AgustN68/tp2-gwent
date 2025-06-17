@@ -12,7 +12,7 @@ public class Unidad implements Carta {
 
     private final String nombre;
     private Puntaje puntaje;
-    private Modificador modificador;
+    private final Modificador modificador;
     private List<Seccion> secciones;
 
     public Unidad(String nombre, Seccion seccion, int puntosIniciales, Modificador modificador) {
@@ -70,17 +70,20 @@ public class Unidad implements Carta {
     }
 
     public void actualizarPuntaje(int valor) {
-        puntaje.modificarValor(valor);
+        modificador.aplicarEfectoClima(puntaje, valor);
     }
 
     public void multiplicarPuntaje(int multiplicador) {
-        puntaje.multiplicarValor(multiplicador);
+        modificador.aplicarMultiplicacion(puntaje, multiplicador);
     }
 
     public void restaurarPuntaje() {
         puntaje.reiniciarValor();
     }
 
+    public boolean esVulnerableAEspeciales() {
+        return modificador.esVulnerableAEspeciales();
+    }
 
     public boolean esMasFuerte(Unidad unidad) {
         return puntaje.esMayor(unidad.calcularPuntaje());
@@ -94,3 +97,4 @@ public class Unidad implements Carta {
         return secciones.get(0).actualizarPuntajeSegunCantidadEnSeccion(this, puntaje);
     }
 }
+

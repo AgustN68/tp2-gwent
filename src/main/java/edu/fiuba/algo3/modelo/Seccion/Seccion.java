@@ -55,7 +55,7 @@ public abstract class Seccion {
     }
 
     public void removerCartasDePuntaje(Puntaje puntaje) {
-        cartasUnidades.removeIf(unidad -> unidad.tienePuntaje(puntaje));
+        cartasUnidades.removeIf(unidad -> unidad.tienePuntaje(puntaje) && unidad.esVulnerableAEspeciales());
     }
 
     public Puntaje actualizarPuntajeSegunCantidadEnSeccion(Unidad unidad, Puntaje puntaje) {
@@ -68,3 +68,4 @@ public abstract class Seccion {
         return puntaje.multiplicarPuntaje(new Puntaje(cantidad));
     }
 }
+
