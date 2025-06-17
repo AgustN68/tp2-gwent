@@ -1,22 +1,18 @@
 package edu.fiuba.algo3.modelo.Modificador;
 
+import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Puntaje;
 
 public class Unida extends Modificador {
-    private int cantidadEnSeccion;
+    private Unidad unidad;
 
-    public Unida() {
-        this.cantidadEnSeccion = 0;
+    public void setCarta(Unidad unidad) {
+        this.unidad = unidad;
     }
-
-    public void sumarCantidadEnSeccion() {
-        this.cantidadEnSeccion++;
-    }
-
 
     @Override
     public Puntaje aplicarModificador(Puntaje puntaje) {
-        return new Puntaje(puntaje.obtenerValor() * cantidadEnSeccion);
+        return unidad.actualizarPuntajeSegunCantMismoTipoEnSeccion(puntaje);
     }
 
     @Override

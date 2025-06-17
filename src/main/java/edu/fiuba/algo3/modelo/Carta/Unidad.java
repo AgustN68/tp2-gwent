@@ -56,6 +56,14 @@ public class Unidad implements Carta {
         this.secciones = nuevasSeccionesPermitidas;
     }
 
+    public String obtenerNombre() {
+        return this.nombre;
+    }
+
+    public Boolean esIgual(Unidad unidad) {
+        return this.nombre.equals(unidad.obtenerNombre());
+    }
+
 
     public Puntaje calcularPuntaje() {
         return modificador.aplicarModificador(puntaje);
@@ -80,5 +88,9 @@ public class Unidad implements Carta {
 
     public boolean tienePuntaje(Puntaje puntaje) {
         return this.puntaje.equalsPuntaje(puntaje);
+    }
+
+    public Puntaje actualizarPuntajeSegunCantMismoTipoEnSeccion(Puntaje puntaje) {
+        return secciones.get(0).actualizarPuntajeSegunCantidadEnSeccion(this, puntaje);
     }
 }

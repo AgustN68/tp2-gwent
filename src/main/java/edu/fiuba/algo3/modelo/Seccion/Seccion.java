@@ -57,4 +57,14 @@ public abstract class Seccion {
     public void removerCartasDePuntaje(Puntaje puntaje) {
         cartasUnidades.removeIf(unidad -> unidad.tienePuntaje(puntaje));
     }
+
+    public Puntaje actualizarPuntajeSegunCantidadEnSeccion(Unidad unidad, Puntaje puntaje) {
+        int cantidad = 0;
+        for (Unidad carta : cartasUnidades) {
+            if (carta.esIgual(unidad)) {
+                cantidad++;
+            }
+        }
+        return puntaje.multiplicarPuntaje(new Puntaje(cantidad));
+    }
 }

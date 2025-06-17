@@ -18,6 +18,10 @@ public class Puntaje {
         return new Puntaje(valor - unPuntaje.obtenerValor());
     }
 
+    public Puntaje multiplicarPuntaje(Puntaje unPuntaje) {
+        return new Puntaje(valor * unPuntaje.obtenerValor());
+    }
+
     public int obtenerValor() {
         return valor;
     }

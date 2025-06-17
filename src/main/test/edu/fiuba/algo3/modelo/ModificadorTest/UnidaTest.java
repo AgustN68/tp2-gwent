@@ -18,11 +18,11 @@ public class UnidaTest {
     @Test
     public void test01unModificadorNormalCalculaElPuntajeCorrecto() {
 
-
         // Arrange
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
         CuerpoACuerpo seccionCuerpo = new CuerpoACuerpo();
         Modificador normal = new SinModificador();
+
         Unidad unidad = new Unidad("Nombre", seccionCuerpo, 5,normal);
 
         // Act
@@ -44,12 +44,12 @@ public class UnidaTest {
         Seccion seccionAsedio = new Asedio();
 
         Unida modificador = new Unida();
-        Unidad catapulta1 = new Unidad("Nombre", seccionAsedio, 8, modificador);
+        Unidad catapulta1 = new Unidad("Catapulta", seccionAsedio, 8, modificador);
+        modificador.setCarta(catapulta1);
 
 
         //Act
         catapulta1.usar();
-        modificador.sumarCantidadEnSeccion();
 
         Puntaje puntajeTotal = seccionAsedio.puntajeTotal();
 
@@ -66,27 +66,27 @@ public class UnidaTest {
         Seccion seccionRango = new Rango();
         Seccion seccionAsedio = new Asedio();
 
-        Unida modificador = new Unida();
-        Unidad catapulta1 = new Unidad("Nombre", seccionAsedio, 8, modificador);
-        Unidad catapulta2 = new Unidad("Nombre", seccionAsedio, 8, modificador);
-        Unidad catapulta3 = new Unidad("Nombre", seccionAsedio, 8, modificador);
+        Unida modificador1 = new Unida();
+        Unida modificador2 = new Unida();
+        Unida modificador3 = new Unida();
+
+        Unidad catapulta1 = new Unidad("Catapulta", seccionAsedio, 8, modificador1);
+        Unidad catapulta2 = new Unidad("Catapulta", seccionAsedio, 8, modificador2);
+        Unidad catapulta3 = new Unidad("Catapulta", seccionAsedio, 8, modificador3);
+
+        modificador1.setCarta(catapulta1);
+        modificador2.setCarta(catapulta2);
+        modificador3.setCarta(catapulta3);
 
         // Act
         catapulta1.usar();
-        modificador.sumarCantidadEnSeccion();
-
         catapulta2.usar();
-        modificador.sumarCantidadEnSeccion();
-
         catapulta3.usar();
-        modificador.sumarCantidadEnSeccion();
-
 
         Puntaje puntajeTotal = seccionAsedio.puntajeTotal();
 
         // Assert
         Assertions.assertTrue(puntajeTotal.equals(72));
-
 
     }
 }

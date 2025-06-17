@@ -254,11 +254,12 @@ public class testEntrega1 {
         //Assert
         Assertions.assertEquals(tamanio, descartes.cantidadCartas());
     }
-    // Punto 6 - Falta el "que solo se aplique el valor a la ronda"
+
 
     @Test
     public void test09ModificoUnaCartaConUnaCartaaUnidaYSeCambianLosPuntos() {
 
+        // Arrange
         Seccion cuerpoACuerpo = new CuerpoACuerpo();
         Seccion rango = new Rango();
         Seccion asedio = new Asedio();
@@ -270,15 +271,17 @@ public class testEntrega1 {
 
         Tablero tablero = new Tablero(secciones);
 
-        Unida modificador = new Unida();
-        Unidad catapulta1 = new Unidad("Nombre", asedio, 8, modificador);
-        Unidad catapulta2 = new Unidad("Nombre", asedio, 8, modificador);
+        Unida modificador1 = new Unida();
+        Unida modificador2 = new Unida();
+
+        Unidad catapulta1 = new Unidad("Catapulta", asedio, 8, modificador1);
+        Unidad catapulta2 = new Unidad("Catapulta", asedio, 8, modificador2);
+
+        modificador1.setCarta(catapulta1);
+        modificador2.setCarta( catapulta2);
 
         catapulta1.usar();
-        modificador.sumarCantidadEnSeccion();
-
         catapulta2.usar();
-        modificador.sumarCantidadEnSeccion();
 
         Puntaje puntajeTotal = asedio.puntajeTotal();
 
