@@ -1,0 +1,318 @@
+{
+    "mazo_jugador_uno": {
+        "unidades": [
+            {
+                "nombre": "Birna Bran",
+                "puntos": 2,
+                "modificador": [
+                    "Medico"
+                ],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Geralt de Rivia",
+                "puntos": 15,
+                "modificador": [
+                    "Legendaria"
+                ],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Guerrero del Clan an Craite",
+                "puntos": 6,
+                "modificador": [
+                    "Carta Unida"
+                ],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Jaskier",
+                "puntos": 2,
+                "modificador": [
+                    "Morale Boost"
+                ],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Vampiro: Katakan",
+                "puntos": 5,
+                "modificador": [],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Barclay Els",
+                "puntos": 6,
+                "modificador": [
+                    "Agil"
+                ],
+                "seccion": "Cuerpo a Cuerpo, Rango"
+            },
+            {
+                "nombre": "Celaeno Harpía",
+                "puntos": 2,
+                "modificador": [
+                    "Agil"
+                ],
+                "seccion": "Cuerpo a Cuerpo, Rango"
+            },
+            {
+                "nombre": "Arquero de Infantería Negro",
+                "puntos": 10,
+                "modificador": [],
+                "seccion": "Rango"
+            },
+            {
+                "nombre": "Pirata del Clan Dimun",
+                "puntos": 6,
+                "modificador": [
+                    "Quemar"
+                ],
+                "seccion": "Rango"
+            },
+            {
+                "nombre": "Cazadores de Dragones de Crinfrid",
+                "puntos": 5,
+                "modificador": [
+                    "Carta Unida"
+                ],
+                "seccion": "Rango"
+            },
+            {
+                "nombre": "Catapulta",
+                "puntos": 8,
+                "modificador": [
+                    "Carta Unida"
+                ],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Ballesta",
+                "puntos": 6,
+                "modificador": [],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Medico del Estandarte de Dun",
+                "puntos": 5,
+                "modificador": [
+                    "Medico"
+                ],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Torre de Asedio",
+                "puntos": 6,
+                "modificador": [],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Thaler",
+                "puntos": 1,
+                "modificador": [
+                    "Espia"
+                ],
+                "seccion": "Asedio"
+            }
+        ],
+        "especiales": [
+            {
+                "nombre": "Cuerno del comandante",
+                "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+                "tipo": "Morale boost"
+            },
+            {
+                "nombre": "Cuerno del comandante",
+                "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+                "tipo": "Morale boost"
+            },
+            {
+                "nombre": "Cuerno del comandante",
+                "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+                "tipo": "Morale boost"
+            },
+            {
+                "nombre": "Escarcha mordaz",
+                "descripcion": "Establece la fuerza de todas las cartas de Combate Cuerpo a Cuerpo en 1 para ambos jugadores.",
+                "tipo": "Clima",
+                "afectado": [
+                    "Combate Cuerpo a Cuerpo"
+                ]
+            },
+            {
+                "nombre": "Lluvia torrencial",
+                "descripcion": "Establece la fuerza de todas las cartas de Asedio en 1 para ambos jugadores.",
+                "tipo": "Clima",
+                "afectado": [
+                    "Asedio"
+                ]
+            },
+            {
+                "nombre": "Tormeta de Skellige",
+                "descripcion": "Establece la fuerza de todas las cartas de Combate Cuerpo a Cuerpo y Combate a Distancia en 1 para ambos jugadores.",
+                "tipo": "Clima",
+                "afectado": [
+                    "Cuerpo a Cuerpo",
+                    "Combate a Distancia"
+                ]
+            }
+        ]
+    },
+    "mazo_jugador_dos": {
+        "unidades": [
+            {
+                "nombre": "Berserker",
+                "puntos": 4,
+                "modificador": [],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Comando de Rayas Azules",
+                "puntos": 4,
+                "modificador": [
+                    "Carta Unida"
+                ],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Blueboy Lugos",
+                "puntos": 6,
+                "modificador": [],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Botchling",
+                "puntos": 4,
+                "modificador": [],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Fuerza de Defensa Bovina",
+                "puntos": 8,
+                "modificador": [],
+                "seccion": "Cuerpo a Cuerpo"
+            },
+            {
+                "nombre": "Cahir Mawr Dyffryn aep Ceallach",
+                "puntos": 6,
+                "modificador": [],
+                "seccion": "Rango"
+            },
+            {
+                "nombre": "Harpía Celaeno",
+                "puntos": 2,
+                "modificador": [
+                    "Agil"
+                ],
+                "seccion": "Cuerpo a Cuerpo, Rango"
+            },
+            {
+                "nombre": "Cerys",
+                "puntos": 10,
+                "modificador": [
+                    "Legendaria"
+                ],
+                "seccion": "Rango"
+            },
+            {
+                "nombre": "Ciaran aep Easnillien",
+                "puntos": 3,
+                "modificador": [
+                    "Agil"
+                ],
+                "seccion": "Cuerpo a Cuerpo, Rango"
+            },
+            {
+                "nombre": "Cirilla Fiona Elen Riannon",
+                "puntos": 15,
+                "modificador": [
+                    "Legendaria"
+                ],
+                "seccion": "Rango"
+            },
+            {
+                "nombre": "Doncella Escudo del Clan Drummond",
+                "puntos": 4,
+                "modificador": [
+                    "Carta Unida"
+                ],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Skald del Clan Heymaey",
+                "puntos": 4,
+                "modificador": [],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Herrero del Clan Tordarroch",
+                "puntos": 4,
+                "modificador": [],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Guerrero del Clan an Craite",
+                "puntos": 6,
+                "modificador": [
+                    "Carta Unida"
+                ],
+                "seccion": "Asedio"
+            },
+            {
+                "nombre": "Crone: Brewess",
+                "puntos": 6,
+                "modificador": [],
+                "seccion": "Asedio"
+            }
+        ],
+        "especiales": [
+            {
+                "nombre": "Quemar",
+                "descripcion": "Elimina las cartas más fuertes del campo de batalla.",
+                "tipo": "Tierra arrasada"
+            },
+            {
+                "nombre": "Quemar",
+                "descripcion": "Elimina las cartas más fuertes del campo de batalla.",
+                "tipo": "Tierra arrasada"
+            },
+            {
+                "nombre": "Tiempo despejado",
+                "descripcion": "Elimina todos los efectos de clima en el tablero.",
+                "tipo": "Clima",
+                "afectado": [
+                    "Cuerpo a Cuerpo",
+                    "Rango",
+                    "Asedio"
+                ]
+            },
+            {
+                "nombre": "Tiempo despejado",
+                "descripcion": "Elimina todos los efectos de clima en el tablero.",
+                "tipo": "Clima",
+                "afectado": [
+                    "Cuerpo a Cuerpo",
+                    "Rango",
+                    "Asedio"
+                ]
+            },
+            {
+                "nombre": "Tiempo despejado",
+                "descripcion": "Elimina todos los efectos de clima en el tablero.",
+                "tipo": "Clima",
+                "afectado": [
+                    "Cuerpo a Cuerpo",
+                    "Rango",
+                    "Asedio"
+                ]
+            },
+            {
+                "nombre": "Lluvia torrencial",
+                "descripcion": "Establece la fuerza de todas las cartas de Asedio en 1 para ambos jugadores.",
+                "tipo": "Clima",
+                "afectado": [
+                    "Asedio"
+                ]
+            }
+        ]
+    }
+}
