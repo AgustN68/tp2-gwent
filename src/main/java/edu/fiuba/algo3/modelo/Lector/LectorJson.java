@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo.Lector;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Factory.EspecialFactory;
@@ -20,8 +20,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
-import org.json.simple.parser.ParseException;
-
 public class LectorJson implements Lector {
 
     // SE ASUME QUE LAS SECCIONES ESTAN EN EL ORDEN:
@@ -33,9 +31,21 @@ public class LectorJson implements Lector {
     private static final int POS_SECCION_PRINCIPAL = 0;
     private static final int POS_MODIFICADOR = 0;
 
-    // Por algun motivo las referencias del JSON difieren en ambos mazos
+    // Por algun motivo las referencias del JSON a secciones difieren en ambos mazos
+    private static final String CUERPO_A_CUERPO = "Cuerpo a Cuerpo";
+    private static final String RANGO = "Rango";
+    private static final String ASEDIO = "Asedio";
+
     private static final String REF_CUERPO_A_CUERPO = "Combate Cuerpo a Cuerpo";
     private static final String REF_RANGO = "Combate a Distancia";
+
+    private static final Map<String, Integer> SECCIONES_MAP = Map.of(
+            REF_CUERPO_A_CUERPO, POS_CUERPO_A_CUERPO,
+            REF_RANGO, POS_RANGO,
+            CUERPO_A_CUERPO, POS_CUERPO_A_CUERPO,
+            RANGO, POS_RANGO,
+            ASEDIO, POS_ASEDIO
+    );
 
 
     /* Hay modificadores y especiales que requieren:
@@ -55,90 +65,36 @@ public class LectorJson implements Lector {
             Tablero tableroJ2
             )
     {
-
         List<Mazo> mazos = new ArrayList<>();
 
         try {
-
-            List<Unidad> unidadesJugador1 = new ArrayList<>();
-            List<Especial> especialesJugador1 = new ArrayList<>();
-
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(new FileReader(ruta));
-
             JSONObject jsonObject = (JSONObject) obj;
-            JSONObject mazoJugadorUno = (JSONObject) jsonObject.get("mazo_jugador_uno");
-            JSONArray unidadesJugadorUno = (JSONArray) mazoJugadorUno.get("unidades");
 
-            for (Object unidadObj : unidadesJugadorUno) {
-                JSONObject unidad = (JSONObject) unidadObj;
+            // Procesar mazo del jugador 1
+            Mazo mazoJugador1 = procesarMazo(
+                jsonObject,
+                "mazo_jugador_uno",
+                seccionesj1,
+                seccionesj2,
+                jugador1,
+                tableroJ1,
+                tableroJ2
+            );
+            mazos.add(mazoJugador1);
 
-                String nombre = (String) unidad.get("nombre");
-                Long puntos = (Long) unidad.get("puntos");
-                String seccionesString = (String) unidad.get("seccion");
-
-                List<String> secciones = parsearSecciones(seccionesString);
-
-                JSONArray modificadores = (JSONArray) unidad.get("modificador");
-
-                String modificador = "SinModificador";
-
-                if (!modificadores.isEmpty()) {
-                    modificador = (String) modificadores.get(POS_MODIFICADOR);
-                }
-
-                Modificador nuevoModificador = ModificadorFactory.crearModificador(
-                        modificador,
-                        jugador1,
-                        obtenerListaSecciones(secciones, seccionesj1)
-                        ); // Jugador por espia y medico. Las secciones por Agil.
-
-
-                Seccion seccionPrincipal = obtenerSeccion(secciones.get(POS_SECCION_PRINCIPAL), seccionesj1);
-
-                Unidad nuevaUnidad = UnidadFactory.crearUnidad(
-                        nombre,
-                        puntos,
-                        seccionPrincipal,
-                        nuevoModificador
-                );
-
-                nuevoModificador.setCarta(nuevaUnidad);
-                unidadesJugador1.add(nuevaUnidad);
-            }
-
-            JSONArray especialesJugadorUno = (JSONArray) mazoJugadorUno.get("especiales");
-
-            for (Object especialObj : especialesJugadorUno) {
-                JSONObject especial = (JSONObject) especialObj;
-
-                String nombre = (String) especial.get("nombre");
-                String descripcion = (String) especial.get("descripcion");
-                String tipo = (String) especial.get("tipo");
-
-                JSONArray seccionesAfectadasArray = (JSONArray) especial.get("afectado"); // array
-
-                List<String> seccionesAString = parsearJsonArrayDeSecciones(seccionesAfectadasArray);
-                List<Seccion> seccionesAfectadas = parsearSeccionesDeAmbosJugadores(seccionesAString, seccionesj1, seccionesj2);
-
-
-                Especial nuevaEspecial = EspecialFactory.crearEspecial(
-                        tipo,
-                        nombre,
-                        descripcion,
-                        tableroJ1,
-                        tableroJ2,
-                        seccionesAfectadas
-                );
-
-                especialesJugador1.add(nuevaEspecial);
-
-
-
-
-            }
-            mazos.add(new Mazo(unidadesJugador1, especialesJugador1));
-
+            // Procesar mazo del jugador 2
+            Mazo mazoJugador2 = procesarMazo(
+                jsonObject,
+                "mazo_jugador_dos",
+                seccionesj2,
+                seccionesj1,
+                jugador2,
+                tableroJ2,
+                tableroJ1
+            );
+            mazos.add(mazoJugador2);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -147,16 +103,99 @@ public class LectorJson implements Lector {
         return mazos;
     }
 
+    private Mazo procesarMazo(
+            JSONObject jsonObject,
+            String nombreMazo,
+            List<Seccion> seccionesJugadorActual,
+            List<Seccion> seccionesOtroJugador,
+            Jugador jugadorActual,
+            Tablero tableroJugadorActual,
+            Tablero tableroOtroJugador
+    ) {
+        List<Unidad> unidades = new ArrayList<>();
+        List<Especial> especiales = new ArrayList<>();
 
-    private List<Seccion> parsearSeccionesDeAmbosJugadores
-            (
+        JSONObject mazoJson = (JSONObject) jsonObject.get(nombreMazo);
+
+        // Procesar unidades
+        JSONArray unidadesJson = (JSONArray) mazoJson.get("unidades");
+        for (Object unidadObj : unidadesJson) {
+            JSONObject unidad = (JSONObject) unidadObj;
+
+            String nombre = (String) unidad.get("nombre");
+            Long puntos = (Long) unidad.get("puntos");
+            String seccionesString = (String) unidad.get("seccion");
+
+            List<String> secciones = parsearSecciones(seccionesString);
+
+            JSONArray modificadores = (JSONArray) unidad.get("modificador");
+
+            String modificador = "SinModificador";
+
+            if (!modificadores.isEmpty()) {
+                modificador = (String) modificadores.get(POS_MODIFICADOR);
+            }
+
+            Modificador nuevoModificador = ModificadorFactory.crearModificador(
+                    modificador,
+                    jugadorActual,
+                    obtenerListaSecciones(secciones, seccionesJugadorActual)
+            );
+
+            Seccion seccionPrincipal = obtenerSeccion(secciones.get(POS_SECCION_PRINCIPAL), seccionesJugadorActual);
+
+            Unidad nuevaUnidad = UnidadFactory.crearUnidad(
+                    nombre,
+                    puntos,
+                    seccionPrincipal,
+                    nuevoModificador
+            );
+
+            nuevoModificador.setCarta(nuevaUnidad);
+            unidades.add(nuevaUnidad);
+        }
+
+        // Procesar especiales
+        JSONArray especialesJson = (JSONArray) mazoJson.get("especiales");
+        for (Object especialObj : especialesJson) {
+            JSONObject especial = (JSONObject) especialObj;
+
+            String nombre = (String) especial.get("nombre");
+            String descripcion = (String) especial.get("descripcion");
+            String tipo = (String) especial.get("tipo");
+
+            JSONArray seccionesAfectadasArray = (JSONArray) especial.get("afectado");
+            List<String> seccionesAString = parsearJsonArrayDeSecciones(seccionesAfectadasArray);
+            List<Seccion> seccionesAfectadas = parsearSeccionesDeAmbosJugadores(
+                    seccionesAString,
+                    seccionesJugadorActual,
+                    seccionesOtroJugador
+            );
+
+            Especial nuevaEspecial = EspecialFactory.crearEspecial(
+                    tipo,
+                    nombre,
+                    descripcion,
+                    tableroJugadorActual,
+                    tableroOtroJugador,
+                    seccionesAfectadas
+            );
+
+            especiales.add(nuevaEspecial);
+        }
+
+        return new Mazo(unidades, especiales);
+    }
+
+
+    private List<Seccion> parsearSeccionesDeAmbosJugadores(
             List<String> seccionesAfectadas,
             List<Seccion> seccionesj1,
             List<Seccion> seccionesj2
             )
     {
-
         List<Seccion> nuevasSecciones = new ArrayList<>();
+
         for (String seccion : seccionesAfectadas) {
             nuevasSecciones.add(obtenerSeccion(seccion, seccionesj1));
             nuevasSecciones.add(obtenerSeccion(seccion, seccionesj2));
@@ -164,8 +203,6 @@ public class LectorJson implements Lector {
 
         return nuevasSecciones;
     }
-
-
 
 
     private List<String> parsearSecciones(String seccionString) {
@@ -190,58 +227,32 @@ public class LectorJson implements Lector {
                 }
             }
         }
-
         return seccionesAfectadas;
     }
 
     private Seccion obtenerSeccion (String nombre, List<Seccion> seccion) {
-        switch (nombre) {
-            case REF_CUERPO_A_CUERPO:
-                return seccion.get(POS_CUERPO_A_CUERPO);
-
-            case REF_RANGO:
-                return seccion.get(POS_RANGO);
-
-            case "Cuerpo a Cuerpo":
-                return seccion.get(POS_CUERPO_A_CUERPO);
-            case "Rango":
-                return seccion.get(POS_RANGO);
-            case "Asedio":
-                return seccion.get(POS_ASEDIO);
-
-            default:
-                throw new SeccionInexistenteException("Sección no reconocida: " + nombre);
+        if (!SECCIONES_MAP.containsKey(nombre)) {
+            throw new SeccionInexistenteException("Sección no reconocida: " + nombre);
+        } else {
+            int pos = SECCIONES_MAP.get(nombre);
+            return seccion.get(pos);
+         }
         }
-    }
-
 
     // Para agil y especiales
     private List<Seccion> obtenerListaSecciones(List<String> seccionesString, List<Seccion> seccionesJugador) {
         List<Seccion> secciones = new ArrayList<>();
 
         for (String seccion : seccionesString) {
-            switch (seccion) {
-                case REF_CUERPO_A_CUERPO:
-                    secciones.add(seccionesJugador.get(POS_CUERPO_A_CUERPO));
-                    break;
 
-                case REF_RANGO:
-                    secciones.add(seccionesJugador.get(POS_RANGO));
-                    break;
-
-                case "Cuerpo a Cuerpo":
-                    secciones.add(seccionesJugador.get(POS_CUERPO_A_CUERPO));
-                    break;
-                case "Rango":
-                    secciones.add(seccionesJugador.get(POS_RANGO));
-                    break;
-                case "Asedio":
-                    secciones.add(seccionesJugador.get(POS_ASEDIO));
-                    break;
-                default:
-                    throw new SeccionInexistenteException("Sección no reconocida: " + seccion);
+            if (!SECCIONES_MAP.containsKey(seccion)) {
+                throw new SeccionInexistenteException("Sección no reconocida: " + seccion);
+            } else {
+                int pos = SECCIONES_MAP.get(seccion);
+                secciones.add(seccionesJugador.get(pos));
             }
         }
+
         return secciones;
 
     }

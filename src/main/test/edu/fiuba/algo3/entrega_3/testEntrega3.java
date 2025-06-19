@@ -21,13 +21,15 @@ import java.util.List;
 public class testEntrega3 {
 
     private static final String RUTA_JSON = "src/main/java/edu/fiuba/algo3/archivos/gwent.json";
+
     private static final int POS_MAZO_J1 = 0;
     private static final int POS_MAZO_J2 = 1;
 
     @Test
     public void test01seExtraenCorrectamenteLosMazosDelJsonyEsValido() {
-        Lector lector = new LectorJson();
 
+        // Arrange
+        Lector lector = new LectorJson();
 
         List<Seccion> seccionesJ1 = new ArrayList<>();
         seccionesJ1.add(new CuerpoACuerpo());
@@ -67,9 +69,9 @@ public class testEntrega3 {
 
 
 
-
+        // Act & Assert
         Assertions.assertDoesNotThrow(() -> {
-            List<Mazo> mazoLeido = lector.leerMazos(
+            List<Mazo> mazosLeido = lector.leerMazos(
                     RUTA_JSON,
                     seccionesJ1,
                     seccionesJ2,
@@ -78,8 +80,10 @@ public class testEntrega3 {
                     tableroJ1,
                     tableroJ2);
 
-            jugador1.setMazo(mazoLeido.get(POS_MAZO_J1));
+            jugador1.setMazo(mazosLeido.get(POS_MAZO_J1));
+            jugador2.setMazo(mazosLeido.get(POS_MAZO_J2));
         });
+
 
     }
 }
