@@ -47,7 +47,12 @@ public class testEntrega1 {
             unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(asedio, asedio));
+
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(asedio);
+            seccionesAfectadas.add(new Asedio());
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
@@ -77,7 +82,11 @@ public class testEntrega1 {
             unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(asedio, asedio));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(asedio);
+            seccionesAfectadas.add(new Asedio());
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
         assertThrows(
@@ -106,7 +115,11 @@ public class testEntrega1 {
             unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 5; i++) {
-            especiales.add(new Clima(asedio, asedio));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(asedio);
+            seccionesAfectadas.add(new Asedio());
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
 
@@ -137,7 +150,11 @@ public class testEntrega1 {
             unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(asedio, asedio));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(asedio);
+            seccionesAfectadas.add(asedio);
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
@@ -168,7 +185,11 @@ public class testEntrega1 {
             unidades.add(new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(asedio, asedio));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(asedio);
+            seccionesAfectadas.add(asedio);
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
@@ -295,7 +316,12 @@ public class testEntrega1 {
         Seccion cuerpoACuerpo2 = new CuerpoACuerpo();
         Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo1,5,new SinModificador());
         Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo2,6,new SinModificador());
-        Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
+
+        List<Seccion> seccionesAfectadas = new ArrayList<>();
+        seccionesAfectadas.add(cuerpoACuerpo1);
+        seccionesAfectadas.add(cuerpoACuerpo2);
+
+        Clima nieve = new Clima(seccionesAfectadas);
 
         cuerpoACuerpo1.ubicar(unidad1);
         cuerpoACuerpo2.ubicar(unidad2);

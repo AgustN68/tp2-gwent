@@ -55,5 +55,9 @@ public class Jugador {
         int cantidadCartas = (mazo.obtenerCantidadDeCartas() > 1) ? 2 : 1;
         tomarCartasMazo(cantidadCartas);
     }
+
+    public void setMazo(Mazo mazo) {
+        this.mazo = mazo;
+    }
 }
 

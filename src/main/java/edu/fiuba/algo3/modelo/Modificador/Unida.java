@@ -4,11 +4,6 @@ import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Puntaje;
 
 public class Unida extends Modificador {
-    private Unidad unidad;
-
-    public void setCarta(Unidad unidad) {
-        this.unidad = unidad;
-    }
 
     @Override
     public Puntaje aplicarModificador(Puntaje puntaje) {

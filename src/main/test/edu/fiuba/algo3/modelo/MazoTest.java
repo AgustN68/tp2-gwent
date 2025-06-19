@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasEspecialesSuficientesException;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasUnidadSuficientesException;
 import org.junit.Test;
@@ -27,7 +28,12 @@ public class MazoTest {
             cartasUnidades.add(new Unidad("Nombre", cuerpoACuerpo,2, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            cartasEspeciales.add(new Clima(cuerpoACuerpo, cuerpoACuerpo));
+
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(cuerpoACuerpo);
+            seccionesAfectadas.add(cuerpoACuerpo);
+
+            cartasEspeciales.add(new Clima(seccionesAfectadas));
         }
 
         //Act y Assert
@@ -45,7 +51,12 @@ public class MazoTest {
             cartasUnidades.add(new Unidad("Nombre", cuerpoACuerpo,2, new SinModificador()));
         }
         for (int i = 0; i < 9; i++) {
-            cartasEspeciales.add(new Clima(cuerpoACuerpo, cuerpoACuerpo));
+
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(cuerpoACuerpo);
+            seccionesAfectadas.add(cuerpoACuerpo);
+
+            cartasEspeciales.add(new Clima(seccionesAfectadas));
         }
 
         //Act y Assert
@@ -63,7 +74,13 @@ public class MazoTest {
             cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
+
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(new CuerpoACuerpo());
+            seccionesAfectadas.add(new CuerpoACuerpo());
+
+
+            cartasEspeciales.add(new Clima(seccionesAfectadas));
         }
 
 
@@ -84,7 +101,11 @@ public class MazoTest {
             cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 3; i++) {
-            cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(new CuerpoACuerpo());
+            seccionesAfectadas.add(new CuerpoACuerpo());
+
+            cartasEspeciales.add(new Clima(seccionesAfectadas));
         }
 
 
@@ -104,7 +125,11 @@ public class MazoTest {
             cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 8; i++) {
-            cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(new CuerpoACuerpo());
+            seccionesAfectadas.add(new CuerpoACuerpo());
+
+            cartasEspeciales.add(new Clima(seccionesAfectadas));
         }
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);
 

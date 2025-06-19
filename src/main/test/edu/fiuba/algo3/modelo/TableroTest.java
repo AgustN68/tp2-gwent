@@ -75,7 +75,13 @@ public class TableroTest {
         seccionesTablero2.add(cuerpoACuerpo2);
         Tablero tablero2 = new Tablero(seccionesTablero2);
 
-        Clima clima = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
+
+        List<Seccion> seccionesAfectadas = new ArrayList<>();
+        seccionesAfectadas.add(cuerpoACuerpo1);
+        seccionesAfectadas.add(cuerpoACuerpo2);
+
+
+        Clima clima = new Clima(seccionesAfectadas);
 
         new Unidad("Nombre", cuerpoACuerpo1, 4, new SinModificador()).ubicar(cuerpoACuerpo1);
         new Unidad("Nombre", cuerpoACuerpo1, 2, new SinModificador()).ubicar(cuerpoACuerpo1);

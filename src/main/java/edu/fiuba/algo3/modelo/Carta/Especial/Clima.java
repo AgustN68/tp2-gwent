@@ -2,16 +2,16 @@ package edu.fiuba.algo3.modelo.Carta.Especial;
 
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
+import java.util.List;
+
 public class Clima extends Especial {
 
     protected static final int VALOR = 1;
 
-    protected Seccion seccionAfectada1;
-    protected Seccion seccionAfectada2;
+    protected List<Seccion> seccionesAfectadas;
 
-    public Clima(Seccion seccion1, Seccion seccion2) {
-        seccionAfectada1 = seccion1;
-        seccionAfectada2 = seccion2;
+    public Clima(List<Seccion> secciones) {
+        seccionesAfectadas = secciones;
     }
 
     public Clima() {
@@ -19,8 +19,10 @@ public class Clima extends Especial {
     }
 
     public void usar() {
-        seccionAfectada1.reducirPuntaje(VALOR);
-        seccionAfectada2.reducirPuntaje(VALOR);
+        for (Seccion seccion : seccionesAfectadas) {
+            seccion.reducirPuntaje(VALOR);
+        }
+
     }
 
 }

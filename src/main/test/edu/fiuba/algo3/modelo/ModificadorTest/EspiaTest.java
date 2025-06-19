@@ -45,7 +45,11 @@ public class EspiaTest {
         }
 
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(cuerpoACuerpo1, cuerpoACuerpo2));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(cuerpoACuerpo1);
+            seccionesAfectadas.add(cuerpoACuerpo2);
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
 
@@ -92,7 +96,11 @@ public class EspiaTest {
         }
 
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(cuerpoACuerpo1, cuerpoACuerpo2));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(cuerpoACuerpo1);
+            seccionesAfectadas.add(cuerpoACuerpo2);
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
 

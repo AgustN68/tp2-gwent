@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
 import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,11 @@ public class ManoTest {
             cartasUnidades.add(new Unidad("Nombre", new CuerpoACuerpo(),2, new SinModificador()));
         }
         for (int i = 0; i < 6; i++) {
-            cartasEspeciales.add(new Clima(new CuerpoACuerpo(),new CuerpoACuerpo()));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(new CuerpoACuerpo());
+            seccionesAfectadas.add(new CuerpoACuerpo());
+
+            cartasEspeciales.add(new Clima(seccionesAfectadas));
         }
 
         Mazo mazo = new Mazo(cartasUnidades, cartasEspeciales);

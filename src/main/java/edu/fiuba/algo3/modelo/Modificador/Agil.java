@@ -18,6 +18,8 @@ public class Agil extends Modificador {
         this.unidad.actualizarSecciones(seccionesPermitidas);
 
     }
+
+    @Override
     public void setCarta(Unidad hechicero) {
         this.unidad = hechicero;
         this.aplicarModificador();

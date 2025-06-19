@@ -46,7 +46,13 @@ public class testEntrega2 {
         int puntosCarta2 = 6;
         Unidad unidad1 = new Unidad("Nombre", cuerpoACuerpo1,puntosCarta1,new SinModificador());
         Unidad unidad2 = new Unidad("Nombre", cuerpoACuerpo2,puntosCarta2,new SinModificador());
-        Clima nieve = new Clima(cuerpoACuerpo1, cuerpoACuerpo2);
+
+        List<Seccion> seccionesAfectadas = new ArrayList<>();
+        seccionesAfectadas.add(cuerpoACuerpo1);
+        seccionesAfectadas.add(cuerpoACuerpo2);
+
+
+        Clima nieve = new Clima(seccionesAfectadas);
         Despejado despejadoClima = new Despejado(tablero1, tablero2);
 
         cuerpoACuerpo1.ubicar(unidad1);
@@ -131,7 +137,12 @@ public class testEntrega2 {
         }
 
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(cuerpoACuerpo1, cuerpoACuerpo2));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(cuerpoACuerpo1);
+            seccionesAfectadas.add(cuerpoACuerpo2);
+
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
 
 
@@ -222,7 +233,12 @@ public class testEntrega2 {
         }
 
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(cuerpoACuerpo, new CuerpoACuerpo()));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(cuerpoACuerpo);
+            seccionesAfectadas.add(new CuerpoACuerpo());
+
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
         Mazo mazo = new Mazo(unidades, especiales);
         PilaDeDescarte pila = new PilaDeDescarte();

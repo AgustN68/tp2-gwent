@@ -40,7 +40,11 @@ public class MedicoTest {
         }
 
         for (int i = 0; i < 6; i++) {
-            especiales.add(new Clima(cuerpoACuerpo, new CuerpoACuerpo()));
+            List<Seccion> seccionesAfectadas = new ArrayList<>();
+            seccionesAfectadas.add(cuerpoACuerpo);
+            seccionesAfectadas.add(new CuerpoACuerpo());
+
+            especiales.add(new Clima(seccionesAfectadas));
         }
         Mazo mazo = new Mazo(unidades, especiales);
         PilaDeDescarte pila = new PilaDeDescarte();
