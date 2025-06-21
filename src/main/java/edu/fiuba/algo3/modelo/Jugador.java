@@ -11,6 +11,7 @@ public class Jugador {
     private Mazo mazo;
     private Mano mano;
     private PilaDeDescarte pilaDeDescarte;
+    private String nombre;
 
     public Jugador(Tablero tablero, Mazo mazo, PilaDeDescarte pilaDeDescarte) {
         this.tablero = tablero;
@@ -47,7 +48,7 @@ public class Jugador {
         return mano.obtenerCartas();
     }
 
-    public Carta agarrarDescarte(){
+    public Carta agarrarDescarte() {
         return this.pilaDeDescarte.agarrarCarta();
     }
 
@@ -59,5 +60,15 @@ public class Jugador {
     public void setMazo(Mazo mazo) {
         this.mazo = mazo;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
 }
+
 
