@@ -55,18 +55,13 @@ public class LectorJson implements Lector {
        Por lo que se deben pasar como parametros al leer el mazo y por ende, a la fábrica
      */
 
-    public List<Mazo> leerMazos (
-            String ruta,
-            List<Seccion> seccionesj1,
-            List<Seccion> seccionesj2,
-            Jugador jugador1,
-            Jugador jugador2,
-            Tablero tableroJ1,
-            Tablero tableroJ2
-            )
-    {
-        List<Mazo> mazos = new ArrayList<>();
+    public List<Mazo> leerMazos (String ruta, Jugador jugador1, Jugador jugador2) {
 
+        List<Mazo> mazos = new ArrayList<>();
+        Tablero tableroJ1 = jugador1.getTablero();
+        Tablero tableroJ2 = jugador2.getTablero();
+        List<Seccion> seccionesJ1 = tableroJ1.getSecciones();
+        List<Seccion> seccionesJ2 = tableroJ2.getSecciones();
         try {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(new FileReader(ruta));
@@ -76,8 +71,8 @@ public class LectorJson implements Lector {
             Mazo mazoJugador1 = procesarMazo(
                 jsonObject,
                 "mazo_jugador_uno",
-                seccionesj1,
-                seccionesj2,
+                seccionesJ1,
+                seccionesJ2,
                 jugador1,
                 tableroJ1,
                 tableroJ2
@@ -88,8 +83,8 @@ public class LectorJson implements Lector {
             Mazo mazoJugador2 = procesarMazo(
                 jsonObject,
                 "mazo_jugador_dos",
-                seccionesj2,
-                seccionesj1,
+                seccionesJ2,
+                seccionesJ1,
                 jugador2,
                 tableroJ2,
                 tableroJ1

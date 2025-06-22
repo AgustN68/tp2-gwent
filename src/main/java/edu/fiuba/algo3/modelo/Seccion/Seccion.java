@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Seccion;
 
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Puntaje;
 
@@ -67,5 +68,9 @@ public abstract class Seccion {
         }
         return puntaje.multiplicarPuntaje(new Puntaje(cantidad));
     }
+
+    /*public void recibirClima(Clima clima){
+        clima.afectar(this);
+    }*/
 }
 

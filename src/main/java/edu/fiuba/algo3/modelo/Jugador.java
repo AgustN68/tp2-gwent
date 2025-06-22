@@ -69,6 +69,10 @@ public class Jugador {
         this.nombre = nombre;
     }
 
+    public Tablero getTablero() {
+        return tablero;
+    }
+
 }
 
 

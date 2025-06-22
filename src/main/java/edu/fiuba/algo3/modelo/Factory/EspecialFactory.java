@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.Factory;
 
 import edu.fiuba.algo3.modelo.Carta.Especial.*;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
 import java.util.List;

@@ -1,5 +1,6 @@
-package edu.fiuba.algo3.modelo.Carta.Especial;
+package edu.fiuba.algo3.modelo.Carta.Especial.Clima;
 
+import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.List;
@@ -15,14 +16,14 @@ public class Clima extends Especial {
     }
 
     public Clima() {
-
     }
 
     public void usar() {
         for (Seccion seccion : seccionesAfectadas) {
             seccion.reducirPuntaje(VALOR);
         }
-
     }
+
+    public void aplicarClima() {}
 
 }

@@ -7,9 +7,8 @@ public abstract class Especial implements Carta {
     private String nombre;
     private String descripcion;
 
-
-    public void usar() {
-    }
+    @Override
+    public void usar() {}
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

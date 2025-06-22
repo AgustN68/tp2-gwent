@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Carta.Especial;
+package edu.fiuba.algo3.modelo.Carta.Especial.Clima;
 
 import edu.fiuba.algo3.modelo.Tablero;
 

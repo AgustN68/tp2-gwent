@@ -73,12 +73,8 @@ public class testEntrega3 {
         Assertions.assertDoesNotThrow(() -> {
             List<Mazo> mazosLeido = lector.leerMazos(
                     RUTA_JSON,
-                    seccionesJ1,
-                    seccionesJ2,
                     jugador1,
-                    jugador2,
-                    tableroJ1,
-                    tableroJ2);
+                    jugador2);
 
             jugador1.setMazo(mazosLeido.get(POS_MAZO_J1));
             jugador2.setMazo(mazosLeido.get(POS_MAZO_J2));

@@ -40,4 +40,8 @@ public class Tablero {
             seccion.removerCartasDePuntaje(puntajeMasFuerte);
         }
     }
+
+    public List<Seccion> getSecciones() {
+        return secciones;
+    }
 }

@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modelo.CartaTest.EspecialTest;
 
-import edu.fiuba.algo3.modelo.Carta.Especial.Clima;
-import edu.fiuba.algo3.modelo.Carta.Especial.Despejado;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Nieve;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Puntaje;
