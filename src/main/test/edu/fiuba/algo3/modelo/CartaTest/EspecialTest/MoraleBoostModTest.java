@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MoraleBoostTest {
+public class MoraleBoostModTest {
     @Test
     public void test01SeAplicaMoraleBoostAUnaSeccion() {
         MoraleBoost moraleBoost = new MoraleBoost();

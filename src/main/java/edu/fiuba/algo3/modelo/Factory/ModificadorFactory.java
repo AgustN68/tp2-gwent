@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Factory;
 
-import edu.fiuba.algo3.modelo.Modificador.MoraleBoost;
+import edu.fiuba.algo3.modelo.Modificador.MoraleBoostMod;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Modificador.*;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
@@ -25,7 +25,7 @@ public class ModificadorFactory {
                 return new Unida();
 
             case "Morale Boost":
-                return new MoraleBoost();
+                return new MoraleBoostMod();
 
             case "Espia":
                 return new Espia(jugador);
