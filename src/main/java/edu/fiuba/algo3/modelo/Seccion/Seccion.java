@@ -40,6 +40,12 @@ public abstract class Seccion {
         }
     }
 
+    public void sumarPuntaje(int suma) {
+        for (Unidad unidad : cartasUnidades) {
+            unidad.sumarPuntaje(suma);
+        }
+    }
+
     public void restaurarPuntaje() {
         for (Unidad unidad : cartasUnidades) {
             unidad.restaurarPuntaje();

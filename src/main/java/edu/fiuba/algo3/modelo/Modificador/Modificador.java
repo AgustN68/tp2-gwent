@@ -31,4 +31,10 @@ public abstract class Modificador {
             puntaje.multiplicarValor(multiplicador);
         }
     }
+
+    public void aplicarSuma(Puntaje puntaje, int suma) {
+            if (esVulnerableAEspeciales()) {
+                puntaje.sumarValor(suma);
+            }
+        }
 }

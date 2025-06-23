@@ -42,6 +42,10 @@ public class Puntaje {
         valor = valorOriginal;
     }
 
+    public void sumarValor(int suma) {
+        valor = valor + suma;
+    }
+
     public void multiplicarValor(int multiplicador) {
         valor = valor * multiplicador;
     }

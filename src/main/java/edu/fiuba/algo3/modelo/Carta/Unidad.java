@@ -15,6 +15,8 @@ public class Unidad implements Carta {
     private final Modificador modificador;
     private List<Seccion> secciones;
 
+    private static final int POS_SECCION_PARTICULAR = 0;
+
     public Unidad(String nombre, Seccion seccion, int puntosIniciales, Modificador modificador) {
         this.nombre = nombre;
         this.secciones = new ArrayList<>();
@@ -25,7 +27,7 @@ public class Unidad implements Carta {
 
     @Override
     public void usar() {
-        this.ubicar(this.secciones.get(0));
+        this.ubicar(this.secciones.get(POS_SECCION_PARTICULAR));
         this.modificador.aplicarModificador();
     }
 
@@ -77,6 +79,13 @@ public class Unidad implements Carta {
         modificador.aplicarMultiplicacion(puntaje, multiplicador);
     }
 
+    public void sumaPuntaje(int suma) {
+        secciones.get(POS_SECCION_PARTICULAR).sumarPuntaje(suma);
+    }
+
+    public void sumarPuntaje(int suma) {
+        modificador.aplicarSuma(puntaje, suma);
+    }
     public void restaurarPuntaje() {
         puntaje.reiniciarValor();
     }
@@ -94,7 +103,8 @@ public class Unidad implements Carta {
     }
 
     public Puntaje actualizarPuntajeSegunCantMismoTipoEnSeccion(Puntaje puntaje) {
-        return secciones.get(0).actualizarPuntajeSegunCantidadEnSeccion(this, puntaje);
+        return secciones.get(POS_SECCION_PARTICULAR).actualizarPuntajeSegunCantidadEnSeccion(this, puntaje);
     }
+
 }
 
