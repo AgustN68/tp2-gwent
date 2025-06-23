@@ -55,7 +55,8 @@ public class EspiaTest {
 
         Mazo mazo = new Mazo(unidades, especiales);
 
-        Jugador jugador1 = new Jugador(tablero1, mazo, new PilaDeDescarte());
+        Jugador jugador1 = new Jugador(tablero1, new PilaDeDescarte());
+        jugador1.setMazo(mazo);
 
         int cartasEsperadas = 12;
 
@@ -106,7 +107,8 @@ public class EspiaTest {
 
         Mazo mazo = new Mazo(unidades, especiales);
 
-        Jugador jugador1 = new Jugador(tablero1, mazo, new PilaDeDescarte());
+        Jugador jugador1 = new Jugador(tablero1, new PilaDeDescarte());
+        jugador1.setMazo(mazo);
 
         int cartasEsperadas = 22;
         Espia espia = new Espia(jugador1);

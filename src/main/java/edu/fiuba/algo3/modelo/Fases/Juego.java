@@ -9,31 +9,40 @@ import java.util.List;
 
 public class Juego extends Fase{
 
-    Jugador primerJugador;
-    Jugador segundoJugador;
-    private static final int CANT_RONDAS = 3;
-    List<Ronda> rondas;
+    List<Ronda> rondas = new ArrayList<Ronda>();
+    private Boolean juegoTerminado;
+    Jugador ganador;
+    protected static final int CANT_RONDAS_NECESARIAS = 2;
 
-    public Juego(Gwent juego, Jugador primerJugador, Jugador segundoJugador) {
+    public Juego(Gwent juego) {
         super(juego);
-        this.primerJugador = primerJugador;
-        this.segundoJugador = segundoJugador;
-        seleccionarRondas();
-    }
-
-    private void seleccionarRondas() {
-        rondas = new ArrayList<Ronda>();
-        for (int i = 0; i < CANT_RONDAS; i++) {
-            rondas.add(new Ronda());
-        }
+        this.juegoTerminado = false;
     }
 
     @Override
     public void iniciarFase() {
-        for (Ronda ronda : rondas) {
-            ronda.jugarRonda();
+        while (!juegoTerminado) {
+            Ronda rondaActual = new Ronda(jugadores);
+            rondas.add(rondaActual);
+            rondaActual.jugarRonda();
+            juegoTerminado = comprobarGanador();
         }
-
-        juego.cambiarFase(new Final(juego));
+        siguienteFase();
     }
+
+    private void siguienteFase() {
+        juego.cambiarFase(new Final(juego, ganador));
+    }
+
+    private Boolean comprobarGanador() {
+        for (Jugador jugador : jugadores) {
+            if (jugador.rondasGanadas() >= CANT_RONDAS_NECESARIAS) {
+                ganador = jugador;
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

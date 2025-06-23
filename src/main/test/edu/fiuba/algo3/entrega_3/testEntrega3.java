@@ -64,9 +64,11 @@ public class testEntrega3 {
         Mazo mazo1 = new Mazo(unidades, especiales);
         Mazo mazo2 = new Mazo(unidades2, especiales2);
 
-        Jugador jugador1 = new Jugador(tableroJ1, mazo1, new PilaDeDescarte());
-        Jugador jugador2 = new Jugador(tableroJ2, mazo2, new PilaDeDescarte());
+        Jugador jugador1 = new Jugador(tableroJ1, new PilaDeDescarte());
+        Jugador jugador2 = new Jugador(tableroJ2, new PilaDeDescarte());
 
+        jugador1.setMazo(mazo1);
+        jugador2.setMazo(mazo2);
 
 
         // Act & Assert

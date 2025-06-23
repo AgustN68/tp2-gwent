@@ -50,7 +50,8 @@ public class MedicoTest {
         PilaDeDescarte pila = new PilaDeDescarte();
         pila.descartarUna(new Unidad("Nombre", cuerpoACuerpo, 5, new SinModificador()));
 
-        Jugador jugador1 = new Jugador(tablero1, mazo, pila);
+        Jugador jugador1 = new Jugador(tablero1, pila);
+        jugador1.setMazo(mazo);
 
         Medico medico = new Medico(jugador1);
         Unidad unidadMedico = new Unidad("Nombre", cuerpoACuerpo, 8, medico);

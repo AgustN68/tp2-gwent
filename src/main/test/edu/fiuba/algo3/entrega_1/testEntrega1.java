@@ -56,7 +56,7 @@ public class testEntrega1 {
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
-        Jugador jugador = new Jugador(tablero, mazo, new PilaDeDescarte());
+        Jugador jugador = new Jugador(tablero, new PilaDeDescarte());
 
         //jugador.validarCartasSuficientesMazo(15, 6);
     }
@@ -158,7 +158,8 @@ public class testEntrega1 {
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
-        Jugador jugador = new Jugador(tablero, mazo, new PilaDeDescarte());
+        Jugador jugador = new Jugador(tablero, new PilaDeDescarte());
+        jugador.setMazo(mazo);
         jugador.tomarCartasMazo(10);
 
         jugador.validarCartasSuficientesMano(10);
@@ -193,7 +194,8 @@ public class testEntrega1 {
         }
 
         Mazo mazo = new Mazo(unidades, especiales);
-        Jugador jugador = new Jugador(tablero, mazo, new PilaDeDescarte());
+        Jugador jugador = new Jugador(tablero, new PilaDeDescarte());
+        jugador.setMazo(mazo);
         jugador.tomarCartasMazo(9);
 
         assertThrows(
@@ -221,7 +223,8 @@ public class testEntrega1 {
 
         when(mockedMazo.obtenerCarta()).thenReturn(unidad);
 
-        Jugador jugador = new Jugador(tablero, mockedMazo, new PilaDeDescarte());
+        Jugador jugador = new Jugador(tablero, new PilaDeDescarte());
+        jugador.setMazo(mockedMazo);
         jugador.tomarCartasMazo(1);
         Carta cartaSeleccionada = jugador.seleccionarCarta(0);
         cartaSeleccionada.usar();
@@ -247,7 +250,8 @@ public class testEntrega1 {
 
         when(mockedMazo.obtenerCarta()).thenReturn(unidad);
 
-        Jugador jugador = new Jugador(tablero, mockedMazo, new PilaDeDescarte());
+        Jugador jugador = new Jugador(tablero, new PilaDeDescarte());
+        jugador.setMazo(mockedMazo);
         jugador.tomarCartasMazo(1);
         Carta cartaSeleccionada = jugador.seleccionarCarta(0);
         cartaSeleccionada.usar();

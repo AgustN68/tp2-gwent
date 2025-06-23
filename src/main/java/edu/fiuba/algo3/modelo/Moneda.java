@@ -11,16 +11,14 @@ public class Moneda {
     public Moneda() {
         this.random = new Random();
     }
-    public List<Jugador> elegirOrdenJugadores(Jugador jugador1, Jugador jugador2) {
-        List<Jugador> jugadores = new ArrayList<Jugador>();
+    public List<Jugador> elegirOrdenJugadores(List<Jugador> jugadores) {
         if (random.nextBoolean()) {
-            jugadores.add(jugador1);
-            jugadores.add(jugador2);
             return jugadores;
         }
         else {
-            jugadores.add(jugador2);
-            jugadores.add(jugador1);
+            Jugador primero = jugadores.get(0);
+            jugadores.set(0, jugadores.get(1));
+            jugadores.set(1, primero);
             return jugadores;
         }
     }

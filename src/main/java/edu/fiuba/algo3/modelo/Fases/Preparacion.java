@@ -15,20 +15,23 @@ public class Preparacion extends Fase {
         super(juego);
     }
 
+
     @Override
     public void iniciarFase() {
-        prepararJugador(jugador1);
-        prepararJugador(jugador2);
+        prepararJugadores(jugadores);
 
-        List<Jugador> jugadores = moneda.elegirOrdenJugadores(jugador1,jugador2);
+        List<Jugador> jugadores = moneda.elegirOrdenJugadores(this.jugadores);
 
-        juego.cambiarFase(new Juego(juego, jugadores.get(0), jugadores.get(1)));
+        juego.cambiarFase(new Juego(juego));
 
     }
 
-    private void prepararJugador(Jugador jugador) {
-        jugador.tomarCartasMazo(CANT_CARTAS_MANO);
-        descarcarCartas(jugador);
+    private void prepararJugadores(List<Jugador> jugadores) {
+        for (Jugador jugador : jugadores) {
+            jugador.tomarCartasMazo(CANT_CARTAS_MANO);
+            descarcarCartas(jugador);
+        }
+
     }
 
     private void descarcarCartas(Jugador jugador) {

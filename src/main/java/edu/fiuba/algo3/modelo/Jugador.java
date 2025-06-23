@@ -12,12 +12,13 @@ public class Jugador {
     private Mano mano;
     private PilaDeDescarte pilaDeDescarte;
     private String nombre;
+    private int rondasGanadas;
 
-    public Jugador(Tablero tablero, Mazo mazo, PilaDeDescarte pilaDeDescarte) {
+    public Jugador(Tablero tablero, PilaDeDescarte pilaDeDescarte) {
         this.tablero = tablero;
-        this.mazo = mazo;
         this.mano = new Mano(new ArrayList<>());
         this.pilaDeDescarte = pilaDeDescarte;
+        rondasGanadas = 0;
     }
 
     public void validarCartasSuficientesMano(int cantidadCartas) {
@@ -73,6 +74,13 @@ public class Jugador {
         return tablero;
     }
 
+    public void aumentarRondasGanadas() {
+        rondasGanadas++;
+    }
+
+    public int rondasGanadas() {
+        return rondasGanadas;
+    }
 }
 
 
