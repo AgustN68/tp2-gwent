@@ -80,7 +80,8 @@ public class PreparacionView extends BorderPane {
             final int posicion = i;
 
             CartaView cartaView = new CartaView(carta);
-            cartaView.setStyle("-fx-border-color: gray; -fx-border-width: 2;");
+            cartaView.establecerEstilo("-fx-border-color: gray; -fx-border-width: 2;");
+
 
             cartaView.setOnMouseClicked(e -> seleccionarCarta(posicion, cartaView));
             vistasCartas.add(cartaView);
@@ -100,11 +101,11 @@ public class PreparacionView extends BorderPane {
         if (cartasSeleccionadas.contains(posicion)) {
             // Deseleccionar carta
             cartasSeleccionadas.remove(Integer.valueOf(posicion));
-            cartaView.setStyle("-fx-border-color: gray; -fx-border-width: 2;");
+            cartaView.establecerEstilo("-fx-border-color: gray; -fx-border-width: 2;");
         } else if (cartasSeleccionadas.size() < 2) {
             // Seleccionar carta
             cartasSeleccionadas.add(posicion);
-            cartaView.setStyle("-fx-border-color: gold; -fx-border-width: 3;");
+            cartaView.establecerEstilo("-fx-border-color: gold; -fx-border-width: 3;");
         }
     }
 

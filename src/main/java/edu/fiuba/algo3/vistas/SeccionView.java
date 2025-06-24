@@ -6,17 +6,17 @@ import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.awt.*;
 import java.util.List;
 
 /**
  * Componente visual para representar una sección del tablero
  */
-public class SeccionView extends VBox {
+public class SeccionView extends HBox {
 
     private Seccion seccion;
     private String nombreSeccion;
@@ -27,9 +27,9 @@ public class SeccionView extends VBox {
         this.nombreSeccion = nombreSeccion;
         this.nombreJugador = nombreJugador;
 
-        setPadding(new Insets(10));
-        setSpacing(10);
-        setAlignment(Pos.CENTER);
+        setPadding(new Insets(1));
+        setSpacing(1);
+        setAlignment(Pos.CENTER_LEFT);
 
         actualizarVista();
     }
@@ -38,18 +38,20 @@ public class SeccionView extends VBox {
         getChildren().clear();
 
         // Etiqueta con nombre de la sección
-        Label nombreLabel = new Label(nombreSeccion + " - " + nombreJugador);
-        nombreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Label nombreSeccionLabel = new Label(nombreSeccion);
+        nombreSeccionLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        nombreSeccionLabel.setWrapText(true);
+        nombreSeccionLabel.setMaxWidth(80);
 
         // Contenedor para las cartas
-        FlowPane cartasPane = new FlowPane();
-        cartasPane.setHgap(10);
-        cartasPane.setVgap(10);
+        HBox cartasPane = new HBox(1);
         cartasPane.setAlignment(Pos.CENTER);
-        cartasPane.setPadding(new Insets(5));
+        cartasPane.setPadding(new Insets(1));
         cartasPane.setStyle("-fx-border-color: gray; -fx-border-width: 1px; -fx-padding: 10px;");
-        cartasPane.setMinHeight(150);
-        cartasPane.setPrefWidth(800);
+        cartasPane.setMinHeight(75);
+
+        HBox.setHgrow(cartasPane, Priority.ALWAYS);
+
 
         // Agregar las cartas a la sección
         List<Unidad> cartas = seccion.getCartasUnidades();
@@ -63,8 +65,12 @@ public class SeccionView extends VBox {
         Label puntajeLabel = new Label("Puntos: " + puntajeSeccion);
         puntajeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 
+        VBox informacionPane = new VBox(10);
+        informacionPane.setAlignment(Pos.CENTER);
+        informacionPane.setPrefWidth(80);
+        informacionPane.getChildren().addAll(puntajeLabel, nombreSeccionLabel);
         // Añadir componentes al contenedor principal
-        getChildren().addAll(nombreLabel, cartasPane, puntajeLabel);
+        getChildren().addAll(informacionPane, cartasPane);
     }
 
     public Seccion getSeccion() {

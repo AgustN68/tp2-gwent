@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -42,20 +43,10 @@ public class TableroView extends BorderPane {
         Label tituloLabel = new Label("GWENT - RONDA " + controller.getRondaActual());
         tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
 
-        Label puntajeJ1Label = new Label(controller.getJugador1().getNombre() + ": " +
-                controller.getJugador1().obtenerPuntaje().obtenerValor() + " puntos | " +
-                controller.getJugador1().rondasGanadas() + " rondas ganadas");
-        puntajeJ1Label.setFont(Font.font("Arial", 16));
-
-        Label puntajeJ2Label = new Label(controller.getJugador2().getNombre() + ": " +
-                controller.getJugador2().obtenerPuntaje().obtenerValor() + " puntos | " +
-                controller.getJugador2().rondasGanadas() + " rondas ganadas");
-        puntajeJ2Label.setFont(Font.font("Arial", 16));
-
         Label turnoLabel = new Label("Turno de: " + controller.getJugadorActual().getNombre());
         turnoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
 
-        VBox cabeceraBox = new VBox(10, tituloLabel, puntajeJ1Label, puntajeJ2Label, turnoLabel);
+        VBox cabeceraBox = new VBox(10, tituloLabel, turnoLabel);
         cabeceraBox.setAlignment(Pos.CENTER);
         cabeceraBox.setPadding(new Insets(5));
         setTop(cabeceraBox);
@@ -63,27 +54,12 @@ public class TableroView extends BorderPane {
 
     private void configurarTablero() {
         // Contenedor principal para el tablero
-        VBox tableroBox = new VBox(10);
+        VBox tableroBox = new VBox(5);
         tableroBox.setAlignment(Pos.CENTER);
-        tableroBox.setPadding(new Insets(5));
+        tableroBox.setPadding(new Insets(0));
 
         Jugador jugador1 = controller.getJugador1();
         Jugador jugador2 = controller.getJugador2();
-
-        // Mostrar la mano del jugador 2 (rival)
-        Label manoJ2Label = new Label("MANO JUGADOR " + jugador2.getNombre());
-        manoJ2Label.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-
-        HBox manoJ2Box = new HBox(10);
-        manoJ2Box.setAlignment(Pos.CENTER);
-        manoJ2Box.setStyle("-fx-border-color: gray; -fx-border-width: 1px; -fx-padding: 10px;");
-        manoJ2Box.setMinHeight(60);
-        manoJ2Box.setPrefWidth(800);
-
-        // Solo mostrar el número de cartas del rival, no las cartas específicas
-        Label cartasJ2Label = new Label("Cartas en mano: " + jugador2.verMano().size());
-        cartasJ2Label.setFont(Font.font("Arial", 14));
-        manoJ2Box.getChildren().add(cartasJ2Label);
 
         // Crear las vistas para cada sección del tablero
         List<Seccion> seccionesJ1 = jugador1.getTablero().getSecciones();
@@ -93,27 +69,19 @@ public class TableroView extends BorderPane {
         if (seccionesJ1.size() >= 3 && seccionesJ2.size() >= 3) {
             // Añadir las secciones al tablero en el orden requerido
             tableroBox.getChildren().addAll(
-                    manoJ2Label,
-                    manoJ2Box,
-                    new Label("SECCION ASEDIO JUGADOR " + jugador2.getNombre()),
                     new SeccionView(seccionesJ2.get(2), "ASEDIO", jugador2.getNombre()),
-                    new Label("SECCION DISTANCIA JUGADOR " + jugador2.getNombre()),
                     new SeccionView(seccionesJ2.get(1), "DISTANCIA", jugador2.getNombre()),
-                    new Label("SECCION CUERPO A CUERPO JUGADOR " + jugador2.getNombre()),
                     new SeccionView(seccionesJ2.get(0), "CUERPO A CUERPO", jugador2.getNombre()),
-                    new Label("SECCION CUERPO A CUERPO JUGADOR " + jugador1.getNombre()),
                     new SeccionView(seccionesJ1.get(0), "CUERPO A CUERPO", jugador1.getNombre()),
-                    new Label("SECCION DISTANCIA JUGADOR " + jugador1.getNombre()),
                     new SeccionView(seccionesJ1.get(1), "DISTANCIA", jugador1.getNombre()),
-                    new Label("SECCION ASEDIO JUGADOR " + jugador1.getNombre()),
                     new SeccionView(seccionesJ1.get(2), "ASEDIO", jugador1.getNombre())
             );
         }
 
-        // Crear un ScrollPane para poder ver todo el contenido
+        // Crear un ScrollPane para poder ver el contenido que no entre
         ScrollPane scrollPane = new ScrollPane(tableroBox);
         scrollPane.setFitToWidth(true);
-        scrollPane.setPrefViewportHeight(500); // Altura ajustable según necesidad
+        //scrollPane.setPrefViewportHeight(500); // Altura ajustable según necesidad
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
@@ -121,18 +89,56 @@ public class TableroView extends BorderPane {
     }
 
     private void configurarManoYAcciones() {
-        VBox contenedorInferior = new VBox(10);
-        contenedorInferior.setAlignment(Pos.CENTER);
+        HBox contenedorInferior = new HBox(5);
+        contenedorInferior.setAlignment(Pos.CENTER_LEFT);
         contenedorInferior.setPadding(new Insets(5));
 
-        // Título para la mano del jugador
-        Label manoTituloLabel = new Label("TU MANO");
-        manoTituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        // Informacion
+        HBox informacionBox = new HBox(5);
+        informacionBox.setAlignment(Pos.CENTER);
+
+        // para j1
+        VBox informacionJ1Box = new VBox(5);
+
+        Label nombreJ1Label = new Label(controller.getJugador1().getNombre());
+        nombreJ1Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+
+        Label cartasRestantesJ1Label = new Label("Cartas: " + controller.getJugador1().verMano().size());
+        cartasRestantesJ1Label.setFont(Font.font("Arial", 16));
+
+        Label puntajeJ1Label = new Label("Puntaje: " + controller.getJugador1().obtenerPuntaje().obtenerValor());
+        puntajeJ1Label.setFont(Font.font("Arial", 16));
+
+        Label rondasGanadasJ1Label = new Label("Rondas ganadas: " + controller.getJugador1().rondasGanadas());
+        rondasGanadasJ1Label.setFont(Font.font("Arial", 16));
+
+        informacionJ1Box.getChildren().addAll(nombreJ1Label, cartasRestantesJ1Label, puntajeJ1Label, rondasGanadasJ1Label);
+
+        // para j2
+        VBox informacionJ2Box = new VBox(5);
+
+        Label nombreJ2Label = new Label(controller.getJugador2().getNombre());
+        nombreJ2Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+
+        Label cartasRestantesJ2Label = new Label("Cartas: " + controller.getJugador2().verMano().size());
+        cartasRestantesJ2Label.setFont(Font.font("Arial", 16));
+
+        Label puntajeJ2Label = new Label("Puntaje: " + controller.getJugador2().obtenerPuntaje().obtenerValor());
+        puntajeJ2Label.setFont(Font.font("Arial", 16));
+
+        Label rondasGanadasJ2Label = new Label("Rondas ganadas: " + controller.getJugador2().rondasGanadas());
+        rondasGanadasJ2Label.setFont(Font.font("Arial", 16));
+
+        informacionJ2Box.getChildren().addAll(nombreJ2Label, cartasRestantesJ2Label, puntajeJ2Label, rondasGanadasJ2Label);
+
+
+        informacionBox.getChildren().addAll(informacionJ1Box, informacionJ2Box);
 
         // Mostrar las cartas en la mano del jugador actual
         HBox manoBox = new HBox(10);
         manoBox.setAlignment(Pos.CENTER);
         manoBox.setPadding(new Insets(5));
+        HBox.setHgrow(manoBox, Priority.ALWAYS);
 
         List<Carta> cartasEnMano = controller.getJugadorActual().verMano();
         for (int i = 0; i < cartasEnMano.size(); i++) {
@@ -157,15 +163,7 @@ public class TableroView extends BorderPane {
             actualizarVista();
         });
 
-        HBox accionesBox = new HBox(20, pasarButton);
-        accionesBox.setAlignment(Pos.CENTER);
-        accionesBox.setPadding(new Insets(5));
-
-        contenedorInferior.getChildren().addAll(
-                manoTituloLabel,
-                manoBox,
-                accionesBox
-        );
+        contenedorInferior.getChildren().addAll(informacionBox, manoBox, pasarButton);
 
         setBottom(contenedorInferior);
     }
