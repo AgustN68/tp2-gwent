@@ -21,6 +21,8 @@ public class TableroView extends BorderPane {
 
     private GwentController controller;
     private GwentApp app;
+    private Integer cartaSeleccionada = null;
+    private CartaView cartaSeleccionadaView = null;
 
     public TableroView(GwentController controller, GwentApp app) {
         this.controller = controller;
@@ -69,6 +71,7 @@ public class TableroView extends BorderPane {
 
         Jugador jugador1 = controller.getJugador1();
         Jugador jugador2 = controller.getJugador2();
+        Jugador jugadorActual = controller.getJugadorActual();
 
         // Mostrar la mano del jugador 2 (rival)
         Label manoJ2Label = new Label("MANO JUGADOR " + jugador2.getNombre());
@@ -91,22 +94,45 @@ public class TableroView extends BorderPane {
 
         // Asegurarnos de que tenemos todas las secciones necesarias y las añadimos en el orden correcto
         if (seccionesJ1.size() >= 3 && seccionesJ2.size() >= 3) {
+            // Crear las vistas de las secciones, permitiendo hacer clic en ellas si hay una carta seleccionada
+            SeccionView asedioJ2View = new SeccionView(seccionesJ2.get(2), "ASEDIO", jugador2.getNombre());
+            SeccionView distanciaJ2View = new SeccionView(seccionesJ2.get(1), "DISTANCIA", jugador2.getNombre());
+            SeccionView cuerpoACuerpoJ2View = new SeccionView(seccionesJ2.get(0), "CUERPO A CUERPO", jugador2.getNombre());
+
+            SeccionView cuerpoACuerpoJ1View = new SeccionView(seccionesJ1.get(0), "CUERPO A CUERPO", jugador1.getNombre());
+            SeccionView distanciaJ1View = new SeccionView(seccionesJ1.get(1), "DISTANCIA", jugador1.getNombre());
+            SeccionView asedioJ1View = new SeccionView(seccionesJ1.get(2), "ASEDIO", jugador1.getNombre());
+
+            // Si hay una carta seleccionada y es el turno del jugador 1, permitir colocar en sus secciones
+            if (cartaSeleccionada != null && jugadorActual == jugador1) {
+                configurarEventosSeccion(cuerpoACuerpoJ1View, seccionesJ1.get(0));
+                configurarEventosSeccion(distanciaJ1View, seccionesJ1.get(1));
+                configurarEventosSeccion(asedioJ1View, seccionesJ1.get(2));
+            }
+
+            // Si hay una carta seleccionada y es el turno del jugador 2, permitir colocar en sus secciones
+            if (cartaSeleccionada != null && jugadorActual == jugador2) {
+                configurarEventosSeccion(cuerpoACuerpoJ2View, seccionesJ2.get(0));
+                configurarEventosSeccion(distanciaJ2View, seccionesJ2.get(1));
+                configurarEventosSeccion(asedioJ2View, seccionesJ2.get(2));
+            }
+
             // Añadir las secciones al tablero en el orden requerido
             tableroBox.getChildren().addAll(
                     manoJ2Label,
                     manoJ2Box,
                     new Label("SECCION ASEDIO JUGADOR " + jugador2.getNombre()),
-                    new SeccionView(seccionesJ2.get(2), "ASEDIO", jugador2.getNombre()),
+                    asedioJ2View,
                     new Label("SECCION DISTANCIA JUGADOR " + jugador2.getNombre()),
-                    new SeccionView(seccionesJ2.get(1), "DISTANCIA", jugador2.getNombre()),
+                    distanciaJ2View,
                     new Label("SECCION CUERPO A CUERPO JUGADOR " + jugador2.getNombre()),
-                    new SeccionView(seccionesJ2.get(0), "CUERPO A CUERPO", jugador2.getNombre()),
+                    cuerpoACuerpoJ2View,
                     new Label("SECCION CUERPO A CUERPO JUGADOR " + jugador1.getNombre()),
-                    new SeccionView(seccionesJ1.get(0), "CUERPO A CUERPO", jugador1.getNombre()),
+                    cuerpoACuerpoJ1View,
                     new Label("SECCION DISTANCIA JUGADOR " + jugador1.getNombre()),
-                    new SeccionView(seccionesJ1.get(1), "DISTANCIA", jugador1.getNombre()),
+                    distanciaJ1View,
                     new Label("SECCION ASEDIO JUGADOR " + jugador1.getNombre()),
-                    new SeccionView(seccionesJ1.get(2), "ASEDIO", jugador1.getNombre())
+                    asedioJ1View
             );
         }
 
@@ -120,6 +146,31 @@ public class TableroView extends BorderPane {
         setCenter(scrollPane);
     }
 
+    private void configurarEventosSeccion(SeccionView seccionView, Seccion seccion) {
+        // Destacar visualmente que esta sección es seleccionable
+        seccionView.setStyle("-fx-border-color: lightblue; -fx-border-width: 2px; -fx-background-color: rgba(173, 216, 230, 0.2);");
+
+        seccionView.setOnMouseClicked(e -> {
+            if (cartaSeleccionada != null) {
+                try {
+                    // Intenta jugar la carta en esta sección
+                    controller.jugarCartaEnSeccion(cartaSeleccionada, seccion);
+
+                    // Resetear la selección
+                    cartaSeleccionada = null;
+                    cartaSeleccionadaView = null;
+
+                    // Actualizar toda la vista
+                    actualizarVista();
+                } catch (Exception ex) {
+                    // Si hay un error (por ejemplo, la carta no puede jugarse en esta sección),
+                    // mostrar un mensaje de error (podría mejorarse con un diálogo)
+                    System.out.println("Error al jugar carta: " + ex.getMessage());
+                }
+            }
+        });
+    }
+
     private void configurarManoYAcciones() {
         VBox contenedorInferior = new VBox(10);
         contenedorInferior.setAlignment(Pos.CENTER);
@@ -128,6 +179,12 @@ public class TableroView extends BorderPane {
         // Título para la mano del jugador
         Label manoTituloLabel = new Label("TU MANO");
         manoTituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+
+        // Mensaje de instrucción
+        Label instruccionLabel = new Label(cartaSeleccionada == null ?
+                "Selecciona una carta para jugar" :
+                "Carta seleccionada. Ahora elige una sección donde colocarla");
+        instruccionLabel.setFont(Font.font("Arial", 14));
 
         // Mostrar las cartas en la mano del jugador actual
         HBox manoBox = new HBox(10);
@@ -140,9 +197,36 @@ public class TableroView extends BorderPane {
             final int posicion = i;
 
             CartaView cartaView = new CartaView(carta);
+
+            // Si esta carta ya está seleccionada, resaltarla
+            if (cartaSeleccionada != null && cartaSeleccionada == posicion) {
+                cartaView.setStyle("-fx-border-color: gold; -fx-border-width: 3;");
+                cartaSeleccionadaView = cartaView;
+            }
+
             cartaView.setOnMouseClicked(e -> {
-                controller.jugarCarta(posicion);
-                actualizarVista();
+                // Si ya hay una carta seleccionada, deseleccionarla
+                if (cartaSeleccionadaView != null) {
+                    cartaSeleccionadaView.setStyle("-fx-border-color: black; -fx-border-width: 1;");
+                }
+
+                // Si seleccionamos la misma carta, la deseleccionamos
+                if (cartaSeleccionada != null && cartaSeleccionada == posicion) {
+                    cartaSeleccionada = null;
+                    cartaSeleccionadaView = null;
+                } else {
+                    // Seleccionar la nueva carta
+                    cartaSeleccionada = posicion;
+                    cartaSeleccionadaView = cartaView;
+                    cartaView.setStyle("-fx-border-color: gold; -fx-border-width: 3;");
+                }
+
+                // Actualizar solo la parte inferior para reflejar la selección
+                setBottom(null);
+                configurarManoYAcciones();
+                // Actualizar también el tablero para mostrar las secciones seleccionables
+                setCenter(null);
+                configurarTablero();
             });
 
             manoBox.getChildren().add(cartaView);
@@ -153,16 +237,35 @@ public class TableroView extends BorderPane {
         pasarButton.setFont(Font.font("Arial", 16));
         pasarButton.setPrefSize(150, 50);
         pasarButton.setOnAction(e -> {
+            // Limpiar selección antes de pasar
+            cartaSeleccionada = null;
+            cartaSeleccionadaView = null;
             controller.pasarTurno();
             actualizarVista();
         });
 
-        HBox accionesBox = new HBox(20, pasarButton);
+        Button cancelarButton = new Button("Cancelar selección");
+        cancelarButton.setFont(Font.font("Arial", 16));
+        cancelarButton.setPrefSize(200, 50);
+        cancelarButton.setDisable(cartaSeleccionada == null);
+        cancelarButton.setOnAction(e -> {
+            cartaSeleccionada = null;
+            cartaSeleccionadaView = null;
+            // Actualizar solo la parte inferior
+            setBottom(null);
+            configurarManoYAcciones();
+            // Actualizar también el tablero para quitar las secciones seleccionables
+            setCenter(null);
+            configurarTablero();
+        });
+
+        HBox accionesBox = new HBox(20, pasarButton, cancelarButton);
         accionesBox.setAlignment(Pos.CENTER);
         accionesBox.setPadding(new Insets(5));
 
         contenedorInferior.getChildren().addAll(
                 manoTituloLabel,
+                instruccionLabel,
                 manoBox,
                 accionesBox
         );
@@ -170,13 +273,11 @@ public class TableroView extends BorderPane {
         setBottom(contenedorInferior);
     }
 
-    // Método para actualizar la vista cuando cambie el estado del juego
-    public void actualizarVista() {
-        // Eliminar todos los nodos actuales
-        getChildren().clear();
-
-        // Volver a configurar la vista
+    private void actualizarVista() {
+        // Actualizar la cabecera
         configurarCabecera();
+
+        // Volver a configurar el tablero y la mano/acciones
         configurarTablero();
         configurarManoYAcciones();
     }
