@@ -27,4 +27,8 @@ public class Gwent {
     public void setJugadores(List<Jugador> jugadores) {
         this.jugadores = jugadores;
     }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
 }

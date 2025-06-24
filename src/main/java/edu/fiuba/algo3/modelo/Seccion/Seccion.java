@@ -75,6 +75,10 @@ public abstract class Seccion {
         return puntaje.multiplicarPuntaje(new Puntaje(cantidad));
     }
 
+    public List<Unidad> getCartasUnidades() {
+        return cartasUnidades;
+    }
+
     /*public void recibirClima(Clima clima){
         clima.afectar(this);
     }*/

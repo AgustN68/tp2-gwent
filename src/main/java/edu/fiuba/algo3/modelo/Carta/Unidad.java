@@ -106,5 +106,12 @@ public class Unidad implements Carta {
         return secciones.get(POS_SECCION_PARTICULAR).actualizarPuntajeSegunCantidadEnSeccion(this, puntaje);
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Puntaje getPuntaje() {
+        return puntaje;
+    }
 }
 

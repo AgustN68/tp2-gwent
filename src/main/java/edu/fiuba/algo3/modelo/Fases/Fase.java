@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Fase {
-    protected List<Jugador> jugadores;
+    protected List<Jugador> jugadores = new ArrayList<>();
     protected Gwent juego;
 
     public Fase(Gwent juego) {
@@ -16,4 +16,11 @@ public abstract class Fase {
 
     public abstract void iniciarFase();
 
+    /**
+     * Establece la lista de jugadores para esta fase
+     * @param jugadores Lista de jugadores a establecer
+     */
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
 }

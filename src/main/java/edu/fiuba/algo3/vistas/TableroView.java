@@ -1,0 +1,183 @@
+package edu.fiuba.algo3.vistas;
+
+import edu.fiuba.algo3.controllers.GwentController;
+import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
+import java.util.List;
+
+public class TableroView extends BorderPane {
+
+    private GwentController controller;
+    private GwentApp app;
+
+    public TableroView(GwentController controller, GwentApp app) {
+        this.controller = controller;
+        this.app = app;
+
+        setPadding(new Insets(10));
+
+        // Cabecera - información del juego
+        configurarCabecera();
+
+        // Centro - tablero de juego
+        configurarTablero();
+
+        // Parte inferior - mano del jugador actual y botones de acción
+        configurarManoYAcciones();
+    }
+
+    private void configurarCabecera() {
+        Label tituloLabel = new Label("GWENT - RONDA " + controller.getRondaActual());
+        tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+
+        Label puntajeJ1Label = new Label(controller.getJugador1().getNombre() + ": " +
+                controller.getJugador1().obtenerPuntaje().obtenerValor() + " puntos | " +
+                controller.getJugador1().rondasGanadas() + " rondas ganadas");
+        puntajeJ1Label.setFont(Font.font("Arial", 16));
+
+        Label puntajeJ2Label = new Label(controller.getJugador2().getNombre() + ": " +
+                controller.getJugador2().obtenerPuntaje().obtenerValor() + " puntos | " +
+                controller.getJugador2().rondasGanadas() + " rondas ganadas");
+        puntajeJ2Label.setFont(Font.font("Arial", 16));
+
+        Label turnoLabel = new Label("Turno de: " + controller.getJugadorActual().getNombre());
+        turnoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+
+        VBox cabeceraBox = new VBox(10, tituloLabel, puntajeJ1Label, puntajeJ2Label, turnoLabel);
+        cabeceraBox.setAlignment(Pos.CENTER);
+        cabeceraBox.setPadding(new Insets(5));
+        setTop(cabeceraBox);
+    }
+
+    private void configurarTablero() {
+        // Contenedor principal para el tablero
+        VBox tableroBox = new VBox(10);
+        tableroBox.setAlignment(Pos.CENTER);
+        tableroBox.setPadding(new Insets(5));
+
+        Jugador jugador1 = controller.getJugador1();
+        Jugador jugador2 = controller.getJugador2();
+
+        // Mostrar la mano del jugador 2 (rival)
+        Label manoJ2Label = new Label("MANO JUGADOR " + jugador2.getNombre());
+        manoJ2Label.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+
+        HBox manoJ2Box = new HBox(10);
+        manoJ2Box.setAlignment(Pos.CENTER);
+        manoJ2Box.setStyle("-fx-border-color: gray; -fx-border-width: 1px; -fx-padding: 10px;");
+        manoJ2Box.setMinHeight(60);
+        manoJ2Box.setPrefWidth(800);
+
+        // Solo mostrar el número de cartas del rival, no las cartas específicas
+        Label cartasJ2Label = new Label("Cartas en mano: " + jugador2.verMano().size());
+        cartasJ2Label.setFont(Font.font("Arial", 14));
+        manoJ2Box.getChildren().add(cartasJ2Label);
+
+        // Crear las vistas para cada sección del tablero
+        List<Seccion> seccionesJ1 = jugador1.getTablero().getSecciones();
+        List<Seccion> seccionesJ2 = jugador2.getTablero().getSecciones();
+
+        // Asegurarnos de que tenemos todas las secciones necesarias y las añadimos en el orden correcto
+        if (seccionesJ1.size() >= 3 && seccionesJ2.size() >= 3) {
+            // Añadir las secciones al tablero en el orden requerido
+            tableroBox.getChildren().addAll(
+                    manoJ2Label,
+                    manoJ2Box,
+                    new Label("SECCION ASEDIO JUGADOR " + jugador2.getNombre()),
+                    new SeccionView(seccionesJ2.get(2), "ASEDIO", jugador2.getNombre()),
+                    new Label("SECCION DISTANCIA JUGADOR " + jugador2.getNombre()),
+                    new SeccionView(seccionesJ2.get(1), "DISTANCIA", jugador2.getNombre()),
+                    new Label("SECCION CUERPO A CUERPO JUGADOR " + jugador2.getNombre()),
+                    new SeccionView(seccionesJ2.get(0), "CUERPO A CUERPO", jugador2.getNombre()),
+                    new Label("SECCION CUERPO A CUERPO JUGADOR " + jugador1.getNombre()),
+                    new SeccionView(seccionesJ1.get(0), "CUERPO A CUERPO", jugador1.getNombre()),
+                    new Label("SECCION DISTANCIA JUGADOR " + jugador1.getNombre()),
+                    new SeccionView(seccionesJ1.get(1), "DISTANCIA", jugador1.getNombre()),
+                    new Label("SECCION ASEDIO JUGADOR " + jugador1.getNombre()),
+                    new SeccionView(seccionesJ1.get(2), "ASEDIO", jugador1.getNombre())
+            );
+        }
+
+        // Crear un ScrollPane para poder ver todo el contenido
+        ScrollPane scrollPane = new ScrollPane(tableroBox);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPrefViewportHeight(500); // Altura ajustable según necesidad
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+        setCenter(scrollPane);
+    }
+
+    private void configurarManoYAcciones() {
+        VBox contenedorInferior = new VBox(10);
+        contenedorInferior.setAlignment(Pos.CENTER);
+        contenedorInferior.setPadding(new Insets(5));
+
+        // Título para la mano del jugador
+        Label manoTituloLabel = new Label("TU MANO");
+        manoTituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+
+        // Mostrar las cartas en la mano del jugador actual
+        HBox manoBox = new HBox(10);
+        manoBox.setAlignment(Pos.CENTER);
+        manoBox.setPadding(new Insets(5));
+
+        List<Carta> cartasEnMano = controller.getJugadorActual().verMano();
+        for (int i = 0; i < cartasEnMano.size(); i++) {
+            Carta carta = cartasEnMano.get(i);
+            final int posicion = i;
+
+            CartaView cartaView = new CartaView(carta);
+            cartaView.setOnMouseClicked(e -> {
+                controller.jugarCarta(posicion);
+                actualizarVista();
+            });
+
+            manoBox.getChildren().add(cartaView);
+        }
+
+        // Botones de acción
+        Button pasarButton = new Button("Pasar");
+        pasarButton.setFont(Font.font("Arial", 16));
+        pasarButton.setPrefSize(150, 50);
+        pasarButton.setOnAction(e -> {
+            controller.pasarTurno();
+            actualizarVista();
+        });
+
+        HBox accionesBox = new HBox(20, pasarButton);
+        accionesBox.setAlignment(Pos.CENTER);
+        accionesBox.setPadding(new Insets(5));
+
+        contenedorInferior.getChildren().addAll(
+                manoTituloLabel,
+                manoBox,
+                accionesBox
+        );
+
+        setBottom(contenedorInferior);
+    }
+
+    // Método para actualizar la vista cuando cambie el estado del juego
+    public void actualizarVista() {
+        // Eliminar todos los nodos actuales
+        getChildren().clear();
+
+        // Volver a configurar la vista
+        configurarCabecera();
+        configurarTablero();
+        configurarManoYAcciones();
+    }
+}
