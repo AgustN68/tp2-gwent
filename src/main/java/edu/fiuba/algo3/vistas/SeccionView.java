@@ -76,6 +76,13 @@ public class SeccionView extends HBox {
         informacionPane.getChildren().addAll(puntajeLabel, nombreSeccionLabel);
         // Añadir componentes al contenedor principal
         getChildren().addAll(informacionPane, cartasPane);
+
+        setOnMouseEntered(e -> {
+            setViewOrder(-1.0);
+        });
+        setOnMouseExited(e -> {
+            setViewOrder(0.0);
+        });
     }
 
     public Seccion getSeccion() {
