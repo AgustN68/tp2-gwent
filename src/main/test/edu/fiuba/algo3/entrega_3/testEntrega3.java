@@ -44,32 +44,8 @@ public class testEntrega3 {
         Tablero tableroJ1 = new Tablero(seccionesJ1);
         Tablero tableroJ2 = new Tablero(seccionesJ2);
 
-        List<Unidad> unidades = new ArrayList<>();
-        List<Especial> especiales = new ArrayList<>();
-
-        List<Unidad> unidades2 = new ArrayList<>();
-        List<Especial> especiales2 = new ArrayList<>();
-
-
-        for (int i = 0; i < 16; i++) {
-            unidades.add(null);
-            unidades2.add(null);
-        }
-
-        for (int i = 0; i < 6; i++) {
-            especiales.add(null);
-            especiales2.add(null);
-        }
-
-        Mazo mazo1 = new Mazo(unidades, especiales);
-        Mazo mazo2 = new Mazo(unidades2, especiales2);
-
         Jugador jugador1 = new Jugador(tableroJ1, new PilaDeDescarte());
         Jugador jugador2 = new Jugador(tableroJ2, new PilaDeDescarte());
-
-        jugador1.setMazo(mazo1);
-        jugador2.setMazo(mazo2);
-
 
         // Act & Assert
         Assertions.assertDoesNotThrow(() -> {
