@@ -21,11 +21,13 @@ public class SeccionView extends HBox {
     private Seccion seccion;
     private String nombreSeccion;
     private String nombreJugador;
+    private GwentApp app;
 
-    public SeccionView(Seccion seccion, String nombreSeccion, String nombreJugador) {
+    public SeccionView(Seccion seccion, String nombreSeccion, String nombreJugador, GwentApp app) {
         this.seccion = seccion;
         this.nombreSeccion = nombreSeccion;
         this.nombreJugador = nombreJugador;
+        this.app = app;
 
         setPadding(new Insets(1));
         setSpacing(5);
@@ -53,7 +55,7 @@ public class SeccionView extends HBox {
         // Agregar las cartas a la sección
         List<Unidad> cartas = seccion.getCartasUnidades();
         for (Unidad unidad : cartas) {
-            CartaView cartaView = new CartaView(unidad);
+            CartaView cartaView = new CartaView(unidad, app);
             cartasPane.getChildren().add(cartaView);
         }
 
@@ -62,11 +64,13 @@ public class SeccionView extends HBox {
         Label puntajeLabel = new Label("Puntos: " + puntajeSeccion);
         puntajeLabel.setAlignment(Pos.CENTER);
         puntajeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        puntajeLabel.setStyle("-fx-text-fill: #FFFFFF;");
 
         // Mostrar nombre de la sección
         Label nombreSeccionLabel = new Label(nombreSeccion);
         nombreSeccionLabel.setAlignment(Pos.CENTER);
         nombreSeccionLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        nombreSeccionLabel.setStyle("-fx-text-fill: #FFFFFF;");
         nombreSeccionLabel.setWrapText(true);
         nombreSeccionLabel.setMaxWidth(80);
 

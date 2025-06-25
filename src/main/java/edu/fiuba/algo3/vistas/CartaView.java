@@ -8,12 +8,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
@@ -25,7 +24,7 @@ public class CartaView extends VBox {
     private static final double ancho = 60;  // proporcion 2/3
     private static final double alto = 90;
 
-    public CartaView(Carta carta) {
+    public CartaView(Carta carta, GwentApp app) {
         this.carta = carta;
 
         setPadding(new Insets(5));
@@ -45,24 +44,11 @@ public class CartaView extends VBox {
         getChildren().add(nombreLabel);
 
         // Fondo de la carta
-        Image fondoImage;
-        InputStream is = getClass().getResourceAsStream("/imagenes/cartas/" + nombreCarta + ".png");
-        if (is == null) {
-            is = getClass().getResourceAsStream("/imagenes/cartas/placeholder.png");
-            if (is == null) {
-                System.err.println("No se encontró la imagen ni el placeholder para: " + nombreCarta);
-            }
+        try {
+            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/cartas/placeholder.png")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        fondoImage = new Image(is);
-
-        BackgroundImage fondo = new BackgroundImage(
-                fondoImage,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO,true,true,false, true)
-        );
-        setBackground(new Background(fondo));
 
 
         // Valor de puntaje (solo para unidades)

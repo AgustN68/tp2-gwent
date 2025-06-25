@@ -2,9 +2,13 @@ package edu.fiuba.algo3.vistas;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.controllers.GwentController;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class GwentApp extends Application {
 
@@ -50,6 +54,24 @@ public class GwentApp extends Application {
         FinJuegoView finJuegoView = new FinJuegoView(ganador, this);
         Scene scene = new Scene(finJuegoView, 1024, 768);
         primaryStage.setScene(scene);
+    }
+
+    public BackgroundImage obtenerBackgroundImage(String direccionImagen) throws FileNotFoundException {
+        Image fondoImage;
+        InputStream is = getClass().getResourceAsStream(direccionImagen);
+        if (is == null) {
+            throw new FileNotFoundException(direccionImagen);
+        }
+        fondoImage = new Image(is);
+
+        BackgroundImage fondo = new BackgroundImage(
+                fondoImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO,true,true,false, true)
+        );
+        return fondo;
     }
 
     public static void main(String[] args) {
