@@ -119,8 +119,7 @@ public class GwentController {
         posicionesCartas.sort((a, b) -> b - a);
 
         for (int posicion : posicionesCartas) {
-            // Ya que usarCarta() internamente llama a seleccionarCarta() y luego descarta, solo necesitamos llamar a usarCarta directamente
-            jugador.usarCarta(posicion);
+            jugador.descartarCarta(posicion);
         }
 
         // Tomar nuevas cartas
