@@ -37,8 +37,12 @@ public class Jugador {
 
     public void usarCarta(int posicion) {
         Carta carta = mano.agarrarCarta(posicion);
-        this.pilaDeDescarte.descartarUna(carta);
+        descartarCarta(posicion);
         carta.usar();
+    }
+
+    public void descartarCarta(int posicion) {
+        this.pilaDeDescarte.descartarUna(mano.agarrarCarta(posicion));
     }
 
     public Puntaje obtenerPuntaje() {
@@ -82,5 +86,3 @@ public class Jugador {
         return rondasGanadas;
     }
 }
-
-
