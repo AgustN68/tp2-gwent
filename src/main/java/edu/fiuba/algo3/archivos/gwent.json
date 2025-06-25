@@ -62,10 +62,12 @@
                 "seccion": "Rango"
             },
             {
-                "nombre": "Pirata del Clan Dimun",
-                "puntos": 6,
-                "modificador": [],
-                "seccion": "Rango"
+                "nombre": "Catapulta",
+                "puntos": 8,
+                "modificador": [
+                    "Carta Unida"
+                ],
+                "seccion": "Asedio"
             },
             {
                 "nombre": "Cazadores de Dragones de Crinfrid",
