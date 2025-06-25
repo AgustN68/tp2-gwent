@@ -54,7 +54,7 @@ public class TableroView extends BorderPane {
 
     private void configurarTablero() {
         // Contenedor principal para el tablero
-        VBox tableroBox = new VBox(5);
+        VBox tableroBox = new VBox(2);
         tableroBox.setAlignment(Pos.CENTER);
         tableroBox.setPadding(new Insets(0));
 
@@ -78,14 +78,7 @@ public class TableroView extends BorderPane {
             );
         }
 
-        // Crear un ScrollPane para poder ver el contenido que no entre
-        ScrollPane scrollPane = new ScrollPane(tableroBox);
-        scrollPane.setFitToWidth(true);
-        //scrollPane.setPrefViewportHeight(500); // Altura ajustable según necesidad
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-
-        setCenter(scrollPane);
+        setCenter(tableroBox);
     }
 
     private void configurarManoYAcciones() {
@@ -94,7 +87,7 @@ public class TableroView extends BorderPane {
         contenedorInferior.setPadding(new Insets(5));
 
         // Informacion
-        HBox informacionBox = new HBox(5);
+        HBox informacionBox = new HBox(10);
         informacionBox.setAlignment(Pos.CENTER);
 
         // para j1
@@ -135,7 +128,7 @@ public class TableroView extends BorderPane {
         informacionBox.getChildren().addAll(informacionJ1Box, informacionJ2Box);
 
         // Mostrar las cartas en la mano del jugador actual
-        HBox manoBox = new HBox(10);
+        HBox manoBox = new HBox(2);
         manoBox.setAlignment(Pos.CENTER);
         manoBox.setPadding(new Insets(5));
         HBox.setHgrow(manoBox, Priority.ALWAYS);

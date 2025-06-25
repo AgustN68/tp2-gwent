@@ -28,7 +28,7 @@ public class SeccionView extends HBox {
         this.nombreJugador = nombreJugador;
 
         setPadding(new Insets(1));
-        setSpacing(1);
+        setSpacing(5);
         setAlignment(Pos.CENTER_LEFT);
 
         actualizarVista();
@@ -37,18 +37,15 @@ public class SeccionView extends HBox {
     public void actualizarVista() {
         getChildren().clear();
 
-        // Etiqueta con nombre de la sección
-        Label nombreSeccionLabel = new Label(nombreSeccion);
-        nombreSeccionLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        nombreSeccionLabel.setWrapText(true);
-        nombreSeccionLabel.setMaxWidth(80);
+
 
         // Contenedor para las cartas
-        HBox cartasPane = new HBox(1);
+        double paddingCartasPane = 2;
+        HBox cartasPane = new HBox(2);
         cartasPane.setAlignment(Pos.CENTER);
-        cartasPane.setPadding(new Insets(1));
-        cartasPane.setStyle("-fx-border-color: gray; -fx-border-width: 1px; -fx-padding: 10px;");
-        cartasPane.setMinHeight(75);
+        cartasPane.setPadding(new Insets(paddingCartasPane));
+        cartasPane.setStyle("-fx-border-color: gray; -fx-border-width: 1px;");
+        cartasPane.setMinHeight(CartaView.getAlto()+2*paddingCartasPane+2);
 
         HBox.setHgrow(cartasPane, Priority.ALWAYS);
 
@@ -63,7 +60,15 @@ public class SeccionView extends HBox {
         // Mostrar el puntaje de la sección
         int puntajeSeccion = seccion.puntajeTotal().obtenerValor();
         Label puntajeLabel = new Label("Puntos: " + puntajeSeccion);
+        puntajeLabel.setAlignment(Pos.CENTER);
         puntajeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+
+        // Mostrar nombre de la sección
+        Label nombreSeccionLabel = new Label(nombreSeccion);
+        nombreSeccionLabel.setAlignment(Pos.CENTER);
+        nombreSeccionLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        nombreSeccionLabel.setWrapText(true);
+        nombreSeccionLabel.setMaxWidth(80);
 
         VBox informacionPane = new VBox(10);
         informacionPane.setAlignment(Pos.CENTER);

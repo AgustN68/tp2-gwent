@@ -66,8 +66,8 @@ public class PreparacionView extends BorderPane {
 
     private void actualizarVistaMano() {
         FlowPane cartasPane = new FlowPane();
-        cartasPane.setHgap(15);
-        cartasPane.setVgap(15);
+        cartasPane.setHgap(2);
+        cartasPane.setVgap(2);
         cartasPane.setAlignment(Pos.CENTER);
         cartasPane.setPadding(new Insets(20));
 

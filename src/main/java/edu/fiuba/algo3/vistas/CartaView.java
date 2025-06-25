@@ -14,19 +14,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
+import java.io.InputStream;
+
 /**
  * Componente visual para representar una carta en la interfaz
  */
 public class CartaView extends VBox {
 
     private Carta carta;
+    private static final double ancho = 60;  // proporcion 2/3
+    private static final double alto = 90;
 
     public CartaView(Carta carta) {
         this.carta = carta;
-        double ancho = 50;
-        double alto = 70;
 
-        // para evitar problemas (como desplazamientos) al incrementar el tamaño
         setPadding(new Insets(5));
         setSpacing(5);
         setAlignment(Pos.TOP_CENTER);
@@ -45,11 +46,15 @@ public class CartaView extends VBox {
 
         // Fondo de la carta
         Image fondoImage;
-        if (getClass().getResourceAsStream("/imagenes/cartas/" + nombreCarta + ".png") == null) {
-            fondoImage = new Image(getClass().getResourceAsStream("/imagenes/cartas/placeholder.png"));
-        } else {
-            fondoImage = new Image(getClass().getResourceAsStream("/imagenes/cartas/" + nombreCarta + ".png"));
+        InputStream is = getClass().getResourceAsStream("/imagenes/cartas/" + nombreCarta + ".png");
+        if (is == null) {
+            is = getClass().getResourceAsStream("/imagenes/cartas/placeholder.png");
+            if (is == null) {
+                System.err.println("No se encontró la imagen ni el placeholder para: " + nombreCarta);
+            }
         }
+        fondoImage = new Image(is);
+
         BackgroundImage fondo = new BackgroundImage(
                 fondoImage,
                 BackgroundRepeat.NO_REPEAT,
@@ -74,7 +79,7 @@ public class CartaView extends VBox {
             getChildren().addAll(espacio, puntajeLabel);
         }
         // Configurar estilo del contenedor
-        setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-background-color: #f0f0f0;");
+        setStyle("-fx-border-color: black; -fx-border-width: 1;");
 
         // Efectos
         var scaleTrans = new ScaleTransition(Duration.millis(250), this);
@@ -94,6 +99,14 @@ public class CartaView extends VBox {
             scaleTrans.play();
         });
 
+    }
+
+    public static double getAncho() {
+        return ancho;
+    }
+
+    public static double getAlto() {
+        return alto;
     }
 
     /**
