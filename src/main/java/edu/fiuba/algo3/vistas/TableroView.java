@@ -30,9 +30,6 @@ public class TableroView extends BorderPane {
 
         setPadding(new Insets(10));
 
-        // Cabecera - información del juego
-        configurarCabecera();
-
         // Lado izquierdo
         configurarIzquierda();
 
@@ -48,7 +45,12 @@ public class TableroView extends BorderPane {
         VBox informacionBox = new VBox(10);
         informacionBox.setAlignment(Pos.CENTER);
 
-        // para j1
+        // Mostrar el turno actual
+        Label turnoLabel = new Label("Turno de: " + controller.getJugadorActual().getNombre());
+        turnoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+        turnoLabel.setStyle("-fx-text-fill: #FFFFFF;");
+
+        // Info del jugador 1
         Jugador jugador1 = controller.getJugador1();
         VBox informacionJ1Box = new VBox(5);
 
@@ -68,9 +70,9 @@ public class TableroView extends BorderPane {
         rondasGanadasJ1Label.setFont(Font.font("Arial", 16));
         rondasGanadasJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
 
-        informacionJ1Box.getChildren().addAll(nombreJ1Label, cartasRestantesJ1Label, puntajeJ1Label, rondasGanadasJ1Label);
+        informacionJ1Box.getChildren().addAll(turnoLabel, nombreJ1Label, cartasRestantesJ1Label, puntajeJ1Label, rondasGanadasJ1Label);
 
-        // para j2
+        // Info del jugador 2
         Jugador jugador2 = controller.getJugador2();
         VBox informacionJ2Box = new VBox(5);
 
@@ -114,17 +116,6 @@ public class TableroView extends BorderPane {
         setLeft(izquierdaBox);
     }
 
-    private void configurarCabecera() {
-        Label tituloLabel = new Label("GWENT - RONDA " + controller.getRondaActual() + " - TURNO DE: " + controller.getJugadorActual().getNombre());
-        tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
-        tituloLabel.setStyle("-fx-text-fill: #FFFFFF;");
-
-        VBox cabeceraBox = new VBox(10, tituloLabel);
-        cabeceraBox.setAlignment(Pos.CENTER);
-        cabeceraBox.setPadding(new Insets(5));
-        setTop(cabeceraBox);
-    }
-
     private void configurarTablero() {
         // Contenedor principal para el tablero
         VBox tableroBox = new VBox(2);
@@ -142,12 +133,12 @@ public class TableroView extends BorderPane {
         if (seccionesJ1.size() >= 3 && seccionesJ2.size() >= 3) {
             // Añadir las secciones al tablero en el orden requerido
             tableroBox.getChildren().addAll(
-                    new SeccionView(seccionesJ2.get(2), "ASEDIO", jugador2.getNombre(), app),
-                    new SeccionView(seccionesJ2.get(1), "DISTANCIA", jugador2.getNombre(), app),
-                    new SeccionView(seccionesJ2.get(0), "CUERPO A CUERPO", jugador2.getNombre(), app),
-                    new SeccionView(seccionesJ1.get(0), "CUERPO A CUERPO", jugador1.getNombre(), app),
-                    new SeccionView(seccionesJ1.get(1), "DISTANCIA", jugador1.getNombre(), app),
-                    new SeccionView(seccionesJ1.get(2), "ASEDIO", jugador1.getNombre(), app)
+                    new SeccionView(seccionesJ2.get(2), "ASEDIO", jugador2.getNombre(), app, 2),
+                    new SeccionView(seccionesJ2.get(1), "DISTANCIA", jugador2.getNombre(), app, 2),
+                    new SeccionView(seccionesJ2.get(0), "CUERPO A CUERPO", jugador2.getNombre(), app, 2),
+                    new SeccionView(seccionesJ1.get(0), "CUERPO A CUERPO", jugador1.getNombre(), app, 1),
+                    new SeccionView(seccionesJ1.get(1), "DISTANCIA", jugador1.getNombre(), app, 1),
+                    new SeccionView(seccionesJ1.get(2), "ASEDIO", jugador1.getNombre(), app, 1)
             );
         }
 
@@ -192,13 +183,12 @@ public class TableroView extends BorderPane {
         setBottom(contenedorInferior);
     }
 
-    // Método para actualizar la vista cuando cambie el estado del juego
+    // Actualizar la vista cuando cambie el estado del juego
     public void actualizarVista() {
         // Eliminar todos los nodos actuales
         getChildren().clear();
 
         // Volver a configurar la vista
-        configurarCabecera();
         configurarIzquierda();
         configurarTablero();
         configurarManoYAcciones();

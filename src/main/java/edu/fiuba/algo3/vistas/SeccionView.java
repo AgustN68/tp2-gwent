@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -22,12 +23,14 @@ public class SeccionView extends HBox {
     private String nombreSeccion;
     private String nombreJugador;
     private GwentApp app;
+    private Integer jugadorId;
 
-    public SeccionView(Seccion seccion, String nombreSeccion, String nombreJugador, GwentApp app) {
+    public SeccionView(Seccion seccion, String nombreSeccion, String nombreJugador, GwentApp app, Integer jugadorId) {
         this.seccion = seccion;
         this.nombreSeccion = nombreSeccion;
         this.nombreJugador = nombreJugador;
         this.app = app;
+        this.jugadorId = jugadorId;
 
         setPadding(new Insets(1));
         setSpacing(5);
@@ -39,33 +42,43 @@ public class SeccionView extends HBox {
     public void actualizarVista() {
         getChildren().clear();
 
+        // Puntaje de la sección
+        StackPane puntajePane = new StackPane();
+        double iconSize = 20;
+        puntajePane.setMinHeight(iconSize);
+        puntajePane.setPrefHeight(iconSize);
+        puntajePane.setMaxHeight(iconSize);
+        puntajePane.setMinWidth(iconSize);
+        puntajePane.setPrefWidth(iconSize);
+        puntajePane.setMaxWidth(iconSize);
 
-
-        // Contenedor para las cartas
-        double paddingCartasPane = 2;
-        HBox cartasPane = new HBox(2);
-        cartasPane.setAlignment(Pos.CENTER);
-        cartasPane.setPadding(new Insets(paddingCartasPane));
-        cartasPane.setStyle("-fx-border-color: gray; -fx-border-width: 1px;");
-        cartasPane.setMinHeight(CartaView.getAlto()+2*paddingCartasPane+2);
-
-        HBox.setHgrow(cartasPane, Priority.ALWAYS);
-
-
-        // Agregar las cartas a la sección
-        List<Unidad> cartas = seccion.getCartasUnidades();
-        for (Unidad unidad : cartas) {
-            CartaView cartaView = new CartaView(unidad, app, false);
-            cartasPane.getChildren().add(cartaView);
+        try {
+            // Cargar la imagen y fijar el tamaño del background
+            BackgroundImage bgImg = app.obtenerBackgroundImage("/imagenes/iconos/puntos_jugador_" + jugadorId + ".png");
+            BackgroundSize bgSize = new BackgroundSize(
+                iconSize, iconSize, false, false, false, false
+            );
+            BackgroundImage fixedBgImg = new BackgroundImage(
+                bgImg.getImage(),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                bgSize
+            );
+            puntajePane.setBackground(new Background(fixedBgImg));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
-        // Mostrar el puntaje de la sección
         int puntajeSeccion = seccion.puntajeTotal().obtenerValor();
-        Label puntajeLabel = new Label("Puntos: " + puntajeSeccion);
+        Label puntajeLabel = new Label(String.valueOf(puntajeSeccion));
         puntajeLabel.setAlignment(Pos.CENTER);
         puntajeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         puntajeLabel.setStyle("-fx-text-fill: #FFFFFF;");
 
+        puntajePane.getChildren().add(puntajeLabel);
+
+        /*
         // Mostrar nombre de la sección
         Label nombreSeccionLabel = new Label(nombreSeccion);
         nombreSeccionLabel.setAlignment(Pos.CENTER);
@@ -78,8 +91,26 @@ public class SeccionView extends HBox {
         informacionPane.setAlignment(Pos.CENTER);
         informacionPane.setPrefWidth(80);
         informacionPane.getChildren().addAll(puntajeLabel, nombreSeccionLabel);
-        // Añadir componentes al contenedor principal
-        getChildren().addAll(informacionPane, cartasPane);
+         */
+
+        // Contenedor para las cartas
+        double paddingCartasPane = 2;
+        HBox cartasPane = new HBox(2);
+        cartasPane.setAlignment(Pos.CENTER);
+        cartasPane.setPadding(new Insets(paddingCartasPane));
+        cartasPane.setStyle("-fx-border-color: gray; -fx-border-width: 1px;");
+        cartasPane.setMinHeight(CartaView.getAlto()+2*paddingCartasPane+2);
+
+        HBox.setHgrow(cartasPane, Priority.ALWAYS);
+
+        // Agregar las cartas a la sección
+        List<Unidad> cartas = seccion.getCartasUnidades();
+        for (Unidad unidad : cartas) {
+            CartaView cartaView = new CartaView(unidad, app, false);
+            cartasPane.getChildren().add(cartaView);
+        }
+
+        getChildren().addAll(puntajePane, cartasPane);
 
         setOnMouseEntered(e -> {
             setViewOrder(-1.0);
