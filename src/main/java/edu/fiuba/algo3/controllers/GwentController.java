@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.Seccion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.Seccion.Rango;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import edu.fiuba.algo3.modelo.Tablero;
-import edu.fiuba.algo3.modelo.exceptions.UnidadNoSePuedeUbicarEnEstaSeccionException;
 import edu.fiuba.algo3.vistas.GwentApp;
 
 import java.util.ArrayList;
@@ -120,9 +119,9 @@ public class GwentController {
         posicionesCartas.sort((a, b) -> b - a);
 
         for (int posicion : posicionesCartas) {
-            // Usamos el nuevo método descartarCarta en lugar de usarCarta
-            // para enviar las cartas al mazo de descarte sin colocarlas en el tablero
-            jugador.descartarCarta(posicion);
+            Carta carta = jugador.seleccionarCarta(posicion);
+            // Descartar la carta
+            jugador.usarCarta(posicion);
         }
 
         // Tomar nuevas cartas
@@ -133,39 +132,6 @@ public class GwentController {
         if (!jugadorActual.verMano().isEmpty() && posicionCarta < jugadorActual.verMano().size()) {
             jugadorActual.usarCarta(posicionCarta);
             cambiarTurno();
-        }
-    }
-
-    /**
-     * Juega una carta en una sección específica del tablero.
-     * Esto es especialmente útil para cartas ágiles que pueden colocarse en diferentes secciones.
-     *
-     * @param posicionCarta La posición de la carta en la mano del jugador actual
-     * @param seccion La sección donde se quiere colocar la carta
-     */
-    public void jugarCartaEnSeccion(int posicionCarta, Seccion seccion) {
-        if (!jugadorActual.verMano().isEmpty() && posicionCarta < jugadorActual.verMano().size()) {
-            Carta carta = jugadorActual.verMano().get(posicionCarta);
-
-            if (carta instanceof Unidad) {
-                // Si es una carta unidad, intentamos colocarla en la sección indicada
-                Unidad unidad = (Unidad) carta;
-
-                // Eliminamos la carta de la mano del jugador
-                jugadorActual.seleccionarCarta(posicionCarta);
-
-                try {
-                    // Intentamos ubicar la unidad en la sección elegida
-                    unidad.usar(seccion);
-                    cambiarTurno();
-                } catch (UnidadNoSePuedeUbicarEnEstaSeccionException e) {
-                    // Si la carta no puede ubicarse en esa sección, lanzamos la excepción
-                    throw new UnidadNoSePuedeUbicarEnEstaSeccionException("Esta carta no puede colocarse en esta sección: " + e.getMessage());
-                }
-            } else {
-                // Si no es una unidad, lanzamos excepción
-                throw new RuntimeException("Solo las cartas unidad pueden colocarse en secciones");
-            }
         }
     }
 
