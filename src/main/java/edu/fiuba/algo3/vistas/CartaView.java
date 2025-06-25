@@ -96,10 +96,6 @@ public class CartaView extends VBox {
 
     }
 
-    void establecerEstilo(String s) {
-        setStyle(s);
-    }
-
     /**
      * Intenta obtener un nombre más amigable de la carta
      */
