@@ -2,14 +2,17 @@ package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 /**
  * Componente visual para representar una carta en la interfaz
@@ -20,40 +23,77 @@ public class CartaView extends VBox {
 
     public CartaView(Carta carta) {
         this.carta = carta;
+        double ancho = 50;
+        double alto = 70;
 
+        // para evitar problemas (como desplazamientos) al incrementar el tamaño
         setPadding(new Insets(5));
         setSpacing(5);
-        setAlignment(Pos.CENTER);
-        setPrefSize(100, 140);
+        setAlignment(Pos.TOP_CENTER);
 
-        // Fondo de la carta
-        Rectangle fondo = new Rectangle(90, 130);
-        fondo.setFill(Color.LIGHTGRAY);
-        fondo.setStroke(Color.BLACK);
-        fondo.setArcWidth(10);
-        fondo.setArcHeight(10);
+        setMinSize(ancho, alto);
+        setPrefSize(ancho, alto);
+        setMaxSize(ancho, alto);
 
-        // Nombre de la carta - intentamos obtener un nombre más amigable
+        // Nombre de la carta
         String nombreCarta = obtenerNombreCarta(carta);
         Label nombreLabel = new Label(nombreCarta);
-        nombreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        nombreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 8));
         nombreLabel.setWrapText(true);
-        nombreLabel.setMaxWidth(80);
+
+        getChildren().add(nombreLabel);
+
+        // Fondo de la carta
+        Image fondoImage;
+        if (getClass().getResourceAsStream("/imagenes/cartas/" + nombreCarta + ".png") == null) {
+            fondoImage = new Image(getClass().getResourceAsStream("/imagenes/cartas/placeholder.png"));
+        } else {
+            fondoImage = new Image(getClass().getResourceAsStream("/imagenes/cartas/" + nombreCarta + ".png"));
+        }
+        BackgroundImage fondo = new BackgroundImage(
+                fondoImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO,true,true,false, true)
+        );
+        setBackground(new Background(fondo));
+
 
         // Valor de puntaje (solo para unidades)
         if (carta instanceof Unidad) {
             Unidad unidad = (Unidad) carta;
             int puntaje = unidad.getPuntaje().obtenerValor();
             Label puntajeLabel = new Label("Puntos: " + puntaje);
-            puntajeLabel.setFont(Font.font("Arial", 11));
-            getChildren().addAll(fondo, nombreLabel, puntajeLabel);
-        } else {
-            // Si no es unidad, solo mostrar el nombre
-            getChildren().addAll(fondo, nombreLabel);
-        }
+            puntajeLabel.setFont(Font.font("Arial", 8));
 
-        // Configurar estilo visual del contenedor
+            // Espaciador para empujar el puntaje hacia abajo
+            Region espacio = new Region();
+            VBox.setVgrow(espacio, Priority.ALWAYS);
+
+            getChildren().addAll(espacio, puntajeLabel);
+        }
+        // Configurar estilo del contenedor
         setStyle("-fx-border-color: black; -fx-border-width: 1; -fx-background-color: #f0f0f0;");
+
+        // Efectos
+        var scaleTrans = new ScaleTransition(Duration.millis(250), this);
+        scaleTrans.setFromX(1.0);
+        scaleTrans.setFromY(1.0);
+        scaleTrans.setToX(2.0);
+        scaleTrans.setToY(2.0);
+
+        setOnMouseEntered(e -> {
+            scaleTrans.setRate(1.0);
+            setViewOrder(-1.0);
+            scaleTrans.play();
+        });
+        setOnMouseExited(e -> {
+            scaleTrans.setRate(-1.0);
+            setViewOrder(0.0);
+            scaleTrans.play();
+        });
+
     }
 
     /**

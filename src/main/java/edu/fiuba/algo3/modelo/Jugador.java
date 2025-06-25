@@ -41,18 +41,6 @@ public class Jugador {
         carta.usar();
     }
 
-    /**
-     * Descarta cartas de la mano sin jugarlas al tablero.
-     * Este método es específico para la fase de preparación.
-     *
-     * @param posicion La posición de la carta en la mano
-     */
-    public void descartarCarta(int posicion) {
-        Carta carta = mano.agarrarCarta(posicion);
-        this.pilaDeDescarte.descartarUna(carta);
-        // No llamamos a carta.usar() para evitar que se coloque en el tablero
-    }
-
     public Puntaje obtenerPuntaje() {
         return tablero.calcularPuntaje();
     }
@@ -94,3 +82,5 @@ public class Jugador {
         return rondasGanadas;
     }
 }
+
+

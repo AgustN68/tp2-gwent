@@ -82,6 +82,7 @@ public class PreparacionView extends BorderPane {
             CartaView cartaView = new CartaView(carta);
             cartaView.setStyle("-fx-border-color: gray; -fx-border-width: 2;");
 
+
             cartaView.setOnMouseClicked(e -> seleccionarCarta(posicion, cartaView));
             vistasCartas.add(cartaView);
             cartasPane.getChildren().add(cartaView);
