@@ -33,6 +33,9 @@ public class TableroView extends BorderPane {
         // Cabecera - información del juego
         configurarCabecera();
 
+        // Lado izquierdo
+        configurarIzquierda();
+
         // Centro - tablero de juego
         configurarTablero();
 
@@ -40,16 +43,83 @@ public class TableroView extends BorderPane {
         configurarManoYAcciones();
     }
 
+    private void configurarIzquierda() {
+        // Informacion
+        VBox informacionBox = new VBox(10);
+        informacionBox.setAlignment(Pos.CENTER);
+
+        // para j1
+        Jugador jugador1 = controller.getJugador1();
+        VBox informacionJ1Box = new VBox(5);
+
+        Label nombreJ1Label = new Label(jugador1.getNombre());
+        nombreJ1Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        nombreJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        Label cartasRestantesJ1Label = new Label("Cartas: " + jugador1.verMano().size());
+        cartasRestantesJ1Label.setFont(Font.font("Arial", 16));
+        cartasRestantesJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        Label puntajeJ1Label = new Label("Puntaje: " + jugador1.obtenerPuntaje().obtenerValor());
+        puntajeJ1Label.setFont(Font.font("Arial", 16));
+        puntajeJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        Label rondasGanadasJ1Label = new Label("Rondas ganadas: " + jugador1.rondasGanadas());
+        rondasGanadasJ1Label.setFont(Font.font("Arial", 16));
+        rondasGanadasJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        informacionJ1Box.getChildren().addAll(nombreJ1Label, cartasRestantesJ1Label, puntajeJ1Label, rondasGanadasJ1Label);
+
+        // para j2
+        Jugador jugador2 = controller.getJugador2();
+        VBox informacionJ2Box = new VBox(5);
+
+        Label nombreJ2Label = new Label(jugador2.getNombre());
+        nombreJ2Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        nombreJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        Label cartasRestantesJ2Label = new Label("Cartas: " + jugador2.verMano().size());
+        cartasRestantesJ2Label.setFont(Font.font("Arial", 16));
+        cartasRestantesJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        Label puntajeJ2Label = new Label("Puntaje: " + jugador2.obtenerPuntaje().obtenerValor());
+        puntajeJ2Label.setFont(Font.font("Arial", 16));
+        puntajeJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        Label rondasGanadasJ2Label = new Label("Rondas ganadas: " + jugador2.rondasGanadas());
+        rondasGanadasJ2Label.setFont(Font.font("Arial", 16));
+        rondasGanadasJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
+
+        informacionJ2Box.getChildren().addAll(nombreJ2Label, cartasRestantesJ2Label, puntajeJ2Label, rondasGanadasJ2Label);
+
+        // Botones de acción
+        Button pasarButton = new Button("Pasar");
+        pasarButton.setFont(Font.font("Arial", 16));
+        pasarButton.setPrefSize(150, 50);
+        pasarButton.setOnAction(e -> {
+            controller.pasarTurno();
+            actualizarVista();
+        });
+
+        informacionBox.getChildren().addAll(informacionJ1Box, informacionJ2Box, pasarButton);
+
+        // Crear un contenedor HBox para agregar margen a la derecha
+        HBox izquierdaBox = new HBox();
+
+        // Espaciador para margen
+        Region espaciador = new Region();
+        espaciador.setMinWidth(30); // Margen entre lado izquierdo y el tablero
+
+        izquierdaBox.getChildren().addAll(informacionBox, espaciador);
+        setLeft(izquierdaBox);
+    }
+
     private void configurarCabecera() {
-        Label tituloLabel = new Label("GWENT - RONDA " + controller.getRondaActual());
+        Label tituloLabel = new Label("GWENT - RONDA " + controller.getRondaActual() + " - TURNO DE: " + controller.getJugadorActual().getNombre());
         tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
         tituloLabel.setStyle("-fx-text-fill: #FFFFFF;");
 
-        Label turnoLabel = new Label("Turno de: " + controller.getJugadorActual().getNombre());
-        turnoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        turnoLabel.setStyle("-fx-text-fill: #FFFFFF;");
-
-        VBox cabeceraBox = new VBox(10, tituloLabel, turnoLabel);
+        VBox cabeceraBox = new VBox(10, tituloLabel);
         cabeceraBox.setAlignment(Pos.CENTER);
         cabeceraBox.setPadding(new Insets(5));
         setTop(cabeceraBox);
@@ -97,55 +167,6 @@ public class TableroView extends BorderPane {
         contenedorInferior.setAlignment(Pos.CENTER_LEFT);
         contenedorInferior.setPadding(new Insets(5));
 
-        // Informacion
-        HBox informacionBox = new HBox(10);
-        informacionBox.setAlignment(Pos.CENTER);
-
-        // para j1
-        VBox informacionJ1Box = new VBox(5);
-
-        Label nombreJ1Label = new Label(controller.getJugador1().getNombre());
-        nombreJ1Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        nombreJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label cartasRestantesJ1Label = new Label("Cartas: " + controller.getJugador1().verMano().size());
-        cartasRestantesJ1Label.setFont(Font.font("Arial", 16));
-        cartasRestantesJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label puntajeJ1Label = new Label("Puntaje: " + controller.getJugador1().obtenerPuntaje().obtenerValor());
-        puntajeJ1Label.setFont(Font.font("Arial", 16));
-        puntajeJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label rondasGanadasJ1Label = new Label("Rondas ganadas: " + controller.getJugador1().rondasGanadas());
-        rondasGanadasJ1Label.setFont(Font.font("Arial", 16));
-        rondasGanadasJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        informacionJ1Box.getChildren().addAll(nombreJ1Label, cartasRestantesJ1Label, puntajeJ1Label, rondasGanadasJ1Label);
-
-        // para j2
-        VBox informacionJ2Box = new VBox(5);
-
-        Label nombreJ2Label = new Label(controller.getJugador2().getNombre());
-        nombreJ2Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        nombreJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label cartasRestantesJ2Label = new Label("Cartas: " + controller.getJugador2().verMano().size());
-        cartasRestantesJ2Label.setFont(Font.font("Arial", 16));
-        cartasRestantesJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label puntajeJ2Label = new Label("Puntaje: " + controller.getJugador2().obtenerPuntaje().obtenerValor());
-        puntajeJ2Label.setFont(Font.font("Arial", 16));
-        puntajeJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label rondasGanadasJ2Label = new Label("Rondas ganadas: " + controller.getJugador2().rondasGanadas());
-        rondasGanadasJ2Label.setFont(Font.font("Arial", 16));
-        rondasGanadasJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        informacionJ2Box.getChildren().addAll(nombreJ2Label, cartasRestantesJ2Label, puntajeJ2Label, rondasGanadasJ2Label);
-
-
-        informacionBox.getChildren().addAll(informacionJ1Box, informacionJ2Box);
-
         // Mostrar las cartas en la mano del jugador actual
         HBox manoBox = new HBox(2);
         manoBox.setAlignment(Pos.CENTER);
@@ -157,7 +178,7 @@ public class TableroView extends BorderPane {
             Carta carta = cartasEnMano.get(i);
             final int posicion = i;
 
-            CartaView cartaView = new CartaView(carta, app);
+            CartaView cartaView = new CartaView(carta, app, true);
             cartaView.setOnMouseClicked(e -> {
                 controller.jugarCarta(posicion);
                 actualizarVista();
@@ -166,16 +187,7 @@ public class TableroView extends BorderPane {
             manoBox.getChildren().add(cartaView);
         }
 
-        // Botones de acción
-        Button pasarButton = new Button("Pasar");
-        pasarButton.setFont(Font.font("Arial", 16));
-        pasarButton.setPrefSize(150, 50);
-        pasarButton.setOnAction(e -> {
-            controller.pasarTurno();
-            actualizarVista();
-        });
-
-        contenedorInferior.getChildren().addAll(informacionBox, manoBox, pasarButton);
+        contenedorInferior.getChildren().add(manoBox);
 
         setBottom(contenedorInferior);
     }
@@ -187,6 +199,7 @@ public class TableroView extends BorderPane {
 
         // Volver a configurar la vista
         configurarCabecera();
+        configurarIzquierda();
         configurarTablero();
         configurarManoYAcciones();
     }

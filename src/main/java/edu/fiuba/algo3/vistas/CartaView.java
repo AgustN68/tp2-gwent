@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vistas;
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -22,10 +23,12 @@ public class CartaView extends VBox {
 
     private Carta carta;
     private static final double ancho = 60;  // proporcion 2/3
-    private static final double alto = 90;
+    private static final double alto = 110;
+    private Boolean animacionElevar;
 
-    public CartaView(Carta carta, GwentApp app) {
+    public CartaView(Carta carta, GwentApp app, Boolean animacionElevar) {
         this.carta = carta;
+        this.animacionElevar = animacionElevar;
 
         setPadding(new Insets(5));
         setSpacing(5);
@@ -39,6 +42,7 @@ public class CartaView extends VBox {
         String nombreCarta = obtenerNombreCarta(carta);
         Label nombreLabel = new Label(nombreCarta);
         nombreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 8));
+        nombreLabel.setStyle("-fx-text-fill: #FFFFFF;");
         nombreLabel.setWrapText(true);
 
         getChildren().add(nombreLabel);
@@ -57,6 +61,7 @@ public class CartaView extends VBox {
             int puntaje = unidad.getPuntaje().obtenerValor();
             Label puntajeLabel = new Label("Puntos: " + puntaje);
             puntajeLabel.setFont(Font.font("Arial", 8));
+            puntajeLabel.setStyle("-fx-text-fill: #FFFFFF;");
 
             // Espaciador para empujar el puntaje hacia abajo
             Region espacio = new Region();
@@ -74,15 +79,29 @@ public class CartaView extends VBox {
         scaleTrans.setToX(2.0);
         scaleTrans.setToY(2.0);
 
+        var translateTrans = new TranslateTransition(Duration.millis(250), this);
+        translateTrans.setFromY(0);
+        translateTrans.setToY(-100);
+
         setOnMouseEntered(e -> {
             scaleTrans.setRate(1.0);
             setViewOrder(-1.0);
             scaleTrans.play();
+
+            if (animacionElevar) {
+                translateTrans.setRate(1.0);
+                translateTrans.play();
+            }
         });
         setOnMouseExited(e -> {
             scaleTrans.setRate(-1.0);
             setViewOrder(0.0);
             scaleTrans.play();
+
+            if (animacionElevar) {
+                translateTrans.setRate(-1.0);
+                translateTrans.play();
+            }
         });
 
     }

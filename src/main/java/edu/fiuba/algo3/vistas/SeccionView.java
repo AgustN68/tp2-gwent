@@ -55,7 +55,7 @@ public class SeccionView extends HBox {
         // Agregar las cartas a la sección
         List<Unidad> cartas = seccion.getCartasUnidades();
         for (Unidad unidad : cartas) {
-            CartaView cartaView = new CartaView(unidad, app);
+            CartaView cartaView = new CartaView(unidad, app, false);
             cartasPane.getChildren().add(cartaView);
         }
 
