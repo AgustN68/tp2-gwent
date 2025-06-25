@@ -34,7 +34,7 @@
                 "seccion": "Cuerpo a Cuerpo"
             },
             {
-                "nombre": "Vampiro: Katakan",
+                "nombre": "Vampiro - Katakan",
                 "puntos": 5,
                 "modificador": [],
                 "seccion": "Cuerpo a Cuerpo"
@@ -145,7 +145,7 @@
                 ]
             },
             {
-                "nombre": "Tormeta de Skellige",
+                "nombre": "Tormenta de Skellige",
                 "descripcion": "Establece la fuerza de todas las cartas de Combate Cuerpo a Cuerpo y Combate a Distancia en 1 para ambos jugadores.",
                 "tipo": "Clima",
                 "afectado": [
@@ -196,7 +196,7 @@
                 "seccion": "Rango"
             },
             {
-                "nombre": "Harpía Celaeno",
+                "nombre": "Celaeno Harpía",
                 "puntos": 2,
                 "modificador": [
                     "Agil"
@@ -256,7 +256,7 @@
                 "seccion": "Asedio"
             },
             {
-                "nombre": "Crone: Brewess",
+                "nombre": "Crone - Brewess",
                 "puntos": 6,
                 "modificador": [],
                 "seccion": "Asedio"

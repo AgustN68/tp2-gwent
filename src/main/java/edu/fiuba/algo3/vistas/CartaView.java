@@ -45,7 +45,7 @@ public class CartaView extends VBox {
 
         // Fondo de la carta
         try {
-            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/cartas/placeholder.png")));
+            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/cartas/" + nombreCarta + ".jpg")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
