@@ -74,6 +74,28 @@ public class GwentApp extends Application {
         return fondo;
     }
 
+    public StackPane crearIcono(String direccionImagen, Double size) throws FileNotFoundException {
+        StackPane pane = new StackPane();
+        pane.setMinSize(size, size);
+        pane.setPrefSize(size, size);
+        pane.setMaxSize(size, size);
+
+        BackgroundImage bgImg = obtenerBackgroundImage(direccionImagen);
+        BackgroundSize bgSize = new BackgroundSize(
+                size, size, false, false, false, false
+        );
+        BackgroundImage fixedBgImg = new BackgroundImage(
+                bgImg.getImage(),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                bgSize
+        );
+        pane.setBackground(new Background(fixedBgImg));
+
+        return pane;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -43,29 +43,9 @@ public class SeccionView extends HBox {
         getChildren().clear();
 
         // Puntaje de la sección
-        StackPane puntajePane = new StackPane();
-        double iconSize = 20;
-        puntajePane.setMinHeight(iconSize);
-        puntajePane.setPrefHeight(iconSize);
-        puntajePane.setMaxHeight(iconSize);
-        puntajePane.setMinWidth(iconSize);
-        puntajePane.setPrefWidth(iconSize);
-        puntajePane.setMaxWidth(iconSize);
-
+        StackPane puntajePane;
         try {
-            // Cargar la imagen y fijar el tamaño del background
-            BackgroundImage bgImg = app.obtenerBackgroundImage("/imagenes/iconos/puntos_jugador_" + jugadorId + ".png");
-            BackgroundSize bgSize = new BackgroundSize(
-                iconSize, iconSize, false, false, false, false
-            );
-            BackgroundImage fixedBgImg = new BackgroundImage(
-                bgImg.getImage(),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                bgSize
-            );
-            puntajePane.setBackground(new Background(fixedBgImg));
+            puntajePane = app.crearIcono("/imagenes/iconos/puntos_jugador_" + jugadorId + ".png", 20.0);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
