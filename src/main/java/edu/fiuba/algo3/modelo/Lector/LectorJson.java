@@ -138,8 +138,8 @@ public class LectorJson implements Lector {
             );
 
             Seccion seccionPrincipal = modificador.equals("Agil") ?
-            obtenerSeccion(secciones.get(POS_SECCION_PRINCIPAL), seccionesJugadorActual) :
-                    obtenerSeccion(secciones.get(POS_SECCION_PRINCIPAL), seccionesOtroJugador);
+            obtenerSeccion(secciones.get(POS_SECCION_PRINCIPAL), seccionesOtroJugador) :
+                    obtenerSeccion(secciones.get(POS_SECCION_PRINCIPAL), seccionesJugadorActual);
 
             Unidad nuevaUnidad = UnidadFactory.crearUnidad(
                     nombre,
