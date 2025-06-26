@@ -66,8 +66,9 @@ public class Gwent {
         return ganador;
     }
 
-    // Falta implementacion
     public void limpiarTablero() {
+        jugador1.limpiarTablero();
+        jugador2.limpiarTablero();
     }
 
     public boolean hayGanador() {

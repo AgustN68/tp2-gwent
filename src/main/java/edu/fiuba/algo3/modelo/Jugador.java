@@ -85,4 +85,9 @@ public class Jugador {
     public int rondasGanadas() {
         return rondasGanadas;
     }
+
+    public void limpiarTablero() {
+        List<Carta> cartasUsadas = tablero.limpiarTablero();
+        pilaDeDescarte.descartarCartas(cartasUsadas);
+    }
 }

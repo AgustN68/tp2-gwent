@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.ArrayList;
@@ -43,5 +44,13 @@ public class Tablero {
 
     public List<Seccion> getSecciones() {
         return secciones;
+    }
+
+    public List<Carta> limpiarTablero() {
+        List<Carta> cartas = new ArrayList<>();
+        for (Seccion seccion : secciones) {
+            cartas.addAll(seccion.limpiarSeccion());
+        }
+        return cartas;
     }
 }

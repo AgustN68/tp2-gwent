@@ -1,10 +1,12 @@
 package edu.fiuba.algo3.modelo.Seccion;
 
+import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Puntaje;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class Seccion {
@@ -77,6 +79,12 @@ public abstract class Seccion {
 
     public List<Unidad> getCartasUnidades() {
         return cartasUnidades;
+    }
+
+    public List<Carta> limpiarSeccion() {
+        List<Carta> cartas = new ArrayList<>(cartasUnidades);
+        cartasUnidades.clear();
+        return cartas;
     }
 
     /*public void recibirClima(Clima clima){
