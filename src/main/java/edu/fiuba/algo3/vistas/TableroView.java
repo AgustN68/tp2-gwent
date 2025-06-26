@@ -45,54 +45,7 @@ public class TableroView extends BorderPane {
         VBox informacionBox = new VBox(10);
         informacionBox.setAlignment(Pos.CENTER);
 
-        // Mostrar el turno actual
-        Label turnoLabel = new Label("Turno de: " + controller.getJugadorActual().getNombre());
-        turnoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
-        turnoLabel.setStyle("-fx-text-fill: #FFFFFF;");
 
-        // Info del jugador 1
-        Jugador jugador1 = controller.getJugador1();
-        VBox informacionJ1Box = new VBox(5);
-
-        Label nombreJ1Label = new Label(jugador1.getNombre());
-        nombreJ1Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        nombreJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label cartasRestantesJ1Label = new Label("Cartas: " + jugador1.verMano().size());
-        cartasRestantesJ1Label.setFont(Font.font("Arial", 16));
-        cartasRestantesJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label puntajeJ1Label = new Label("Puntaje: " + jugador1.obtenerPuntaje().obtenerValor());
-        puntajeJ1Label.setFont(Font.font("Arial", 16));
-        puntajeJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label rondasGanadasJ1Label = new Label("Rondas ganadas: " + jugador1.rondasGanadas());
-        rondasGanadasJ1Label.setFont(Font.font("Arial", 16));
-        rondasGanadasJ1Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        informacionJ1Box.getChildren().addAll(turnoLabel, nombreJ1Label, cartasRestantesJ1Label, puntajeJ1Label, rondasGanadasJ1Label);
-
-        // Info del jugador 2
-        Jugador jugador2 = controller.getJugador2();
-        VBox informacionJ2Box = new VBox(5);
-
-        Label nombreJ2Label = new Label(jugador2.getNombre());
-        nombreJ2Label.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        nombreJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label cartasRestantesJ2Label = new Label("Cartas: " + jugador2.verMano().size());
-        cartasRestantesJ2Label.setFont(Font.font("Arial", 16));
-        cartasRestantesJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label puntajeJ2Label = new Label("Puntaje: " + jugador2.obtenerPuntaje().obtenerValor());
-        puntajeJ2Label.setFont(Font.font("Arial", 16));
-        puntajeJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        Label rondasGanadasJ2Label = new Label("Rondas ganadas: " + jugador2.rondasGanadas());
-        rondasGanadasJ2Label.setFont(Font.font("Arial", 16));
-        rondasGanadasJ2Label.setStyle("-fx-text-fill: #FFFFFF;");
-
-        informacionJ2Box.getChildren().addAll(nombreJ2Label, cartasRestantesJ2Label, puntajeJ2Label, rondasGanadasJ2Label);
 
         // Botones de acción
         Button pasarButton = new Button("Pasar");
@@ -103,14 +56,25 @@ public class TableroView extends BorderPane {
             actualizarVista();
         });
 
-        informacionBox.getChildren().addAll(informacionJ1Box, informacionJ2Box, pasarButton);
+        JugadorView jugador1View = new JugadorView(app, controller.getJugador1(), 1);
+        JugadorView jugador2View = new JugadorView(app, controller.getJugador2(), 2);
+
+        // Mostrar el turno actual
+        jugador1View.actualizarTurno(controller.getJugadorActual().getNombre());
+        jugador2View.actualizarTurno(controller.getJugadorActual().getNombre());
+
+        informacionBox.getChildren().addAll(
+                jugador2View,
+                jugador1View,
+                pasarButton
+        );
 
         // Crear un contenedor HBox para agregar margen a la derecha
         HBox izquierdaBox = new HBox();
 
         // Espaciador para margen
         Region espaciador = new Region();
-        espaciador.setMinWidth(30); // Margen entre lado izquierdo y el tablero
+        espaciador.setMinWidth(10); // Margen entre lado izquierdo y el tablero
 
         izquierdaBox.getChildren().addAll(informacionBox, espaciador);
         setLeft(izquierdaBox);

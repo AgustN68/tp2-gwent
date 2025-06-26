@@ -22,8 +22,8 @@ import java.io.InputStream;
 public class CartaView extends VBox {
 
     private Carta carta;
-    private static final double ancho = 60;  // proporcion 2/3
-    private static final double alto = 110;
+    private static final double ancho = 60;
+    private static final double alto = 104;
     private Boolean animacionElevar;
 
     public CartaView(Carta carta, GwentApp app, Boolean animacionElevar) {

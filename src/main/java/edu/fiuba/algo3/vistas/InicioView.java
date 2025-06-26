@@ -6,9 +6,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.io.FileNotFoundException;
 
 public class InicioView extends VBox {
 
@@ -18,6 +21,13 @@ public class InicioView extends VBox {
     private TextField nombreJugador2Field;
 
     public InicioView(GwentController controller, GwentApp app) {
+        // fondo del background
+        try {
+            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/fondos/fondo_nombre.jpg")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         this.controller = controller;
         this.app = app;
 

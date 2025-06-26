@@ -21,15 +21,23 @@ public class GwentApp extends Application {
         this.controller = new GwentController();
         this.controller.setApp(this); // Establecer la referencia al GwentApp en el controlador
 
-        // Configuración básica de la ventana
-        primaryStage.setTitle("Gwent - TP2");
-        primaryStage.setMinWidth(1024);
-        primaryStage.setMinHeight(768);
+        //aca cargo las propiedades de la ventana
+        stage.setTitle("Gwent");
+        primaryStage.setMinWidth(1280); // proporcion 9/16
+        primaryStage.setMinHeight(720);
 
-        // Mostrar la pantalla inicial para ingresar nombres
-        mostrarPantallaInicial();
+        Image icono = new Image("file:src/main/resources/imagenes/logo/logo_gwent.png");
+        stage.getIcons().add(icono);
+
+        mostrarPantallaBienvenida();
 
         primaryStage.show();
+    }
+
+    public void mostrarPantallaBienvenida(){
+        PantallaInicialView bienvenidaView = new PantallaInicialView(controller, this);
+        Scene scene = new Scene(bienvenidaView, 1024,720);
+        primaryStage.setScene(scene);
     }
 
     public void mostrarPantallaInicial() {
@@ -72,6 +80,28 @@ public class GwentApp extends Application {
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO,true,true,false, true)
         );
         return fondo;
+    }
+
+    public StackPane crearIcono(String direccionImagen, Double size) throws FileNotFoundException {
+        StackPane pane = new StackPane();
+        pane.setMinSize(size, size);
+        pane.setPrefSize(size, size);
+        pane.setMaxSize(size, size);
+
+        BackgroundImage bgImg = obtenerBackgroundImage(direccionImagen);
+        BackgroundSize bgSize = new BackgroundSize(
+                size, size, false, false, false, false
+        );
+        BackgroundImage fixedBgImg = new BackgroundImage(
+                bgImg.getImage(),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                bgSize
+        );
+        pane.setBackground(new Background(fixedBgImg));
+
+        return pane;
     }
 
     public static void main(String[] args) {
