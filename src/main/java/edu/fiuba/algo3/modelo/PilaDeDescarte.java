@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Carta.CartaNula;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class PilaDeDescarte implements  Mostrable {
     public int cantidadCartas(){
         return this.cartas.size();
     }
-    public Carta agarrarCarta(){
-        return this.cartas.remove(0);
+    public Carta agarrarCarta() {
+        return cantidadCartas() != 0 ? this.cartas.remove(0) : new CartaNula();
     }
 }
