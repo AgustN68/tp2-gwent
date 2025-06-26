@@ -13,35 +13,60 @@ public class Juego extends Fase{
     private Boolean juegoTerminado;
     Jugador ganador;
     protected static final int CANT_RONDAS_NECESARIAS = 2;
+    private List<Jugador> jugadores;
+    private Ronda rondaActual;
 
-    public Juego(Gwent juego) {
+    public Juego(Gwent juego, List<Jugador> jugadoresOrdenados) {
         super(juego);
         this.juegoTerminado = false;
+        this.jugadores = jugadoresOrdenados;
     }
 
     @Override
     public void iniciarFase() {
-        while (!juegoTerminado) {
-            Ronda rondaActual = new Ronda(jugadores);
-            rondas.add(rondaActual);
-            rondaActual.jugarRonda();
-            juegoTerminado = comprobarGanador();
-        }
-        siguienteFase();
+        rondaActual = new Ronda(new ArrayList<>(jugadores));
+        rondas.add(rondaActual);
     }
 
     private void siguienteFase() {
         juego.cambiarFase(new Final(juego, ganador));
     }
 
-    private Boolean comprobarGanador() {
+    private Boolean hayGanador() {
         for (Jugador jugador : jugadores) {
             if (jugador.rondasGanadas() >= CANT_RONDAS_NECESARIAS) {
-                ganador = jugador;
+                juego.setGanador(jugador);
                 return true;
             }
         }
         return false;
+    }
+
+
+    public Jugador getJugadorActual() {
+        return rondaActual.getJugadorActual();
+    }
+
+    public void jugarCarta(int posicionCarta) {
+        rondaActual.jugarCarta(posicionCarta);
+    }
+
+    public void pasarTurno() {
+        rondaActual.pasarTurno();
+        comprobarFinDeRonda();
+    }
+
+    private void comprobarFinDeRonda() {
+        if (rondaActual.rondaFinalizada()){
+            terminarRonda();
+        }
+    }
+
+    private void terminarRonda() {
+        if (!hayGanador()) {
+            juego.limpiarTablero();
+            rondaActual = new Ronda(new ArrayList<>(jugadores));
+        }
     }
 
 
