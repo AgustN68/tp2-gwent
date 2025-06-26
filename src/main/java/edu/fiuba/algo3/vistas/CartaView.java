@@ -49,24 +49,36 @@ public class CartaView extends VBox {
         Region espacio = new Region();
         VBox.setVgrow(espacio, Priority.ALWAYS);
 
-        double iconSize = 15.0;
 
         // Valor de puntaje (solo para unidades)
         if (carta instanceof Unidad) {
             Unidad unidad = (Unidad) carta;
+            String nombreModificador = unidad.obtenerModificador().getClass().getSimpleName();
             int puntaje = unidad.getPuntaje().obtenerValor();
 
             // Mostramos puntaje
+            Label puntajeLabel = new Label(String.valueOf(puntaje));
+            puntajeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 8));
+            puntajeLabel.setTranslateX(-5.5);
+            puntajeLabel.setTranslateY(-5.5);
+
             StackPane puntajePane;
+
             try {
-                puntajePane = app.crearIcono("/imagenes/iconos/puntaje_normal.png", iconSize);
+                if (nombreModificador.equals("Legendaria")) {
+                    puntajePane = app.crearIcono("/imagenes/iconos/puntaje_legendaria.png", 30.0);
+                    puntajeLabel.setStyle("-fx-text-fill: #FFF;");
+                } else {
+                    puntajePane = app.crearIcono("/imagenes/iconos/puntaje_normal.png", 30.0);
+                    puntajeLabel.setStyle("-fx-text-fill: #000;");
+                }
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-
-            Label puntajeLabel = new Label(String.valueOf(puntaje));
-            puntajeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 8));
-            puntajeLabel.setStyle("-fx-text-fill: #000;");
+            StackPane.setAlignment(puntajeLabel, Pos.CENTER);
+            puntajePane.setTranslateX(-4.5);
+            puntajePane.setTranslateY(-4.5);
+            puntajePane.getChildren().add(puntajeLabel);
 
             getChildren().addAll(puntajePane, espacio);
 
@@ -79,12 +91,11 @@ public class CartaView extends VBox {
             inferiorBox.getChildren().add(espacioInferior);
 
             // Mostramos el modificador
-            String nombreModificador = unidad.obtenerModificador().getClass().getSimpleName();
-            if (!nombreModificador.equals("SinModificador")) {
+            if (!nombreModificador.equals("SinModificador") && !nombreModificador.equals("Legendaria")) {
                 String nombreModificadorImagen = nombreModificador.toLowerCase() + "_modificador.png";
                 StackPane modificadorPane;
                 try {
-                    modificadorPane = app.crearIcono("/imagenes/iconos/" + nombreModificadorImagen, iconSize);
+                    modificadorPane = app.crearIcono("/imagenes/iconos/" + nombreModificadorImagen, 15.0);
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
@@ -92,17 +103,16 @@ public class CartaView extends VBox {
 
             }
 
-            // Mostramos seccion
+            // Mostramos seccion TODO agil
             String nombreImagen = unidad.obtenerSecciones().get(0).getClass().getSimpleName().toLowerCase() + ".png";
             StackPane seccionPane;
             try {
-                seccionPane = app.crearIcono("/imagenes/iconos/" + nombreImagen, iconSize);
+                seccionPane = app.crearIcono("/imagenes/iconos/" + nombreImagen, 15.0);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
 
-            puntajePane.getChildren().add(puntajeLabel);
-            StackPane.setAlignment(puntajeLabel, Pos.CENTER);
+
 
             inferiorBox.getChildren().add(seccionPane);
 
@@ -114,7 +124,7 @@ public class CartaView extends VBox {
             String nombreImagen = especial.getNombre().toLowerCase().replace(" ", "_") + "_efecto.png";
             StackPane especialPane;
             try {
-                especialPane = app.crearIcono("/imagenes/iconos/" + nombreImagen, iconSize);
+                especialPane = app.crearIcono("/imagenes/iconos/" + nombreImagen, 15.0);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
