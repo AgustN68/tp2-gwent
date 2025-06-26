@@ -129,6 +129,7 @@ public class TableroView extends BorderPane {
 
             CartaView cartaView = new CartaView(carta, app, true);
             cartaView.setOnMouseClicked(e -> {
+                cartaView.setDisable(true); // Evita clicks múltiples
                 controller.jugarCarta(posicion);
                 actualizarVista();
             });

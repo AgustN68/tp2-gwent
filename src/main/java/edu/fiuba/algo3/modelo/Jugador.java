@@ -37,8 +37,8 @@ public class Jugador {
 
     public void usarCarta(int posicion) {
         Carta carta = mano.agarrarCarta(posicion);
-        descartarCarta(posicion);
         carta.usar();
+        pilaDeDescarte.descartarUna(carta);
     }
 
     public void descartarCarta(int posicion) {
