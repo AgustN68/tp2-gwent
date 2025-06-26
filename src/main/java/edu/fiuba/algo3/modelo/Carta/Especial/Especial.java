@@ -17,4 +17,10 @@ public abstract class Especial implements Carta {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public String getNombre() {
+        return this.nombre;
+    }
 }
+
+

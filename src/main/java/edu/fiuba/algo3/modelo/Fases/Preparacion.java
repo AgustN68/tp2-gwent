@@ -18,25 +18,23 @@ public class Preparacion extends Fase {
 
     @Override
     public void iniciarFase() {
-        prepararJugadores(jugadores);
 
-        List<Jugador> jugadores = moneda.elegirOrdenJugadores(this.jugadores);
+        Jugador jugador1 = juego.getJugador1();
+        Jugador jugador2 = juego.getJugador2();
 
-        juego.cambiarFase(new Juego(juego));
+        // Preparar jugadores (repartir cartas, etc.)
+        prepararJugadores(jugador1,jugador2);
 
+        // Determinar el orden de los jugadores usando la moneda
+        juego.setOrdenJugadores(moneda.elegirOrdenJugadores(jugador1, jugador2));
+        
     }
 
-    private void prepararJugadores(List<Jugador> jugadores) {
-        for (Jugador jugador : jugadores) {
-            jugador.tomarCartasMazo(CANT_CARTAS_MANO);
-            descarcarCartas(jugador);
-        }
-
+    private void prepararJugadores(Jugador jugador1, Jugador jugador2) {
+        jugador1.tomarCartasMazo(CANT_CARTAS_MANO);
+        jugador2.tomarCartasMazo(CANT_CARTAS_MANO);
     }
 
-    private void descarcarCartas(Jugador jugador) {
-        // mas adelante
-    }
 
 
 

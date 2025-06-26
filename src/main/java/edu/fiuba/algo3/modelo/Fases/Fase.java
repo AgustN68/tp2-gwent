@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Fase {
-    protected List<Jugador> jugadores;
     protected Gwent juego;
 
     public Fase(Gwent juego) {
@@ -15,5 +14,6 @@ public abstract class Fase {
     }
 
     public abstract void iniciarFase();
+
 
 }
