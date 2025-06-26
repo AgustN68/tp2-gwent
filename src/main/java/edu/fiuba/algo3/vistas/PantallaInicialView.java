@@ -63,7 +63,7 @@ public class PantallaInicialView extends StackPane {
             });
 
                 // Mensaje de continuar
-                Label mensaje = new Label("Click para continuar en el logo");
+                Label mensaje = new Label("Click en el logo para continuar");
                 mensaje.setStyle("-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;");
 
                 FadeTransition fade = new FadeTransition(Duration.seconds(1), mensaje);
