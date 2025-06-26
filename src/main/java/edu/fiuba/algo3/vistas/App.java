@@ -1,7 +1,12 @@
 package edu.fiuba.algo3.vistas;
 
 import javafx.application.Application;
+
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.File;
+import java.net.URL;
 
 /**
  * JavaFX App - Punto de entrada principal de la aplicación
