@@ -24,7 +24,7 @@ public class GwentController {
     private Gwent juego;
     private Jugador jugador1;
     private Jugador jugador2;
-    private Jugador jugadorActual;
+    //private Jugador jugadorActual;
     private boolean jugadorPaso;
     private boolean rivalPaso;
     private int rondaActual;
@@ -45,6 +45,8 @@ public class GwentController {
      * Este método evita usar la fase Inicial del juego para no bloquear la interfaz.
      */
     public void iniciarJuego(String nombreJugador1, String nombreJugador2) {
+        juego.iniciarJuego(nombreJugador1, nombreJugador2);
+        /*
         // Crear secciones para los tableros
         List<Seccion> seccionesJ1 = crearSecciones();
         List<Seccion> seccionesJ2 = crearSecciones();
@@ -69,12 +71,14 @@ public class GwentController {
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         this.juego.setJugadores(jugadores);
+
+         */
     }
 
     /**
      * Carga los mazos para ambos jugadores desde el archivo JSON
      */
-    private void cargarMazos() {
+    /*private void cargarMazos() {
         Lector lector = new LectorJson();
         List<Mazo> mazos = lector.leerMazos(RUTA_JSON, jugador1, jugador2);
 
@@ -86,7 +90,7 @@ public class GwentController {
 
     /**
      * Crea las secciones necesarias para un tablero (Cuerpo a Cuerpo, Rango, Asedio)
-     */
+
     private List<Seccion> crearSecciones() {
         List<Seccion> secciones = new ArrayList<>();
         secciones.add(new CuerpoACuerpo());
@@ -112,10 +116,11 @@ public class GwentController {
         Random random = new Random();
         return random.nextBoolean();
     }
-
+*/
     public void descartarCartas(Jugador jugador, List<Integer> posicionesCartas) {
         // Descarta las cartas seleccionadas y toma nuevas del mazo
         // Nota: las posiciones deben estar ordenadas de mayor a menor para no afectar los índices
+
         posicionesCartas.sort((a, b) -> b - a);
 
         for (int posicion : posicionesCartas) {
@@ -127,30 +132,17 @@ public class GwentController {
     }
 
     public void jugarCarta(int posicionCarta) {
-        if (!jugadorActual.verMano().isEmpty() && posicionCarta < jugadorActual.verMano().size()) {
-            jugadorActual.usarCarta(posicionCarta);
-            cambiarTurno();
-        }
+        juego.jugarCarta(posicionCarta);
     }
 
     public void pasarTurno() {
-        if (jugadorActual == jugador1) {
-            jugadorPaso = true;
-        } else {
-            rivalPaso = true;
-        }
-
-        if (jugadorPaso && rivalPaso) {
-            finalizarRonda();
-        } else {
-            cambiarTurno();
-        }
+        juego.pasarTurno();
     }
 
-    private void cambiarTurno() {
+    /*private void cambiarTurno() {
         jugadorActual = (jugadorActual == jugador1) ? jugador2 : jugador1;
     }
-
+*/
     private void finalizarRonda() {
         // Determinar ganador de la ronda
         int puntajeJ1 = jugador1.obtenerPuntaje().obtenerValor();
@@ -185,9 +177,9 @@ public class GwentController {
 
         // El perdedor de la ronda anterior comienza
         if (jugador1.obtenerPuntaje().obtenerValor() < jugador2.obtenerPuntaje().obtenerValor()) {
-            jugadorActual = jugador1;
+           // jugadorActual = jugador1;
         } else {
-            jugadorActual = jugador2;
+          //  jugadorActual = jugador2;
         }
     }
 
@@ -218,15 +210,15 @@ public class GwentController {
 
     // Getters y setters
     public Jugador getJugador1() {
-        return jugador1;
+        return juego.getJugador1();
     }
 
     public Jugador getJugador2() {
-        return jugador2;
+        return juego.getJugador2();
     }
 
     public Jugador getJugadorActual() {
-        return jugadorActual;
+        return juego.jugadorActual();
     }
 
     public int getRondaActual() {
@@ -235,5 +227,9 @@ public class GwentController {
 
     public Gwent getJuego() {
         return juego;
+    }
+
+    public void iniciarFaseJuego() {
+        juego.iniciarFaseJuego();
     }
 }

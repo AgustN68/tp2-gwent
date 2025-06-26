@@ -124,6 +124,7 @@ public class PreparacionView extends BorderPane {
             ((Label)((VBox)getTop()).getChildren().get(1)).setText("Turno de: " + jugadorActual.getNombre());
         } else {
             // Ambos jugadores han terminado la fase de preparación
+            controller.iniciarFaseJuego();
             app.mostrarPantallaJuego();
         }
     }

@@ -68,7 +68,6 @@ public class InicioView extends VBox {
         controller.iniciarJuego(nombreJ1, nombreJ2);
 
         // Pasar a la fase de preparación
-        controller.iniciarFasePreparacion();
         app.mostrarPantallaPreparacion();
     }
 }

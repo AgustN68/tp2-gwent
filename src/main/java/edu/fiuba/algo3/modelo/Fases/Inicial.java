@@ -14,39 +14,41 @@ import java.util.List;
 public class Inicial extends Fase {
 
     private static final String RUTA_JSON = "src/main/java/edu/fiuba/algo3/archivos/gwent.json";
-    private static final int CANT_JUGADORES = 2;
+    private String nombreJugador1;
+    private String nombreJugador2;
+    private Jugador jugador1;
+    private Jugador jugador2;
 
     private Lector lector = new LectorJson();
 
-    public Inicial(Gwent juego) {
+    public Inicial(Gwent juego, String nombreJugador1, String nombreJugador2) {
         super(juego);
+        this.nombreJugador1 = nombreJugador1;
+        this.nombreJugador2 = nombreJugador2;
     }
 
 
     @Override
     public void iniciarFase() {
         prepararJugadores();
-        juego.setJugadores(jugadores);
+        juego.setJugadores(jugador1, jugador2);
         juego.cambiarFase(new Preparacion(juego));
     }
 
     private void prepararJugadores() {
         crearJugadores();
 
-        List <Mazo> mazos = lector.leerMazos(RUTA_JSON, jugadores.get(0), jugadores.get(1));
+        List <Mazo> mazos = lector.leerMazos(RUTA_JSON, jugador1, jugador2);
 
-        int indice = 0;
-        for (Jugador jugador : jugadores) {
-            jugador.setMazo(mazos.get(indice));
-            jugador.setNombre("Jugador " + indice);
-            indice++;
-        }
+        jugador1.setMazo(mazos.get(0));
+        jugador2.setMazo(mazos.get(1));
     }
 
     private void crearJugadores() {
-        for (int i = 0; i < CANT_JUGADORES; i++) {
-            jugadores.add(new Jugador(crearTablero(),new PilaDeDescarte()));
-        }
+        jugador1 = new Jugador(crearTablero(),new PilaDeDescarte());
+        jugador1.setNombre(nombreJugador1);
+        jugador2 = new Jugador(crearTablero(), new PilaDeDescarte());
+        jugador2.setNombre(nombreJugador2);
     }
 
     private Tablero crearTablero() {
@@ -60,4 +62,12 @@ public class Inicial extends Fase {
         return tablero;
 
     }
+
+    /**
+     * Establece la lista de jugadores para esta fase
+     * @param jugadores Lista de jugadores a establecer
+     */
+   /* public void setJugadores() {
+        this.jugadores = jugadores;
+    }*/
 }
