@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vistas;
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
@@ -13,6 +14,8 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * Componente visual para representar una carta en la interfaz
@@ -103,16 +106,21 @@ public class CartaView extends VBox {
 
             }
 
-            // Mostramos seccion TODO agil
-            String nombreImagen = unidad.obtenerSecciones().get(0).getClass().getSimpleName().toLowerCase() + ".png";
+            // Mostramos seccion
+            List<Seccion> secciones = unidad.obtenerSecciones();
+            String nombreImagen;
+            // TODO aca hay un problema con los agiles: al jugar una carta agil, parece vaciar su lista de secciones
+            if (secciones.size() != 1) {
+                nombreImagen = "cuerpoacuerpo_rango_seccion.png";
+            } else {
+                nombreImagen = unidad.obtenerSecciones().get(0).getClass().getSimpleName().toLowerCase() + "_seccion.png";
+            }
             StackPane seccionPane;
             try {
                 seccionPane = app.crearIcono("/imagenes/iconos/" + nombreImagen, 15.0);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-
-
 
             inferiorBox.getChildren().add(seccionPane);
 
@@ -181,18 +189,18 @@ public class CartaView extends VBox {
      */
     private String obtenerNombreCarta(Carta carta) {
         // Usar instanceof para determinar el tipo de carta
-        if (carta instanceof edu.fiuba.algo3.modelo.Carta.Unidad) {
-            edu.fiuba.algo3.modelo.Carta.Unidad unidad = (edu.fiuba.algo3.modelo.Carta.Unidad) carta;
+        if (carta instanceof Unidad) {
+            Unidad unidad = (Unidad) carta;
             try {
-                java.lang.reflect.Method metodo = unidad.getClass().getMethod("getNombre");
+                Method metodo = unidad.getClass().getMethod("getNombre");
                 return (String) metodo.invoke(unidad);
             } catch (Exception e) {
                 // Si no tiene el método, mostrar el nombre de la clase
                 return "Unidad";
             }
-        } else if (carta instanceof edu.fiuba.algo3.modelo.Carta.Especial.Especial) {
+        } else if (carta instanceof Especial) {
             try {
-                java.lang.reflect.Method metodo = carta.getClass().getMethod("getNombre");
+                Method metodo = carta.getClass().getMethod("getNombre");
                 return (String) metodo.invoke(carta);
             } catch (Exception e) {
                 // Si no tiene el método, mostrar el tipo de carta especial
