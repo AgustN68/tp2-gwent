@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.geometry.Insets;
@@ -10,7 +9,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -19,11 +18,14 @@ import java.util.List;
  */
 public class SeccionView extends HBox {
 
+    private final double PADDING_CARTAS_PANE = 2;
     private Seccion seccion;
     private String nombreSeccion;
     private String nombreJugador;
     private GwentApp app;
     private Integer jugadorId;
+    private Boolean jugable = false;
+    private Integer posicionCartaSeleccionada = null;
 
     public SeccionView(Seccion seccion, String nombreSeccion, String nombreJugador, GwentApp app, Integer jugadorId) {
         this.seccion = seccion;
@@ -58,34 +60,19 @@ public class SeccionView extends HBox {
 
         puntajePane.getChildren().add(puntajeLabel);
 
-        /*
-        // Mostrar nombre de la sección
-        Label nombreSeccionLabel = new Label(nombreSeccion);
-        nombreSeccionLabel.setAlignment(Pos.CENTER);
-        nombreSeccionLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        nombreSeccionLabel.setStyle("-fx-text-fill: #FFFFFF;");
-        nombreSeccionLabel.setWrapText(true);
-        nombreSeccionLabel.setMaxWidth(80);
-
-        VBox informacionPane = new VBox(10);
-        informacionPane.setAlignment(Pos.CENTER);
-        informacionPane.setPrefWidth(80);
-        informacionPane.getChildren().addAll(puntajeLabel, nombreSeccionLabel);
-         */
-
         // Contenedor para las cartas
-        double paddingCartasPane = 2;
+
         HBox cartasPane = new HBox(2);
         setStyle(
                 "-fx-background-color: rgba(70,70,70,0.5);" +
-                "-fx-padding: " + paddingCartasPane + ";" +
+                "-fx-padding: " + PADDING_CARTAS_PANE + ";" +
                 "-fx-border-color: #000;" +
                 "-fx-border-width: 2;" +
                 "-fx-border-radius: 5;" +
                 "-fx-background-radius: 5"
         );
         cartasPane.setAlignment(Pos.CENTER);
-        cartasPane.setMinHeight(CartaView.getAlto()+2*paddingCartasPane+2);
+        cartasPane.setMinHeight(CartaView.getAlto()+2*PADDING_CARTAS_PANE+2);
         HBox.setHgrow(cartasPane, Priority.ALWAYS);
 
         // Agregar las cartas a la sección
@@ -99,13 +86,53 @@ public class SeccionView extends HBox {
 
         setOnMouseEntered(e -> {
             setViewOrder(-1.0);
+            if (jugable) {
+                setBorder(new Border(new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
+            }
         });
         setOnMouseExited(e -> {
             setViewOrder(0.0);
+            setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
         });
     }
 
     public Seccion getSeccion() {
         return seccion;
+    }
+
+    public void seccionSeleccionada(int posicion, String nombreJugador, String nombreSeccion) {
+        if (this.nombreJugador.equals(nombreJugador) && this.nombreSeccion.equals(nombreSeccion)) {
+            jugable = true;
+            posicionCartaSeleccionada = posicion;
+            setStyle(
+                    "-fx-background-color: rgba(255, 255, 0, 0.5);" +
+                    "-fx-padding: " + PADDING_CARTAS_PANE + ";" +
+                    "-fx-border-color: #000;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-border-radius: 5;" +
+                    "-fx-background-radius: 5"
+            );
+        }
+    }
+
+    public void seccionDeseleccionar() {
+        jugable = false;
+        posicionCartaSeleccionada = null;
+        setStyle(
+                "-fx-background-color: rgba(70,70,70,0.5);" +
+                "-fx-padding: " + PADDING_CARTAS_PANE + ";" +
+                "-fx-border-color: #000;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5"
+        );
+    }
+
+    public boolean esJugable() {
+        return jugable;
+    }
+
+    public int obtenerPosicionCartaSeleccionada() {
+        return posicionCartaSeleccionada;
     }
 }

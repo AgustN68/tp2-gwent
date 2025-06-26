@@ -2,10 +2,12 @@ package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.controllers.GwentController;
 import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -17,6 +19,7 @@ public class TableroView extends BorderPane {
 
     private GwentController controller;
     private GwentApp app;
+    VBox tableroBox;
 
     public TableroView(GwentController controller, GwentApp app) {
         this.controller = controller;
@@ -76,7 +79,7 @@ public class TableroView extends BorderPane {
 
     private void configurarTablero() {
         // Contenedor principal para el tablero
-        VBox tableroBox = new VBox(2);
+        tableroBox = new VBox(2);
         tableroBox.setAlignment(Pos.CENTER);
         tableroBox.setPadding(new Insets(0));
 
@@ -91,13 +94,22 @@ public class TableroView extends BorderPane {
         if (seccionesJ1.size() >= 3 && seccionesJ2.size() >= 3) {
             // Añadir las secciones al tablero en el orden requerido
             tableroBox.getChildren().addAll(
-                    new SeccionView(seccionesJ2.get(2), "ASEDIO", jugador2.getNombre(), app, 2),
-                    new SeccionView(seccionesJ2.get(1), "DISTANCIA", jugador2.getNombre(), app, 2),
-                    new SeccionView(seccionesJ2.get(0), "CUERPO A CUERPO", jugador2.getNombre(), app, 2),
-                    new SeccionView(seccionesJ1.get(0), "CUERPO A CUERPO", jugador1.getNombre(), app, 1),
-                    new SeccionView(seccionesJ1.get(1), "DISTANCIA", jugador1.getNombre(), app, 1),
-                    new SeccionView(seccionesJ1.get(2), "ASEDIO", jugador1.getNombre(), app, 1)
+                    new SeccionView(seccionesJ2.get(2), "Asedio", jugador2.getNombre(), app, 2),
+                    new SeccionView(seccionesJ2.get(1), "Rango", jugador2.getNombre(), app, 2),
+                    new SeccionView(seccionesJ2.get(0), "CuerpoACuerpo", jugador2.getNombre(), app, 2),
+                    new SeccionView(seccionesJ1.get(0), "CuerpoACuerpo", jugador1.getNombre(), app, 1),
+                    new SeccionView(seccionesJ1.get(1), "Rango", jugador1.getNombre(), app, 1),
+                    new SeccionView(seccionesJ1.get(2), "Asedio", jugador1.getNombre(), app, 1)
             );
+        }
+
+        for (Node seccionView : tableroBox.getChildren()) {
+            SeccionView view = (SeccionView) seccionView;
+            view.setOnMouseClicked(e -> {
+                if (view.esJugable()) {
+                    jugarCarta(CartaView.getCartaSeleccionada(), view.obtenerPosicionCartaSeleccionada());
+                }
+            });
         }
 
         // Backgound del tablero
@@ -111,6 +123,12 @@ public class TableroView extends BorderPane {
         setCenter(tableroBox);
     }
 
+    private void jugarCarta(CartaView cartaView, int posicion) {
+        cartaView.setDisable(true); // Evita clicks múltiples
+        controller.jugarCarta(posicion);
+        actualizarVista();
+    }
+
     private void configurarManoYAcciones() {
         HBox contenedorInferior = new HBox(5);
         contenedorInferior.setAlignment(Pos.CENTER_LEFT);
@@ -118,20 +136,34 @@ public class TableroView extends BorderPane {
 
         // Mostrar las cartas en la mano del jugador actual
         HBox manoBox = new HBox(2);
-        manoBox.setAlignment(Pos.CENTER);
+        manoBox.setAlignment(Pos.BOTTOM_CENTER);
         manoBox.setPadding(new Insets(5));
+        manoBox.setMinHeight(CartaView.getAlto()+80);
         HBox.setHgrow(manoBox, Priority.ALWAYS);
 
-        List<Carta> cartasEnMano = controller.getJugadorActual().verMano();
+        Jugador jugadorActual = controller.getJugadorActual();
+        List<Carta> cartasEnMano = jugadorActual.verMano();
         for (int i = 0; i < cartasEnMano.size(); i++) {
             Carta carta = cartasEnMano.get(i);
             final int posicion = i;
 
             CartaView cartaView = new CartaView(carta, app, true);
             cartaView.setOnMouseClicked(e -> {
-                cartaView.setDisable(true); // Evita clicks múltiples
-                controller.jugarCarta(posicion);
-                actualizarVista();
+
+                // Solo permitir click si no hay carta levantada/seleccionada
+                CartaView cartaSeleccionada = CartaView.getCartaSeleccionada();
+                if (cartaSeleccionada == null) {
+                    if (carta instanceof Unidad) {
+                        seleccionarUnidad(posicion, jugadorActual, cartaView);
+                    } else {
+                        jugarCarta(cartaView, posicion);
+                    }
+                } else if (cartaView.equals(cartaSeleccionada)) {
+                    cartaView.deseleccionarCarta();
+                    for (Node seccionView : tableroBox.getChildren()) {
+                        ((SeccionView) seccionView).seccionDeseleccionar();
+                    }
+                }
             });
 
             manoBox.getChildren().add(cartaView);
@@ -142,8 +174,20 @@ public class TableroView extends BorderPane {
         setBottom(contenedorInferior);
     }
 
+    private void seleccionarUnidad(int posicion, Jugador jugadorActual, CartaView cartaViewUnidad) {
+        cartaViewUnidad.seleccionarCarta();
+        List<Seccion> secciones = ((Unidad)cartaViewUnidad.getCarta()).obtenerSecciones();
+        for (Seccion seccion : secciones) {
+            for (Node seccionView : tableroBox.getChildren()) {
+                ((SeccionView) seccionView).seccionSeleccionada(posicion, jugadorActual.getNombre(), seccion.getClass().getSimpleName());
+            }
+        }
+    }
+
     // Actualizar la vista cuando cambie el estado del juego
     public void actualizarVista() {
+        CartaView.resetCartaSeleccionada();
+
         // Eliminar todos los nodos actuales
         getChildren().clear();
 
