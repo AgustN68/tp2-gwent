@@ -1,13 +1,12 @@
 package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import javafx.geometry.Insets;
+import javafx.animation.FadeTransition;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import javax.swing.border.Border;
+import javafx.util.Duration;
 import java.io.FileNotFoundException;
 
 public class JugadorView extends BorderPane {
@@ -87,5 +86,24 @@ public class JugadorView extends BorderPane {
         cartasYVidasBox.getChildren().addAll(cartasPane, cartasRestantesLabel, espacio, vidasPane, rondasGanadasLabel);
 
         setTop(cartasYVidasBox);
+    }
+
+    public void actualizarTurno(String nombreJugadorActual) {
+        // Actualizar el estilo del jugador actual
+        if (jugador.getNombre().equals(nombreJugadorActual)) {
+            setStyle("-fx-background-color: rgba(255, 215, 0, 0.5); -fx-padding: 10; -fx-border-color: #000; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-radius: 5");
+            // Transición de resaltado al cambiar el turno
+            FadeTransition ft = new FadeTransition(Duration.seconds(1.0), this);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.5);
+            ft.setCycleCount(8); // cada ciclo es un medio
+            ft.setRate(4); // ciclos por segundo
+            ft.setAutoReverse(true);
+            ft.setOnFinished(ev -> setOpacity(1.0));
+            ft.play();
+        } else {
+            setStyle("-fx-background-color: rgba(120, 120, 120, 0.5); -fx-padding: 10; -fx-border-color: #000; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-radius: 5");
+            setOpacity(1.0);
+        }
     }
 }

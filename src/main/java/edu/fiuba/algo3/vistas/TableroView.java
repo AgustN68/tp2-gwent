@@ -45,10 +45,7 @@ public class TableroView extends BorderPane {
         VBox informacionBox = new VBox(10);
         informacionBox.setAlignment(Pos.CENTER);
 
-        // Mostrar el turno actual
-        Label turnoLabel = new Label("Turno de:\n" + controller.getJugadorActual().getNombre());
-        turnoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28));
-        turnoLabel.setStyle("-fx-text-fill: #FFFFFF;");
+
 
         // Botones de acción
         Button pasarButton = new Button("Pasar");
@@ -59,10 +56,16 @@ public class TableroView extends BorderPane {
             actualizarVista();
         });
 
+        JugadorView jugador1View = new JugadorView(app, controller.getJugador1(), 1);
+        JugadorView jugador2View = new JugadorView(app, controller.getJugador2(), 2);
+
+        // Mostrar el turno actual
+        jugador1View.actualizarTurno(controller.getJugadorActual().getNombre());
+        jugador2View.actualizarTurno(controller.getJugadorActual().getNombre());
+
         informacionBox.getChildren().addAll(
-                turnoLabel,
-                new JugadorView(app, controller.getJugador2(), 2),
-                new JugadorView(app, controller.getJugador1(), 1),
+                jugador2View,
+                jugador1View,
                 pasarButton
         );
 

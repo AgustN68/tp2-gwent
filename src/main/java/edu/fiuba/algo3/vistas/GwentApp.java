@@ -23,34 +23,21 @@ public class GwentApp extends Application {
 
         //aca cargo las propiedades de la ventana
         stage.setTitle("Gwent");
-        primaryStage.setMinWidth(1800);
+        primaryStage.setMinWidth(1280); // proporcion 9/16
         primaryStage.setMinHeight(720);
 
-        Image icono = new Image("file:src/main/resources/imagenes/logo/logo_gwent.png"); // o la ruta que corresponda
+        Image icono = new Image("file:src/main/resources/imagenes/logo/logo_gwent.png");
         stage.getIcons().add(icono);
 
-        // Configuración básica de la ventana
-        /*primaryStage.setTitle("Gwent - TP2");
-        primaryStage.setMinWidth(1024);
-        primaryStage.setMinHeight(768);
-        */
-        //Yoooo, pantalla bienvenida
         mostrarPantallaBienvenida();
-
-        // Mostrar la pantalla inicial para ingresar nombres
-        //mostrarPantallaInicial();
 
         primaryStage.show();
     }
 
-    /////// agrego yo
     public void mostrarPantallaBienvenida(){
         PantallaInicialView bienvenidaView = new PantallaInicialView(controller, this);
         Scene scene = new Scene(bienvenidaView, 1024,720);
         primaryStage.setScene(scene);
-        //Scene scene = new Scene(bienvenidaView);
-        //primaryStage.setScene(scene);
-        //primaryStage.sizeToScene();
     }
 
     public void mostrarPantallaInicial() {

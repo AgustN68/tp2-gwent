@@ -76,11 +76,16 @@ public class SeccionView extends HBox {
         // Contenedor para las cartas
         double paddingCartasPane = 2;
         HBox cartasPane = new HBox(2);
+        setStyle(
+                "-fx-background-color: rgba(70,70,70,0.5);" +
+                "-fx-padding: " + paddingCartasPane + ";" +
+                "-fx-border-color: #000;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5"
+        );
         cartasPane.setAlignment(Pos.CENTER);
-        cartasPane.setPadding(new Insets(paddingCartasPane));
-        cartasPane.setStyle("-fx-border-color: gray; -fx-border-width: 1px;");
         cartasPane.setMinHeight(CartaView.getAlto()+2*paddingCartasPane+2);
-
         HBox.setHgrow(cartasPane, Priority.ALWAYS);
 
         // Agregar las cartas a la sección
