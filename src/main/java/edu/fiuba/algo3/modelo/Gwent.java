@@ -62,7 +62,15 @@ public class Gwent {
         ganador = jugador;
     }
 
+    public Jugador getGanador() {
+        return ganador;
+    }
+
     // Falta implementacion
     public void limpiarTablero() {
+    }
+
+    public boolean hayGanador() {
+        return ganador != null;
     }
 }

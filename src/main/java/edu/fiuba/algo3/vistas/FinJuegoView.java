@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ public class FinJuegoView extends VBox {
 
     private GwentApp app;
 
-    public FinJuegoView(String ganador, GwentApp app) {
+    public FinJuegoView(Jugador ganador, GwentApp app) {
         this.app = app;
 
         setPadding(new Insets(50));
@@ -25,7 +26,7 @@ public class FinJuegoView extends VBox {
         tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 48));
 
         // Mensaje de ganador
-        Label ganadorLabel = new Label("El ganador es: " + ganador);
+        Label ganadorLabel = new Label("El ganador es: " + ganador.getNombre());
         ganadorLabel.setFont(Font.font("Arial", FontWeight.BOLD, 32));
 
         // Botón para jugar de nuevo

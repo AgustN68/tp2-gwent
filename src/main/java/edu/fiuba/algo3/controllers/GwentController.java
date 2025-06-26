@@ -46,77 +46,8 @@ public class GwentController {
      */
     public void iniciarJuego(String nombreJugador1, String nombreJugador2) {
         juego.iniciarJuego(nombreJugador1, nombreJugador2);
-        /*
-        // Crear secciones para los tableros
-        List<Seccion> seccionesJ1 = crearSecciones();
-        List<Seccion> seccionesJ2 = crearSecciones();
-
-        // Crear tableros
-        Tablero tableroJ1 = new Tablero(seccionesJ1);
-        Tablero tableroJ2 = new Tablero(seccionesJ2);
-
-        // Crear jugadores
-        this.jugador1 = new Jugador(tableroJ1, new PilaDeDescarte());
-        this.jugador2 = new Jugador(tableroJ2, new PilaDeDescarte());
-
-        // Establecer nombres
-        this.jugador1.setNombre(nombreJugador1);
-        this.jugador2.setNombre(nombreJugador2);
-
-        // Cargar los mazos
-        cargarMazos();
-
-        // Crear lista de jugadores y establecerla en el juego
-        List<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-        this.juego.setJugadores(jugadores);
-
-         */
     }
 
-    /**
-     * Carga los mazos para ambos jugadores desde el archivo JSON
-     */
-    /*private void cargarMazos() {
-        Lector lector = new LectorJson();
-        List<Mazo> mazos = lector.leerMazos(RUTA_JSON, jugador1, jugador2);
-
-        if (mazos != null && mazos.size() >= 2) {
-            jugador1.setMazo(mazos.get(0));
-            jugador2.setMazo(mazos.get(1));
-        }
-    }
-
-    /**
-     * Crea las secciones necesarias para un tablero (Cuerpo a Cuerpo, Rango, Asedio)
-
-    private List<Seccion> crearSecciones() {
-        List<Seccion> secciones = new ArrayList<>();
-        secciones.add(new CuerpoACuerpo());
-        secciones.add(new Rango());
-        secciones.add(new Asedio());
-        return secciones;
-    }
-
-    public void iniciarFasePreparacion() {
-        // Repartir 10 cartas a cada jugador
-        jugador1.tomarCartasMazo(10);
-        jugador2.tomarCartasMazo(10);
-
-        // Por defecto, se elige aleatoriamente quién va primero
-        this.jugadorActual = tirarMoneda() ? jugador1 : jugador2;
-
-        // Resetear estados de pase para la ronda
-        jugadorPaso = false;
-        rivalPaso = false;
-    }
-
-    public boolean tirarMoneda() {
-        Random random = new Random();
-        return random.nextBoolean();
-    }
-*/
     public void descartarCartas(Jugador jugador, List<Integer> posicionesCartas) {
         // Descarta las cartas seleccionadas y toma nuevas del mazo
         // Nota: las posiciones deben estar ordenadas de mayor a menor para no afectar los índices
@@ -137,74 +68,15 @@ public class GwentController {
 
     public void pasarTurno() {
         juego.pasarTurno();
-    }
-
-    /*private void cambiarTurno() {
-        jugadorActual = (jugadorActual == jugador1) ? jugador2 : jugador1;
-    }
-*/
-    private void finalizarRonda() {
-        // Determinar ganador de la ronda
-        int puntajeJ1 = jugador1.obtenerPuntaje().obtenerValor();
-        int puntajeJ2 = jugador2.obtenerPuntaje().obtenerValor();
-
-        if (puntajeJ1 > puntajeJ2) {
-            jugador1.aumentarRondasGanadas();
-        } else if (puntajeJ2 > puntajeJ1) {
-            jugador2.aumentarRondasGanadas();
-        } else {
-            // En caso de empate, ambos ganan
-            jugador1.aumentarRondasGanadas();
-            jugador2.aumentarRondasGanadas();
-        }
-
-        // Verificar si alguien ganó el juego
-        if (jugador1.rondasGanadas() >= 2 || jugador2.rondasGanadas() >= 2) {
+        if (juego.hayGanador()) {
             finalizarJuego();
-        } else {
-            // Preparar la siguiente ronda
-            prepararSiguienteRonda();
-        }
-    }
-
-    private void prepararSiguienteRonda() {
-        // Incrementar contador de rondas
-        rondaActual++;
-
-        // Resetear estados de pase
-        jugadorPaso = false;
-        rivalPaso = false;
-
-        // El perdedor de la ronda anterior comienza
-        if (jugador1.obtenerPuntaje().obtenerValor() < jugador2.obtenerPuntaje().obtenerValor()) {
-           // jugadorActual = jugador1;
-        } else {
-          //  jugadorActual = jugador2;
         }
     }
 
     private void finalizarJuego() {
-        // Determinar el ganador final
-        String nombreGanador;
-        if (jugador1.rondasGanadas() > jugador2.rondasGanadas()) {
-            nombreGanador = jugador1.getNombre();
-        } else if (jugador2.rondasGanadas() > jugador1.rondasGanadas()) {
-            nombreGanador = jugador2.getNombre();
-        } else {
-            // En caso de empate (no debería ocurrir con 2 rondas ganadas)
-            Puntaje puntajeJ1 = jugador1.obtenerPuntaje();
-            Puntaje puntajeJ2 = jugador2.obtenerPuntaje();
-
-            if (puntajeJ1.obtenerValor() > puntajeJ2.obtenerValor()) {
-                nombreGanador = jugador1.getNombre();
-            } else {
-                nombreGanador = jugador2.getNombre();
-            }
-        }
-
         // Mostrar la pantalla final con el ganador
         if (app != null) {
-            app.mostrarPantallaFinal(nombreGanador);
+            app.mostrarPantallaFinal(juego.getGanador());
         }
     }
 

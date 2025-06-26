@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -78,7 +79,7 @@ public class GwentApp extends Application {
         primaryStage.setScene(scene);
     }
 
-    public void mostrarPantallaFinal(String ganador) {
+    public void mostrarPantallaFinal(Jugador ganador) {
         double width = 1280, height = 720;
         if (primaryStage.getScene() != null) {
             width = primaryStage.getScene().getWidth();
