@@ -113,5 +113,13 @@ public class Unidad implements Carta {
     public Puntaje getPuntaje() {
         return puntaje;
     }
+
+    public List<Seccion> obtenerSecciones() {
+        return secciones;
+    }
+
+    public Modificador obtenerModificador() {
+        return modificador;
+    }
 }
 

@@ -35,32 +35,57 @@ public class GwentApp extends Application {
     }
 
     public void mostrarPantallaBienvenida(){
+        double width = 1280, height = 720;
+        if (primaryStage.getScene() != null) {
+            width = primaryStage.getScene().getWidth();
+            height = primaryStage.getScene().getHeight();
+        }
         PantallaInicialView bienvenidaView = new PantallaInicialView(controller, this);
-        Scene scene = new Scene(bienvenidaView, 1024,720);
+        Scene scene = new Scene(bienvenidaView, width, height);
         primaryStage.setScene(scene);
     }
 
     public void mostrarPantallaInicial() {
+        double width = 1280, height = 720;
+        if (primaryStage.getScene() != null) {
+            width = primaryStage.getScene().getWidth();
+            height = primaryStage.getScene().getHeight();
+        }
         InicioView inicioView = new InicioView(controller, this);
-        Scene scene = new Scene(inicioView, 1024, 768);
+        Scene scene = new Scene(inicioView, width, height);
         primaryStage.setScene(scene);
     }
 
     public void mostrarPantallaPreparacion() {
+        double width = 1280, height = 720;
+        if (primaryStage.getScene() != null) {
+            width = primaryStage.getScene().getWidth();
+            height = primaryStage.getScene().getHeight();
+        }
         PreparacionView preparacionView = new PreparacionView(controller, this);
-        Scene scene = new Scene(preparacionView, 1024, 768);
+        Scene scene = new Scene(preparacionView, width, height);
         primaryStage.setScene(scene);
     }
 
     public void mostrarPantallaJuego() {
+        double width = 1280, height = 720;
+        if (primaryStage.getScene() != null) {
+            width = primaryStage.getScene().getWidth();
+            height = primaryStage.getScene().getHeight();
+        }
         TableroView tableroView = new TableroView(controller, this);
-        Scene scene = new Scene(tableroView, 1024, 768);
+        Scene scene = new Scene(tableroView, width, height);
         primaryStage.setScene(scene);
     }
 
     public void mostrarPantallaFinal(String ganador) {
+        double width = 1280, height = 720;
+        if (primaryStage.getScene() != null) {
+            width = primaryStage.getScene().getWidth();
+            height = primaryStage.getScene().getHeight();
+        }
         FinJuegoView finJuegoView = new FinJuegoView(ganador, this);
-        Scene scene = new Scene(finJuegoView, 1024, 768);
+        Scene scene = new Scene(finJuegoView, width, height);
         primaryStage.setScene(scene);
     }
 

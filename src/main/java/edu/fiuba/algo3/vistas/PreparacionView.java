@@ -28,14 +28,24 @@ public class PreparacionView extends BorderPane {
         this.app = app;
         this.jugadorActual = controller.getJugador1(); // Comenzamos con el jugador 1
 
+        try {
+            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/fondos/tablero.jpg")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         setPadding(new Insets(20));
 
         // Sección superior - Título y jugador actual
         Label tituloLabel = new Label("FASE DE PREPARACIÓN");
         tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 32));
+        tituloLabel.setStyle("-fx-text-fill: #FFFFFF;");
+
 
         Label jugadorLabel = new Label("Turno de: " + jugadorActual.getNombre());
         jugadorLabel.setFont(Font.font("Arial", 18));
+        jugadorLabel.setStyle("-fx-text-fill: #FFFFFF;");
+
 
         VBox headerBox = new VBox(10, tituloLabel, jugadorLabel);
         headerBox.setAlignment(Pos.CENTER);
@@ -89,6 +99,8 @@ public class PreparacionView extends BorderPane {
         // Instrucciones
         Label instruccionesLabel = new Label("Selecciona hasta 2 cartas para descartar");
         instruccionesLabel.setFont(Font.font("Arial", 16));
+        instruccionesLabel.setStyle("-fx-text-fill: #FFFFFF;");
+
 
         VBox centerBox = new VBox(20, instruccionesLabel, cartasPane);
         centerBox.setAlignment(Pos.CENTER);

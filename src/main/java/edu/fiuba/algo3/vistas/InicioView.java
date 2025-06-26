@@ -38,10 +38,12 @@ public class InicioView extends VBox {
         // Título
         Label tituloLabel = new Label("GWENT");
         tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 48));
+        tituloLabel.setStyle("-fx-text-fill: #FFFFFF;");
 
         // Formulario para jugador 1
         Label jugador1Label = new Label("Nombre del Jugador 1:");
         jugador1Label.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        jugador1Label.setStyle("-fx-text-fill: #FFFFFF;");
         nombreJugador1Field = new TextField();
         nombreJugador1Field.setMaxWidth(300);
         nombreJugador1Field.setPromptText("Ingrese nombre del Jugador 1");
@@ -49,6 +51,7 @@ public class InicioView extends VBox {
         // Formulario para jugador 2
         Label jugador2Label = new Label("Nombre del Jugador 2:");
         jugador2Label.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        jugador2Label.setStyle("-fx-text-fill: #FFFFFF;");
         nombreJugador2Field = new TextField();
         nombreJugador2Field.setMaxWidth(300);
         nombreJugador2Field.setPromptText("Ingrese nombre del Jugador 2");

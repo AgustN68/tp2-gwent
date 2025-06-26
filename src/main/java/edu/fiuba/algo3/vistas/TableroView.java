@@ -7,16 +7,10 @@ import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
 
 public class TableroView extends BorderPane {
@@ -109,7 +103,7 @@ public class TableroView extends BorderPane {
         // Backgound del tablero
 
         try {
-            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/tablero.jpg")));
+            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/fondos/tablero.jpg")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
