@@ -68,4 +68,35 @@ public class ManoTest {
 
         assertEquals(1, cartas.size());
     }
+
+    @Test
+    public void test04AgarrarCartaPasandoleUnaPocisionNegativaYDebeDarError() {
+        Modificador modificador = new SinModificador();
+        Asedio asedio = new Asedio();
+
+        List<Carta> cartas = new ArrayList<>();
+        cartas.add(new Unidad("Nombre", asedio, 7, modificador));
+        cartas.add(new Unidad("Nombre", asedio, 3, modificador));
+
+        Mano mano = new Mano(cartas);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {mano.agarrarCarta(-1);
+        });
+    }
+
+    @Test
+    public void test05AgarrarCartaPasandoleUnaPocisionMayorALaPermitidaYDebeDarError() {
+        Modificador modificador = new SinModificador();
+        Asedio asedio = new Asedio();
+
+        List<Carta> cartas = new ArrayList<>();
+        cartas.add(new Unidad("Nombre", asedio, 7, modificador));
+        cartas.add(new Unidad("Nombre", asedio, 3, modificador));
+
+        Mano mano = new Mano(cartas);
+
+        assertThrows(IndexOutOfBoundsException.class, () -> {mano.agarrarCarta(5);
+        });
+    }
+
 }
