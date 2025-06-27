@@ -24,7 +24,16 @@ public class Ronda {
         jugador1 = jugadores.get(0);
         jugador2 = jugadores.get(1);
         jugadoresEnRonda = jugadores;
+        limpiarClimas();
 
+    }
+
+    private void limpiarClimas() {
+        Tablero tablero1 = jugador1.getTablero();
+        Tablero tablero2 = jugador2.getTablero();
+
+        tablero1.limpiarClima(new Despejado(tablero1,tablero2));
+        tablero2.limpiarClima(new Despejado(tablero1,tablero2));
     }
 
     private void finalizarRonda() {
@@ -106,4 +115,6 @@ public class Ronda {
     public void pasarTurno() {
         pasar(jugadorActual);
     }
+
+
 }
