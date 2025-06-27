@@ -1,0 +1,29 @@
+@startuml Proceso de Creación de una Unidad Agil
+title Diagrama de Secuencia - Proceso de Creación de una Unidad "Agil"
+
+' Definir participantes
+actor Json
+participant "Jugador1: Jugador" as J1
+participant "mano: Mano" as M
+participant "Unidad" as UN
+participant "Modificador" as MOD
+
+participant "unidad: Unidad" as C
+participant "asedio: Asedio" as A
+participant "modificador: Agil" as U
+
+' Interacciones
+
+Json -> MOD: new Agil(Secciones)
+Json <-- MOD: instancia de Agil
+
+
+Json -> UN: new Unidad(nombre, seccion, puntos, modificador: Agil)
+Json <-- UN: instancia de Unidad
+
+Json -> U: setCarta(unidad)
+U -> U: aplicarModificador()
+C <- U: actualizarSecciones(Secciones)
+
+
+@enduml
