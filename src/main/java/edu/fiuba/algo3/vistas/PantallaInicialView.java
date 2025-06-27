@@ -29,28 +29,17 @@ public class PantallaInicialView extends StackPane {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-                // Logo
-                Image logo = new Image("file:src/main/resources/imagenes/logo/logo_gwent.png", true);
-                ImageView logoView = new ImageView(logo);
-                logoView.setFitWidth(400);
-                logoView.setPreserveRatio(true);
+            // Logo
+            Image logo = new Image("file:src/main/resources/imagenes/logo/logo_gwent.png", true);
+            ImageView logoView = new ImageView(logo);
+            logoView.setFitWidth(400);
+            logoView.setPreserveRatio(true);
 
-                //efecto desvanecimiento
-                this.setOpacity(1.0);
-                // Escala al pasar el mouse
-                logoView.setOnMouseEntered(event -> {
-                    ScaleTransition st = new ScaleTransition(Duration.millis(200), logoView);
-                    st.setToX(1.2);
-                    st.setToY(1.2);
-                    st.play();
-                });
+            //efecto desvanecimiento
+            this.setOpacity(1.0);
 
-                logoView.setOnMouseExited(event -> {
-                    ScaleTransition st = new ScaleTransition(Duration.millis(200), logoView);
-                    st.setToX(1);
-                    st.setToY(1);
-                    st.play();
-                });
+            efectoMouse(logoView);
+
             logoView.setOnMouseClicked(event -> {
                 FadeTransition fadeOut = new FadeTransition(Duration.millis(800), this);
                 fadeOut.setFromValue(1.0);
@@ -62,26 +51,46 @@ public class PantallaInicialView extends StackPane {
                 fadeOut.play();
             });
 
-                // Mensaje de continuar
-                Label mensaje = new Label("Click en el logo para continuar");
-                mensaje.setStyle("-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;");
+            Label mensaje = mensajeParaContinuar();
 
-                FadeTransition fade = new FadeTransition(Duration.seconds(1), mensaje);
-                fade.setFromValue(1.0);
-                fade.setToValue(0.0);
-                fade.setCycleCount(FadeTransition.INDEFINITE);
-                fade.setAutoReverse(true);
-                fade.play();
+            VBox centro = new VBox(50, logoView, mensaje);
+            centro.setAlignment(Pos.CENTER);
 
-                VBox centro = new VBox(50, logoView, mensaje);
-                centro.setAlignment(Pos.CENTER);
-
-                this.getChildren().add( centro);
+            this.getChildren().add( centro);
 
             /*// Música
             Media media = new Media("file:src/main/resources/sonidos/musica_intro.mp3");
             sonido = new AudioClip(media.getSource());
             sonido.setCycleCount(AudioClip.INDEFINITE);
             sonido.play();*/
+        }
+
+        public Label mensajeParaContinuar(){
+            Label mensaje = new Label("Click en el logo para continuar");
+            mensaje.setStyle("-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;");
+
+            FadeTransition fade = new FadeTransition(Duration.seconds(1), mensaje);
+            fade.setFromValue(1.0);
+            fade.setToValue(0.0);
+            fade.setCycleCount(FadeTransition.INDEFINITE);
+            fade.setAutoReverse(true);
+            fade.play();
+            return mensaje;
+        }
+
+        public void efectoMouse(ImageView logoView){
+            logoView.setOnMouseEntered(event -> {
+                ScaleTransition st = new ScaleTransition(Duration.millis(200), logoView);
+                st.setToX(1.2);
+                st.setToY(1.2);
+                st.play();
+            });
+
+            logoView.setOnMouseExited(event -> {
+                ScaleTransition st = new ScaleTransition(Duration.millis(200), logoView);
+                st.setToX(1);
+                st.setToY(1);
+                st.play();
+            });
         }
 }

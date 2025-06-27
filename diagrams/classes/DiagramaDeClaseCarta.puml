@@ -1,0 +1,32 @@
+@startuml
+interface Carta {
+usar(): void
+}
+
+class Nula{
+
+}
+class Unidad{
+}
+
+abstract Especial{
+
+}
+
+class TierraArrasada{
+}
+class MoraleBoost{
+producto: Int
+}
+class Clima{
+}
+
+class Despejado{}
+Carta <|.. Nula
+Carta <|.. Unidad
+Carta <|.. Especial
+Especial <|-- TierraArrasada
+Especial <|-- MoraleBoost
+Especial <|-- Clima
+Clima <|-- Despejado
+@enduml
