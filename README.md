@@ -1,16 +1,16 @@
 ![tp2](https://github.com/fiuba/algo3_proyecto_base_tp2/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2)
 
-# TP2 Algoritmos 3: {nombre} 
+# TP2 Paradigmas de Programación: Gwent
 
-Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
+Trabajo Práctico número 2 de la materia Paradigmas de Programación de FIUBA
 
 ## Grupo {9}
 
 * **Integrante 1** - [Agustin Ivan Abitabile](https://github.com/AgustN68)
-* **Integrante 2** - [Axel](https://github.com/integrante2)
+* **Integrante 2** - [Axel Miguel Billordo](https://github.com/axeel25)
 * **Integrante 3** - [Felipe Ignacio Quero Retamal](https://github.com/fqueror)
-* **Integrante 4** - [Santiago](https://github.com/integrante4)
-* * **Integrante 4** - [Tomás](https://github.com/integrante4)
+* **Integrante 4** - [Santiago Fardini](https://github.com/FARDOO)
+* **Integrante 5** - [Tomás](https://github.com/tomasuba)
 
 Corrector: **Pablo Suárez**
 
