@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Fases;
 import edu.fiuba.algo3.modelo.Gwent;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Ronda;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,10 @@ public class Juego extends Fase{
         rondaActual.jugarCarta(posicionCarta);
     }
 
+    public void jugarCarta(int posicionCarta, Seccion seccion) {
+        rondaActual.jugarCarta(posicionCarta, seccion);
+    }
+
     public void pasarTurno() {
         rondaActual.pasarTurno();
         comprobarFinDeRonda();
@@ -68,6 +73,4 @@ public class Juego extends Fase{
             rondaActual = new Ronda(new ArrayList<>(jugadores));
         }
     }
-
-
 }

@@ -9,4 +9,9 @@ public class MoraleBoost extends Especial {
     public void usar(Seccion seccion) {
         seccion.multiplicarPuntaje(producto);
     }
+
+    @Override
+    public void usar() {
+
+    }
 }

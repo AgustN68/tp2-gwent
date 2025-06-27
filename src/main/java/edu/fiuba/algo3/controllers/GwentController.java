@@ -66,6 +66,10 @@ public class GwentController {
         juego.jugarCarta(posicionCarta);
     }
 
+    public void jugarCarta(int posicionCarta, Seccion seccion) {
+        juego.jugarCarta(posicionCarta, seccion);
+    }
+
     public void pasarTurno() {
         juego.pasarTurno();
         if (juego.hayGanador()) {

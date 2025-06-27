@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,12 @@ public class Jugador {
     public void usarCarta(int posicion) {
         Carta carta = mano.agarrarCarta(posicion);
         carta.usar();
+        pilaDeDescarte.descartarUna(carta);
+    }
+
+    public void usarCarta(int posicion, Seccion seccion) {
+        Carta carta = mano.agarrarCarta(posicion);
+        carta.usar(seccion);
         pilaDeDescarte.descartarUna(carta);
     }
 

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.modelo.Carta.Unidad;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -134,5 +135,13 @@ public class SeccionView extends HBox {
 
     public int obtenerPosicionCartaSeleccionada() {
         return posicionCartaSeleccionada;
+    }
+
+    public Seccion obtenerSeccion() {
+        return seccion;
+    }
+
+    public boolean tieneJugador(String nombreJugador) {
+        return this.nombreJugador.equals(nombreJugador);
     }
 }

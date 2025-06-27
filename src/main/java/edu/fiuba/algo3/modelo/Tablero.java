@@ -27,21 +27,6 @@ public class Tablero {
         }
     }
 
-    public void removerUnidadesMasFuertes() {
-        Puntaje puntajeMasFuerte = new Puntaje(0);
-
-        for (Seccion seccion : secciones) {
-            Puntaje puntajeMasFuerteSeccionActual = seccion.obtenerPuntajeMasFuerte();
-            if (!puntajeMasFuerte.esMayor(puntajeMasFuerteSeccionActual)) {
-                puntajeMasFuerte = puntajeMasFuerteSeccionActual;
-            }
-        }
-
-        for (Seccion seccion : secciones) {
-            seccion.removerCartasDePuntaje(puntajeMasFuerte);
-        }
-    }
-
     public List<Seccion> getSecciones() {
         return secciones;
     }
