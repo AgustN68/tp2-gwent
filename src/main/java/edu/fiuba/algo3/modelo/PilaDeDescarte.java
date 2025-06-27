@@ -4,9 +4,12 @@ import edu.fiuba.algo3.modelo.Carta.CartaNula;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PilaDeDescarte {
     private List<Carta> cartas;
+    private static final Random random = new Random();
+
     public PilaDeDescarte(){
         this.cartas = new ArrayList<>();
     }
@@ -22,7 +25,13 @@ public class PilaDeDescarte {
     public int cantidadCartas(){
         return this.cartas.size();
     }
+
     public Carta agarrarCarta() {
-        return cantidadCartas() != 0 ? this.cartas.remove(0) : new CartaNula();
+        if (cantidadCartas() != 0) {
+            int idx = random.nextInt(cartas.size());
+            return this.cartas.remove(idx);
+        } else {
+            return new CartaNula();
+        }
     }
 }
