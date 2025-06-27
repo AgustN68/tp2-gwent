@@ -10,7 +10,7 @@ Trabajo Práctico número 2 de la materia Paradigmas de Programación de FIUBA
 * **Integrante 2** - [Axel Miguel Billordo](https://github.com/axeel25)
 * **Integrante 3** - [Felipe Ignacio Quero Retamal](https://github.com/fqueror)
 * **Integrante 4** - [Santiago Fardini](https://github.com/FARDOO)
-* **Integrante 5** - [Tomás](https://github.com/tomasuba)
+* **Integrante 5** - [Tomás Bautista Conti](https://github.com/tomasuba)
 
 Corrector: **Pablo Suárez**
 
