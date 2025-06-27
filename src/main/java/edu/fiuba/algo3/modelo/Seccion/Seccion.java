@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.Seccion;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.ClimaPosible;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Puntaje;
 
@@ -12,6 +14,8 @@ import java.util.List;
 public abstract class Seccion {
 
     private List<Unidad> cartasUnidades;
+
+    private ClimaPosible climaActual;
 
     public Seccion() {
         cartasUnidades = new ArrayList<>();
@@ -28,6 +32,7 @@ public abstract class Seccion {
     
     public void ubicar(Unidad unidad){
         cartasUnidades.add(unidad);
+        climaActual.modificarPuntaje(cartasUnidades);
     }
 
     public Puntaje puntajeTotal() {
@@ -96,8 +101,16 @@ public abstract class Seccion {
         return cartas;
     }
 
-    /*public void recibirClima(Clima clima){
-        clima.afectar(this);
+    public void establecerClima(ClimaPosible clima){
+        // Restaurar puntaje antes de aplicar nuevo clima
+        restaurarPuntaje();
+        climaActual = clima;
+        climaActual.modificarPuntaje(cartasUnidades);
+    }
+/*
+    public void limpiarClima(){
+        restaurarPuntaje();
+        climaActual = null;
     }*/
 }
 

@@ -12,7 +12,7 @@ public class EspecialFactory {
     private static final String TIPO_TIERRA_ARRASADA = "Tierra arrasada";
     private static final String TIPO_MORALE_BOOST = "Morale Boost";
     private static final String TIPO_CLIMA = "Clima";
-    private static final String NOMBRE_CLIMA_DESPEJADO = "Tiempo Despejado";
+    private static final String NOMBRE_CLIMA_DESPEJADO = "Tiempo despejado";
 
     public static Especial crearEspecial(
             String tipo,
@@ -36,7 +36,7 @@ public class EspecialFactory {
 
             case TIPO_CLIMA:
                 if (nombre.equals(NOMBRE_CLIMA_DESPEJADO)) {
-                    nuevaEspecial = new Despejado(seccionesAfectadas);
+                    nuevaEspecial = new Despejado(tablero1, tablero2);
                 } else {
                     nuevaEspecial = new Clima(seccionesAfectadas);
                 }
