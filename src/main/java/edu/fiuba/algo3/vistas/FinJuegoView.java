@@ -57,7 +57,9 @@ public class FinJuegoView extends VBox {
         Button reiniciarButton = new Button("Jugar de nuevo");
         reiniciarButton.setFont(Font.font("Arial", 16));
         reiniciarButton.setPrefSize(200, 50);
-        reiniciarButton.setOnAction(e -> app.mostrarPantallaInicial());
+        reiniciarButton.setOnAction(e -> {
+            this.sonido.stop();
+            app.mostrarPantallaInicial();});
 
         // Botón para salir
         Button salirButton = new Button("Salir del juego");
