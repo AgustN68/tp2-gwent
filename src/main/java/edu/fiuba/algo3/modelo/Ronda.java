@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
+
 import java.util.List;
 
 public class Ronda {
@@ -11,6 +13,9 @@ public class Ronda {
 
 
     public Ronda(List<Jugador> jugadores) {
+        if (jugadores.size() != 2) {
+            throw new IllegalArgumentException("La ronda debe tener exactamente dos jugadores");
+        }
         jugadorActual = jugadores.get(0);
         jugador1 = jugadores.get(0);
         jugador2 = jugadores.get(1);
@@ -69,10 +74,14 @@ public class Ronda {
     }
 
     public void jugarCarta(int posicionCarta) {
-        if (!jugadorActual.verMano().isEmpty() && posicionCarta >= 0 && posicionCarta < jugadorActual.verMano().size()) {
-            jugadorActual.usarCarta(posicionCarta);
-            cambiarTurno();
+        if (jugadorActual.verMano().isEmpty()) {
+            throw new NoHayCartasSuficientesException("La mano del jugador está vacía");
         }
+        if (posicionCarta < 0 || posicionCarta >= jugadorActual.verMano().size()) {
+            throw new IndexOutOfBoundsException("Posición inválida");
+        }
+        jugadorActual.usarCarta(posicionCarta);
+        cambiarTurno();
     }
 
     private void cambiarTurno() {
