@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
@@ -22,6 +24,7 @@ public class Ronda {
         jugador1 = jugadores.get(0);
         jugador2 = jugadores.get(1);
         jugadoresEnRonda = jugadores;
+
     }
 
     private void finalizarRonda() {

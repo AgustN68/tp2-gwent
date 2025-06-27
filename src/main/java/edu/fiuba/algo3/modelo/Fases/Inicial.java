@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.Fases;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
 import edu.fiuba.algo3.modelo.Lector.Lector;
 import edu.fiuba.algo3.modelo.Lector.LectorJson;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
@@ -18,6 +20,8 @@ public class Inicial extends Fase {
     private String nombreJugador2;
     private Jugador jugador1;
     private Jugador jugador2;
+    private Tablero tablero1;
+    private Tablero tablero2;
 
     private Lector lector = new LectorJson();
 
@@ -36,7 +40,10 @@ public class Inicial extends Fase {
     }
 
     private void prepararJugadores() {
+        crearTableros();
         crearJugadores();
+
+       prepararSecciones();
 
         List <Mazo> mazos = lector.leerMazos(RUTA_JSON, jugador1, jugador2);
 
@@ -44,10 +51,28 @@ public class Inicial extends Fase {
         jugador2.setMazo(mazos.get(1));
     }
 
+    private void crearTableros() {
+        tablero1 = crearTablero();
+        tablero2 = crearTablero();
+    }
+
+    private void prepararSecciones() {
+
+        List<Seccion> seccionesT1 = tablero1.getSecciones();
+        List<Seccion> seccionesT2 = tablero2.getSecciones();
+
+        for (Seccion seccion : seccionesT1) {
+            seccion.establecerClima(new Despejado(tablero1,tablero2));
+        }
+        for (Seccion seccion : seccionesT2) {
+            seccion.establecerClima(new Despejado(tablero1,tablero2));
+        }
+    }
+
     private void crearJugadores() {
-        jugador1 = new Jugador(crearTablero(),new PilaDeDescarte());
+        jugador1 = new Jugador(tablero1,new PilaDeDescarte());
         jugador1.setNombre(nombreJugador1);
-        jugador2 = new Jugador(crearTablero(), new PilaDeDescarte());
+        jugador2 = new Jugador(tablero2, new PilaDeDescarte());
         jugador2.setNombre(nombreJugador2);
     }
 
