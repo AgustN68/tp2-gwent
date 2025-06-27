@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.controllers.GwentController;
 import edu.fiuba.algo3.modelo.Carta.Carta;
+import edu.fiuba.algo3.modelo.Carta.Especial.MoraleBoost;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
@@ -13,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TableroView extends BorderPane {
@@ -107,7 +109,7 @@ public class TableroView extends BorderPane {
             SeccionView view = (SeccionView) seccionView;
             view.setOnMouseClicked(e -> {
                 if (view.esJugable()) {
-                    jugarCarta(CartaView.getCartaSeleccionada(), view.obtenerPosicionCartaSeleccionada());
+                    jugarCarta(CartaView.getCartaSeleccionada(), view.obtenerPosicionCartaSeleccionada(), view.obtenerSeccion());
                 }
             });
         }
@@ -126,6 +128,12 @@ public class TableroView extends BorderPane {
     private void jugarCarta(CartaView cartaView, int posicion) {
         cartaView.setDisable(true); // Evita clicks múltiples
         controller.jugarCarta(posicion);
+        actualizarVista();
+    }
+
+    private void jugarCarta(CartaView cartaView, int posicion, Seccion seccion) {
+        cartaView.setDisable(true); // Evita clicks múltiples
+        controller.jugarCarta(posicion, seccion);
         actualizarVista();
     }
 
@@ -154,7 +162,9 @@ public class TableroView extends BorderPane {
                 CartaView cartaSeleccionada = CartaView.getCartaSeleccionada();
                 if (cartaSeleccionada == null) {
                     if (carta instanceof Unidad) {
-                        seleccionarUnidad(posicion, jugadorActual, cartaView);
+                        seleccionarCarta(posicion, jugadorActual, cartaView, ((Unidad) cartaView.getCarta()).obtenerSecciones());
+                    } else if (carta instanceof MoraleBoost) {
+                        seleccionarCarta(posicion, jugadorActual, cartaView, obtenerSeccionesDe(jugadorActual));
                     } else {
                         jugarCarta(cartaView, posicion);
                     }
@@ -174,9 +184,19 @@ public class TableroView extends BorderPane {
         setBottom(contenedorInferior);
     }
 
-    private void seleccionarUnidad(int posicion, Jugador jugadorActual, CartaView cartaViewUnidad) {
-        cartaViewUnidad.seleccionarCarta();
-        List<Seccion> secciones = ((Unidad)cartaViewUnidad.getCarta()).obtenerSecciones();
+    private List<Seccion> obtenerSeccionesDe(Jugador jugadorActual) {
+        List<Seccion> secciones = new ArrayList<>();
+        for (Node seccionView : tableroBox.getChildren()) {
+            SeccionView view = (SeccionView) seccionView;
+            if (view.tieneJugador(jugadorActual.getNombre())) {
+                secciones.add(view.obtenerSeccion());
+            }
+        }
+        return secciones;
+    }
+
+    private void seleccionarCarta(int posicion, Jugador jugadorActual, CartaView cartaView, List<Seccion> secciones) {
+        cartaView.seleccionarCarta();
         for (Seccion seccion : secciones) {
             for (Node seccionView : tableroBox.getChildren()) {
                 ((SeccionView) seccionView).seccionSeleccionada(posicion, jugadorActual.getNombre(), seccion.getClass().getSimpleName());

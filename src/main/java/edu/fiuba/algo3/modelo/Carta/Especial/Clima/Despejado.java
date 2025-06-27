@@ -1,21 +1,24 @@
 package edu.fiuba.algo3.modelo.Carta.Especial.Clima;
 
-import edu.fiuba.algo3.modelo.Tablero;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
+
+import java.util.List;
 
 public class Despejado extends Clima {
 
-    private Tablero tablero1;
-    private Tablero tablero2;
-
-    public Despejado(Tablero tablero1, Tablero tablero2) {
-        super();
-        this.tablero1 = tablero1;
-        this.tablero2 = tablero2;
+    public Despejado(List<Seccion> secciones) {
+        super(secciones);
     }
 
+    @Override
     public void usar() {
-        tablero1.limpiarClima();
-        tablero2.limpiarClima();
+        for (Seccion seccion : seccionesAfectadas) {
+            seccion.restaurarPuntaje();
+        }
     }
 
+    @Override
+    public void usar(Seccion seccion) {
+
+    }
 }

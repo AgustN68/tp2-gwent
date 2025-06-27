@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
+
 import java.util.List;
 
 public class Ronda {
@@ -20,17 +22,6 @@ public class Ronda {
         jugador1 = jugadores.get(0);
         jugador2 = jugadores.get(1);
         jugadoresEnRonda = jugadores;
-    }
-
-    public void jugarRonda() {
-        while (!rondaTerminada()) {
-            for (Jugador jugador : jugadoresEnRonda) {
-                Turno turnoJugador = new Turno(jugador, this);
-                turnoJugador.jugarTurno();
-            }
-        }
-
-        finalizarRonda();
     }
 
     private void finalizarRonda() {
@@ -82,6 +73,13 @@ public class Ronda {
         }
         jugadorActual.usarCarta(posicionCarta);
         cambiarTurno();
+    }
+
+    public void jugarCarta(int posicionCarta, Seccion seccion) {
+        if (!jugadorActual.verMano().isEmpty() && posicionCarta >= 0 && posicionCarta < jugadorActual.verMano().size()) {
+            jugadorActual.usarCarta(posicionCarta, seccion);
+            cambiarTurno();
+        }
     }
 
     private void cambiarTurno() {

@@ -27,30 +27,20 @@ public class Unidad implements Carta {
 
     @Override
     public void usar() {
-        this.ubicar(this.secciones.get(POS_SECCION_PARTICULAR));
+
+    }
+
+    @Override
+    public void usar(Seccion seccion) {
+        this.ubicar(seccion);
         this.modificador.aplicarModificador();
     }
 
-    public void usar(Seccion seccion) {
-        ubicar(seccion);
-    }
-
-
     public void ubicar(Seccion seccionAUbicar) {
-        if (seccionPuedeUbicar(seccionAUbicar)) {
-            seccionAUbicar.ubicar(this);
-        } else {
+        if (!secciones.contains(seccionAUbicar)) {
             throw new UnidadNoSePuedeUbicarEnEstaSeccionException("No se puede ubicar en esta seccion");
         }
-    }
-
-    private Boolean seccionPuedeUbicar(Seccion seccion) {
-        for (Seccion seccionPermitida : secciones) {
-            if (seccion.equals(seccionPermitida)) {
-                return true;
-            }
-        }
-        return false;
+        seccionAUbicar.ubicar(this);
     }
 
     public void actualizarSecciones(List<Seccion> nuevasSeccionesPermitidas) {
