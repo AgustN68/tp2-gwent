@@ -7,11 +7,12 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 ## Grupo {9}
 
 * **Integrante 1** - [Agustin Ivan Abitabile](https://github.com/AgustN68)
-* **Integrante 2** - [integrante2](https://github.com/integrante2)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Integrante 2** - [Axel](https://github.com/integrante2)
+* **Integrante 3** - [Felipe Ignacio Quero Retamal](https://github.com/fqueror)
+* **Integrante 4** - [Santiago](https://github.com/integrante4)
+* * **Integrante 4** - [Tomás](https://github.com/integrante4)
 
-Corrector: **{Pablo Suárez}**
+Corrector: **Pablo Suárez**
 
 ## Aplicación
 
