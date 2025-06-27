@@ -20,8 +20,8 @@ public class Agil extends Modificador {
     }
 
     @Override
-    public void setCarta(Unidad hechicero) {
-        this.unidad = hechicero;
+    public void setCarta(Unidad unidad) {
+        this.unidad = unidad;
         this.aplicarModificador();
     }
 }
