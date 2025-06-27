@@ -8,6 +8,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -23,6 +25,8 @@ public class PreparacionView extends BorderPane {
     private List<Integer> cartasSeleccionadas = new ArrayList<>();
     private List<CartaView> vistasCartas = new ArrayList<>();
 
+    private AudioClip  sonido;
+
     public PreparacionView(GwentController controller, GwentApp app) {
         this.controller = controller;
         this.app = app;
@@ -33,7 +37,15 @@ public class PreparacionView extends BorderPane {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
+        //añado musica
+        try {
+            Media media = new Media(getClass().getResource("/sonidos/musica_preparacion.mp3").toExternalForm());
+            sonido = new AudioClip(media.getSource());
+            sonido.setCycleCount(AudioClip.INDEFINITE);
+            sonido.play();
+        } catch (Exception e) {
+            System.out.println("Error al cargar o reproducir la música: " + e.getMessage());
+        }
         setPadding(new Insets(20));
 
         // Sección superior - Título y jugador actual
@@ -137,6 +149,7 @@ public class PreparacionView extends BorderPane {
         } else {
             // Ambos jugadores han terminado la fase de preparación
             controller.iniciarFaseJuego();
+            this.sonido.stop();
             app.mostrarPantallaJuego();
         }
     }

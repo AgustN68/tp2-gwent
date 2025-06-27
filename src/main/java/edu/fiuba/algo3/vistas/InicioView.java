@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -20,12 +22,24 @@ public class InicioView extends VBox {
     private TextField nombreJugador1Field;
     private TextField nombreJugador2Field;
 
+    private AudioClip sonido;
+
     public InicioView(GwentController controller, GwentApp app) {
         // fondo del background
         try {
             setBackground(new Background(app.obtenerBackgroundImage("/imagenes/fondos/fondo_nombre.jpg")));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        }
+
+        //musica de esta escena
+        try {
+            Media media = new Media(getClass().getResource("/sonidos/musica_nombre.mp3").toExternalForm());
+            sonido = new AudioClip(media.getSource());
+            sonido.setCycleCount(AudioClip.INDEFINITE);
+            sonido.play();
+        } catch (Exception e) {
+            System.out.println("Error al cargar o reproducir la música: " + e.getMessage());
         }
 
         this.controller = controller;
@@ -60,7 +74,9 @@ public class InicioView extends VBox {
         Button iniciarButton = new Button("Iniciar Juego");
         iniciarButton.setFont(Font.font("Arial", 16));
         iniciarButton.setPrefSize(200, 50);
-        iniciarButton.setOnAction(e -> iniciarJuego());
+        iniciarButton.setOnAction(e -> {
+                detenerSonido(this.sonido);
+                iniciarJuego();});
 
         // Añadir componentes a la vista
         getChildren().addAll(
@@ -82,5 +98,10 @@ public class InicioView extends VBox {
 
         // Pasar a la fase de preparación
         app.mostrarPantallaPreparacion();
+    }
+    public void detenerSonido(AudioClip sonido){
+        if(sonido != null){
+            sonido.stop();
+        }
     }
 }

@@ -37,7 +37,7 @@ public class PantallaInicialView extends StackPane {
 
             //añado musica
             try {
-                Media media = new Media(getClass().getResource("/sonidos/musica_intro.mp3").toExternalForm());
+                Media media = new Media(getClass().getResource("/sonidos/musica_intro2.mp3").toExternalForm());
                 sonido = new AudioClip(media.getSource());
                 sonido.setCycleCount(AudioClip.INDEFINITE);
                 sonido.play();
