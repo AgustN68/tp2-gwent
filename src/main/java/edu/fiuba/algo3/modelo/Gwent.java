@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Fases.*;
+import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.List;
 
@@ -52,6 +53,10 @@ public class Gwent {
 
     public void jugarCarta(int posicionCarta) {
         faseJuego.jugarCarta(posicionCarta);
+    }
+
+    public void jugarCarta(int posicionCarta, Seccion seccion) {
+        faseJuego.jugarCarta(posicionCarta, seccion);
     }
 
     public void pasarTurno() {
