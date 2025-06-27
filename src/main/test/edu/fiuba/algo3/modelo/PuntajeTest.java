@@ -3,8 +3,7 @@ package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PuntajeTest {
 
@@ -99,4 +98,11 @@ public class PuntajeTest {
         assertFalse(resultado);
 
     }
+
+    @Test
+    public void test07creoUnPuntajeConUnValorNegativoYDebeDarError() {
+
+        assertThrows(IllegalArgumentException.class, () -> {new Puntaje(-10);});
+    }
+
 }
