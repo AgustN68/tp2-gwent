@@ -9,6 +9,7 @@ participant "unidad: Unidad" as C
 participant "unidad2: Unidad" as C2
 participant "asedio: Asedio" as A
 participant "modificador: Medico" as ME
+participant "Modificador" as MOD
 
 ' Interacciones
 Usuario -> J1: 1. usarCarta(posicionUnidad)
@@ -19,7 +20,7 @@ J1 -> C: usar()
 C -> C: ubicar(Asedio)
 C -> A: ubicar(unidad)
 
-C -> M: aplicarModificador()
+C -> ME: aplicarModificador()
 
 ME -> J1: agarrarDescarte()
 J1 --> ME: instancia de Unidad "unidad2"
@@ -27,5 +28,6 @@ C2 <- ME: usar()
 
 C2 -> C2: ubicar(Asedio)
 C2 -> A: ubicar(unidad)
+C2 -> MOD: aplicarModificador()
 
 @enduml

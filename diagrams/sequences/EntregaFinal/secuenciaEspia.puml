@@ -1,0 +1,47 @@
+@startuml Proceso de Creación de una Unidad Espia
+title Diagrama de Secuencia - Proceso de Creación  y uso de una Unidad "Espía"
+
+' Definir participantes
+actor Usuario
+
+participant "Jugador1: Jugador" as J1
+participant "mazo: Mazo" as M
+participant "mano: Mano" as MA
+
+
+participant "Unidad" as UN
+participant "Modificador" as MOD
+
+participant "unidad: Unidad" as C
+participant "seccion: Seccion" as SEC
+participant "modificador: Espia" as ESP
+
+
+' Interacciones
+
+Usuario -> MOD: new Espia(jugador1)
+Usuario <-- MOD: instancia de Espia
+
+
+Usuario -> UN: new Unidad(nombre, seccion, puntos, modificador: Espia)
+Usuario <-- UN: instancia de Unidad
+
+Usuario -> C: usar()
+
+C -> C: ubicar(seccion)
+C -> SEC: ubicar(unidad)
+C -> ESP: aplicarModificador()
+J1 <- ESP: tomarCartasEspia()
+
+J1 -> M: obtenerCartasEspia(jugador)
+J1 <- M: tomarCartasMazo(cantidad)
+
+loop según la cantidad
+J1 -> MA: tomarCarta(mazo)
+MA -> M: obtenerCarta()
+M --> MA: instancia de alguna carta
+end
+
+
+
+@enduml
