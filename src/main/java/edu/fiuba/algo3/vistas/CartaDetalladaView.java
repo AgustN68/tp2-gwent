@@ -60,9 +60,9 @@ public class CartaDetalladaView extends VBox {
         labelsBox.getChildren().add(nombreLabel);
 
         // Descripción
-        if (carta instanceof Especial) {
-            Especial especial = (Especial) carta;
-            Label descripcionLabel = new Label(especial.obtenerDescripcion());
+        //if (carta instanceof Especial) {
+            //Carta especial = (Especial) carta;
+            Label descripcionLabel = new Label(carta.obtenerDescripcion());
             descripcionLabel.setFont(Font.font(FUENTE, FontWeight.EXTRA_BOLD, 18));
             descripcionLabel.setAlignment(Pos.CENTER);
             descripcionLabel.setTextFill(Color.BLACK);
@@ -70,7 +70,7 @@ public class CartaDetalladaView extends VBox {
             descripcionLabel.setMaxWidth(220);
 
             labelsBox.getChildren().add(descripcionLabel);
-        }
+        //}
 
         infoPane.getChildren().add(labelsBox);
         getChildren().add(infoPane);
