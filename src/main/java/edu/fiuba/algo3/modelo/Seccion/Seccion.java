@@ -18,6 +18,9 @@ public abstract class Seccion {
     }
     
     public void reducirPuntaje(int valor){
+        if (valor < 0) {
+            throw new IllegalArgumentException("El valor no puede ser negativo");
+        }
         for (Unidad unidad : cartasUnidades){
             unidad.actualizarPuntaje(valor);
         }
@@ -37,12 +40,18 @@ public abstract class Seccion {
 
 
     public void multiplicarPuntaje(int producto) {
+        if (producto <= 0) {
+            throw new IllegalArgumentException("El producto debe ser mayor que cero");
+        }
         for (Unidad unidad : cartasUnidades) {
             unidad.multiplicarPuntaje(producto);
         }
     }
 
     public void sumarPuntaje(int suma) {
+        if (suma < 0) {
+            throw new IllegalArgumentException("La suma no puede ser negativa");
+        }
         for (Unidad unidad : cartasUnidades) {
             unidad.sumarPuntaje(suma);
         }
@@ -55,7 +64,7 @@ public abstract class Seccion {
     }
 
     public Puntaje obtenerPuntajeMasFuerte() {
-        if (cartasUnidades.size() == 0) return new Puntaje(0);
+        if (cartasUnidades.isEmpty()) return new Puntaje(0);
         Unidad unidadMasFuerte = cartasUnidades.get(0);
         for (Unidad unidad : cartasUnidades) {
             unidadMasFuerte = unidad.esMasFuerte(unidadMasFuerte) ? unidad : unidadMasFuerte;
