@@ -42,6 +42,7 @@ public class PreparacionView extends BorderPane {
             Media media = new Media(getClass().getResource("/sonidos/musica_preparacion.wav").toExternalForm());
             sonido = new AudioClip(media.getSource());
             sonido.setCycleCount(AudioClip.INDEFINITE);
+            sonido.setVolume(0.05);
             sonido.play();
         } catch (Exception e) {
             System.out.println("Error al cargar o reproducir la música: " + e.getMessage());
