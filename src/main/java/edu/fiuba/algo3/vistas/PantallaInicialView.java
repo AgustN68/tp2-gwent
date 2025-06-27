@@ -22,6 +22,7 @@ public class PantallaInicialView extends StackPane {
     private Scene escena;
 
     private AudioClip sonido;
+    private AudioClip sonidoClick;
 
         public PantallaInicialView(GwentController controller, GwentApp app) {
             try {
@@ -44,7 +45,11 @@ public class PantallaInicialView extends StackPane {
             } catch (Exception e) {
                 System.out.println("Error al cargar o reproducir la música: " + e.getMessage());
             }
-
+            try {
+                this.sonidoClick = new AudioClip(getClass().getResource("/sonidos/click.mp3").toExternalForm());
+            } catch (Exception e){
+                System.out.println("Error al cargar sonido click " + e.getMessage());
+            }
             //efecto desvanecimiento
             this.setOpacity(1.0);
 
@@ -55,6 +60,7 @@ public class PantallaInicialView extends StackPane {
                 fadeOut.setFromValue(1.0);
                 fadeOut.setToValue(0.0);
                 fadeOut.setOnFinished(e -> {
+                    sonidoClick.play();
                     detenerSonido(sonido);
                     app.mostrarPantallaInicial();
                 });
