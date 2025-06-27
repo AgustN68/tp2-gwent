@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Seccion;
 
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.ClimaPosible;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.SinClima;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Puntaje;
 
@@ -16,6 +17,7 @@ public abstract class Seccion {
 
     public Seccion() {
         cartasUnidades = new ArrayList<>();
+        climaActual = new SinClima();
     }
     
     public void reducirPuntaje(int valor){
@@ -110,4 +112,3 @@ public abstract class Seccion {
         climaActual = null;
     }*/
 }
-

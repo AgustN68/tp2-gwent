@@ -41,7 +41,7 @@ public class LegendariaTest {
         // Act
         TierraArrasada tierraArrasada = new TierraArrasada();
 
-        tierraArrasada.usar(tablero);
+        tierraArrasada.usar(secciones);
 
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 

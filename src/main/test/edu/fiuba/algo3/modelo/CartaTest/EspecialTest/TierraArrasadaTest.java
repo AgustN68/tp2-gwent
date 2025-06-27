@@ -40,7 +40,7 @@ public class TierraArrasadaTest {
         // Act
         TierraArrasada tierraArrasada = new TierraArrasada();
 
-        tierraArrasada.usar(tablero);
+        tierraArrasada.usar(secciones);
 
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 
@@ -74,7 +74,7 @@ public class TierraArrasadaTest {
         // Act
         TierraArrasada tierraArrasada = new TierraArrasada();
 
-        tierraArrasada.usar(tablero);
+        tierraArrasada.usar(secciones);
 
         Puntaje puntajeObtenido = tablero.calcularPuntaje();
 

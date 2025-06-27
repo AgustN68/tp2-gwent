@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Modificador.SinModificador;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
@@ -76,6 +77,8 @@ public class TableroTest {
         Tablero tablero2 = new Tablero(seccionesTablero2);
 
 
+        Despejado despejado = new Despejado(tablero1, tablero2);
+
         List<Seccion> seccionesAfectadas = new ArrayList<>();
         seccionesAfectadas.add(cuerpoACuerpo1);
         seccionesAfectadas.add(cuerpoACuerpo2);
@@ -89,101 +92,9 @@ public class TableroTest {
         clima.usar();
 
         //"Act"
-        tablero1.limpiarClima();
+        tablero1.limpiarClima(despejado);
 
         //"Assert"
         assertEquals(6, tablero1.calcularPuntaje().obtenerValor());
-    }
-
-    @Test
-    public void test04UnTableroPuedeRemoverLasUnidadesMasFuertes(){
-        //"Arrange"
-        Seccion cuerpoACuerpo = new CuerpoACuerpo();
-        Seccion rango = new Rango();
-        Seccion asedio = new Asedio();
-        List<Seccion> seccionesTablero = new ArrayList<>();
-        seccionesTablero.add(cuerpoACuerpo);
-        seccionesTablero.add(rango);
-        seccionesTablero.add(asedio);
-        Tablero tablero = new Tablero(seccionesTablero);
-
-        new Unidad("Nombre", cuerpoACuerpo, 8, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad("Nombre", asedio, 4, new SinModificador()).ubicar(asedio);
-        new Unidad("Nombre", rango, 3, new SinModificador()).ubicar(rango);
-
-        //"Act"
-        tablero.removerUnidadesMasFuertes();
-
-        //"Assert"
-        assertEquals(7, tablero.calcularPuntaje().obtenerValor());
-    }
-
-    @Test
-    public void test05UnTableroPuedeRemoverLasUnidadesMasFuertes(){
-        //"Arrange"
-        Seccion cuerpoACuerpo = new CuerpoACuerpo();
-        Seccion rango = new Rango();
-        Seccion asedio = new Asedio();
-        List<Seccion> seccionesTablero = new ArrayList<>();
-        seccionesTablero.add(cuerpoACuerpo);
-        seccionesTablero.add(rango);
-        seccionesTablero.add(asedio);
-        Tablero tablero = new Tablero(seccionesTablero);
-
-        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad("Nombre", asedio, 8, new SinModificador()).ubicar(asedio);
-        new Unidad("Nombre", rango, 3, new SinModificador()).ubicar(rango);
-
-        //"Act"
-        tablero.removerUnidadesMasFuertes();
-
-        //"Assert"
-        assertEquals(7, tablero.calcularPuntaje().obtenerValor());
-    }
-
-    @Test
-    public void test06UnTableroPuedeRemoverLasUnidadesMasFuertes(){
-        //"Arrange"
-        Seccion cuerpoACuerpo = new CuerpoACuerpo();
-        Seccion rango = new Rango();
-        Seccion asedio = new Asedio();
-        List<Seccion> seccionesTablero = new ArrayList<>();
-        seccionesTablero.add(cuerpoACuerpo);
-        seccionesTablero.add(rango);
-        seccionesTablero.add(asedio);
-        Tablero tablero = new Tablero(seccionesTablero);
-
-        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad("Nombre", asedio, 8, new SinModificador()).ubicar(asedio);
-        new Unidad("Nombre", rango, 9, new SinModificador()).ubicar(rango);
-
-        //"Act"
-        tablero.removerUnidadesMasFuertes();
-
-        //"Assert"
-        assertEquals(12, tablero.calcularPuntaje().obtenerValor());
-    }
-
-    @Test
-    public void test07UnTableroPuedeRemoverLasUnidadesMasFuertes(){
-        //"Arrange"
-        Seccion cuerpoACuerpo = new CuerpoACuerpo();
-        Seccion rango = new Rango();
-        Seccion asedio = new Asedio();
-        List<Seccion> seccionesTablero = new ArrayList<>();
-        seccionesTablero.add(cuerpoACuerpo);
-        seccionesTablero.add(rango);
-        seccionesTablero.add(asedio);
-        Tablero tablero = new Tablero(seccionesTablero);
-
-        new Unidad("Nombre", cuerpoACuerpo, 4, new SinModificador()).ubicar(cuerpoACuerpo);
-        new Unidad("Nombre", asedio, 9, new SinModificador()).ubicar(asedio);
-        new Unidad("Nombre", rango, 9, new SinModificador()).ubicar(rango);
-
-        //"Act"
-        tablero.removerUnidadesMasFuertes();
-
-        //"Assert"
-        assertEquals(4, tablero.calcularPuntaje().obtenerValor());
     }
 }
