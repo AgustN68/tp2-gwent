@@ -22,27 +22,14 @@ import java.util.Random;
 
 public class GwentController {
     private Gwent juego;
-    private Jugador jugador1;
-    private Jugador jugador2;
-    //private Jugador jugadorActual;
-    private boolean jugadorPaso;
-    private boolean rivalPaso;
-    private int rondaActual;
     private GwentApp app;
-    private static final String RUTA_JSON = "src/main/java/edu/fiuba/algo3/archivos/gwent.json";
 
     public GwentController() {
         this.juego = new Gwent();
-        this.rondaActual = 1;
     }
 
-    /**
-     * Reinicia el juego creando una nueva instancia de Gwent.
-     * Se llama cuando el usuario quiere jugar de nuevo.
-     */
     public void reiniciarJuego() {
         this.juego = new Gwent();
-        this.rondaActual = 1;
     }
 
     public void iniciarJuego(String nombreJugador1, String nombreJugador2) {
@@ -100,10 +87,6 @@ public class GwentController {
 
     public Jugador getJugadorActual() {
         return juego.jugadorActual();
-    }
-
-    public int getRondaActual() {
-        return rondaActual;
     }
 
     public Gwent getJuego() {
