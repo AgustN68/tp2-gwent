@@ -36,7 +36,7 @@ public class FinJuegoView extends VBox {
 
         //añado musica
         try {
-            Media media = new Media(getClass().getResource("/sonidos/musica_ganador.mp3").toExternalForm());
+            Media media = new Media(getClass().getResource("/sonidos/musica_ganador.wav").toExternalForm());
             sonido = new AudioClip(media.getSource());
             sonido.setCycleCount(AudioClip.INDEFINITE);
             sonido.play();

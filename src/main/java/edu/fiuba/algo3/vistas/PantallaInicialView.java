@@ -38,7 +38,7 @@ public class PantallaInicialView extends StackPane {
 
             //añado musica
             try {
-                Media media = new Media(getClass().getResource("/sonidos/musica_intro2.mp3").toExternalForm());
+                Media media = new Media(getClass().getResource("/sonidos/musica_intro2.wav").toExternalForm());
                 sonido = new AudioClip(media.getSource());
                 sonido.setCycleCount(AudioClip.INDEFINITE);
                 sonido.play();
@@ -46,7 +46,7 @@ public class PantallaInicialView extends StackPane {
                 System.out.println("Error al cargar o reproducir la música: " + e.getMessage());
             }
             try {
-                this.sonidoClick = new AudioClip(getClass().getResource("/sonidos/click.mp3").toExternalForm());
+                this.sonidoClick = new AudioClip(getClass().getResource("/sonidos/click.wav").toExternalForm());
             } catch (Exception e){
                 System.out.println("Error al cargar sonido click " + e.getMessage());
             }

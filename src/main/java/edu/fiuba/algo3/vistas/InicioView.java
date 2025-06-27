@@ -34,7 +34,7 @@ public class InicioView extends VBox {
 
         //musica de esta escena
         try {
-            Media media = new Media(getClass().getResource("/sonidos/musica_nombre.mp3").toExternalForm());
+            Media media = new Media(getClass().getResource("/sonidos/musica_nombre.wav").toExternalForm());
             sonido = new AudioClip(media.getSource());
             sonido.setCycleCount(AudioClip.INDEFINITE);
             sonido.play();

@@ -39,7 +39,7 @@ public class PreparacionView extends BorderPane {
         }
         //añado musica
         try {
-            Media media = new Media(getClass().getResource("/sonidos/musica_preparacion.mp3").toExternalForm());
+            Media media = new Media(getClass().getResource("/sonidos/musica_preparacion.wav").toExternalForm());
             sonido = new AudioClip(media.getSource());
             sonido.setCycleCount(AudioClip.INDEFINITE);
             sonido.play();
