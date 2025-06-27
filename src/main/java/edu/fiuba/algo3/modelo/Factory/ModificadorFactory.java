@@ -9,28 +9,36 @@ import java.util.List;
 
 public class ModificadorFactory {
 
+    private static final String TIPO_SIN_MODIFICADOR = "SinModificador";
+    private static final String TIPO_LEGENDARIA = "Legendaria";
+    private static final String TIPO_MEDICO = "Medico";
+    private static final String TIPO_CARTA_UNIDA = "Carta Unida";
+    private static final String TIPO_MORALE_BOOST = "Morale Boost";
+    private static final String TIPO_ESPIA = "Espia";
+    private static final String TIPO_AGIL = "Agil";
+
     public static Modificador crearModificador(String modificador, Jugador jugador, List<Seccion> secciones) {
         switch (modificador) {
 
-            case "SinModificador":
+            case TIPO_SIN_MODIFICADOR:
                 return new SinModificador();
 
-            case "Legendaria":
+            case TIPO_LEGENDARIA:
                 return new Legendaria();
 
-            case "Medico":
+            case TIPO_MEDICO:
                 return new Medico(jugador);
 
-            case "Carta Unida":
+            case TIPO_CARTA_UNIDA:
                 return new Unida();
 
-            case "Morale Boost":
+            case TIPO_MORALE_BOOST:
                 return new MoraleBoostMod();
 
-            case "Espia":
+            case TIPO_ESPIA:
                 return new Espia(jugador);
 
-            case "Agil":
+            case TIPO_AGIL:
                 return new Agil(secciones);
 
             default:
