@@ -24,13 +24,16 @@ public class Mazo {
 
     private void validarUnidades(List<Unidad> unidades, int cant){
         if (unidades.size() < cant) {
-            throw new NoHayCartasUnidadSuficientesException("El mazo no tiene unidades suficientes");
-        }
+            throw new NoHayCartasUnidadSuficientesException(
+                    String.format("El mazo debe tener al menos %d unidades, pero tiene %d", cant, unidades.size())
+            );        }
     }
 
     private void validarEspeciales(List<Especial> especiales, int cant){
         if (especiales.size() < cant) {
-            throw new NoHayCartasEspecialesSuficientesException("El mazo no tiene cartas especiales suficientes");
+            throw new NoHayCartasEspecialesSuficientesException(
+                    String.format("El mazo debe tener al menos %d cartas especiales, pero tiene %d", cant, especiales.size())
+            );
         }
     }
 
