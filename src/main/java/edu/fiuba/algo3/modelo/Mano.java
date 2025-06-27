@@ -24,6 +24,9 @@ public class Mano {
     }
 
     public Carta agarrarCarta(int unaPosicion){
+        if (unaPosicion < 0 || unaPosicion >= cartas.size()) {
+            throw new IndexOutOfBoundsException("Posición inválida");
+        }
         return cartas.remove(unaPosicion);
     }
 
