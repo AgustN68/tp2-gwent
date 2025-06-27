@@ -17,10 +17,6 @@ import java.io.FileNotFoundException;
 
 public class PantallaInicialView extends StackPane {
 
-    private GwentController controller;
-    private GwentApp app;
-    private Scene escena;
-
     private AudioClip sonido;
     private AudioClip sonidoClick;
 
