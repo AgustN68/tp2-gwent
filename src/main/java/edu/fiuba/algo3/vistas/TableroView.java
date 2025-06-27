@@ -13,6 +13,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.text.Font;
 
 import java.io.FileNotFoundException;
@@ -25,10 +27,19 @@ public class TableroView extends BorderPane {
     private GwentApp app;
     VBox tableroBox;
     private VBox infoCartaBox; // Panel de información de carta
+    private AudioClip sonidoClick;
 
     public TableroView(GwentController controller, GwentApp app) {
         this.controller = controller;
         this.app = app;
+
+        // Cargar el sonido de click
+        try {
+            Media media = new Media(getClass().getResource("/sonidos/click.wav").toExternalForm());
+            sonidoClick = new AudioClip(media.getSource());
+        } catch (Exception e) {
+            System.out.println("Error al cargar el sonido de click: " + e.getMessage());
+        }
 
         setPadding(new Insets(10));
 
@@ -138,18 +149,30 @@ public class TableroView extends BorderPane {
 
     private void jugarCarta(CartaView cartaView, int posicion) {
         cartaView.setDisable(true); // Evita clicks múltiples
+        // Reproducir sonido de click
+        if (sonidoClick != null) {
+            sonidoClick.play();
+        }
         controller.jugarCarta(posicion);
         actualizarVista();
     }
 
     private void jugarCarta(CartaView cartaView, int posicion, Seccion seccion) {
         cartaView.setDisable(true); // Evita clicks múltiples
+        // Reproducir sonido de click
+        if (sonidoClick != null) {
+            sonidoClick.play();
+        }
         controller.jugarCarta(posicion, seccion);
         actualizarVista();
     }
 
     private void jugarCarta(CartaView cartaView, int posicion, List<Seccion> secciones) {
         cartaView.setDisable(true); // Evita clicks múltiples
+        // Reproducir sonido de click
+        if (sonidoClick != null) {
+            sonidoClick.play();
+        }
         controller.jugarCarta(posicion, secciones);
         actualizarVista();
     }
