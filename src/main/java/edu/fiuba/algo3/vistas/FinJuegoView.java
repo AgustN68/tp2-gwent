@@ -59,7 +59,10 @@ public class FinJuegoView extends VBox {
         reiniciarButton.setPrefSize(200, 50);
         reiniciarButton.setOnAction(e -> {
             this.sonido.stop();
-            app.mostrarPantallaInicial();});
+            // Reiniciar el juego antes de mostrar la pantalla inicial
+            app.getController().reiniciarJuego();
+            app.mostrarPantallaInicial();
+        });
 
         // Botón para salir
         Button salirButton = new Button("Salir del juego");
@@ -67,7 +70,8 @@ public class FinJuegoView extends VBox {
         salirButton.setPrefSize(200, 50);
         salirButton.setOnAction(e ->   {
             this.sonido.stop();
-            ((Stage) getScene().getWindow()).close();});
+            ((Stage) getScene().getWindow()).close();
+        });
 
         // Añadir componentes a la vista
         getChildren().addAll(

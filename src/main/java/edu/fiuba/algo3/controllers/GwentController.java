@@ -36,14 +36,15 @@ public class GwentController {
         this.rondaActual = 1;
     }
 
-    public void setApp(GwentApp app) {
-        this.app = app;
+    /**
+     * Reinicia el juego creando una nueva instancia de Gwent.
+     * Se llama cuando el usuario quiere jugar de nuevo.
+     */
+    public void reiniciarJuego() {
+        this.juego = new Gwent();
+        this.rondaActual = 1;
     }
 
-    /**
-     * Inicia el juego creando directamente los jugadores, tableros y mazos.
-     * Este método evita usar la fase Inicial del juego para no bloquear la interfaz.
-     */
     public void iniciarJuego(String nombreJugador1, String nombreJugador2) {
         juego.iniciarJuego(nombreJugador1, nombreJugador2);
     }
@@ -111,5 +112,9 @@ public class GwentController {
 
     public void iniciarFaseJuego() {
         juego.iniciarFaseJuego();
+    }
+
+    public void setApp(GwentApp app) {
+        this.app = app;
     }
 }

@@ -90,6 +90,14 @@ public class GwentApp extends Application {
         primaryStage.setScene(scene);
     }
 
+    /**
+     * Devuelve el controlador de la aplicación.
+     * Permite que las vistas accedan al controlador para operaciones como reiniciar el juego.
+     */
+    public GwentController getController() {
+        return this.controller;
+    }
+
     public BackgroundImage obtenerBackgroundImage(String direccionImagen) throws FileNotFoundException {
         Image fondoImage;
         InputStream is = getClass().getResourceAsStream(direccionImagen);
