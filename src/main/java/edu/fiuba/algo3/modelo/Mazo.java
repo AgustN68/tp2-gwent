@@ -53,4 +53,12 @@ public class Mazo {
     public int obtenerCantidadDeCartas() {
         return cartas.size();
     }
+
+    public void obtenerCartasEspia(Jugador jugador) {
+        int cantidadDisponible = obtenerCantidadDeCartas();
+        int cantidadCartas = (cantidadDisponible > 1) ? 2 : (cantidadDisponible == 1 ? 1 : 0);
+        if (cantidadCartas > 0) {
+            jugador.tomarCartasMazo(cantidadCartas);
+        }
+    }
 }

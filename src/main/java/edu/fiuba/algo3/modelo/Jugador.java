@@ -66,8 +66,7 @@ public class Jugador {
 
     public void tomarCartasEspia() {
         Objects.requireNonNull(mazo, "El mazo no ha sido asignado");
-        int cantidadCartas = (mazo.obtenerCantidadDeCartas() > 1) ? 2 : 1;
-        tomarCartasMazo(cantidadCartas);
+        mazo.obtenerCartasEspia(this);
     }
 
     public void setMazo(Mazo mazo) {
