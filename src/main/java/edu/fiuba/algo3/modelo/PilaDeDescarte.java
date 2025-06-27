@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Carta.CartaNula;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PilaDeDescarte implements  Mostrable {
+public class PilaDeDescarte {
     private List<Carta> cartas;
     public PilaDeDescarte(){
         this.cartas = new ArrayList<>();
@@ -19,9 +19,6 @@ public class PilaDeDescarte implements  Mostrable {
         this.cartas.addAll(descartes);
     }
 
-    public List <Carta> mostrar(){
-        return this.cartas;         //ver que vamos a mostrar, carta deberia poder mostrar algo al jugador
-    }
     public int cantidadCartas(){
         return this.cartas.size();
     }
