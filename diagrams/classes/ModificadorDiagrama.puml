@@ -8,14 +8,23 @@ abstract Modificador{
 +aplicarMultiplicacion(puntaje: Puntaje, multiplicador: Int): void
 +aplicarSuma(puntaje: Puntaje, suma:Int): void
 }
+class Espia{
++aplicarModificador():void
+}
+class Medico{
+-jugador: Jugador
+-descripcion: String
++aplicarModificador(): Void
+}
+class Agil{
++aplicarModificador():void
+}
 
-class Medico{}
-class Agil{}
 class Legendaria{}
 class Unida{}
 class SinModificador{}
 class MoraleBoostMod{}
-
+Modificador <|-- Espia
 Modificador <|.. Medico
 Modificador <|.. Agil
 Modificador <|.. Legendaria

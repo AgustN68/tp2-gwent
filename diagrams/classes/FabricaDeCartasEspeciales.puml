@@ -1,0 +1,30 @@
+@startuml
+class EspecialFactory{
++crearEspecial(): Especial
+}
+
+abstract Especial{
++usar()
+}
+
+class TierraArrasada{
++usar()
+}
+class Clima{
++usar()
+}
+Class Despejado{
++usar()
+}
+class MoraleBoost{
++usar()
+}
+
+EspecialFactory .> Especial
+
+Especial <|-- TierraArrasada
+Especial <|-- Clima
+Especial <|-- Despejado
+Especial <|-- MoraleBoost
+
+@enduml
