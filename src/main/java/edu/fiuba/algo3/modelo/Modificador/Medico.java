@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 
 public class Medico extends Modificador {
     private final Jugador jugador;
+    private String descripcion = "Medico: Permite elegir una carta de tu pila de descartes y jugarla al instante.";
 
     public Medico(Jugador jugador) {
         this.jugador = jugador;
@@ -14,5 +15,9 @@ public class Medico extends Modificador {
     public void aplicarModificador() {
         Carta carta = this.jugador.agarrarDescarte();
         carta.usar();
+    }
+    @Override
+    public String obtenerDescripcion() {
+        return this.descripcion;
     }
 }

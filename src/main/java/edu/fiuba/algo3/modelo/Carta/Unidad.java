@@ -105,5 +105,10 @@ public class Unidad extends Carta {
     public Modificador obtenerModificador() {
         return modificador;
     }
+
+    @Override
+    public String obtenerDescripcion() {
+        return modificador.obtenerDescripcion();
+    }
 }
 

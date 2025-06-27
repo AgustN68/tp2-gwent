@@ -20,4 +20,9 @@ public class CartaNula extends Carta {
     public void usar(List<Seccion> secciones) {
     }
 
+    @Override
+    public String obtenerDescripcion() {
+        return "";
+    }
+
 }

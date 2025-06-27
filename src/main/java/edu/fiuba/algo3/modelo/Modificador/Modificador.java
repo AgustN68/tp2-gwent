@@ -6,7 +6,6 @@ import edu.fiuba.algo3.modelo.Puntaje;
 public abstract class Modificador {
     protected Unidad unidad;
 
-
     public Puntaje aplicarModificador(Puntaje puntaje) {
         return puntaje;
     }
@@ -37,4 +36,6 @@ public abstract class Modificador {
                 puntaje.sumarValor(suma);
             }
         }
+
+    public abstract String obtenerDescripcion();
 }
