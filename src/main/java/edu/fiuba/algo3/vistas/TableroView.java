@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Carta.Especial.MoraleBoost;
 import edu.fiuba.algo3.modelo.Carta.Especial.TierraArrasada;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Modificador.Espia;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -178,7 +179,16 @@ public class TableroView extends BorderPane {
                 CartaView cartaSeleccionada = CartaView.getCartaSeleccionada();
                 if (cartaSeleccionada == null) {
                     if (carta instanceof Unidad) {
-                        seleccionarCarta(posicion, jugadorActual, cartaView, ((Unidad) cartaView.getCarta()).obtenerSecciones());
+                        Unidad unidad = (Unidad) cartaView.getCarta();
+                        if (unidad.obtenerModificador().getClass() == Espia.class) {
+                            if (jugadorActual.equals(controller.getJugador1())) {
+                                seleccionarCarta(posicion, controller.getJugador2(), cartaView, unidad.obtenerSecciones());
+                            } else {
+                                seleccionarCarta(posicion, controller.getJugador1(), cartaView, unidad.obtenerSecciones());
+                            }
+                        } else {
+                            seleccionarCarta(posicion, jugadorActual, cartaView, unidad.obtenerSecciones());
+                        }
                     } else if (carta instanceof MoraleBoost) {
                         seleccionarCarta(posicion, jugadorActual, cartaView, obtenerSeccionesDe(jugadorActual));
                     } else if (carta instanceof TierraArrasada) {
