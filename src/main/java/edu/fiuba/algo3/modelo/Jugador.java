@@ -55,6 +55,12 @@ public class Jugador {
         pilaDeDescarte.descartarUna(carta);
     }
 
+    public void usarCarta(int posicion, List<Seccion> secciones) {
+        Carta carta = mano.agarrarCarta(posicion);
+        carta.usar(secciones);
+        pilaDeDescarte.descartarUna(carta);
+    }
+
     public void descartarCarta(int posicion) {
         this.pilaDeDescarte.descartarUna(mano.agarrarCarta(posicion));
     }

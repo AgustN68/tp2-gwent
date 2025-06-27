@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.Carta.Especial;
 
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
+import java.util.List;
+
 public class MoraleBoost extends Especial {
 
     private int producto = 2;
@@ -14,5 +16,9 @@ public class MoraleBoost extends Especial {
     @Override
     public void usar() {
 
+    }
+
+    @Override
+    public void usar(List<Seccion> secciones) {
     }
 }

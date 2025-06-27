@@ -82,6 +82,13 @@ public class Ronda {
         }
     }
 
+    public void jugarCarta(int posicionCarta, List<Seccion> secciones) {
+        if (!jugadorActual.verMano().isEmpty() && posicionCarta >= 0 && posicionCarta < jugadorActual.verMano().size()) {
+            jugadorActual.usarCarta(posicionCarta, secciones);
+            cambiarTurno();
+        }
+    }
+
     private void cambiarTurno() {
         if (jugadoresEnRonda.size() > 1) {
             if (jugadorActual.equals(jugadoresEnRonda.get(0))){

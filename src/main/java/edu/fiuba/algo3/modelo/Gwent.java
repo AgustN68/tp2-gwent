@@ -59,6 +59,10 @@ public class Gwent {
         faseJuego.jugarCarta(posicionCarta, seccion);
     }
 
+    public void jugarCarta(int posicionCarta, List<Seccion> secciones) {
+        faseJuego.jugarCarta(posicionCarta, secciones);
+    }
+
     public void pasarTurno() {
         faseJuego.pasarTurno();
     }

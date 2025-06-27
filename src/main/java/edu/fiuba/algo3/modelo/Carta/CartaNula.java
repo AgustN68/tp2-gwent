@@ -16,4 +16,8 @@ public class CartaNula extends Carta {
 
     }
 
+    @Override
+    public void usar(List<Seccion> secciones) {
+    }
+
 }

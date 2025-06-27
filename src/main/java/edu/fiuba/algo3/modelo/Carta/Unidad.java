@@ -35,6 +35,10 @@ public class Unidad extends Carta {
         this.modificador.aplicarModificador();
     }
 
+    @Override
+    public void usar(List<Seccion> secciones) {
+    }
+
     public void ubicar(Seccion seccionAUbicar) {
         if (!secciones.contains(seccionAUbicar)) {
             throw new UnidadNoSePuedeUbicarEnEstaSeccionException("No se puede ubicar en esta seccion");

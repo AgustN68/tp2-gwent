@@ -5,10 +5,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
 
 public class FinJuegoView extends VBox {
 
@@ -21,13 +25,21 @@ public class FinJuegoView extends VBox {
         setSpacing(30);
         setAlignment(Pos.CENTER);
 
+        try {
+            setBackground(new Background(app.obtenerBackgroundImage("/imagenes/fondos/tablero.jpg")));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         // Título
         Label tituloLabel = new Label("¡FIN DEL JUEGO!");
         tituloLabel.setFont(Font.font("Arial", FontWeight.BOLD, 48));
+        tituloLabel.setTextFill(Color.WHITE);
 
         // Mensaje de ganador
         Label ganadorLabel = new Label("El ganador es: " + ganador.getNombre());
         ganadorLabel.setFont(Font.font("Arial", FontWeight.BOLD, 32));
+        ganadorLabel.setTextFill(Color.WHITE);
 
         // Botón para jugar de nuevo
         Button reiniciarButton = new Button("Jugar de nuevo");

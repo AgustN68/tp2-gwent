@@ -27,4 +27,8 @@ public class Clima extends Especial {
     public void usar(Seccion seccion) {
 
     }
+
+    @Override
+    public void usar(List<Seccion> secciones) {
+    }
 }

@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vistas;
 import edu.fiuba.algo3.controllers.GwentController;
 import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.MoraleBoost;
+import edu.fiuba.algo3.modelo.Carta.Especial.TierraArrasada;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
@@ -146,6 +147,12 @@ public class TableroView extends BorderPane {
         actualizarVista();
     }
 
+    private void jugarCarta(CartaView cartaView, int posicion, List<Seccion> secciones) {
+        cartaView.setDisable(true); // Evita clicks múltiples
+        controller.jugarCarta(posicion, secciones);
+        actualizarVista();
+    }
+
     private void configurarManoYAcciones() {
         HBox contenedorInferior = new HBox(5);
         contenedorInferior.setAlignment(Pos.CENTER_LEFT);
@@ -174,6 +181,10 @@ public class TableroView extends BorderPane {
                         seleccionarCarta(posicion, jugadorActual, cartaView, ((Unidad) cartaView.getCarta()).obtenerSecciones());
                     } else if (carta instanceof MoraleBoost) {
                         seleccionarCarta(posicion, jugadorActual, cartaView, obtenerSeccionesDe(jugadorActual));
+                    } else if (carta instanceof TierraArrasada) {
+                        List<Seccion> secciones = obtenerSeccionesDe(controller.getJugador1());
+                        secciones.addAll(obtenerSeccionesDe(controller.getJugador2()));
+                        jugarCarta(cartaView, posicion, secciones);
                     } else {
                         jugarCarta(cartaView, posicion);
                     }

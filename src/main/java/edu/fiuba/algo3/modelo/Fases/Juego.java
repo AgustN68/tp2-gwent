@@ -56,6 +56,10 @@ public class Juego extends Fase{
         rondaActual.jugarCarta(posicionCarta, seccion);
     }
 
+    public void jugarCarta(int posicionCarta, List<Seccion> secciones) {
+        rondaActual.jugarCarta(posicionCarta, secciones);
+    }
+
     public void pasarTurno() {
         rondaActual.pasarTurno();
         comprobarFinDeRonda();
