@@ -6,12 +6,15 @@ import edu.fiuba.algo3.modelo.Carta.Especial.MoraleBoost;
 import edu.fiuba.algo3.modelo.Carta.Especial.TierraArrasada;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Modificador.Espia;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.text.Font;
 
 import java.io.FileNotFoundException;
@@ -24,10 +27,19 @@ public class TableroView extends BorderPane {
     private GwentApp app;
     VBox tableroBox;
     private VBox infoCartaBox; // Panel de información de carta
+    private AudioClip sonidoClick;
 
     public TableroView(GwentController controller, GwentApp app) {
         this.controller = controller;
         this.app = app;
+
+        // Cargar el sonido de click
+        try {
+            Media media = new Media(getClass().getResource("/sonidos/click.wav").toExternalForm());
+            sonidoClick = new AudioClip(media.getSource());
+        } catch (Exception e) {
+            System.out.println("Error al cargar el sonido de click: " + e.getMessage());
+        }
 
         setPadding(new Insets(10));
 
@@ -137,18 +149,30 @@ public class TableroView extends BorderPane {
 
     private void jugarCarta(CartaView cartaView, int posicion) {
         cartaView.setDisable(true); // Evita clicks múltiples
+        // Reproducir sonido de click
+        if (sonidoClick != null) {
+            sonidoClick.play();
+        }
         controller.jugarCarta(posicion);
         actualizarVista();
     }
 
     private void jugarCarta(CartaView cartaView, int posicion, Seccion seccion) {
         cartaView.setDisable(true); // Evita clicks múltiples
+        // Reproducir sonido de click
+        if (sonidoClick != null) {
+            sonidoClick.play();
+        }
         controller.jugarCarta(posicion, seccion);
         actualizarVista();
     }
 
     private void jugarCarta(CartaView cartaView, int posicion, List<Seccion> secciones) {
         cartaView.setDisable(true); // Evita clicks múltiples
+        // Reproducir sonido de click
+        if (sonidoClick != null) {
+            sonidoClick.play();
+        }
         controller.jugarCarta(posicion, secciones);
         actualizarVista();
     }
@@ -158,7 +182,14 @@ public class TableroView extends BorderPane {
         contenedorInferior.setAlignment(Pos.CENTER_LEFT);
         contenedorInferior.setPadding(new Insets(5));
 
-        // Mostrar las cartas en la mano del jugador actual
+        HBox manoBox = crearManoBox();
+
+        contenedorInferior.getChildren().add(manoBox);
+
+        setBottom(contenedorInferior);
+    }
+
+    private HBox crearManoBox() {
         HBox manoBox = new HBox(2);
         manoBox.setAlignment(Pos.BOTTOM_CENTER);
         manoBox.setPadding(new Insets(5));
@@ -172,36 +203,44 @@ public class TableroView extends BorderPane {
             final int posicion = i;
 
             CartaView cartaView = new CartaView(carta, app, true, true);
-            cartaView.setOnMouseClicked(e -> {
-
-                // Solo permitir click si no hay carta levantada/seleccionada
-                CartaView cartaSeleccionada = CartaView.getCartaSeleccionada();
-                if (cartaSeleccionada == null) {
-                    if (carta instanceof Unidad) {
-                        seleccionarCarta(posicion, jugadorActual, cartaView, ((Unidad) cartaView.getCarta()).obtenerSecciones());
-                    } else if (carta instanceof MoraleBoost) {
-                        seleccionarCarta(posicion, jugadorActual, cartaView, obtenerSeccionesDe(jugadorActual));
-                    } else if (carta instanceof TierraArrasada) {
-                        List<Seccion> secciones = obtenerSeccionesDe(controller.getJugador1());
-                        secciones.addAll(obtenerSeccionesDe(controller.getJugador2()));
-                        jugarCarta(cartaView, posicion, secciones);
-                    } else {
-                        jugarCarta(cartaView, posicion);
-                    }
-                } else if (cartaView.equals(cartaSeleccionada)) {
-                    cartaView.deseleccionarCarta();
-                    for (Node seccionView : tableroBox.getChildren()) {
-                        ((SeccionView) seccionView).seccionDeseleccionar();
-                    }
-                }
-            });
+            configurarEventoCartaMano(cartaView, carta, posicion, jugadorActual);
 
             manoBox.getChildren().add(cartaView);
         }
+        return manoBox;
+    }
 
-        contenedorInferior.getChildren().add(manoBox);
-
-        setBottom(contenedorInferior);
+    private void configurarEventoCartaMano(CartaView cartaView, Carta carta, int posicion, Jugador jugadorActual) {
+        cartaView.setOnMouseClicked(e -> {
+            CartaView cartaSeleccionada = CartaView.getCartaSeleccionada();
+            if (cartaSeleccionada == null) {
+                if (carta instanceof Unidad) {
+                    Unidad unidad = (Unidad) cartaView.getCarta();
+                    if (unidad.obtenerModificador().getClass() == Espia.class) {
+                        if (jugadorActual.equals(controller.getJugador1())) {
+                            seleccionarCarta(posicion, controller.getJugador2(), cartaView, unidad.obtenerSecciones());
+                        } else {
+                            seleccionarCarta(posicion, controller.getJugador1(), cartaView, unidad.obtenerSecciones());
+                        }
+                    } else {
+                        seleccionarCarta(posicion, jugadorActual, cartaView, unidad.obtenerSecciones());
+                    }
+                } else if (carta instanceof MoraleBoost) {
+                    seleccionarCarta(posicion, jugadorActual, cartaView, obtenerSeccionesDe(jugadorActual));
+                } else if (carta instanceof TierraArrasada) {
+                    List<Seccion> secciones = obtenerSeccionesDe(controller.getJugador1());
+                    secciones.addAll(obtenerSeccionesDe(controller.getJugador2()));
+                    jugarCarta(cartaView, posicion, secciones);
+                } else {
+                    jugarCarta(cartaView, posicion);
+                }
+            } else if (cartaView.equals(cartaSeleccionada)) {
+                cartaView.deseleccionarCarta();
+                for (Node seccionView : tableroBox.getChildren()) {
+                    ((SeccionView) seccionView).seccionDeseleccionar();
+                }
+            }
+        });
     }
 
     private List<Seccion> obtenerSeccionesDe(Jugador jugadorActual) {

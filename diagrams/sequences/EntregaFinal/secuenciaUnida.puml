@@ -1,0 +1,58 @@
+@startuml Calculo de un puntaje de una sección con dos Cartas con Modificador "Cartas Unidas"
+
+title Diagrama de Secuencia - Cálculo de un puntaje de una sección con dos Cartas con Modificador "Cartas Unidas"
+
+' Definir participantes
+actor Usuario
+participant "Jugador1: Jugador" as J1
+participant "mano: Mano" as M
+
+participant "Catapulta: Unidad" as C
+participant "Catapulta2: Unidad" as C2
+
+participant "Unidad" as UN
+
+participant "asedio: Asedio" as A
+participant "modificador: Unida" as U
+
+participant "puntaje: Puntaje" as PU
+' Interacciones
+Usuario -> J1: 1. usarCarta(posicionCatapulta)
+J1 -> M: agarrarCarta(posicionCatapulta)
+J1 <-- M: instancia de unidad "Catapulta" con puntaje 8
+J1 -> C: usar()
+
+C -> C: ubicar(Asedio)
+C -> A: ubicar(Catapulta)
+
+C -> U: aplicarModificador()
+
+Usuario -> J1: 1. usarCarta(posicionCatapulta2)
+J1 -> M: agarrarCarta(posicionCatapulta2)
+J1 <-- M: instancia de unidad "Catapulta2" con puntaje 8
+J1 -> C2: usar()
+
+C2 -> C2: ubicar(Asedio)
+C2 -> A: ubicar(Catapulta2)
+
+C2 -> U: aplicarModificador()
+
+Usuario -> A: calcularPuntajeTotal()
+
+A -> C: calcularPuntaje()
+C -> U: aplicarModificador(puntaje)
+U -> C: actualizarPuntajeSegunCantMismoTipoEnSeccion(puntaje)
+C -> A: actualizarPuntajeSegunCantidadEnSeccion(catapulta, puntaje)
+
+loop Por cada unidad almacenada, si es otra catapulta
+A -> UN: esIgual(catapulta)
+A -> A: incrementar contador "cantidad"
+end
+
+A -> PU: multiplicarPuntaje(new Puntaje(cantidad))
+Usuario <-- PU: new Puntaje(cantidad * valor)
+
+
+
+
+@enduml

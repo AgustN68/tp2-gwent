@@ -11,17 +11,13 @@ public class TierraArrasada extends Especial {
 
 
     public void usar(List<Seccion> secciones) {
-        System.out.println("buscando carta con mayor puntaje");
         Puntaje puntajeMasFuerte = new Puntaje(0);
         for (Seccion seccion : secciones) {
             Puntaje puntajeMasFuerteSeccionActual = seccion.obtenerPuntajeMasFuerte();
-            System.out.println("puntaje maximo de " + seccion.getClass().getSimpleName() + ": " + puntajeMasFuerteSeccionActual);
             if (!puntajeMasFuerte.esMayor(puntajeMasFuerteSeccionActual)) {
                 puntajeMasFuerte = puntajeMasFuerteSeccionActual;
             }
         }
-        System.out.println("puntaje mas fuerte: " + puntajeMasFuerte);
-        System.out.println("removiendo cartas de puntaje " + puntajeMasFuerte + " de todas las secciones");
         for (Seccion seccion : secciones) {
             seccion.removerCartasDePuntaje(puntajeMasFuerte);
         }
