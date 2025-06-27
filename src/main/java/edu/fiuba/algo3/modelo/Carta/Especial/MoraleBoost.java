@@ -6,6 +6,7 @@ public class MoraleBoost extends Especial {
 
     private int producto = 2;
 
+    @Override
     public void usar(Seccion seccion) {
         seccion.multiplicarPuntaje(producto);
     }

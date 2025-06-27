@@ -1,14 +1,19 @@
 package edu.fiuba.algo3.modelo.Carta;
 
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
-import edu.fiuba.algo3.modelo.Tablero;
 
-import java.util.List;
+public abstract class Carta {
 
-public interface Carta {
+    private String nombre;
 
-    void usar();
+    public abstract void usar();
 
-    void usar(Seccion seccion);
+    public abstract void usar(Seccion seccion);
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getNombre() {
+        return this.nombre;
+    }
 }

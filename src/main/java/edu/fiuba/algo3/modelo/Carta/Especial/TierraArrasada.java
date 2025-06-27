@@ -9,18 +9,14 @@ import java.util.List;
 
 public class TierraArrasada extends Especial {
 
+
     public void usar(List<Seccion> secciones) {
         Puntaje puntajeMasFuerte = new Puntaje(0);
-
         for (Seccion seccion : secciones) {
             Puntaje puntajeMasFuerteSeccionActual = seccion.obtenerPuntajeMasFuerte();
             if (!puntajeMasFuerte.esMayor(puntajeMasFuerteSeccionActual)) {
                 puntajeMasFuerte = puntajeMasFuerteSeccionActual;
             }
-        }
-
-        for (Seccion seccion : secciones) {
-            seccion.removerCartasDePuntaje(puntajeMasFuerte);
         }
     }
 
@@ -33,4 +29,5 @@ public class TierraArrasada extends Especial {
     public void usar(Seccion seccion) {
 
     }
+
 }

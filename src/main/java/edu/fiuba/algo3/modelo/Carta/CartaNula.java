@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.List;
 
-public class CartaNula implements Carta {
+public class CartaNula extends Carta {
 
     @Override
     public void usar(Seccion seccion) {

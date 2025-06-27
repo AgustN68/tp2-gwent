@@ -8,9 +8,8 @@ import edu.fiuba.algo3.modelo.exceptions.UnidadNoSePuedeUbicarEnEstaSeccionExcep
 import java.util.List;
 import java.util.ArrayList;
 
-public class Unidad implements Carta {
+public class Unidad extends Carta {
 
-    private final String nombre;
     private Puntaje puntaje;
     private final Modificador modificador;
     private List<Seccion> secciones;
@@ -18,7 +17,7 @@ public class Unidad implements Carta {
     private static final int POS_SECCION_PARTICULAR = 0;
 
     public Unidad(String nombre, Seccion seccion, int puntosIniciales, Modificador modificador) {
-        this.nombre = nombre;
+        this.setNombre(nombre);
         this.secciones = new ArrayList<>();
         secciones.add(seccion);
         puntaje = new Puntaje(puntosIniciales);
@@ -48,14 +47,9 @@ public class Unidad implements Carta {
         this.secciones = nuevasSeccionesPermitidas;
     }
 
-    public String obtenerNombre() {
-        return this.nombre;
-    }
-
     public Boolean esIgual(Unidad unidad) {
-        return this.nombre.equals(unidad.obtenerNombre());
+        return this.getNombre().equals(unidad.getNombre());
     }
-
 
     public Puntaje calcularPuntaje() {
         return modificador.aplicarModificador(puntaje);
@@ -94,10 +88,6 @@ public class Unidad implements Carta {
 
     public Puntaje actualizarPuntajeSegunCantMismoTipoEnSeccion(Puntaje puntaje) {
         return secciones.get(POS_SECCION_PARTICULAR).actualizarPuntajeSegunCantidadEnSeccion(this, puntaje);
-    }
-
-    public String getNombre() {
-        return nombre;
     }
 
     public Puntaje getPuntaje() {

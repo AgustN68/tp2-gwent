@@ -22,6 +22,7 @@ public class TableroView extends BorderPane {
     private GwentController controller;
     private GwentApp app;
     VBox tableroBox;
+    private VBox infoCartaBox; // Panel de información de carta
 
     public TableroView(GwentController controller, GwentApp app) {
         this.controller = controller;
@@ -37,14 +38,23 @@ public class TableroView extends BorderPane {
 
         // Parte inferior - mano del jugador actual y botones de acción
         configurarManoYAcciones();
+
+        // Lado derecho
+        configurarDerecha();
+    }
+
+    private void configurarDerecha() {
+        infoCartaBox = new VBox();
+        infoCartaBox.setId("infoCartaBox");
+        infoCartaBox.setAlignment(Pos.TOP_RIGHT);
+        infoCartaBox.setMinWidth(250);
+        setRight(infoCartaBox);
     }
 
     private void configurarIzquierda() {
         // Informacion
         VBox informacionBox = new VBox(10);
         informacionBox.setAlignment(Pos.CENTER);
-
-
 
         // Botones de acción
         Button pasarButton = new Button("Pasar");
@@ -115,7 +125,6 @@ public class TableroView extends BorderPane {
         }
 
         // Backgound del tablero
-
         try {
             setBackground(new Background(app.obtenerBackgroundImage("/imagenes/fondos/tablero.jpg")));
         } catch (FileNotFoundException e) {
@@ -155,7 +164,7 @@ public class TableroView extends BorderPane {
             Carta carta = cartasEnMano.get(i);
             final int posicion = i;
 
-            CartaView cartaView = new CartaView(carta, app, true);
+            CartaView cartaView = new CartaView(carta, app, true, true);
             cartaView.setOnMouseClicked(e -> {
 
                 // Solo permitir click si no hay carta levantada/seleccionada
@@ -208,12 +217,12 @@ public class TableroView extends BorderPane {
     public void actualizarVista() {
         CartaView.resetCartaSeleccionada();
 
-        // Eliminar todos los nodos actuales
         getChildren().clear();
 
         // Volver a configurar la vista
         configurarIzquierda();
         configurarTablero();
         configurarManoYAcciones();
+        configurarDerecha();
     }
 }

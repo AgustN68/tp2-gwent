@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Seccion.Seccion;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -31,15 +32,17 @@ public class CartaView extends VBox {
 
     private Carta carta;
     private Boolean animacionElevar;
+    private Boolean desplegarInfo;
 
     // Control de carta levantada (solo una carta puede estar levantada a la vez)
     private static CartaView cartaLevantada = null;
     // Control de carta seleccionada (solo una carta puede estar seleccionada a la vez)
     private static CartaView cartaSeleccionada = null;
 
-    public CartaView(Carta carta, GwentApp app, Boolean animacionElevar) {
+    public CartaView(Carta carta, GwentApp app, Boolean animacionElevar, Boolean desplegarInfo) {
         this.carta = carta;
         this.animacionElevar = animacionElevar;
+        this.desplegarInfo = desplegarInfo;
 
         setSpacing(5);
         setMinSize(ANCHO, ALTO);
@@ -48,7 +51,7 @@ public class CartaView extends VBox {
 
         setAlignment(Pos.TOP_LEFT);
 
-        String nombreCarta = obtenerNombreCarta(carta);
+        String nombreCarta = carta.getNombre();
         setFondoCarta(app, nombreCarta);
 
         Region espacio = new Region();
@@ -62,7 +65,7 @@ public class CartaView extends VBox {
 
         setStyle("-fx-border-color: black; -fx-border-width: 1;");
 
-        configurarAnimaciones();
+        configurarAnimaciones(app);
     }
 
     private void setFondoCarta(GwentApp app, String nombreCarta) {
@@ -147,7 +150,7 @@ public class CartaView extends VBox {
         }
     }
 
-    private void configurarAnimaciones() {
+    private void configurarAnimaciones(GwentApp app) {
         var scaleTrans = new ScaleTransition(Duration.millis(250), this);
         scaleTrans.setFromX(1.0);
         scaleTrans.setFromY(1.0);
@@ -169,6 +172,9 @@ public class CartaView extends VBox {
                     translateTrans.setRate(1.0);
                     translateTrans.play();
                 }
+                if (desplegarInfo) {
+                    ampliarInfoCartaBox(app);
+                }
             }
         });
         setOnMouseExited(e -> {
@@ -181,6 +187,9 @@ public class CartaView extends VBox {
                 if (animacionElevar) {
                     translateTrans.setRate(-1.0);
                     translateTrans.play();
+                }
+                if (desplegarInfo) {
+                    limpiarInfoCartaBox();
                 }
             }
         });
@@ -197,30 +206,6 @@ public class CartaView extends VBox {
     public static void resetCartaSeleccionada() {
         cartaLevantada = null;
         cartaSeleccionada = null;
-    }
-
-    /**
-     * Intenta obtener un nombre más amigable de la carta
-     */
-    private String obtenerNombreCarta(Carta carta) {
-        if (carta instanceof Unidad) {
-            Unidad unidad = (Unidad) carta;
-            try {
-                Method metodo = unidad.getClass().getMethod("getNombre");
-                return (String) metodo.invoke(unidad);
-            } catch (Exception e) {
-                return "Unidad";
-            }
-        } else if (carta instanceof Especial) {
-            try {
-                Method metodo = carta.getClass().getMethod("getNombre");
-                return (String) metodo.invoke(carta);
-            } catch (Exception e) {
-                return carta.getClass().getSimpleName();
-            }
-        } else {
-            return carta.getClass().getSimpleName();
-        }
     }
 
     public Carta getCarta() {
@@ -242,6 +227,24 @@ public class CartaView extends VBox {
         if (cartaSeleccionada == this) {
             cartaSeleccionada = null;
             setStyle("-fx-border-color: black; -fx-border-width: 1;");
+        }
+    }
+
+    private void ampliarInfoCartaBox(GwentApp app) {
+        Node infoBox = this.getScene().lookup("#infoCartaBox");
+        if (infoBox instanceof VBox) {
+            VBox infoCartaBox = (VBox) infoBox;
+            infoCartaBox.getChildren().clear();
+
+            CartaDetalladaView cartaDetalladaView = new CartaDetalladaView(carta, app);
+            infoCartaBox.getChildren().add(cartaDetalladaView);
+        }
+    }
+    private void limpiarInfoCartaBox() {
+        Node infoBox = this.getScene().lookup("#infoCartaBox");
+        if (infoBox instanceof VBox) {
+            VBox infoCartaBox = (VBox) infoBox;
+            infoCartaBox.getChildren().clear();
         }
     }
 }
