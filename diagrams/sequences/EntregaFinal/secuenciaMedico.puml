@@ -1,0 +1,31 @@
+@startuml Colocación de una Carta con Modificador "Cartas Unidas"
+title Diagrama de Secuencia - Colocación de una Carta con Modificador "Medico" en juego.
+
+' Definir participantes
+actor Usuario
+participant "Jugador1: Jugador" as J1
+participant "mano: Mano" as M
+participant "unidad: Unidad" as C
+participant "unidad2: Unidad" as C2
+participant "asedio: Asedio" as A
+participant "modificador: Medico" as ME
+
+' Interacciones
+Usuario -> J1: 1. usarCarta(posicionUnidad)
+J1 -> M: agarrarCarta(posicionUnidad)
+J1 <-- M: instancia de Unidad
+J1 -> C: usar()
+
+C -> C: ubicar(Asedio)
+C -> A: ubicar(unidad)
+
+C -> M: aplicarModificador()
+
+ME -> J1: agarrarDescarte()
+J1 --> ME: instancia de Unidad "unidad2"
+C2 <- ME: usar()
+
+C2 -> C2: ubicar(Asedio)
+C2 -> A: ubicar(unidad)
+
+@enduml
