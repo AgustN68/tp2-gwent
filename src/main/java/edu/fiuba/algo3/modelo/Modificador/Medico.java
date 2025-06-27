@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 
 public class Medico extends Modificador {
     private final Jugador jugador;
-    private String descripcion = "Medico: Permite elegir una carta de tu pila de descartes y jugarla al instante.";
+    private String descripcion = "Medico: Eliga una carta aleatoria de tu pila de descartes y la juega al instante.";
 
     public Medico(Jugador jugador) {
         this.jugador = jugador;
