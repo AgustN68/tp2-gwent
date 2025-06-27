@@ -6,6 +6,9 @@ public class Puntaje {
     private int valorOriginal;
 
     public Puntaje(int puntosIniciales) {
+        if (puntosIniciales < 0) {
+            throw new IllegalArgumentException("El puntaje no puede ser negativo: " + puntosIniciales);
+        }
         this.valor = puntosIniciales;
         this.valorOriginal = puntosIniciales;
     }
