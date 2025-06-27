@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Carta.Carta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Jugador {
 
@@ -15,13 +16,19 @@ public class Jugador {
     private int rondasGanadas;
 
     public Jugador(Tablero tablero, PilaDeDescarte pilaDeDescarte) {
+        Objects.requireNonNull(tablero, "El tablero no puede ser null");
+        Objects.requireNonNull(pilaDeDescarte, "La pila de descarte no puede ser null");
         this.tablero = tablero;
         this.mano = new Mano(new ArrayList<>());
         this.pilaDeDescarte = pilaDeDescarte;
         rondasGanadas = 0;
+        this.nombre = "";
     }
 
     public void validarCartasSuficientesMano(int cantidadCartas) {
+        if (cantidadCartas < 0) {
+            throw new IllegalArgumentException("La cantidad de cartas no puede ser negativa");
+        }
         mano.tieneCartasSuficientes(cantidadCartas);
     }
 
@@ -58,11 +65,13 @@ public class Jugador {
     }
 
     public void tomarCartasEspia() {
+        Objects.requireNonNull(mazo, "El mazo no ha sido asignado");
         int cantidadCartas = (mazo.obtenerCantidadDeCartas() > 1) ? 2 : 1;
         tomarCartasMazo(cantidadCartas);
     }
 
     public void setMazo(Mazo mazo) {
+        Objects.requireNonNull(mazo, "El mazo no puede ser null");
         this.mazo = mazo;
     }
 
@@ -71,6 +80,7 @@ public class Jugador {
     }
 
     public void setNombre(String nombre) {
+        Objects.requireNonNull(nombre, "El nombre no puede ser null");
         this.nombre = nombre;
     }
 
