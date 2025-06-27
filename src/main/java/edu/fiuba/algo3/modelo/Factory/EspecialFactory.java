@@ -9,6 +9,11 @@ import java.util.List;
 
 public class EspecialFactory {
 
+    private static final String TIPO_TIERRA_ARRASADA = "Tierra arrasada";
+    private static final String TIPO_MORALE_BOOST = "Morale Boost";
+    private static final String TIPO_CLIMA = "Clima";
+    private static final String NOMBRE_CLIMA_DESPEJADO = "Tiempo Despejado";
+
     public static Especial crearEspecial(
             String tipo,
             String nombre,
@@ -19,19 +24,18 @@ public class EspecialFactory {
     ) {
 
         Especial nuevaEspecial;
-        String DESPEJADO = "Tiempo Despejado";
 
         switch (tipo) {
-            case "Tierra arrasada":
+            case TIPO_TIERRA_ARRASADA:
                 nuevaEspecial = new TierraArrasada();
                 break;
 
-            case "Morale Boost":
+            case TIPO_MORALE_BOOST:
                 nuevaEspecial = new MoraleBoost();
                 break;
 
-            case "Clima":
-                if (nombre.equals(DESPEJADO)) {
+            case TIPO_CLIMA:
+                if (nombre.equals(NOMBRE_CLIMA_DESPEJADO)) {
                     nuevaEspecial = new Despejado(tablero1, tablero2);
                 } else {
                     nuevaEspecial = new Clima(seccionesAfectadas);
