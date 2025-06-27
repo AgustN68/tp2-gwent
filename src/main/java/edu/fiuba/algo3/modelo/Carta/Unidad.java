@@ -26,7 +26,7 @@ public class Unidad extends Carta {
 
     @Override
     public void usar() {
-
+        usar(secciones.get(POS_SECCION_PARTICULAR));
     }
 
     @Override
