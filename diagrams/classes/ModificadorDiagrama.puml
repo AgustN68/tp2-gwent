@@ -1,0 +1,27 @@
+@startuml
+@startuml
+abstract Modificador{
+#unidad: Unidad
++aplicarModificador(puntaje: Puntaje): Puntaje
++aplicarEfectoClima(puntaje: Puntaje , valor: Int): void
++esVulnerableAEspeciales(): Boolean
++aplicarMultiplicacion(puntaje: Puntaje, multiplicador: Int): void
++aplicarSuma(puntaje: Puntaje, suma:Int): void
+}
+
+class Medico{}
+class Agil{}
+class Legendaria{}
+class Unida{}
+class SinModificador{}
+class MoraleBoostMod{}
+
+Modificador <|.. Medico
+Modificador <|.. Agil
+Modificador <|.. Legendaria
+Modificador <|.. Unida
+Modificador <|.. SinModificador
+Modificador <|.. MoraleBoostMod
+@enduml
+
+@enduml

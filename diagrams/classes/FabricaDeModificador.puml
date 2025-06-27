@@ -1,0 +1,26 @@
+@startuml
+interface Modificador
+
+class SinModificador implements Modificador
+class Legendaria implements Modificador
+class Medico implements Modificador
+class Unida implements Modificador
+class MoraleBoostMod implements Modificador
+class Espia implements Modificador
+class Agil implements Modificador
+
+class ModificadorFactory {
+    +crearModificador(modificador: String, jugador: Jugador, secciones: List<Seccion>): Modificador
+}
+
+ModificadorFactory --> Modificador
+Modificador <|.. SinModificador
+Modificador <|.. Legendaria
+Modificador <|.. Medico
+Modificador <|.. Unida
+Modificador <|.. MoraleBoostMod
+Modificador <|.. Espia
+Modificador <|.. Agil
+
+
+@enduml
