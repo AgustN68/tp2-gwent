@@ -10,11 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-//import javafx.scene.media.AudioClip;
-//import javafx.scene.media.Media;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.util.Duration;
-
-import javax.swing.text.View;
 import java.io.FileNotFoundException;
 
 public class PantallaInicialView extends StackPane {
@@ -22,6 +20,8 @@ public class PantallaInicialView extends StackPane {
     private GwentController controller;
     private GwentApp app;
     private Scene escena;
+
+    private AudioClip sonido;
 
         public PantallaInicialView(GwentController controller, GwentApp app) {
             try {
@@ -35,6 +35,16 @@ public class PantallaInicialView extends StackPane {
             logoView.setFitWidth(400);
             logoView.setPreserveRatio(true);
 
+            //añado musica
+            try {
+                Media media = new Media(getClass().getResource("/sonidos/musica_intro.mp3").toExternalForm());
+                sonido = new AudioClip(media.getSource());
+                sonido.setCycleCount(AudioClip.INDEFINITE);
+                sonido.play();
+            } catch (Exception e) {
+                System.out.println("Error al cargar o reproducir la música: " + e.getMessage());
+            }
+
             //efecto desvanecimiento
             this.setOpacity(1.0);
 
@@ -45,7 +55,7 @@ public class PantallaInicialView extends StackPane {
                 fadeOut.setFromValue(1.0);
                 fadeOut.setToValue(0.0);
                 fadeOut.setOnFinished(e -> {
-                    //this.detenerMusica();
+                    detenerSonido(sonido);
                     app.mostrarPantallaInicial();
                 });
                 fadeOut.play();
@@ -57,12 +67,6 @@ public class PantallaInicialView extends StackPane {
             centro.setAlignment(Pos.CENTER);
 
             this.getChildren().add( centro);
-
-            /*// Música
-            Media media = new Media("file:src/main/resources/sonidos/musica_intro.mp3");
-            sonido = new AudioClip(media.getSource());
-            sonido.setCycleCount(AudioClip.INDEFINITE);
-            sonido.play();*/
         }
 
         public Label mensajeParaContinuar(){
@@ -92,5 +96,10 @@ public class PantallaInicialView extends StackPane {
                 st.setToY(1);
                 st.play();
             });
+        }
+        public void detenerSonido(AudioClip sonido){
+            if(sonido != null){
+                sonido.stop();
+            }
         }
 }
