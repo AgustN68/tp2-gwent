@@ -1,0 +1,66 @@
+@startuml "Diagrama de Paquetes General"
+title "Diagrama de Paquetes de Unidad - Modificador"
+skinparam titleFontSize 29
+top to bottom direction
+
+skinparam linetype ortho
+
+Package "Modelo" {
+
+
+Package "Modificador" {
+    abstract class Modificador
+    class Legendaria
+    class Unida
+    class Espia
+    class Agil
+    class Medico
+    class SinModificador
+    class MoraleBoostMod
+
+Modificador <|-- Legendaria
+Modificador <|-- Unida
+Modificador <|-- Espia
+Modificador <|-- Agil
+Modificador <|-- Medico
+Modificador <|-- SinModificador
+Modificador <|-- MoraleBoostMod
+
+}
+
+package "Carta" {
+    abstract class Carta
+    package "Especial" {}
+
+    class Unidad
+
+    Carta <|- Unidad
+    Carta <|- Especial
+}
+
+package "Seccion" {
+    abstract class Seccion
+    class Asedio
+    class Rango
+    class CuerpoACuerpo
+
+Seccion <|- Asedio
+Seccion <|- CuerpoACuerpo
+Seccion <|- Rango
+}
+
+Unidad -> Modificador
+Carta -> Seccion
+
+
+
+}
+
+
+
+
+
+
+
+
+@enduml
