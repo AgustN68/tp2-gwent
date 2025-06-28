@@ -1,0 +1,90 @@
+@startuml "Diagrama de Paquetes General"
+title "Diagrama de Paquetes General"
+skinparam titleFontSize 34
+top to bottom direction
+skinparam linetype ortho
+
+package "Modelo" {
+
+    package "Archivos" {}
+
+    package "Carta" {
+        package "Especial" {
+            package "Clima" {
+
+            }
+        }
+    }
+
+    package "Factory" {}
+    package "Lector" {}
+    package "Modificador" {}
+    package "Seccion" {}
+    package "Exceptions" {}
+    package "Fases" {}
+
+    class Gwent
+    class Moneda
+    class Jugador
+    class Mano
+    class Mazo
+    class Puntaje
+    class Ronda
+    class Tablero
+
+'abstract Enemigo
+}
+
+'Package "Controller" {
+
+    'class GwnetController
+    'class MazoController
+
+'}
+
+' Package "Vista" {
+'     class App
+'     class CartaDetalladaView
+'     class CartaView
+'     class FinJuegoView
+'     class GwentApp
+'     class InicioView
+'     class JugadorView
+'     class MiBotonEventHandler
+'     class PantallaInicialView
+'     class PreparacionView
+'     class SeccionView
+'     class TableroView
+' }
+
+Carta --> Puntaje
+Carta --> Seccion
+Carta --> Modificador
+Clima --> Tablero
+
+Factory .> Carta
+Factory .> Modificador
+
+Fases -> Gwent
+Fases -> Jugador
+Fases -> Tablero
+Fases -> Moneda
+
+Lector .> Factory
+Lector .> Archivos
+
+Modificador -> Seccion
+Modificador -> Carta
+Modificador -> Jugador
+Jugador -> Mano
+Jugador -> Mazo
+
+Carta -> Exceptions
+Seccion -> Exceptions
+Modificador -> Exceptions
+
+Fases -> Ronda
+
+'Controller -> Modelo
+'Controller -> Vista
+@enduml

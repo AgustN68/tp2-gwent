@@ -1,0 +1,34 @@
+@startuml "Diagrama de Paquetes General"
+title "Diagrama de Paquetes General"
+skinparam titleFontSize 29
+top to bottom direction
+skinparam linetype ortho
+
+Package "Modelo" {}
+
+Package "Controller" {
+
+    class GwentController
+    class MazoController
+
+}
+
+Package "Vista" {
+    class App
+    class CartaDetalladaView
+    class CartaView
+    class FinJuegoView
+    class GwentApp
+    class InicioView
+    class JugadorView
+    class MiBotonEventHandler
+    class PantallaInicialView
+    class PreparacionView
+    class SeccionView
+    class TableroView
+}
+
+
+Controller -> Modelo
+Controller -> Vista
+@enduml
