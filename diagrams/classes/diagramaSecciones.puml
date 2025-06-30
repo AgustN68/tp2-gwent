@@ -1,0 +1,68 @@
+@startuml Secciones
+skinparam linetype ortho
+
+abstract class Seccion {
+    + ubicar(unidad: Unidad) : void
+    + puntajeTotal() : Puntaje
+    + obtenerPuntajeMasFuerte() : Puntaje
+    + removerCartasDePuntaje(puntaje: Puntaje) : void
+    + limpiarSeccion() : List<Carta>
+    + establecerClima(clima: ClimaPosible) : void
+}
+
+class Rango {
+    + <<create>> Rango()
+    + ubicar(unidad: Unidad) : void
+    + puntajeTotal() : Puntaje
+    + obtenerPuntajeMasFuerte() : Puntaje
+    + removerCartasDePuntaje(puntaje: Puntaje) : void
+    + limpiarSeccion() : List<Carta>
+    + establecerClima(clima: ClimaPosible) : void
+}
+
+class Asedio {
+    + <<create>> Asedio()
+    + ubicar(unidad: Unidad) : void
+    + puntajeTotal() : Puntaje
+    + obtenerPuntajeMasFuerte() : Puntaje
+    + removerCartasDePuntaje(puntaje: Puntaje) : void
+    + limpiarSeccion() : List<Carta>
+    + establecerClima(clima: ClimaPosible) : void
+}
+
+class CuerpoACuerpo {
+    + <<create>> CuerpoACuerpo()
+    + ubicar(unidad: Unidad) : void
+    + puntajeTotal() : Puntaje
+    + obtenerPuntajeMasFuerte() : Puntaje
+    + removerCartasDePuntaje(puntaje: Puntaje) : void
+    + limpiarSeccion() : List<Carta>
+    + establecerClima(clima: ClimaPosible) : void
+}
+
+class Tablero {
+    + <<create>> Tablero(List<Seccion> secciones)
+    + calcularPuntaje(): Puntaje
+    + limpiarClima(Despejado clima): void
+    + limpiarTablero() : List<Carta>
+}
+
+Interface ClimaPosible {}
+
+
+Seccion <|-- CuerpoACuerpo
+Seccion <|-- Rango
+Seccion <|-- Asedio
+Tablero ..> Clima
+
+
+Tablero "1" -> "3" Seccion
+Seccion "1" o-- "*" Unidad
+
+class Clima {
+}
+
+Clima ..|> ClimaPosible
+
+Seccion --> ClimaPosible
+@enduml

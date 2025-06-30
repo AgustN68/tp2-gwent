@@ -1,0 +1,34 @@
+@startuml fabrica
+
+interface Lector {
+    + LeerMazo(ruta: String, jugador1, jugador2: Jugador)
+
+}
+
+class LectorJson {
+        + LeerMazo(ruta: String, jugador1, jugador2: Jugador)
+}
+
+class EspecialFactory {
+    + {static}crearEspecial(): Especial
+}
+
+class UnidadFactory {
+    + {static}crearUnidad(): Unidad
+
+}
+
+class ModificadorFactory {
+    + {static}crearModificador(): Modificador
+
+}
+
+class Mazo {}
+
+LectorJson ..> EspecialFactory
+LectorJson ..> UnidadFactory
+LectorJson ..> ModificadorFactory
+LectorJson o.> Mazo
+
+Lector <|... LectorJson
+

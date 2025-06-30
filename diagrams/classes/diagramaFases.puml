@@ -1,0 +1,104 @@
+@startuml Especiales
+skinparam linetype ortho
+
+abstract class Fase {
+    + iniciarFase(Gwent: juego)
+} 
+
+class Final {
+    + iniciarFase(): void
+
+}
+class Inicial {
+    + nombreJugador1: String
+    + nombreJugador2: String
+    + Inicial(Gwent: Juego, Nombrejugador1, nombreJugador2: String):
+    + IniciarFase(): void
+    - PrepararJugadores(): void
+    - crearTableros()
+    - prepararSecciones(): void
+    - crearJugadores(): void
+}
+class Preparacion {
+    + Preparacion(Gwent: Juego): void
+    + iniciarFase(): void
+    - prepararJugadores(): void
+
+}
+class Juego {
+    - JuegoTerminado: boolean
+    + Juego(Gwent: Juego, List<Jugador> jugadoreOrdenados)
+    + iniciarFase(): void
+    - siguienteFase(): void
+    - hayGanador(): Boolean
+    - jugarCarta(): void
+    - pasarTurno(): void
+    - terminarRonda(): void
+}
+
+class Moneda {
+    - random: Random
+    + Moneda(): void
+    + elegirOdenJugadores(): List<Jugador>
+}
+
+class Ronda {
+    + Ronda(List<Jugador> jugadores)
+    - limpiarClima(): void
+    - finalizarRonda(): void
+    - pasarTurno(): void
+    - cambiarTurno(): void
+}
+
+
+class Gwent {
+    + iniciarJuego(): void
+    + cambiarFase(Fase): void
+
+
+}
+
+class Jugador {}
+
+class Tablero {}
+
+interface Lector {
+    + LeerMazo(ruta: String, jugador1, jugador2: Jugador)
+
+}
+
+class LectorJson {
+        + LeerMazo(ruta: String, jugador1, jugador2: Jugador)
+}
+
+
+
+
+
+Fase - Gwent
+
+' Herencia - usando la misma sintaxis que el otro diagrama
+Fase <|--- Final
+Fase <|--- Inicial  
+Fase <|--- Preparacion
+Fase <|--- Juego
+
+Lector <|.. LectorJson
+
+Juego "1"-> "3" Ronda
+Juego -> "2"Jugador
+
+Final -> Jugador
+
+Preparacion ---> Moneda
+Preparacion .> Jugador
+Inicial "1"-> "2"Jugador
+Inicial "1" o-> "2"Tablero
+Inicial *-- Lector
+Moneda ..> Jugador
+
+Ronda ->"2"Jugador
+
+Gwent ---> "2" Jugador
+
+@enduml
