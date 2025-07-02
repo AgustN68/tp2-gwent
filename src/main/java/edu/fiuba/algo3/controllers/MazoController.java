@@ -23,7 +23,7 @@ public class MazoController {
      * Carga los mazos para ambos jugadores utilizando las instancias reales
      * @param jugador1 El jugador 1 real
      * @param jugador2 El jugador 2 real
-     */
+     **/
     public void cargarMazos(Jugador jugador1, Jugador jugador2) {
         List<Mazo> mazos = lectorJson.leerMazos(RUTA_JSON, jugador1, jugador2);
         Mazo mazoJ1 = mazos.get(0);

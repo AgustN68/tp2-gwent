@@ -11,10 +11,12 @@ public class Despejado extends Especial implements ClimaPosible{
 
     private Tablero tablero1;
     private Tablero tablero2;
+    private String nombre;
 
-    public Despejado(Tablero tablero1, Tablero tablero2) {
+    public Despejado(Tablero tablero1, Tablero tablero2, String nombre) {
         this.tablero1 = tablero1;
         this.tablero2 = tablero2;
+        this.nombre = nombre;
     }
 
 
@@ -39,5 +41,9 @@ public class Despejado extends Especial implements ClimaPosible{
         for (Unidad unidad : unidades) {
             unidad.restaurarPuntaje();
         }
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 }

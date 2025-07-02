@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.modelo.Carta.Especial.Clima.ClimaPosible;
+import edu.fiuba.algo3.modelo.Carta.Especial.Especial;
 import edu.fiuba.algo3.modelo.Carta.Unidad;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
@@ -7,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -95,6 +98,8 @@ public class SeccionView extends HBox {
             setViewOrder(0.0);
             setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
         });
+
+        aplicarClimaVisual();
     }
 
     public Seccion getSeccion() {
@@ -144,4 +149,30 @@ public class SeccionView extends HBox {
     public boolean tieneJugador(String nombreJugador) {
         return this.nombreJugador.equals(nombreJugador);
     }
+
+    public void aplicarClimaVisual() {
+        ClimaPosible climaActual = seccion.getClimaActual();
+
+        Circle climaIcono = new Circle(12); // radio
+
+        switch (climaActual.getNombre()) {
+            case "Escarcha mordaz":
+                climaIcono.setFill(Color.LIGHTBLUE);
+                break;
+            case "Tormenta de Skellige":
+                climaIcono.setFill(Color.DARKBLUE);
+                break;
+            case "Lluvia torrencial":
+                climaIcono.setFill(Color.GRAY);
+
+                break;
+            default:
+
+        }
+        getChildren().add(climaIcono);
+
+
+
+    }
+
 }

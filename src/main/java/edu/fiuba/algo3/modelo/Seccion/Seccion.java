@@ -101,14 +101,12 @@ public abstract class Seccion {
     }
 
     public void establecerClima(ClimaPosible clima){
-        // Restaurar puntaje antes de aplicar nuevo clima
         restaurarPuntaje();
         climaActual = clima;
         climaActual.modificarPuntaje(cartasUnidades);
     }
-/*
-    public void limpiarClima(){
-        restaurarPuntaje();
-        climaActual = null;
-    }*/
+
+    public ClimaPosible getClimaActual() {
+        return climaActual;
+    }
 }

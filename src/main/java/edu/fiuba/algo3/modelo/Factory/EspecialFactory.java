@@ -36,9 +36,9 @@ public class EspecialFactory {
 
             case TIPO_CLIMA:
                 if (nombre.equals(NOMBRE_CLIMA_DESPEJADO)) {
-                    nuevaEspecial = new Despejado(tablero1, tablero2);
+                    nuevaEspecial = new Despejado(tablero1, tablero2, nombre);
                 } else {
-                    nuevaEspecial = new Clima(seccionesAfectadas);
+                    nuevaEspecial = new Clima(seccionesAfectadas, nombre);
                 }
                 break;
 
